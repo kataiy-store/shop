@@ -20,7 +20,7 @@
         .smooth { transition: all 0.3s ease; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         
-        .marquee-box { overflow: hidden; white-space: nowrap; background: #FFC0CB; color: white; padding: 6px; font-weight: 500; font-size: 0.85rem; }
+        .marquee-box { overflow: hidden; white-space: nowrap; background: #FFC0CB; color: white; padding: 6px; font-weight: 500; font-size: 0.9rem; }
         .marquee-content { display: inline-block; animation: scroll 25s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
         
@@ -28,12 +28,14 @@
         .page.active { display: block; }
         @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         
+        /* Product Cards */
         .cute-card { background: white; border-radius: 20px; border: 2px solid transparent; box-shadow: 0 4px 15px rgba(255,105,180, 0.1); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
         .cute-card:hover { border-color: #FFC0CB; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,105,180, 0.2); }
         .img-slider { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden; border-radius: 18px 18px 0 0;}
         .slider-item { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 10px; opacity: 0; transition: opacity 0.8s; }
         .slider-item.active { opacity: 1; }
         
+        /* Inputs & Buttons */
         .inp-cute { width: 100%; border: 2px solid #FFC0CB; border-radius: 16px; padding: 12px 16px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Prompt', sans-serif; font-size: 0.95rem; }
         .inp-cute:focus { border-color: #FF69B4; box-shadow: 0 0 8px rgba(255,105,180,0.3); }
         .inp-admin { width: 100%; border: 1.5px solid #FFC0CB; border-radius: 12px; padding: 10px 14px; background: #FFF0F5; outline: none; transition: 0.3s; font-family: 'Prompt', sans-serif; font-size: 0.9rem; color: #4A4A4A; }
@@ -45,6 +47,7 @@
         .swal2-popup { border-radius: 24px !important; font-family: 'Prompt', sans-serif !important; border: 3px solid #FFC0CB !important; }
         .swal2-confirm { border-radius: 99px !important; background: #FF69B4 !important; }
 
+        /* Admin Layouts */
         .admin-card { background: white; border-radius: 24px; border: 1px solid #FFC0CB; padding: 24px; box-shadow: 0 4px 15px rgba(255,105,180, 0.05); margin-bottom: 24px; }
         .admin-header { font-size: 1.15rem; font-weight: 600; color: #FF69B4; border-bottom: 2px solid #FFF0F5; padding-bottom: 12px; margin-bottom: 16px; }
         .admin-label { display: block; font-size: 0.8rem; font-weight: 600; color: #9CA3AF; margin-bottom: 4px; }
@@ -111,7 +114,7 @@
         <section id="p-home" class="page active">
             <div id="bannerContainer" class="mb-6 hidden">
                 <a id="uiBanL" href="#" target="_blank">
-                    <img id="uiBan" src="" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-white hover:opacity-90 smooth">
+                    <img id="uiBan" src="" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-pMain hover:opacity-90 smooth">
                 </a>
             </div>
             
@@ -165,7 +168,7 @@
 
         <section id="p-topup" class="page">
             <div class="bg-white p-8 max-w-md mx-auto rounded-3xl border border-pMain shadow-sm">
-                <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-wallet"></i> เติมเงิน (ออโต้)</h2>
+                <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-wallet"></i> เติมเงิน (ยอดเข้าอัตโนมัติ)</h2>
                 <div class="flex gap-2 mb-6 bg-pBg p-1.5 rounded-2xl overflow-x-auto hide-scroll text-sm">
                     <button id="bBank" class="flex-1 py-2 px-3 rounded-xl bg-pDark text-white font-semibold shadow-sm" onclick="setPay('bank')"><i class="fa-solid fa-building-columns"></i> ธนาคาร</button>
                     <button id="bTrue" class="flex-1 py-2 px-3 rounded-xl bg-transparent text-gray-500 font-semibold smooth" onclick="setPay('true')"><i class="fa-solid fa-mobile-screen"></i> วอเลท</button>
@@ -235,7 +238,7 @@
                         <div><span class="admin-label">QR Code ธนาคาร</span><input id="s_qrB" class="inp-admin"></div>
                         <div><span class="admin-label">QR Code ทรูมันนี่</span><input id="s_qrT" class="inp-admin"></div>
                         <div><span class="admin-label">QR Code ต่างประเทศ</span><input id="s_qrI" class="inp-admin"></div>
-                        <div class="md:col-span-3"><span class="admin-label">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ส่งเข้า Inbox อัตโนมัติ)</span><input id="s_msgS" class="inp-admin"></div>
+                        <div class="md:col-span-3"><span class="admin-label">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ส่งเข้า Inbox)</span><input id="s_msgS" class="inp-admin"></div>
                     </div>
                 </div>
 
@@ -248,21 +251,18 @@
                         <div><span class="admin-label">เบอร์โทรศัพท์</span><input id="s_phone" class="inp-admin"></div>
                     </div>
                 </div>
-
                 <button onclick="adSaveSet()" class="btn-cute !w-auto !inline-block text-lg shadow-sm"><i class="fa-solid fa-save"></i> บันทึกการตั้งค่าทั้งหมด</button>
             </div>
 
             <div id="ad-prod" class="ad-sec hidden space-y-6">
                 <div class="admin-card" id="prodFormBox">
                     <h3 class="admin-header" id="prodFormTitle"><i class="fa-solid fa-plus-circle"></i> เพิ่ม / แก้ไข สินค้า</h3>
-                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-pBg p-4 rounded-xl border border-pMain space-y-3">
                             <input type="hidden" id="p_id">
                             <div><span class="admin-label text-pDark">*หมวดหมู่ (เช่น ROV, FreeFire)</span><input id="p_cat" class="inp-admin !bg-white"></div>
                             <div><span class="admin-label text-pDark">ลิงก์รูปไอคอนหมวดหมู่ (ใส่แค่อันแรกของหมวด)</span><input id="p_catI" class="inp-admin !bg-white"></div>
                         </div>
-
                         <div class="bg-pBg p-4 rounded-xl border border-pMain grid grid-cols-2 gap-3">
                             <div class="col-span-2"><span class="admin-label text-pDark">*ชื่อแพ็กเกจ</span><input id="p_name" class="inp-admin !bg-white"></div>
                             <div><span class="admin-label text-pDark">*จำนวน</span><input id="p_amt" class="inp-admin !bg-white"></div>
@@ -272,13 +272,11 @@
                             <div class="col-span-2"><span class="admin-label text-pDark">*รูปลิงก์สินค้า (หลายรูปคั่นด้วย , จะสลับเอง 5 วิ)</span><input id="p_img" class="inp-admin !bg-white"></div>
                         </div>
                     </div>
-                    
                     <div class="flex gap-3 mt-5">
                         <button onclick="adSaveProd()" class="btn-cute !w-auto" id="btnSaveProd"><i class="fa-solid fa-save"></i> บันทึกข้อมูลสินค้า</button>
                         <button onclick="adCancelEdit()" class="btn-cute !w-auto !bg-gray-400 hidden" id="btnCancelProd">ยกเลิกการแก้ไข</button>
                     </div>
                 </div>
-
                 <div class="admin-card overflow-x-auto"><table class="admin-table" id="tb-prods"></table></div>
             </div>
 
@@ -301,8 +299,12 @@
 
     </main>
 
+    <footer class="text-center py-6 text-pDark font-semibold text-sm bg-white border-t border-pMain mt-10">
+        <p><i class="fa-solid fa-copyright"></i> 2026 <span id="fName">kataiy-store</span>. All rights reserved.</p>
+    </footer>
+
     <script>
-        // ⚠️ วาง URL Web App ของคุณตรงนี้ ⚠️
+        // ⚠️ นำ Web App URL ของคุณมาใส่ตรงนี้ ⚠️
         const API_URL = 'https://script.google.com/macros/s/AKfycbxXYEwOAYFjx5DA4tDshg_N0vEdwr8gd9keNTOWfaCyTiY_7JkUzC_9qehsL60Hg36l0g/exec';
         
         let st = { sys:{}, prods:[], wrks:[], u:null, inb:[], uOrd:[], adm:null, busy:false, pay:'bank' };
@@ -316,9 +318,8 @@
         window.onload = () => {
             st.u = JSON.parse(localStorage.getItem('ks_usr'));
             loadData(false, true); 
-            setInterval(() => loadData(true, false), 3000); // Polling 3 วิ
+            setInterval(() => loadData(true, false), 3000); 
             
-            // สลับรูปภาพ 5 วิ
             setInterval(() => {
                 document.querySelectorAll('.img-slider').forEach(s => {
                     let imgs = s.querySelectorAll('img');
@@ -349,10 +350,10 @@
 
         function drawUI(silent, updateForm) {
             document.title = st.sys.storeName; document.getElementById('favicon').href = st.sys.logo;
-            document.getElementById('uiName').innerText = st.sys.storeName;
+            document.getElementById('uiName').innerText = st.sys.storeName; document.getElementById('fName').innerText = st.sys.storeName;
             document.getElementById('uiLogo').src = st.sys.logo;
             
-            // อัปเดตป้ายสถานะร้าน (เล็กๆ ตรง Header) อัปเดตทันทีที่ดึงข้อมูลใหม่
+            // อัปเดตป้ายสถานะร้าน (เล็กๆ ตรง Header)
             let statBadge = document.getElementById('headerStatus');
             if(String(st.sys.isOpen) === 'true') { 
                 statBadge.className = 'px-2 py-0.5 text-[0.65rem] font-bold rounded-full text-white bg-green-400 shadow-sm w-max flex items-center gap-1 leading-none smooth'; 
@@ -368,11 +369,15 @@
             if(st.sys.contactPhone) conHtml += `<a href="tel:${st.sys.contactPhone}" class="bg-pBg p-4 rounded-2xl block text-pDark font-bold hover:bg-pMain hover:text-white smooth"><i class="fa-solid fa-phone text-2xl mb-1"></i><br>โทรติดต่อ</a>`;
             document.getElementById('contactList').innerHTML = conHtml || '<div class="text-gray-400">ยังไม่มีข้อมูลติดต่อค่ะ</div>';
 
+            // ระบบแสดงแบรนเนอร์ (แก้ไขบัคและบังคับโชว์ 100%)
             let bc = document.getElementById('bannerContainer');
+            let uiBan = document.getElementById('uiBan');
             if(st.sys.banner && st.sys.banner.trim() !== '') { 
-                document.getElementById('uiBan').src = st.sys.banner; 
+                uiBan.src = st.sys.banner; 
                 document.getElementById('uiBanL').href = st.sys.bannerLink || '#';
                 bc.classList.remove('hidden'); 
+                uiBan.classList.remove('hidden'); 
+                uiBan.style.display = 'block';
             } else {
                 bc.classList.add('hidden'); 
             }
@@ -412,6 +417,7 @@
             });
         }
 
+        // หน้าแรก: แสดงทั้งหมดไม่มี Filter ตามที่ขอ
         function drawProds() {
             let cx = document.getElementById('prodsArea'); 
             let arr = [...st.prods];
@@ -434,6 +440,7 @@
             }).join('');
         }
 
+        // หน้าเกมทั้งหมด: แบ่งหมวดหมู่ให้
         function drawAllGames() {
             let cx = document.getElementById('allGamesArea');
             let grouped = {};
@@ -470,14 +477,13 @@
             cx.classList.remove('hidden');
             gr.innerHTML = st.wrks.map(w => {
                 let imgs = w.imgs.split(',').map(i=>`<img src="${i.trim()}" class="slider-item ${i===w.imgs.split(',')[0]?'active':''}">`).join('');
-                return `<a href="${w.line||'#'}" target="_blank" class="cute-card hover:scale-105 smooth cursor-pointer"><div class="img-slider">${imgs}</div><div class="p-2 text-center text-sm font-bold text-pDark bg-pBg">หมวด: ${w.cat||'ป้าย'}</div></a>`;
+                return `<a href="${w.line||'#'}" target="_blank" class="cute-card hover:scale-105 smooth cursor-pointer"><div class="img-slider">${imgs}</div><div class="p-2 text-center text-sm font-bold text-pDark bg-pBg">หมวด: ${w.cat||'งานป้าย'}</div></a>`;
             }).join('');
         }
 
         function buy(id, name, prc) {
             if(!st.u) return go('auth');
-            // เช็คสถานะแบบสตริงให้ถูกต้อง 100%
-            if(String(st.sys.isOpen) !== 'true') return Swal.fire('ปิดร้าน', 'ขออภัยค่ะ ขณะนี้ร้านปิดให้บริการชั่วคราว', 'warning');
+            if(String(st.sys.isOpen) !== 'true') return Swal.fire('ปิดร้าน', 'ขออภัยค่ะ ร้านปิดให้บริการชั่วคราว', 'warning');
 
             Swal.fire({
                 title: 'ยืนยันสั่งซื้อ',
@@ -530,12 +536,12 @@
             if(!st.u) return go('auth');
             let a = document.getElementById('tAmt').value;
             let r = document.getElementById('tRef').value.toUpperCase(); let f = document.getElementById('tFile').files[0];
-            if(!/^[A-Z0-9]{6}$/.test(r)) return Swal.fire('อ๊ะ!', 'รหัสอ้างอิงต้องเป็น 6 ตัวท้ายสลิปเท่านั้นจ้า', 'error');
+            if(!/^[A-Z0-9]{6}$/.test(r)) return Swal.fire('อ๊ะ!', 'รหัสต้องเป็น 6 ตัวท้ายสลิปเท่านั้นจ้า', 'error');
             if(!a||!f) return Swal.fire('อ๊ะ!', 'แนบสลิปและกรอกจำนวนเงินให้ครบด้วยน้า', 'error');
 
             let rd = new FileReader();
             rd.onload = async () => {
-                Swal.fire({title:'กำลังส่งข้อมูล...', didOpen:()=>Swal.showLoading()});
+                Swal.fire({title:'กำลังอัปโหลด...', didOpen:()=>Swal.showLoading()});
                 let res = await fetchAPI('topup', {userId:st.u.userId, amount:a, refCode:r, method:st.pay, imageBase64:rd.result});
                 if(res && res.status==='success') { Swal.fire('สำเร็จ', `ยอดเงิน ${a} บาท เข้าสู่ระบบอัตโนมัติเรียบร้อยค่ะ`, 'success'); document.getElementById('tAmt').value=''; document.getElementById('tRef').value=''; loadData(); }
                 else Swal.fire('ผิดพลาด', res?res.message:'เกิดข้อผิดพลาด', 'error');
@@ -614,7 +620,7 @@
             Swal.fire({title:'บันทึก...', didOpen:()=>Swal.showLoading()});
             let r = await fetchAPI('adminSaveSet', p);
             if(r && r.status==='success') { 
-                st.sys.isOpen = p.isOpen; // อัปเดต State ทันทีไม่รอโหลดใหม่
+                st.sys.isOpen = p.isOpen; // อัปเดตสถานะทันที
                 Swal.fire('สำเร็จ','','success'); 
                 loadData(false, true); 
             }
@@ -649,7 +655,7 @@
         }
 
         async function adDelP(id) {
-            if(!confirm('ลบเกม/สินค้านี้?')) return;
+            if(!confirm('ลบแพ็กเกจนี้?')) return;
             let r = await fetchAPI('adminManageProd', {act:'del', id:id});
             if(r && r.status==='success') loadData();
         }
