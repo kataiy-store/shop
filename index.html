@@ -107,13 +107,14 @@
     <main class="max-w-6xl mx-auto p-4 min-h-[75vh]">
         
         <section id="p-home" class="page active">
-            <a id="uiBanL" href="#" target="_blank"><img id="uiBan" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-white mb-6 hidden"></a>
+            <div id="bannerContainer" class="mb-6 hidden">
+                <a id="uiBanL" href="#" target="_blank">
+                    <img id="uiBan" src="" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-white hover:opacity-90 smooth">
+                </a>
+            </div>
             
-            <div class="flex flex-col md:flex-row justify-between items-center mb-6 border-b-2 border-pMain pb-3 gap-3">
+            <div class="mb-6 border-b-2 border-pMain pb-3">
                 <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star"></i> บริการแนะนำ</h2>
-                <select id="catFilter" class="inp-cute !py-1.5 !w-full md:!w-64 text-pDark font-semibold" onchange="drawProds()">
-                    <option value="all">หมวดหมู่ทั้งหมด</option>
-                </select>
             </div>
             
             <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
@@ -139,7 +140,7 @@
         </section>
 
         <section id="p-auth" class="page">
-            <div class="bg-white p-8 max-w-sm mx-auto mt-10 rounded-3xl border border-pMain shadow-sm">
+            <div class="bg-white p-6 md:p-8 max-w-sm mx-auto mt-10 rounded-3xl border border-pMain shadow-sm">
                 <h2 class="text-center text-2xl font-bold text-pDark mb-6" id="authTitle"><i class="fa-solid fa-user-check"></i> เข้าสู่ระบบ</h2>
                 
                 <div id="fLog">
@@ -162,7 +163,7 @@
 
         <section id="p-topup" class="page">
             <div class="bg-white p-8 max-w-md mx-auto rounded-3xl border border-pMain shadow-sm">
-                <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-wallet"></i> เติมเงิน (ออโต้)</h2>
+                <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-wallet"></i> เติมเงิน (ยอดเข้าอัตโนมัติ)</h2>
                 <div class="flex gap-2 mb-6 bg-pBg p-1.5 rounded-2xl overflow-x-auto hide-scroll text-sm">
                     <button id="bBank" class="flex-1 py-2 px-3 rounded-xl bg-pDark text-white font-semibold shadow-sm" onclick="setPay('bank')"><i class="fa-solid fa-building-columns"></i> ธนาคาร</button>
                     <button id="bTrue" class="flex-1 py-2 px-3 rounded-xl bg-transparent text-gray-500 font-semibold smooth" onclick="setPay('true')"><i class="fa-solid fa-mobile-screen"></i> วอเลท</button>
@@ -232,7 +233,7 @@
                         <div><span class="admin-label">QR Code ธนาคาร</span><input id="s_qrB" class="inp-admin"></div>
                         <div><span class="admin-label">QR Code ทรูมันนี่</span><input id="s_qrT" class="inp-admin"></div>
                         <div><span class="admin-label">QR Code ต่างประเทศ</span><input id="s_qrI" class="inp-admin"></div>
-                        <div class="md:col-span-3"><span class="admin-label">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ส่งเข้า Inbox อัตโนมัติ)</span><input id="s_msgS" class="inp-admin"></div>
+                        <div class="md:col-span-3"><span class="admin-label">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ส่งเข้า Inbox)</span><input id="s_msgS" class="inp-admin"></div>
                     </div>
                 </div>
 
@@ -245,23 +246,20 @@
                         <div><span class="admin-label">เบอร์โทรศัพท์</span><input id="s_phone" class="inp-admin"></div>
                     </div>
                 </div>
-
                 <button onclick="adSaveSet()" class="btn-cute !w-auto !inline-block text-lg shadow-sm"><i class="fa-solid fa-save"></i> บันทึกการตั้งค่าทั้งหมด</button>
             </div>
 
             <div id="ad-prod" class="ad-sec hidden space-y-6">
                 <div class="admin-card" id="prodFormBox">
                     <h3 class="admin-header" id="prodFormTitle"><i class="fa-solid fa-plus-circle"></i> เพิ่ม / แก้ไข สินค้า</h3>
-                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-pBg p-4 rounded-xl border border-pMain space-y-3">
                             <input type="hidden" id="p_id">
                             <div><span class="admin-label text-pDark">*หมวดหมู่ (เช่น ROV, FreeFire)</span><input id="p_cat" class="inp-admin !bg-white"></div>
                             <div><span class="admin-label text-pDark">ลิงก์รูปไอคอนหมวดหมู่ (ใส่แค่อันแรกของหมวด)</span><input id="p_catI" class="inp-admin !bg-white"></div>
                         </div>
-
                         <div class="bg-pBg p-4 rounded-xl border border-pMain grid grid-cols-2 gap-3">
-                            <div class="col-span-2"><span class="admin-label text-pDark">*ชื่อบริการ / แพ็กเกจ</span><input id="p_name" class="inp-admin !bg-white"></div>
+                            <div class="col-span-2"><span class="admin-label text-pDark">*ชื่อแพ็กเกจ</span><input id="p_name" class="inp-admin !bg-white"></div>
                             <div><span class="admin-label text-pDark">*จำนวน</span><input id="p_amt" class="inp-admin !bg-white"></div>
                             <div><span class="admin-label text-pDark">หน่วย (เพชร, คูปอง)</span><input id="p_unit" class="inp-admin !bg-white"></div>
                             <div><span class="admin-label text-pDark">*ราคา (บาท)</span><input type="number" id="p_prc" class="inp-admin !bg-white" step="0.01"></div>
@@ -269,16 +267,12 @@
                             <div class="col-span-2"><span class="admin-label text-pDark">*รูปลิงก์สินค้า (หลายรูปคั่นด้วย , จะสลับเอง 5 วิ)</span><input id="p_img" class="inp-admin !bg-white"></div>
                         </div>
                     </div>
-                    
                     <div class="flex gap-3 mt-5">
                         <button onclick="adSaveProd()" class="btn-cute !w-auto" id="btnSaveProd"><i class="fa-solid fa-save"></i> บันทึกข้อมูลสินค้า</button>
                         <button onclick="adCancelEdit()" class="btn-cute !w-auto !bg-gray-400 hidden" id="btnCancelProd">ยกเลิกการแก้ไข</button>
                     </div>
                 </div>
-
-                <div class="admin-card overflow-x-auto">
-                    <table class="admin-table" id="tb-prods"></table>
-                </div>
+                <div class="admin-card overflow-x-auto"><table class="admin-table" id="tb-prods"></table></div>
             </div>
 
             <div id="ad-work" class="ad-sec hidden space-y-6">
@@ -294,13 +288,8 @@
                 <div class="admin-card overflow-x-auto"><table class="admin-table" id="tb-works"></table></div>
             </div>
 
-            <div id="ad-topup" class="ad-sec hidden">
-                <div class="admin-card overflow-x-auto"><table class="admin-table min-w-max" id="tb-topups"></table></div>
-            </div>
-            
-            <div id="ad-order" class="ad-sec hidden">
-                <div class="admin-card overflow-x-auto"><table class="admin-table min-w-max" id="tb-orders"></table></div>
-            </div>
+            <div id="ad-topup" class="ad-sec hidden"><div class="admin-card overflow-x-auto"><table class="admin-table min-w-max" id="tb-topups"></table></div></div>
+            <div id="ad-order" class="ad-sec hidden"><div class="admin-card overflow-x-auto"><table class="admin-table min-w-max" id="tb-orders"></table></div></div>
         </section>
 
     </main>
@@ -313,11 +302,11 @@
         // ⚠️ นำ Web App URL ของคุณมาใส่ตรงนี้ ⚠️
         const API_URL = 'https://script.google.com/macros/s/AKfycbxXYEwOAYFjx5DA4tDshg_N0vEdwr8gd9keNTOWfaCyTiY_7JkUzC_9qehsL60Hg36l0g/exec';
         
-        let st = { sys:{}, prods:[], wrks:[], u:null, inb:[], uOrd:[], adm:null, busy:false, pay:'bank', curCat:'all' };
+        let st = { sys:{}, prods:[], wrks:[], u:null, inb:[], uOrd:[], adm:null, busy:false, pay:'bank' };
 
         const dict = {
-            th: { mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ' },
-            en: { mHome:'Home', mGames:'All Games', mTopup:'Topup', mInbox:'Inbox', mHist:'History', mCont:'Contact Us', mLogin:'Login' },
+            th: { mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ / สมัคร' },
+            en: { mHome:'Home', mGames:'All Games', mTopup:'Topup', mInbox:'Inbox', mHist:'History', mCont:'Contact Us', mLogin:'Login / Register' },
             la: { mHome:'ໜ້າຫຼັກ', mGames:'ເກມທັງໝົດ', mTopup:'ຕື່ມເງິນ', mInbox:'ກ່ອງຂໍ້ຄວາມ', mHist:'ປະຫວັດ', mCont:'ຕິດຕໍ່ພວກເຮົາ', mLogin:'ເຂົ້າສູ່ລະບົບ' }
         };
 
@@ -365,7 +354,15 @@
             if(st.sys.contactPhone) conHtml += `<a href="tel:${st.sys.contactPhone}" class="bg-pBg p-4 rounded-2xl block text-pDark font-bold hover:bg-pMain hover:text-white smooth"><i class="fa-solid fa-phone text-2xl mb-1"></i><br>โทรติดต่อ</a>`;
             document.getElementById('contactList').innerHTML = conHtml || '<div class="text-gray-400">ยังไม่มีข้อมูลติดต่อค่ะ</div>';
 
-            if(st.sys.banner) { document.getElementById('uiBan').src = st.sys.banner; document.getElementById('uiBan').classList.remove('hidden'); document.getElementById('uiBanL').href = st.sys.bannerLink||'#'; }
+            // ระบบแสดงแบรนเนอร์ (แก้ไขให้ทำงาน 100%)
+            let bc = document.getElementById('bannerContainer');
+            if(st.sys.banner && st.sys.banner.trim() !== '') { 
+                document.getElementById('uiBan').src = st.sys.banner; 
+                document.getElementById('uiBanL').href = st.sys.bannerLink || '#';
+                bc.classList.remove('hidden'); 
+            } else {
+                bc.classList.add('hidden'); 
+            }
             
             document.getElementById('uiMarq').innerHTML = `<i class="fa-solid fa-bullhorn"></i> ${st.sys.announcement||''} &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fa-solid fa-star"></i> ล่าสุด: ${st.history?st.history.join(' &nbsp;|&nbsp; '):''}`;
 
@@ -381,7 +378,7 @@
             } else {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uId').innerText = st.u.userId; document.getElementById('uBal').innerText = st.u.balance.toFixed(2);
-                document.getElementById('homeHead').innerHTML = `<i class="fa-solid fa-layer-group"></i> บริการทั้งหมด`;
+                document.getElementById('homeHead').innerHTML = `<i class="fa-solid fa-star"></i> บริการแนะนำ`;
                 document.getElementById('fLog').innerHTML = `<button onclick="out()" class="btn-cute !bg-red-400"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</button>`;
                 document.getElementById('authMenuArea').innerHTML = `<button onclick="out()" class="block w-full text-left px-5 py-3 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-6 text-center"></i> ออกจากระบบ</button>`;
                 
@@ -408,14 +405,10 @@
             });
         }
 
+        // หน้าแรก: แสดงทั้งหมดไม่มี Filter ตามที่ขอ
         function drawProds() {
-            let cx = document.getElementById('prodsArea'); let sel = document.getElementById('catFilter');
-            let cats = [...new Set(st.prods.map(p => p.category))];
-            let cv = sel.value;
-            sel.innerHTML = '<option value="all">หมวดหมู่ทั้งหมด</option>' + cats.map(c=>`<option value="${c}">${c}</option>`).join('');
-            sel.value = st.curCat = cv;
-
-            let arr = st.prods.filter(p => st.curCat === 'all' || p.category === st.curCat);
+            let cx = document.getElementById('prodsArea'); 
+            let arr = [...st.prods];
             arr.sort((a,b) => a.price - b.price); 
 
             if(arr.length === 0) return cx.innerHTML = '<div class="col-span-full text-center py-10 text-gray-400 font-bold">ไม่พบสินค้าค่ะ</div>';
@@ -435,6 +428,7 @@
             }).join('');
         }
 
+        // หน้าเกมทั้งหมด: แบ่งหมวดหมู่ให้
         function drawAllGames() {
             let cx = document.getElementById('allGamesArea');
             let grouped = {};
@@ -471,7 +465,7 @@
             cx.classList.remove('hidden');
             gr.innerHTML = st.wrks.map(w => {
                 let imgs = w.imgs.split(',').map(i=>`<img src="${i.trim()}" class="slider-item ${i===w.imgs.split(',')[0]?'active':''}">`).join('');
-                return `<a href="${w.line||'#'}" target="_blank" class="cute-card hover:scale-105 smooth cursor-pointer"><div class="img-slider">${imgs}</div><div class="p-2 text-center text-sm font-bold text-pDark bg-pBg">หมวด: ${w.cat||'งานป้าย'}</div></a>`;
+                return `<a href="${w.line||'#'}" target="_blank" class="cute-card hover:scale-105 smooth cursor-pointer"><div class="img-slider">${imgs}</div><div class="p-2 text-center text-sm font-bold text-pDark bg-pBg">หมวด: ${w.cat||'ป้าย'}</div></a>`;
             }).join('');
         }
 
@@ -481,8 +475,8 @@
 
             Swal.fire({
                 title: 'ยืนยันสั่งซื้อ',
-                html: `<div class="bg-pBg p-4 rounded-2xl mb-4 text-left font-bold text-gray-700 border border-pMain">
-                        <p>สินค้า: <span class="text-pDark">${name}</span></p>
+                html: `<div class="bg-pBg p-4 rounded-xl mb-4 text-left font-bold text-gray-700 border border-pMain">
+                        <p>แพ็กเกจ: <span class="text-pDark">${name}</span></p>
                         <p>ราคา: <span class="text-pDark">฿${prc.toFixed(2)}</span></p>
                         <p>ยอดเงินคุณ: <span class="text-pDark">฿${st.u.balance.toFixed(2)}</span></p>
                        </div>
@@ -496,7 +490,7 @@
             }).then(async (res) => {
                 if (res.isConfirmed) {
                     let d = window.buyType === 'uid' ? document.getElementById('gUid').value : `ID/M:${document.getElementById('gMail').value} P:${document.getElementById('gPass').value}`;
-                    if(!d || d.includes('undefined')) return Swal.fire('อ๊ะ!', 'กรอกข้อมูลให้ครบด้วยน้า', 'error');
+                    if(!d || d.includes('undefined')) return Swal.fire('อ๊ะ!', 'กรอกข้อมูลตัวละครให้ครบด้วยน้า', 'error');
                     
                     Swal.fire({title:'กำลังสั่งซื้อ...', didOpen:()=>Swal.showLoading()});
                     let r = await fetchAPI('order', {userId:st.u.userId, product:name, price:prc, loginType:window.buyType, gameData:d});
@@ -530,12 +524,12 @@
             if(!st.u) return go('auth');
             let a = document.getElementById('tAmt').value;
             let r = document.getElementById('tRef').value.toUpperCase(); let f = document.getElementById('tFile').files[0];
-            if(!/^[A-Z0-9]{6}$/.test(r)) return Swal.fire('อ๊ะ!', 'รหัสอ้างอิงต้องเป็น 6 ตัวท้ายสลิปเท่านั้นจ้า', 'error');
+            if(!/^[A-Z0-9]{6}$/.test(r)) return Swal.fire('อ๊ะ!', 'รหัสต้องเป็น 6 ตัวท้ายสลิปเท่านั้นจ้า', 'error');
             if(!a||!f) return Swal.fire('อ๊ะ!', 'แนบสลิปและกรอกจำนวนเงินให้ครบด้วยน้า', 'error');
 
             let rd = new FileReader();
             rd.onload = async () => {
-                Swal.fire({title:'กำลังอัปโหลด...', didOpen:()=>Swal.showLoading()});
+                Swal.fire({title:'กำลังส่งข้อมูล...', didOpen:()=>Swal.showLoading()});
                 let res = await fetchAPI('topup', {userId:st.u.userId, amount:a, refCode:r, method:st.pay, imageBase64:rd.result});
                 if(res && res.status==='success') { Swal.fire('สำเร็จ', `ยอดเงิน ${a} บาท เข้าสู่ระบบอัตโนมัติเรียบร้อยค่ะ`, 'success'); document.getElementById('tAmt').value=''; document.getElementById('tRef').value=''; loadData(); }
                 else Swal.fire('ผิดพลาด', res?res.message:'เกิดข้อผิดพลาด', 'error');
@@ -571,7 +565,7 @@
         function drawInbox() {
             if(!st.u) return;
             document.getElementById('inboxArea').innerHTML = st.inb.length===0 ? '<div class="text-center py-5 text-gray-400 font-semibold">ไม่มีข้อความค่ะ</div>' : st.inb.map(m=>`<div class="bg-pBg p-4 rounded-2xl mb-3"><p class="text-[0.7rem] text-pDark font-bold mb-1"><i class="fa-solid fa-clock"></i> ${new Date(m.time).toLocaleString('th-TH')}</p><p class="font-semibold text-gray-700 text-sm">${m.msg}</p></div>`).join('');
-            document.getElementById('uOrderList').innerHTML = '<tr><th>เวลา</th><th>Order</th><th>สินค้า</th><th>สถานะ</th></tr>' + st.uOrd.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.oid.substring(0,8)}</td><td>${o.prod}</td><td>${o.stat==='Pending'?'<span class="text-yellow-500 font-bold">รอคิว</span>':'<span class="text-green-500 font-bold">สำเร็จ</span>'}</td></tr>`).join('');
+            document.getElementById('uOrderList').innerHTML = '<tr><th>เวลา</th><th>Order</th><th>แพ็กเกจ</th><th>สถานะ</th></tr>' + st.uOrd.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.oid.substring(0,8)}</td><td>${o.prod}</td><td>${o.stat==='Pending'?'<span class="text-yellow-500 font-bold">รอคิว</span>':'<span class="text-green-500 font-bold">สำเร็จ</span>'}</td></tr>`).join('');
         }
 
         // ================= ADMIN LOGIC =================
@@ -596,10 +590,10 @@
                 document.getElementById('s_msgS').value = st.sys.msgSuccess||'';
             }
 
-            document.getElementById('tb-prods').innerHTML = '<tr><th>หมวด</th><th>ชื่อเกม/สินค้า</th><th>ราคา</th><th>จัดการ</th></tr>' + st.prods.map(p=>`<tr><td>${p.category}</td><td>${p.name}</td><td>฿${p.price}</td><td><button onclick="adEditP('${p.id}')" class="text-blue-500 mr-3"><i class="fa-solid fa-pen"></i></button><button onclick="adDelP('${p.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
+            document.getElementById('tb-prods').innerHTML = '<tr><th>หมวด</th><th>ชื่อแพ็กเกจ</th><th>ราคา</th><th>จัดการ</th></tr>' + st.prods.map(p=>`<tr><td>${p.category}</td><td>${p.name}</td><td>฿${p.price}</td><td><button onclick="adEditP('${p.id}')" class="text-blue-500 mr-3"><i class="fa-solid fa-pen"></i></button><button onclick="adDelP('${p.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
             document.getElementById('tb-works').innerHTML = '<tr><th>หมวด</th><th>จำนวนรูป</th><th>ลบ</th></tr>' + st.wrks.map(w=>`<tr><td>${w.cat}</td><td>${w.imgs.split(',').length} รูป</td><td><button onclick="adDelW('${w.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
             document.getElementById('tb-topups').innerHTML = '<tr><th>เวลา</th><th>User</th><th>ยอด</th><th>อ้างอิง</th><th>สลิป</th><th>สถานะ</th></tr>' + st.adm.topups.map(t=>`<tr><td>${new Date(t.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${t.uid}</td><td>${t.amt}</td><td>${t.ref}</td><td><a href="${t.img}" target="_blank" class="text-pDark underline">ดู</a></td><td><span class="text-green-500 font-bold">อัตโนมัติ</span></td></tr>`).join('');
-            document.getElementById('tb-orders').innerHTML = '<tr><th>เวลา</th><th>User</th><th>เกม/สินค้า</th><th>ข้อมูลเกม</th><th>จัดการ</th></tr>' + st.adm.orders.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.uid}</td><td>${o.prod}</td><td><span class="bg-pBg p-1.5 rounded font-bold">${o.data}</span></td><td>${o.stat==='Pending'?`<button onclick="adUpd('order','${o.oid}','${o.uid}',0)" class="bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-bold">เสร็จสิ้น</button>`:'<span class="text-green-500 font-bold">สำเร็จ</span>'}</td></tr>`).join('');
+            document.getElementById('tb-orders').innerHTML = '<tr><th>เวลา</th><th>User</th><th>แพ็กเกจ</th><th>ข้อมูลเกม</th><th>จัดการ</th></tr>' + st.adm.orders.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.uid}</td><td>${o.prod}</td><td><span class="bg-pBg p-1.5 rounded font-bold">${o.data}</span></td><td>${o.stat==='Pending'?`<button onclick="adUpd('order','${o.oid}','${o.uid}',0)" class="bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-bold">เสร็จสิ้น</button>`:'<span class="text-green-500 font-bold">สำเร็จ</span>'}</td></tr>`).join('');
         }
 
         async function adSaveSet() {
@@ -645,7 +639,7 @@
         }
 
         async function adDelP(id) {
-            if(!confirm('ลบเกม/สินค้านี้?')) return;
+            if(!confirm('ลบแพ็กเกจนี้?')) return;
             let r = await fetchAPI('adminManageProd', {act:'del', id:id});
             if(r && r.status==='success') loadData();
         }
