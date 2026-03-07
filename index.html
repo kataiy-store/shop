@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: { colors: { pastel: '#FFB6C1', pastelLight: '#FFD1DC', pastelDark: '#FF9EBB', bgMain: '#FFF5F7' } }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap');
+        body { font-family: 'Kanit', sans-serif; background-color: #FFF5F7; overflow-x: hidden; }
+        .marquee { white-space: nowrap; animation: marquee 20s linear infinite; display: inline-block; }
+        @keyframes marquee { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+        .section-page { display: none; animation: fadeIn 0.3s; }
+        .section-page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .slider-img { display: none; width: 100%; height: 180px; object-fit: cover; }
+        .slider-img.active { display: block; }
+    </style>
+</head>
+<body class="text-gray-700">
+
+    <nav class="bg-pastelLight p-3 shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="router('home')">
+                <img id="navLogo" src="" alt="Logo" class="w-12 h-12 rounded-full border-2 border-white object-cover">
+                <span id="navStoreName" class="text-2xl font-bold text-white drop-shadow">Loading...</span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div id="userBadge" class="hidden text-sm md:text-base font-semibold bg-white px-3 py-1 rounded-full text-pastelDark shadow-sm cursor-pointer" onclick="router('inbox')">
+                    <i class="fa-solid fa-user"></i> <span id="uName"></span> | <i class="fa-solid fa-coins"></i> <span id="uBal">0.00</span>
+                </div>
+                <button class="text-white text-3xl hover:text-pastelDark transition" onclick="document.getElementById('sideMenu').classList.toggle('hidden')">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="sideMenu" class="hidden fixed right-4 top-20 bg-white rounded-2xl shadow-2xl w-56 py-3 z-50 border-2 border-pastelLight">
+        <button onclick="router('home')" class="block w-full text-left px-5 py-3 hover:bg-pastelLight hover:text-white transition"><i class="fa-solid fa-house w-6"></i> หน้าหลัก</button>
+        <button onclick="router('topup')" class="block w-full text-left px-5 py-3 hover:bg-pastelLight hover:text-white transition"><i class="fa-solid fa-wallet w-6"></i> เติมเงิน</button>
+        <button onclick="router('inbox')" class="block w-full text-left px-5 py-3 hover:bg-pastelLight hover:text-white transition"><i class="fa-solid fa-envelope w-6"></i> กล่องข้อความ</button>
+        <hr class="my-2 border-pastelLight">
+        <div id="menuAuth">
+            <button onclick="router('login')" class="block w-full text-left px-5 py-3 hover:bg-pastelLight hover:text-white transition"><i class="fa-solid fa-right-to-bracket w-6"></i> เข้าสู่ระบบ / สมัครสมาชิก</button>
+        </div>
+    </div>
+
+    <div class="bg-pastel text-white py-1 overflow-hidden shadow-inner text-sm relative">
+        <div class="marquee" id="marqueeText"><i class="fa-solid fa-bullhorn"></i> กำลังโหลดข้อมูลร้านค้า...</div>
+    </div>
+
+    <main class="max-w-6xl mx-auto p-4 min-h-[80vh]">
+        
+        <section id="sec-home" class="section-page active">
+            <div id="bannerArea" class="w-full h-48 md:h-64 bg-white rounded-2xl shadow-sm mb-6 overflow-hidden flex items-center justify-center border-2 border-pastelLight cursor-pointer">
+                <i class="fa-solid fa-image text-4xl text-pastelLight"></i>
+            </div>
+
+            <div id="storeStatus" class="mb-6 p-4 rounded-xl text-center font-bold text-white bg-pastelDark shadow-md">
+                <i class="fa-solid fa-door-open"></i> ร้านเปิดให้บริการตามปกติ สามารถสั่งซื้อได้เลยค่ะ
+            </div>
+
+            <div class="flex justify-between items-end mb-4 border-b-2 border-pastelLight pb-2">
+                <h2 class="text-2xl font-bold text-pastelDark"><i class="fa-solid fa-gamepad"></i> บริการของเรา</h2>
+                <select id="catFilter" class="bg-white border-2 border-pastelLight text-pastelDark rounded-lg px-3 py-1 outline-none" onchange="renderProducts()">
+                    <option value="all">หมวดหมู่ทั้งหมด</option>
+                </select>
+            </div>
+            <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="col-span-full text-center text-gray-400 py-10"><i class="fa-solid fa-spinner fa-spin text-3xl"></i><br>กำลังโหลดสินค้า...</div>
+            </div>
+        </section>
+
+        <section id="sec-topup" class="section-page">
+            <div class="max-w-md mx-auto bg-white p-6 rounded-3xl shadow-lg border-2 border-pastelLight">
+                <h2 class="text-2xl font-bold text-center text-pastelDark mb-6"><i class="fa-solid fa-money-bill-transfer"></i> เติมเงิน</h2>
+                
+                <div class="flex gap-2 mb-4">
+                    <button class="flex-1 py-2 rounded-lg bg-pastelDark text-white font-bold" onclick="selectPayment('promppay')"><i class="fa-solid fa-qrcode"></i> พร้อมเพย์</button>
+                    <button class="flex-1 py-2 rounded-lg bg-gray-200 text-gray-600 font-bold hover:bg-pastelLight hover:text-white" onclick="selectPayment('truemoney')"><i class="fa-solid fa-wallet"></i> ทรูมันนี่</button>
+                </div>
+
+                <div class="text-center mb-6 bg-bgMain p-4 rounded-xl border border-pastelLight">
+                    <img id="qrDisplay" src="" class="mx-auto rounded-xl shadow-sm w-48 h-48 object-cover bg-white mb-2">
+                    <p class="text-sm text-pastelDark font-semibold">แสกน QR Code เพื่อชำระเงิน</p>
+                </div>
+                
+                <input type="number" id="tAmount" placeholder="จำนวนเงินที่โอน (บาท)" class="w-full p-3 rounded-xl border-2 border-pastelLight mb-3 focus:outline-none focus:border-pastelDark text-center font-bold text-lg">
+                <input type="text" id="tRef" placeholder="รหัสอ้างอิง 6 ตัวท้าย (A-Z, 0-9)" maxlength="6" class="w-full p-3 rounded-xl border-2 border-pastelLight mb-3 uppercase focus:outline-none focus:border-pastelDark text-center">
+                <label class="block mb-4 text-center cursor-pointer">
+                    <span class="block text-sm text-gray-500 mb-1">แนบรูปสลิป</span>
+                    <input type="file" id="tSlip" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pastelLight file:text-pastelDark hover:file:bg-pastel">
+                </label>
+                
+                <button onclick="submitTopup()" class="w-full bg-pastelDark text-white font-bold py-3 rounded-xl shadow hover:bg-pink-500 transition text-lg">
+                    <i class="fa-solid fa-check-circle"></i> ยืนยันการแจ้งโอน
+                </button>
+            </div>
+        </section>
+
+        <section id="sec-login" class="section-page">
+            <div class="max-w-md mx-auto bg-white p-8 rounded-3xl shadow-lg border-2 border-pastelLight mt-10">
+                <div class="flex justify-center gap-4 mb-6 border-b-2 border-bgMain pb-2">
+                    <button class="text-xl font-bold text-pastelDark border-b-4 border-pastelDark px-2" id="tabLogin" onclick="toggleAuth('login')">เข้าสู่ระบบ</button>
+                    <button class="text-xl font-bold text-gray-400 px-2" id="tabReg" onclick="toggleAuth('reg')">สมัครสมาชิก</button>
+                </div>
+
+                <div id="formLogin">
+                    <input type="text" id="lUser" placeholder="UID หรือ Email" class="w-full p-3 rounded-xl border-2 border-pastelLight mb-4 focus:outline-none focus:border-pastelDark">
+                    <input type="password" id="lPass" placeholder="รหัสผ่าน" class="w-full p-3 rounded-xl border-2 border-pastelLight mb-6 focus:outline-none focus:border-pastelDark">
+                    <button onclick="doAuth('login')" class="w-full bg-pastelDark text-white font-bold py-3 rounded-xl hover:bg-pink-500 transition shadow-md">เข้าสู่ระบบ</button>
+                </div>
+
+                <div id="formReg" class="hidden">
+                    <input type="email" id="rMail" placeholder="อีเมลของคุณ" class="w-full p-3 rounded-xl border-2 border-pastelLight mb-4 focus:outline-none focus:border-pastelDark">
+                    <input type="password" id="rPass" placeholder="รหัสผ่าน" class="w-full p-3 rounded-xl border-2 border-pastelLight mb-4 focus:outline-none focus:border-pastelDark">
+                    <input type="password" id="rPass2" placeholder="ยืนยันรหัสผ่าน" class="w-full p-3 rounded-xl border-2 border-pastelLight mb-6 focus:outline-none focus:border-pastelDark">
+                    <button onclick="doAuth('register')" class="w-full bg-pastelDark text-white font-bold py-3 rounded-xl hover:bg-pink-500 transition shadow-md">สมัครสมาชิก</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-admin" class="section-page">
+            <h2 class="text-3xl font-bold text-pastelDark mb-6"><i class="fa-solid fa-gear"></i> ระบบหลังบ้าน (แอดมิน)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow border-2 border-pastelLight">
+                <h3 class="font-bold text-xl mb-4 border-b pb-2">ตั้งค่าเว็บไซต์</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="text-sm">ชื่อร้าน</label><input type="text" id="sName" class="w-full p-2 border rounded"></div>
+                    <div><label class="text-sm">อีเมลรับการแจ้งเตือน</label><input type="text" id="sEmail" class="w-full p-2 border rounded"></div>
+                    <div><label class="text-sm">ลิงก์ Logo</label><input type="text" id="sLogo" class="w-full p-2 border rounded"></div>
+                    <div><label class="text-sm">ลิงก์ Banner Popup</label><input type="text" id="sPopup" class="w-full p-2 border rounded"></div>
+                    <div><label class="text-sm">QR Code พร้อมเพย์</label><input type="text" id="sQr1" class="w-full p-2 border rounded"></div>
+                    <div><label class="text-sm">สถานะร้าน (true/false)</label><select id="sOpen" class="w-full p-2 border rounded"><option value="true">เปิดร้าน</option><option value="false">ปิดร้าน</option></select></div>
+                </div>
+                <button onclick="saveAdminSettings()" class="mt-4 bg-pastelDark text-white px-6 py-2 rounded-lg"><i class="fa-solid fa-save"></i> บันทึกการตั้งค่า</button>
+            </div>
+            </section>
+
+    </main>
+
+    <script>
+        // !! สำคัญ: เปลี่ยน URL นี้เป็น Web App URL ที่ได้จาก Apps Script ของคุณ
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxXYEwOAYFjx5DA4tDshg_N0vEdwr8gd9keNTOWfaCyTiY_7JkUzC_9qehsL60Hg36l0g/exec';
+        
+        // State Management
+        const appState = {
+            settings: {}, products: [], user: null, isProcessing: false
+        };
+
+        window.onload = async () => {
+            appState.user = JSON.parse(localStorage.getItem('kStoreUser'));
+            await loadInitialData();
+            setupUI();
+            
+            // Auto Update Background every 5 sec
+            setInterval(loadInitialDataBackground, 5000);
+        };
+
+        // --- Core Fetcher ---
+        async function fetchAPI(action, payload) {
+            if(appState.isProcessing) return null;
+            appState.isProcessing = true;
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: action, payload: payload }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+                const data = await res.json();
+                appState.isProcessing = false;
+                return data;
+            } catch (err) {
+                appState.isProcessing = false;
+                Swal.fire({ icon: 'error', title: 'Oops...', text: 'การเชื่อมต่อมีปัญหาค่ะ' });
+                return null;
+            }
+        }
+
+        // --- Data Loading ---
+        async function loadInitialData() {
+            const res = await fetchAPI('getInitialData', { userId: appState.user ? appState.user.userId : null });
+            if(res && res.status === 'success') {
+                appState.settings = res.settings;
+                appState.products = res.products;
+                if(res.user) {
+                    appState.user = res.user;
+                    localStorage.setItem('kStoreUser', JSON.stringify(res.user));
+                }
+            }
+        }
+        async function loadInitialDataBackground() {
+            appState.isProcessing = false; // Bypass lock for background
+            const res = await fetch(API_URL, { method:'POST', body: JSON.stringify({action:'getInitialData', payload:{userId: appState.user?.userId}}) }).then(r=>r.json()).catch(()=>null);
+            if(res && res.status === 'success') {
+                appState.settings = res.settings; appState.products = res.products; 
+                if(res.user) { appState.user = res.user; updateAuthUI(); }
+                renderProducts(); // Update UI Silently
+            }
+        }
+
+        // --- UI Setup ---
+        function setupUI() {
+            // Apply Settings
+            document.getElementById('navLogo').src = appState.settings.logo || 'https://via.placeholder.com/150';
+            document.getElementById('navStoreName').innerText = appState.settings.storeName || 'kataiy-store';
+            document.getElementById('marqueeText').innerHTML = `<i class="fa-solid fa-bullhorn"></i> ${appState.settings.announcement || 'ยินดีต้อนรับค่ะ'}`;
+            
+            const isOpen = appState.settings.isOpen === 'true';
+            const statusDiv = document.getElementById('storeStatus');
+            if(!isOpen) {
+                statusDiv.className = 'mb-6 p-4 rounded-xl text-center font-bold text-white bg-red-500 shadow-md';
+                statusDiv.innerHTML = '<i class="fa-solid fa-door-closed"></i> ขออภัยค่ะ ขณะนี้ร้านปิดให้บริการ';
+            }
+
+            // Pop up
+            if(appState.settings.popupImg && !sessionStorage.getItem('popSeen')) {
+                Swal.fire({ imageUrl: appState.settings.popupImg, text: appState.settings.popupText, imageWidth: 400, confirmButtonColor: '#FF9EBB' });
+                sessionStorage.setItem('popSeen', 'true');
+            }
+
+            updateAuthUI();
+            extractCategories();
+            renderProducts();
+
+            // Admin Access
+            if(appState.user && appState.user.role === 'admin') {
+                document.getElementById('sideMenu').innerHTML += `<button onclick="router('admin')" class="block w-full text-left px-5 py-3 hover:bg-pastelLight hover:text-white text-blue-500 font-bold"><i class="fa-solid fa-gear w-6"></i> จัดการหลังบ้าน</button>`;
+                fillAdminForm();
+            }
+        }
+
+        function updateAuthUI() {
+            if(appState.user) {
+                document.getElementById('userBadge').classList.remove('hidden');
+                document.getElementById('uName').innerText = appState.user.userId;
+                document.getElementById('uBal').innerText = appState.user.balance.toFixed(2);
+                document.getElementById('menuAuth').innerHTML = `<button onclick="logout()" class="block w-full text-left px-5 py-3 hover:bg-red-100 text-red-500 transition"><i class="fa-solid fa-right-from-bracket w-6"></i> ออกจากระบบ</button>`;
+            } else {
+                document.getElementById('userBadge').classList.add('hidden');
+            }
+        }
+
+        // --- Routing & Tabs ---
+        function router(page) {
+            document.querySelectorAll('.section-page').forEach(el => el.classList.remove('active'));
+            document.getElementById(`sec-${page}`).classList.add('active');
+            document.getElementById('sideMenu').classList.add('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function toggleAuth(type) {
+            document.getElementById('formLogin').classList.add('hidden');
+            document.getElementById('formReg').classList.add('hidden');
+            document.getElementById('tabLogin').classList.replace('border-b-4', 'text-gray-400');
+            document.getElementById('tabLogin').classList.replace('text-pastelDark', 'text-gray-400');
+            document.getElementById('tabReg').classList.replace('border-b-4', 'text-gray-400');
+            document.getElementById('tabReg').classList.replace('text-pastelDark', 'text-gray-400');
+            
+            if(type === 'login') {
+                document.getElementById('formLogin').classList.remove('hidden');
+                document.getElementById('tabLogin').classList.add('border-b-4', 'border-pastelDark', 'text-pastelDark');
+                document.getElementById('tabLogin').classList.remove('text-gray-400');
+            } else {
+                document.getElementById('formReg').classList.remove('hidden');
+                document.getElementById('tabReg').classList.add('border-b-4', 'border-pastelDark', 'text-pastelDark');
+                document.getElementById('tabReg').classList.remove('text-gray-400');
+            }
+        }
+
+        // --- Authentication ---
+        async function doAuth(type) {
+            Swal.fire({ title: 'กำลังโหลด...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
+            let payload = {};
+            if(type === 'login') {
+                payload = { idOrEmail: document.getElementById('lUser').value, password: document.getElementById('lPass').value };
+                if(!payload.idOrEmail || !payload.password) return Swal.fire('แจ้งเตือน', 'กรุณากรอกข้อมูลให้ครบ', 'warning');
+            } else {
+                payload = { email: document.getElementById('rMail').value, password: document.getElementById('rPass').value };
+                if(payload.password !== document.getElementById('rPass2').value) return Swal.fire('ผิดพลาด', 'รหัสผ่านไม่ตรงกัน', 'error');
+            }
+
+            const res = await fetchAPI(type, payload);
+            if(res && res.status === 'success') {
+                appState.user = res.user;
+                localStorage.setItem('kStoreUser', JSON.stringify(res.user));
+                updateAuthUI();
+                Swal.fire({ icon: 'success', title: 'สำเร็จ', text: 'ยินดีต้อนรับเข้าสู่ระบบค่ะ', confirmButtonColor: '#FF9EBB', timer: 1500 });
+                router('home');
+                if(appState.user.role === 'admin') location.reload(); // รีเฟรชเพื่อโหลดเมนูแอดมิน
+            } else {
+                Swal.fire({ icon: 'error', title: 'ผิดพลาด', text: res ? res.message : 'เกิดข้อผิดพลาด', confirmButtonColor: '#FF9EBB' });
+            }
+        }
+
+        function logout() { localStorage.removeItem('kStoreUser'); location.reload(); }
+
+        // --- Product Rendering & Purchase ---
+        function extractCategories() {
+            const select = document.getElementById('catFilter');
+            const cats = [...new Set(appState.products.map(p => p.category))];
+            cats.forEach(c => select.innerHTML += `<option value="${c}">${c}</option>`);
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const filter = document.getElementById('catFilter').value;
+            grid.innerHTML = '';
+            
+            // กรองและเรียงราคาจากน้อยไปมาก
+            let filtered = appState.products.filter(p => filter === 'all' || p.category === filter);
+            filtered.sort((a, b) => a.price - b.price);
+
+            if(filtered.length === 0) return grid.innerHTML = '<div class="col-span-full text-center text-gray-500 py-10">ไม่พบสินค้าในหมวดหมู่นี้ค่ะ</div>';
+
+            filtered.forEach(p => {
+                const imgArr = p.images.split(',');
+                // ทำ Slider ถ้ารูป > 1
+                let imgHTML = `<div class="relative w-full h-32 md:h-40 overflow-hidden rounded-t-xl group">`;
+                imgArr.forEach((img, i) => { imgHTML += `<img src="${img}" class="absolute w-full h-full object-cover transition-opacity duration-1000 ${i===0?'opacity-100':'opacity-0 group-hover:opacity-100'}">`; });
+                imgHTML += `</div>`;
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-xl shadow-sm border-2 border-transparent hover:border-pastelDark transition cursor-pointer flex flex-col" onclick="buyProduct('${p.id}', '${p.name}', ${p.price})">
+                        ${imgHTML}
+                        <div class="p-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs text-white bg-pastel px-2 py-0.5 rounded-full">${p.category}</span>
+                                <h3 class="font-bold text-sm md:text-base mt-1 text-gray-800 leading-tight">${p.name}</h3>
+                                <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-gift"></i> ${p.amount} ${p.unit}</p>
+                            </div>
+                            <div class="mt-2 text-right">
+                                <span class="text-pastelDark font-bold text-lg">฿${p.price.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function buyProduct(id, name, price) {
+            if(!appState.user) return router('login');
+            if(appState.settings.isOpen !== 'true') return Swal.fire('ขออภัย', 'ร้านปิดให้บริการชั่วคราวค่ะ', 'warning');
+
+            Swal.fire({
+                title: 'ยืนยันการสั่งซื้อ',
+                html: `<div class="text-left text-sm text-gray-600 mb-4 bg-bgMain p-3 rounded-lg"><p><b>สินค้า:</b> ${name}</p><p><b>ราคา:</b> <span class="text-pastelDark font-bold">${price.toFixed(2)} บาท</span></p><p><b>ยอดเงินของคุณ:</b> ฿${appState.user.balance.toFixed(2)}</p></div>
+                       <input type="text" id="uidGame" class="swal2-input border-2 border-pastelLight !w-11/12 !mx-auto !block" placeholder="ระบุ UID หรือชื่อตัวละครของคุณ">`,
+                showCancelButton: true, confirmButtonText: 'สั่งซื้อเลย', cancelButtonText: 'ยกเลิก', confirmButtonColor: '#FF9EBB', cancelButtonColor: '#d33'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const uid = document.getElementById('uidGame').value;
+                    if(!uid) return Swal.fire('ผิดพลาด', 'กรุณาระบุข้อมูลตัวละครค่ะ', 'error');
+                    
+                    Swal.fire({ title: 'กำลังดำเนินการ...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
+                    const res = await fetchAPI('placeOrder', { userId: appState.user.userId, productId: id, productName: name, price: price, gameUid: uid });
+                    
+                    if(res && res.status === 'success') {
+                        appState.user.balance = res.newBalance;
+                        updateAuthUI();
+                        Swal.fire({ icon: 'success', title: 'สั่งซื้อสำเร็จ!', text: 'แอดมินรับยอดแล้วค่ะ รอดำเนินการ 5-10 นาที แจ้งเตือนทางกล่องข้อความนะคะ', confirmButtonColor: '#FF9EBB' });
+                    } else {
+                        Swal.fire({ icon: 'error', title: 'ผิดพลาด', text: res ? res.message : 'ยอดเงินไม่เพียงพอ', confirmButtonColor: '#FF9EBB' });
+                    }
+                }
+            });
+        }
+
+        // --- Topup System ---
+        let currentPayMethod = 'promppay';
+        function selectPayment(method) {
+            currentPayMethod = method;
+            document.getElementById('qrDisplay').src = method === 'promppay' ? appState.settings.qrPromptpay : appState.settings.qrTrueMoney;
+            // สลับสีปุ่ม UI
+        }
+
+        function submitTopup() {
+            if(!appState.user) return router('login');
+            const amount = document.getElementById('tAmount').value;
+            const ref = document.getElementById('tRef').value.toUpperCase();
+            const file = document.getElementById('tSlip').files[0];
+
+            if(!/^[A-Z0-9]{6}$/.test(ref)) return Swal.fire('ผิดพลาด', 'รหัสอ้างอิงต้องเป็นภาษาอังกฤษหรือตัวเลข 6 ตัวท้ายสลิปเท่านั้นค่ะ', 'error');
+            if(!amount || !file) return Swal.fire('ผิดพลาด', 'กรุณากรอกจำนวนเงินและแนบสลิปค่ะ', 'error');
+
+            const reader = new FileReader();
+            reader.onload = async () => {
+                Swal.fire({ title: 'กำลังอัปโหลดสลิป...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
+                const res = await fetchAPI('topup', { userId: appState.user.userId, amount: amount, refCode: ref, imageBase64: reader.result, method: currentPayMethod });
+                
+                if(res && res.status === 'success') {
+                    Swal.fire('แจ้งโอนสำเร็จ', 'แอดมินรับยอดค่ะ รอยอดเข้า 5-10 นาทีนะคะ', 'success');
+                    document.getElementById('tAmount').value = ''; document.getElementById('tRef').value = '';
+                } else {
+                    Swal.fire('ผิดพลาด', res ? res.message : 'เกิดข้อผิดพลาด', 'error');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // --- Admin Functions ---
+        function fillAdminForm() {
+            document.getElementById('sName').value = appState.settings.storeName || '';
+            document.getElementById('sEmail').value = appState.settings.adminEmail || '';
+            document.getElementById('sLogo').value = appState.settings.logo || '';
+            document.getElementById('sPopup').value = appState.settings.popupImg || '';
+            document.getElementById('sQr1').value = appState.settings.qrPromptpay || '';
+            document.getElementById('sOpen').value = appState.settings.isOpen || 'true';
+        }
+
+        async function saveAdminSettings() {
+            const payload = {
+                storeName: document.getElementById('sName').value, adminEmail: document.getElementById('sEmail').value,
+                logo: document.getElementById('sLogo').value, popupImg: document.getElementById('sPopup').value,
+                qrPromptpay: document.getElementById('sQr1').value, isOpen: document.getElementById('sOpen').value
+            };
+            Swal.fire({ title: 'กำลังบันทึก...', didOpen: () => Swal.showLoading() });
+            const res = await fetchAPI('saveSettings', payload);
+            if(res && res.status === 'success') {
+                Swal.fire('สำเร็จ', 'บันทึกการตั้งค่าเรียบร้อย', 'success').then(() => location.reload());
+            }
+        }
+    </script>
+</body>
+</html>
