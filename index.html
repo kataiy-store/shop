@@ -112,9 +112,9 @@
     <main class="max-w-6xl mx-auto p-4 min-h-[75vh]">
         
         <section id="p-home" class="page active">
-            <div id="bannerContainer" class="mb-6 hidden">
+            <div id="bannerContainer" class="mb-6">
                 <a id="uiBanL" href="#" target="_blank">
-                    <img id="uiBan" src="" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-pMain hover:opacity-90 smooth">
+                    <img id="uiBan" src="https://placehold.co/1200x400/FFF0F5/FF69B4?text=Banner+Space" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-pMain hover:opacity-90 smooth">
                 </a>
             </div>
             
@@ -238,7 +238,7 @@
                         <div><span class="admin-label">QR Code ธนาคาร</span><input id="s_qrB" class="inp-admin"></div>
                         <div><span class="admin-label">QR Code ทรูมันนี่</span><input id="s_qrT" class="inp-admin"></div>
                         <div><span class="admin-label">QR Code ต่างประเทศ</span><input id="s_qrI" class="inp-admin"></div>
-                        <div class="md:col-span-3"><span class="admin-label">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ส่งเข้า Inbox)</span><input id="s_msgS" class="inp-admin"></div>
+                        <div class="md:col-span-3"><span class="admin-label">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ส่งเข้า Inbox อัตโนมัติ)</span><input id="s_msgS" class="inp-admin"></div>
                     </div>
                 </div>
 
@@ -299,10 +299,6 @@
 
     </main>
 
-    <footer class="text-center py-6 text-pDark font-semibold text-sm bg-white border-t border-pMain mt-10">
-        <p><i class="fa-solid fa-copyright"></i> 2026 <span id="fName">kataiy-store</span>. All rights reserved.</p>
-    </footer>
-
     <script>
         // ⚠️ นำ Web App URL ของคุณมาใส่ตรงนี้ ⚠️
         const API_URL = 'https://script.google.com/macros/s/AKfycbxXYEwOAYFjx5DA4tDshg_N0vEdwr8gd9keNTOWfaCyTiY_7JkUzC_9qehsL60Hg36l0g/exec';
@@ -350,10 +346,9 @@
 
         function drawUI(silent, updateForm) {
             document.title = st.sys.storeName; document.getElementById('favicon').href = st.sys.logo;
-            document.getElementById('uiName').innerText = st.sys.storeName; document.getElementById('fName').innerText = st.sys.storeName;
+            document.getElementById('uiName').innerText = st.sys.storeName; 
             document.getElementById('uiLogo').src = st.sys.logo;
             
-            // อัปเดตป้ายสถานะร้าน (เล็กๆ ตรง Header)
             let statBadge = document.getElementById('headerStatus');
             if(String(st.sys.isOpen) === 'true') { 
                 statBadge.className = 'px-2 py-0.5 text-[0.65rem] font-bold rounded-full text-white bg-green-400 shadow-sm w-max flex items-center gap-1 leading-none smooth'; 
@@ -369,28 +364,27 @@
             if(st.sys.contactPhone) conHtml += `<a href="tel:${st.sys.contactPhone}" class="bg-pBg p-4 rounded-2xl block text-pDark font-bold hover:bg-pMain hover:text-white smooth"><i class="fa-solid fa-phone text-2xl mb-1"></i><br>โทรติดต่อ</a>`;
             document.getElementById('contactList').innerHTML = conHtml || '<div class="text-gray-400">ยังไม่มีข้อมูลติดต่อค่ะ</div>';
 
-            // ระบบแสดงแบรนเนอร์ (แก้ไขบัคและบังคับโชว์ 100%)
-            let bc = document.getElementById('bannerContainer');
+            // บังคับแสดง Banner เสมอ
             let uiBan = document.getElementById('uiBan');
+            document.getElementById('bannerContainer').classList.remove('hidden');
             if(st.sys.banner && st.sys.banner.trim() !== '') { 
                 uiBan.src = st.sys.banner; 
-                document.getElementById('uiBanL').href = st.sys.bannerLink || '#';
-                bc.classList.remove('hidden'); 
-                uiBan.classList.remove('hidden'); 
-                uiBan.style.display = 'block';
             } else {
-                bc.classList.add('hidden'); 
+                uiBan.src = 'https://placehold.co/1200x400/FFF0F5/FF69B4?text=Banner+Space'; 
             }
+            document.getElementById('uiBanL').href = st.sys.bannerLink || '#';
             
             document.getElementById('uiMarq').innerHTML = `<i class="fa-solid fa-bullhorn"></i> ${st.sys.announcement||''} &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fa-solid fa-star"></i> ล่าสุด: ${st.history?st.history.join(' &nbsp;|&nbsp; '):''}`;
 
             if(!st.u) {
+                document.getElementById('homeHead').innerHTML = `<i class="fa-solid fa-star"></i> บริการแนะนำ (กรุณาเข้าสู่ระบบ)`;
                 document.getElementById('uBadge').classList.add('hidden');
                 document.getElementById('adminMenuArea').classList.add('hidden');
                 document.getElementById('authMenuArea').innerHTML = `<button onclick="go('auth')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-6 text-center"></i> <span data-lang="mLogin">เข้าสู่ระบบ / สมัคร</span></button>`;
             } else {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uId').innerText = st.u.userId; document.getElementById('uBal').innerText = st.u.balance.toFixed(2);
+                document.getElementById('homeHead').innerHTML = `<i class="fa-solid fa-layer-group"></i> บริการทั้งหมด`;
                 document.getElementById('fLog').innerHTML = `<button onclick="out()" class="btn-cute !bg-red-400"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</button>`;
                 document.getElementById('authMenuArea').innerHTML = `<button onclick="out()" class="block w-full text-left px-5 py-3 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-6 text-center"></i> ออกจากระบบ</button>`;
                 
@@ -417,7 +411,6 @@
             });
         }
 
-        // หน้าแรก: แสดงทั้งหมดไม่มี Filter ตามที่ขอ
         function drawProds() {
             let cx = document.getElementById('prodsArea'); 
             let arr = [...st.prods];
@@ -440,7 +433,6 @@
             }).join('');
         }
 
-        // หน้าเกมทั้งหมด: แบ่งหมวดหมู่ให้
         function drawAllGames() {
             let cx = document.getElementById('allGamesArea');
             let grouped = {};
@@ -477,7 +469,7 @@
             cx.classList.remove('hidden');
             gr.innerHTML = st.wrks.map(w => {
                 let imgs = w.imgs.split(',').map(i=>`<img src="${i.trim()}" class="slider-item ${i===w.imgs.split(',')[0]?'active':''}">`).join('');
-                return `<a href="${w.line||'#'}" target="_blank" class="cute-card hover:scale-105 smooth cursor-pointer"><div class="img-slider">${imgs}</div><div class="p-2 text-center text-sm font-bold text-pDark bg-pBg">หมวด: ${w.cat||'งานป้าย'}</div></a>`;
+                return `<a href="${w.line||'#'}" target="_blank" class="cute-card hover:scale-105 smooth cursor-pointer"><div class="img-slider">${imgs}</div><div class="p-2 text-center text-sm font-bold text-pDark bg-pBg">หมวด: ${w.cat||'ป้าย'}</div></a>`;
             }).join('');
         }
 
