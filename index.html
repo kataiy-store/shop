@@ -77,7 +77,7 @@
             <button onclick="go('topup')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-wallet w-6 text-center"></i> <span data-lang="mTopup">เติมเงิน</span></button>
             <button onclick="go('inbox')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-envelope w-6 text-center"></i> <span data-lang="mInbox">กล่องข้อความ</span></button>
             <button onclick="go('history')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-clock-rotate-left w-6 text-center"></i> <span data-lang="mHist">ประวัติการสั่งซื้อ</span></button>
-            <button onclick="go('contact')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-phone w-6 text-center"></i> <span data-lang="mCont">ติดต่อเรา</span></button>
+            <button onclick="go('contact')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-address-book w-6 text-center"></i> <span data-lang="mCont">ติดต่อเรา</span></button>
             
             <div id="adminMenuArea" class="hidden border-t border-pMain mt-1 pt-1">
                 <button onclick="go('admin')" class="block w-full text-left px-5 py-3 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-user-shield w-6 text-center"></i> ระบบจัดการหลังบ้าน</button>
@@ -115,7 +115,7 @@
         </section>
 
         <section id="p-games" class="page">
-            <h2 class="text-2xl font-bold text-pDark mb-6 border-b-2 border-pMain pb-2"><i class="fa-solid fa-gamepad"></i> เกมและบริการทั้งหมด (จัดหมวดหมู่)</h2>
+            <h2 class="text-2xl font-bold text-pDark mb-6 border-b-2 border-pMain pb-2"><i class="fa-solid fa-gamepad"></i> เกมและบริการทั้งหมด</h2>
             <div id="allGamesArea" class="space-y-6"></div>
         </section>
 
@@ -142,7 +142,7 @@
                     <input type="email" id="rMail" class="inp-cute mb-3" placeholder="อีเมลของคุณ">
                     <input type="password" id="rPass" class="inp-cute mb-3" placeholder="ตั้งรหัสผ่าน">
                     <input type="password" id="rPass2" class="inp-cute mb-6" placeholder="ยืนยันรหัสผ่าน">
-                    <button onclick="doAuth('register')" class="btn-cute shadow-sm"><i class="fa-solid fa-user-plus"></i> สมัครสมาชิก (พร้อมล็อกอิน)</button>
+                    <button onclick="doAuth('register')" class="btn-cute shadow-sm"><i class="fa-solid fa-user-plus"></i> สมัครสมาชิก (เข้าสู่ระบบทันที)</button>
                     <p class="text-center mt-4 text-sm font-semibold text-gray-500 cursor-pointer hover:text-pDark smooth" onclick="swAuth('log')">มีบัญชีแล้ว? เข้าระบบเลย</p>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                     <i class="fa-solid fa-cloud-arrow-up text-3xl text-pDark mb-2"></i> <br><span class="text-sm font-semibold text-gray-600">กดเพื่อแนบรูปสลิป</span>
                     <input type="file" id="tFile" accept="image/*" class="hidden">
                 </label>
-                <button onclick="doTopup()" class="btn-cute text-lg"><i class="fa-solid fa-paper-plane"></i> ยืนยันแจ้งโอน</button>
+                <button onclick="doTopup()" class="btn-cute text-lg"><i class="fa-solid fa-paper-plane"></i> แจ้งโอนเงิน</button>
             </div>
         </section>
 
@@ -185,6 +185,7 @@
             <div class="flex gap-2 mb-6 overflow-x-auto hide-scroll pb-2 border-b border-pMain">
                 <button class="bg-red-100 text-red-600 px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('set')"><i class="fa-solid fa-gear"></i> ตั้งค่าเว็บ</button>
                 <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('prod')"><i class="fa-solid fa-box-open"></i> สินค้า</button>
+                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('work')"><i class="fa-solid fa-images"></i> งานป้าย</button>
                 <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('topup')"><i class="fa-solid fa-money-bill-wave"></i> ยอดโอน</button>
                 <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('order')"><i class="fa-solid fa-shopping-cart"></i> ออเดอร์</button>
             </div>
@@ -195,11 +196,11 @@
                     <div><label class="text-xs font-semibold text-gray-500">ลิงก์ Logo</label><input id="s_logo" class="inp-cute !py-2 !text-sm"></div>
                     <div><label class="text-xs font-semibold text-gray-500">ประกาศ (Marquee)</label><input id="s_ann" class="inp-cute !py-2 !text-sm"></div>
                     <div><label class="text-xs font-semibold text-gray-500">แบนเนอร์ยาว</label><input id="s_ban" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">ลิงก์คลิกแบนเนอร์</label><input id="s_banL" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">ลิงก์แบนเนอร์</label><input id="s_banL" class="inp-cute !py-2 !text-sm"></div>
                     <div><label class="text-xs font-semibold text-gray-500">หัวข้อ Popup</label><input id="s_popH" class="inp-cute !py-2 !text-sm"></div>
                     <div><label class="text-xs font-semibold text-gray-500">รูป Popup</label><input id="s_popI" class="inp-cute !py-2 !text-sm"></div>
                     <div><label class="text-xs font-semibold text-gray-500">ข้อความ Popup</label><input id="s_popT" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">สถานะร้าน (true/false)</label><select id="s_open" class="inp-cute !py-2 !text-sm"><option value="true">เปิดร้าน</option><option value="false">ปิดร้าน</option></select></div>
+                    <div><label class="text-xs font-semibold text-gray-500">สถานะร้าน</label><select id="s_open" class="inp-cute !py-2 !text-sm"><option value="true">เปิดร้าน</option><option value="false">ปิดร้าน</option></select></div>
                     
                     <div class="col-span-full mt-2 border-t border-pMain pt-2"><h3 class="font-bold text-pDark">ช่องทางชำระ & ติดต่อ</h3></div>
                     <div><label class="text-xs font-semibold text-gray-500">QR ธนาคาร</label><input id="s_qrB" class="inp-cute !py-2 !text-sm"></div>
@@ -209,7 +210,7 @@
                     <div><label class="text-xs font-semibold text-gray-500">Facebook URL</label><input id="s_fb" class="inp-cute !py-2 !text-sm"></div>
                     <div><label class="text-xs font-semibold text-gray-500">Line URL</label><input id="s_line" class="inp-cute !py-2 !text-sm"></div>
                     <div><label class="text-xs font-semibold text-gray-500">เบอร์โทร</label><input id="s_phone" class="inp-cute !py-2 !text-sm"></div>
-                    <div class="col-span-1 md:col-span-2"><label class="text-xs font-semibold text-gray-500">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ลง Inbox)</label><input id="s_msgS" class="inp-cute !py-2 !text-sm"></div>
+                    <div class="col-span-1 md:col-span-2"><label class="text-xs font-semibold text-gray-500">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ</label><input id="s_msgS" class="inp-cute !py-2 !text-sm"></div>
                 </div>
                 <button onclick="adSaveSet()" class="btn-cute mt-5 !w-auto !inline-block"><i class="fa-solid fa-save"></i> บันทึกการตั้งค่าทั้งหมด</button>
             </div>
@@ -219,21 +220,34 @@
                     <h3 class="font-bold text-pDark mb-3" id="prodFormTitle"><i class="fa-solid fa-plus-circle"></i> เพิ่ม/แก้ไข สินค้า</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                         <input type="hidden" id="p_id">
-                        <input id="p_catI" class="inp-cute !py-2 !text-sm" placeholder="ลิงก์รูปหมวดหมู่ (ถ้ามี)">
-                        <input id="p_cat" class="inp-cute !py-2 !text-sm" placeholder="*หมวดหมู่ (เช่น บริการปั๊ม)">
+                        <input id="p_catI" class="inp-cute !py-2 !text-sm" placeholder="ลิงก์รูปหมวดหมู่ (ใส่แค่อันแรกพอ)">
+                        <input id="p_cat" class="inp-cute !py-2 !text-sm" placeholder="*หมวดหมู่ (เช่น ROV, Valorant)">
                         <input id="p_name" class="inp-cute !py-2 !text-sm" placeholder="*ชื่อบริการ">
                         <input id="p_amt" class="inp-cute !py-2 !text-sm" placeholder="*จำนวน">
-                        <input id="p_unit" class="inp-cute !py-2 !text-sm" placeholder="หน่วย (เช่น วิว, ไลค์)">
+                        <input id="p_unit" class="inp-cute !py-2 !text-sm" placeholder="หน่วย (เช่น เพชร, คูปอง)">
                         <input type="number" id="p_prc" class="inp-cute !py-2 !text-sm" placeholder="*ราคา" step="0.01">
                         <input type="number" id="p_disc" class="inp-cute !py-2 !text-sm" placeholder="ส่วนลด %">
-                        <input id="p_img" class="col-span-2 md:col-span-4 inp-cute !py-2 !text-sm" placeholder="*ลิงก์รูปภาพ (หลายรูปคั่นด้วย , จะสลับเอง 5 วิ)">
+                        <input id="p_img" class="col-span-2 md:col-span-4 inp-cute !py-2 !text-sm" placeholder="*ลิงก์รูปภาพ (หลายรูปคั่นด้วย ,)">
                     </div>
                     <div class="flex gap-2 mt-4">
-                        <button onclick="adSaveProd()" class="btn-cute !w-auto !py-2 !text-sm" id="btnSaveProd"><i class="fa-solid fa-plus"></i> เพิ่ม/บันทึก สินค้า</button>
+                        <button onclick="adSaveProd()" class="btn-cute !w-auto !py-2 !text-sm" id="btnSaveProd"><i class="fa-solid fa-save"></i> บันทึกข้อมูลสินค้า</button>
                         <button onclick="adCancelEdit()" class="btn-cute !w-auto !py-2 !text-sm !bg-gray-400 hidden" id="btnCancelProd">ยกเลิก</button>
                     </div>
                 </div>
                 <div class="overflow-x-auto"><table class="admin-table" id="tb-prods"></table></div>
+            </div>
+
+            <div id="ad-work" class="bg-white p-5 rounded-2xl shadow-sm border border-pMain ad-sec hidden">
+                <div class="bg-pBg p-4 rounded-xl mb-6 border border-pMain">
+                    <h3 class="font-bold text-pDark mb-3"><i class="fa-solid fa-palette"></i> เพิ่มงานป้าย</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <input id="w_cat" class="inp-cute !py-2 !text-sm" placeholder="หมวดหมู่ป้าย">
+                        <input id="w_line" class="inp-cute !py-2 !text-sm" placeholder="ลิงก์เชื่อม Line">
+                        <input id="w_img" class="col-span-1 md:col-span-3 inp-cute !py-2 !text-sm" placeholder="ลิงก์รูป (คั่นด้วย , สูงสุด 10 รูป)">
+                    </div>
+                    <button onclick="adAddWork()" class="btn-cute mt-4 !w-auto !inline-block !py-2 !text-sm"><i class="fa-solid fa-plus"></i> เพิ่มงานป้าย</button>
+                </div>
+                <div class="overflow-x-auto"><table class="admin-table" id="tb-works"></table></div>
             </div>
 
             <div id="ad-topup" class="bg-white p-4 rounded-2xl shadow-sm border border-pMain ad-sec hidden overflow-x-auto"><table class="admin-table min-w-max" id="tb-topups"></table></div>
@@ -247,7 +261,7 @@
     </footer>
 
     <script>
-        // ⚠️ สำคัญมาก: เปลี่ยนเป็น URL จาก Google Apps Script ของคุณ ⚠️
+        // ⚠️ นำ Web App URL มาใส่ตรงนี้ ⚠️
         const API_URL = 'https://script.google.com/macros/s/AKfycbxXYEwOAYFjx5DA4tDshg_N0vEdwr8gd9keNTOWfaCyTiY_7JkUzC_9qehsL60Hg36l0g/exec';
         
         let st = { sys:{}, prods:[], wrks:[], u:null, inb:[], uOrd:[], adm:null, busy:false, pay:'bank', curCat:'all' };
@@ -261,9 +275,8 @@
         window.onload = () => {
             st.u = JSON.parse(localStorage.getItem('ks_usr'));
             loadData(false, true); 
-            setInterval(() => loadData(true, false), 3000); // Polling เงียบๆ 3 วิ
+            setInterval(() => loadData(true, false), 3000); 
             
-            // Slider 5 วิ
             setInterval(() => {
                 document.querySelectorAll('.img-slider').forEach(s => {
                     let imgs = s.querySelectorAll('img');
@@ -297,7 +310,6 @@
             document.getElementById('uiName').innerText = st.sys.storeName; document.getElementById('fName').innerText = st.sys.storeName;
             document.getElementById('uiLogo').src = st.sys.logo;
             
-            // Contact Area
             let conHtml = '';
             if(st.sys.contactFB) conHtml += `<a href="${st.sys.contactFB}" target="_blank" class="bg-pBg p-3 rounded-xl block text-pDark font-bold"><i class="fa-brands fa-facebook text-xl"></i> Facebook</a>`;
             if(st.sys.contactLine) conHtml += `<a href="${st.sys.contactLine}" target="_blank" class="bg-pBg p-3 rounded-xl block text-green-500 font-bold"><i class="fa-brands fa-line text-xl"></i> Line Official</a>`;
@@ -316,7 +328,7 @@
                 document.getElementById('homeHead').innerHTML = `<i class="fa-solid fa-star"></i> บริการแนะนำ (กรุณาเข้าสู่ระบบ)`;
                 document.getElementById('uBadge').classList.add('hidden');
                 document.getElementById('adminMenuArea').classList.add('hidden');
-                document.getElementById('authMenuArea').innerHTML = `<button onclick="go('auth')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-6 text-center"></i> เข้าสู่ระบบ / สมัคร</button>`;
+                document.getElementById('authMenuArea').innerHTML = `<button onclick="go('auth')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-6 text-center"></i> <span data-lang="mLogin">เข้าสู่ระบบ / สมัคร</span></button>`;
             } else {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uId').innerText = st.u.userId; document.getElementById('uBal').innerText = st.u.balance.toFixed(2);
@@ -331,7 +343,7 @@
             }
 
             if(!silent || document.getElementById('prodsArea').innerHTML.includes('fa-spinner')) drawProds(); 
-            drawAllGames(); drawInbox();
+            drawAllGames(); drawWorks(); drawInbox();
 
             if(!silent && st.sys.popImg && !sessionStorage.getItem('popS')) {
                 Swal.fire({ title: st.sys.popHead, text: st.sys.popTxt, imageUrl: st.sys.popImg, imageWidth: '100%', customClass: { popup: 'rounded-2xl' }, confirmButtonText: 'รับทราบจ้า' });
@@ -404,7 +416,16 @@
             cx.innerHTML = html || '<div class="text-center py-10 text-gray-400 font-bold">ไม่มีข้อมูลค่ะ</div>';
         }
 
-        // ระบบสั่งซื้อ 100%
+        function drawWorks() {
+            let cx = document.getElementById('worksArea'); let gr = document.getElementById('gridWorks');
+            if(st.wrks.length === 0) return cx.classList.add('hidden');
+            cx.classList.remove('hidden');
+            gr.innerHTML = st.wrks.map(w => {
+                let imgs = w.imgs.split(',').map(i=>`<img src="${i.trim()}" class="slider-item ${i===w.imgs.split(',')[0]?'active':''}">`).join('');
+                return `<a href="${w.line||'#'}" target="_blank" class="cute-card hover:scale-105 smooth cursor-pointer"><div class="img-slider">${imgs}</div><div class="p-2 text-center text-sm font-bold text-pDark bg-pBg">หมวด: ${w.cat||'ป้าย'}</div></a>`;
+            }).join('');
+        }
+
         function buy(id, name, prc) {
             if(!st.u) return go('auth');
             if(st.sys.isOpen !== 'true') return Swal.fire('ปิดร้าน', 'ขออภัยค่ะ ร้านปิดให้บริการชั่วคราว', 'warning');
@@ -425,7 +446,7 @@
                 didOpen: () => { window.buyType = 'uid'; }
             }).then(async (res) => {
                 if (res.isConfirmed) {
-                    let d = window.buyType === 'uid' ? document.getElementById('gUid').value : `M:${document.getElementById('gMail').value} P:${document.getElementById('gPass').value}`;
+                    let d = window.buyType === 'uid' ? document.getElementById('gUid').value : `ID/M:${document.getElementById('gMail').value} P:${document.getElementById('gPass').value}`;
                     if(!d || d.includes('undefined')) return Swal.fire('อ๊ะ!', 'กรอกข้อมูลให้ครบด้วยน้า', 'error');
                     
                     Swal.fire({title:'กำลังสั่งซื้อ...', didOpen:()=>Swal.showLoading()});
@@ -450,7 +471,6 @@
             window.scrollTo(0,0);
         }
 
-        // เติมเงินอัตโนมัติ 100%
         function setPay(m) {
             st.pay = m;
             ['Bank','True','Inter'].forEach(x=>{ document.getElementById(`b${x}`).className = m===x.toLowerCase()?'flex-1 py-2 px-3 rounded-lg bg-pDark text-white font-semibold':'flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold'; });
@@ -473,7 +493,6 @@
             }; rd.readAsDataURL(f);
         }
 
-        // ล็อกอิน/สมัครสมาชิก และออโต้ล็อกอิน 100%
         function swAuth(t) {
             document.getElementById('fLog').classList.toggle('hidden', t!=='log');
             document.getElementById('fReg').classList.toggle('hidden', t!=='reg');
@@ -506,7 +525,7 @@
             document.getElementById('uOrderList').innerHTML = '<tr><th>เวลา</th><th>Order</th><th>สินค้า</th><th>สถานะ</th></tr>' + st.uOrd.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.oid.substring(0,8)}</td><td>${o.prod}</td><td>${o.stat==='Pending'?'<span class="text-yellow-500 font-bold">รอคิว</span>':'<span class="text-green-500 font-bold">สำเร็จ</span>'}</td></tr>`).join('');
         }
 
-        // ================= ADMIN LOGIC 100% =================
+        // ================= ADMIN LOGIC =================
         function swAd(t) {
             document.querySelectorAll('.ad-sec').forEach(e=>e.classList.add('hidden'));
             document.getElementById(`ad-${t}`).classList.remove('hidden');
@@ -531,7 +550,8 @@
             }
 
             document.getElementById('tb-prods').innerHTML = '<tr><th>ID</th><th>หมวด</th><th>ชื่อ</th><th>ราคา</th><th>จัดการ</th></tr>' + st.prods.map(p=>`<tr><td>${p.id}</td><td>${p.category}</td><td>${p.name}</td><td>฿${p.price}</td><td><button onclick="adEditP('${p.id}')" class="text-blue-500 mr-2"><i class="fa-solid fa-pen"></i></button><button onclick="adDelP('${p.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
-            document.getElementById('tb-topups').innerHTML = '<tr><th>เวลา</th><th>User</th><th>ยอด</th><th>อ้างอิง</th><th>สลิป</th><th>สถานะ</th></tr>' + st.adm.topups.map(t=>`<tr><td>${new Date(t.time).toLocaleString('th-TH')}</td><td>${t.uid}</td><td>${t.amt}</td><td>${t.ref}</td><td><a href="${t.img}" target="_blank" class="text-pDark underline">ดู</a></td><td><span class="text-green-500 font-bold">อนุมัติอัตโนมัติ</span></td></tr>`).join('');
+            document.getElementById('tb-works').innerHTML = '<tr><th>ID</th><th>หมวด</th><th>รูป</th><th>ลบ</th></tr>' + st.wrks.map(w=>`<tr><td>${w.id}</td><td>${w.cat}</td><td>${w.imgs.split(',').length} รูป</td><td><button onclick="adDelW('${w.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
+            document.getElementById('tb-topups').innerHTML = '<tr><th>เวลา</th><th>User</th><th>ยอด</th><th>อ้างอิง</th><th>สลิป</th><th>สถานะ</th></tr>' + st.adm.topups.map(t=>`<tr><td>${new Date(t.time).toLocaleString('th-TH')}</td><td>${t.uid}</td><td>${t.amt}</td><td>${t.ref}</td><td><a href="${t.img}" target="_blank" class="text-pDark underline">ดู</a></td><td><span class="text-green-500 font-bold">อัตโนมัติ</span></td></tr>`).join('');
             document.getElementById('tb-orders').innerHTML = '<tr><th>เวลา</th><th>Order</th><th>User</th><th>สินค้า</th><th>ข้อมูล</th><th>จัดการ</th></tr>' + st.adm.orders.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH')}</td><td>${o.oid}</td><td>${o.uid}</td><td>${o.prod}</td><td><span class="bg-pBg p-1 rounded font-bold">${o.data}</span></td><td>${o.stat==='Pending'?`<button onclick="adUpd('order','${o.oid}','${o.uid}',0)" class="bg-green-500 text-white px-2 py-1 rounded-full text-xs">เสร็จสิ้น</button>`:'<span class="text-green-500 font-bold">สำเร็จ</span>'}</td></tr>`).join('');
         }
 
@@ -578,6 +598,20 @@
         async function adDelP(id) {
             if(!confirm('ลบสินค้านี้?')) return;
             let r = await fetchAPI('adminManageProd', {act:'del', id:id});
+            if(r && r.status==='success') loadData();
+        }
+
+        async function adAddWork() {
+            let p = { act:'add', cat:document.getElementById('w_cat').value, line:document.getElementById('w_line').value, imgs:document.getElementById('w_img').value };
+            if(!p.imgs) return Swal.fire('อ๊ะ!','ใส่รูปลิงก์ด้วยจ้า','warning');
+            Swal.fire({title:'กำลังเพิ่ม...', didOpen:()=>Swal.showLoading()});
+            let r = await fetchAPI('adminManageWork', p);
+            if(r && r.status==='success') { Swal.fire('สำเร็จ','','success'); document.getElementById('w_img').value=''; loadData(); }
+        }
+
+        async function adDelW(id) {
+            if(!confirm('ลบงานป้ายนี้?')) return;
+            let r = await fetchAPI('adminManageWork', {act:'del', id:id});
             if(r && r.status==='success') loadData();
         }
 
