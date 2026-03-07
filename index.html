@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
-        body { font-family: 'Prompt', sans-serif; background-color: #FFF0F5; color: #4A4A4A; overflow-x: hidden; }
+        body { font-family: 'Prompt', sans-serif; background-color: #FFF0F5; color: #4A4A4A; overflow-x: hidden; padding-bottom: 80px;}
         .smooth { transition: all 0.3s ease; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         
@@ -28,7 +28,7 @@
         .page.active { display: block; }
         @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        /* 🎨 อัปเดต Layout การ์ดสินค้า ให้เหมือนภาพตัวอย่าง 🎨 */
+        /* Product Cards */
         .cute-card { background: white; border-radius: 20px; border: 1px solid #FCE7F3; box-shadow: 0 4px 15px rgba(255,105,180, 0.05); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; position: relative;}
         .cute-card:hover { border-color: #FFC0CB; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,105,180, 0.15); }
         .img-container { padding: 12px 12px 0 12px; background: white; }
@@ -48,6 +48,12 @@
         .swal2-popup { border-radius: 24px !important; font-family: 'Prompt', sans-serif !important; border: 3px solid #FFC0CB !important; }
         .swal2-confirm { border-radius: 99px !important; background: #FF69B4 !important; }
 
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 2px solid #FCE7F3; display: flex; justify-content: space-around; padding: 10px 0; z-index: 50; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: #FFC0CB; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .nav-item i { font-size: 1.25rem; margin-bottom: 2px; }
+        .nav-item:hover, .nav-item.active { color: #FF69B4; transform: translateY(-3px); }
+
         /* Admin Layouts */
         .admin-card { background: white; border-radius: 24px; border: 1px solid #FFC0CB; padding: 24px; box-shadow: 0 4px 15px rgba(255,105,180, 0.05); margin-bottom: 24px; }
         .admin-header { font-size: 1.15rem; font-weight: 600; color: #FF69B4; border-bottom: 2px solid #FFF0F5; padding-bottom: 12px; margin-bottom: 16px; }
@@ -63,14 +69,14 @@
 <body>
 
     <nav class="bg-white shadow-sm sticky top-0 z-50 border-b-2 border-pMain">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="max-w-6xl mx-auto px-4 py-2 flex justify-between items-center">
             
             <div class="flex items-center gap-3 cursor-pointer" onclick="go('home')">
                 <img id="uiLogo" src="" class="w-11 h-11 rounded-full border border-pMain object-cover shadow-sm bg-white">
                 <div class="flex flex-col justify-center">
                     <h1 id="uiName" class="text-lg md:text-xl font-bold text-pDark leading-tight mb-0.5">Loading...</h1>
                     <span id="headerStatus" class="px-2 py-[1px] text-[0.6rem] font-bold rounded-full text-white bg-gray-400 shadow-sm w-max flex items-center gap-1 leading-none smooth">
-                        <i class="fa-solid fa-circle-notch fa-spin"></i> โหลด...
+                        <i class="fa-solid fa-circle-notch fa-spin"></i> กำลังโหลด
                     </span>
                 </div>
             </div>
@@ -92,10 +98,10 @@
         
         <div id="mainMenu" class="hidden absolute right-4 top-20 bg-white rounded-2xl shadow-xl w-56 py-2 z-50 border border-pMain overflow-hidden">
             <button onclick="go('home')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-house w-6 text-center"></i> <span data-lang="mHome">หน้าหลัก</span></button>
-            <button onclick="go('games')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-gamepad w-6 text-center"></i> <span data-lang="mGames">เกมทั้งหมด</span></button>
-            <button onclick="go('topup')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-wallet w-6 text-center"></i> <span data-lang="mTopup">เติมเงิน</span></button>
-            <button onclick="go('inbox')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-envelope w-6 text-center"></i> <span data-lang="mInbox">กล่องข้อความ</span></button>
-            <button onclick="go('history')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-clock-rotate-left w-6 text-center"></i> <span data-lang="mHist">ประวัติสั่งซื้อ</span></button>
+            <button id="m-games" onclick="go('games')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-gamepad w-6 text-center"></i> <span data-lang="mGames">เกมทั้งหมด</span></button>
+            <button id="m-topup" onclick="go('topup')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-wallet w-6 text-center"></i> <span data-lang="mTopup">เติมเงิน</span></button>
+            <button id="m-inbox" onclick="go('inbox')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-envelope w-6 text-center"></i> <span data-lang="mInbox">กล่องข้อความ</span></button>
+            <button id="m-history" onclick="go('history')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-clock-rotate-left w-6 text-center"></i> <span data-lang="mHist">ประวัติสั่งซื้อ</span></button>
             <button onclick="go('contact')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-phone w-6 text-center"></i> <span data-lang="mCont">ติดต่อเรา</span></button>
             
             <div id="adminMenuArea" class="hidden border-t border-pMain mt-1 pt-1 bg-red-50">
@@ -118,36 +124,32 @@
                 <div class="bg-white rounded-2xl p-3 flex items-center gap-3 shadow-sm border border-pMain">
                     <div class="bg-blue-100 text-blue-500 w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-users"></i></div>
                     <div class="flex flex-col justify-center">
-                        <p class="text-[0.65rem] text-gray-500 font-bold mb-0 leading-none">ผู้ใช้งานทั้งหมด</p>
-                        <h4 class="font-extrabold text-gray-800 text-sm leading-tight mt-1" id="st-users">0</h4>
+                        <p class="text-[0.65rem] text-gray-500 font-bold mb-0 leading-none">ผู้ใช้งานทั้งหมด</p><h4 class="font-extrabold text-gray-800 text-sm leading-tight mt-1" id="st-users">0</h4>
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl p-3 flex items-center gap-3 shadow-sm border border-pMain">
                     <div class="bg-green-100 text-green-500 w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-wallet"></i></div>
                     <div class="flex flex-col justify-center">
-                        <p class="text-[0.65rem] text-gray-500 font-bold mb-0 leading-none">ยอดเติมทั้งหมด</p>
-                        <h4 class="font-extrabold text-gray-800 text-sm leading-tight mt-1" id="st-topups">0 ฿</h4>
+                        <p class="text-[0.65rem] text-gray-500 font-bold mb-0 leading-none">ยอดเติมทั้งหมด</p><h4 class="font-extrabold text-gray-800 text-sm leading-tight mt-1" id="st-topups">0 ฿</h4>
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl p-3 flex items-center gap-3 shadow-sm border border-pMain">
                     <div class="bg-orange-100 text-orange-500 w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-chart-line"></i></div>
                     <div class="flex flex-col justify-center">
-                        <p class="text-[0.65rem] text-gray-500 font-bold mb-0 leading-none">ยอดขายทั้งหมด</p>
-                        <h4 class="font-extrabold text-gray-800 text-sm leading-tight mt-1" id="st-sales">0 ฿</h4>
+                        <p class="text-[0.65rem] text-gray-500 font-bold mb-0 leading-none">ยอดขายทั้งหมด</p><h4 class="font-extrabold text-gray-800 text-sm leading-tight mt-1" id="st-sales">0 ฿</h4>
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl p-3 flex items-center gap-3 shadow-sm border border-pMain">
                     <div class="bg-red-100 text-pDark w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-box"></i></div>
                     <div class="flex flex-col justify-center">
-                        <p class="text-[0.65rem] text-gray-500 font-bold mb-0 leading-none">ออเดอร์ทั้งหมด</p>
-                        <h4 class="font-extrabold text-gray-800 text-sm leading-tight mt-1" id="st-orders">0</h4>
+                        <p class="text-[0.65rem] text-gray-500 font-bold mb-0 leading-none">ออเดอร์ทั้งหมด</p><h4 class="font-extrabold text-gray-800 text-sm leading-tight mt-1" id="st-orders">0</h4>
                     </div>
                 </div>
             </div>
 
-            <div id="bannerContainer" class="mb-8 hidden">
+            <div id="bannerContainer" class="mb-8">
                 <a id="uiBanL" href="#" target="_blank">
-                    <img id="uiBan" src="" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-white hover:opacity-90 smooth">
+                    <img id="uiBan" src="https://placehold.co/1200x400/FFF0F5/FF69B4?text=Banner+Space" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-white hover:opacity-90 smooth">
                 </a>
             </div>
             
@@ -289,12 +291,14 @@
             <div id="ad-prod" class="ad-sec hidden space-y-6">
                 <div class="admin-card" id="prodFormBox">
                     <h3 class="admin-header" id="prodFormTitle"><i class="fa-solid fa-plus-circle"></i> เพิ่ม / แก้ไข สินค้า</h3>
+                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-pBg p-4 rounded-xl border border-pMain space-y-3">
                             <input type="hidden" id="p_id">
                             <div><span class="admin-label text-pDark">*หมวดหมู่ (เช่น ROV, FreeFire)</span><input id="p_cat" class="inp-admin !bg-white"></div>
                             <div><span class="admin-label text-pDark">ลิงก์รูปไอคอนหมวดหมู่ (ใส่แค่อันแรกของหมวด)</span><input id="p_catI" class="inp-admin !bg-white"></div>
                         </div>
+
                         <div class="bg-pBg p-4 rounded-xl border border-pMain grid grid-cols-2 gap-3">
                             <div class="col-span-2"><span class="admin-label text-pDark">*ชื่อบริการ / แพ็กเกจ</span><input id="p_name" class="inp-admin !bg-white"></div>
                             <div><span class="admin-label text-pDark">*จำนวน</span><input id="p_amt" class="inp-admin !bg-white"></div>
@@ -304,12 +308,16 @@
                             <div class="col-span-2"><span class="admin-label text-pDark">*รูปลิงก์สินค้า (หลายรูปคั่นด้วย , จะสลับเอง 5 วิ)</span><input id="p_img" class="inp-admin !bg-white"></div>
                         </div>
                     </div>
+                    
                     <div class="flex gap-3 mt-5">
                         <button onclick="adSaveProd()" class="btn-cute !w-auto" id="btnSaveProd"><i class="fa-solid fa-save"></i> บันทึกข้อมูลสินค้า</button>
                         <button onclick="adCancelEdit()" class="btn-cute !w-auto !bg-gray-400 hidden" id="btnCancelProd">ยกเลิกการแก้ไข</button>
                     </div>
                 </div>
-                <div class="admin-card overflow-x-auto"><table class="admin-table" id="tb-prods"></table></div>
+
+                <div class="admin-card overflow-x-auto">
+                    <table class="admin-table" id="tb-prods"></table>
+                </div>
             </div>
 
             <div id="ad-work" class="ad-sec hidden space-y-6">
@@ -332,15 +340,18 @@
 
     </main>
 
-    <footer class="text-center py-6 text-pDark font-semibold text-sm bg-white border-t border-pMain mt-10">
-        <p><i class="fa-solid fa-copyright"></i> 2026 <span id="fName">kataiy-store</span>. All rights reserved.</p>
-    </footer>
+    <div class="bottom-nav md:hidden">
+        <div class="nav-item active" onclick="go('home')" id="nav-home"><i class="fa-solid fa-house"></i> <span>หน้าหลัก</span></div>
+        <div class="nav-item" onclick="go('topup')" id="nav-topup"><i class="fa-solid fa-wallet"></i> <span>เติมเงิน</span></div>
+        <div class="nav-item" onclick="go('inbox')" id="nav-inbox"><i class="fa-solid fa-envelope"></i> <span>ข้อความ</span></div>
+        <div class="nav-item" onclick="go('auth')" id="nav-auth"><i class="fa-solid fa-user"></i> <span>บัญชี</span></div>
+    </div>
 
     <script>
         // ⚠️ นำ Web App URL ของคุณมาใส่ตรงนี้ ⚠️
         const API_URL = 'https://script.google.com/macros/s/AKfycbxXYEwOAYFjx5DA4tDshg_N0vEdwr8gd9keNTOWfaCyTiY_7JkUzC_9qehsL60Hg36l0g/exec';
         
-        let st = { sys:{}, prods:[], wrks:[], u:null, inb:[], uOrd:[], adm:null, stats:null, busy:false, pay:'bank', curCat:'all' };
+        let st = { sys:{}, prods:[], wrks:[], u:null, inb:[], uOrd:[], adm:null, stats:null, busy:false, pay:'bank' };
 
         const dict = {
             th: { mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ / สมัคร' },
@@ -386,7 +397,7 @@
             document.getElementById('uiName').innerText = st.sys.storeName; 
             document.getElementById('uiLogo').src = st.sys.logo;
             
-            // อัปเดต Stats Bar ด้านบน
+            // อัปเดตสถิติ
             if(st.stats) {
                 document.getElementById('st-users').innerText = st.stats.users.toLocaleString();
                 document.getElementById('st-topups').innerText = st.stats.topups.toLocaleString() + ' ฿';
@@ -409,30 +420,38 @@
             if(st.sys.contactPhone) conHtml += `<a href="tel:${st.sys.contactPhone}" class="bg-pBg p-4 rounded-2xl block text-pDark font-bold hover:bg-pMain hover:text-white smooth"><i class="fa-solid fa-phone text-2xl mb-1"></i><br>โทรติดต่อ</a>`;
             document.getElementById('contactList').innerHTML = conHtml || '<div class="text-gray-400">ยังไม่มีข้อมูลติดต่อค่ะ</div>';
 
-            let bc = document.getElementById('bannerContainer');
             let uiBan = document.getElementById('uiBan');
+            document.getElementById('bannerContainer').classList.remove('hidden'); // โชว์กรอบเสมอ
             if(st.sys.banner && st.sys.banner.trim() !== '') { 
                 uiBan.src = st.sys.banner; 
-                document.getElementById('uiBanL').href = st.sys.bannerLink || '#';
-                bc.classList.remove('hidden'); 
             } else {
-                bc.classList.add('hidden'); 
+                uiBan.src = 'https://placehold.co/1200x400/FFF0F5/FF69B4?text=Banner+Space'; 
             }
+            document.getElementById('uiBanL').href = st.sys.bannerLink || '#';
             
             document.getElementById('uiMarq').innerHTML = `<i class="fa-solid fa-bullhorn"></i> ${st.sys.announcement||''} &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fa-solid fa-star"></i> ล่าสุด: ${st.history?st.history.join(' &nbsp;|&nbsp; '):''}`;
 
+            // การจัดการเมนูเมื่อไม่ได้ Login
             if(!st.u) {
-                document.getElementById('homeHead').innerHTML = `<i class="fa-solid fa-star text-pDark"></i> บริการแนะนำ (กรุณาเข้าสู่ระบบ)`;
                 document.getElementById('uBadge').classList.add('hidden');
                 document.getElementById('adminMenuArea').classList.add('hidden');
                 document.getElementById('authMenuArea').innerHTML = `<button onclick="go('auth')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-6 text-center"></i> <span data-lang="mLogin">เข้าสู่ระบบ / สมัคร</span></button>`;
+                
+                // ซ่อนเมนูที่ไม่ให้ใช้
+                ['m-games', 'm-topup', 'm-inbox', 'm-history', 'nav-topup', 'nav-inbox'].forEach(id => {
+                    if(document.getElementById(id)) document.getElementById(id).classList.add('hidden');
+                });
             } else {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uId').innerText = st.u.userId; document.getElementById('uBal').innerText = st.u.balance.toFixed(2);
-                document.getElementById('homeHead').innerHTML = `<i class="fa-solid fa-star text-pDark"></i> บริการแนะนำ`;
                 document.getElementById('fLog').innerHTML = `<button onclick="out()" class="btn-cute !bg-red-400"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</button>`;
                 document.getElementById('authMenuArea').innerHTML = `<button onclick="out()" class="block w-full text-left px-5 py-3 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-6 text-center"></i> ออกจากระบบ</button>`;
                 
+                // โชว์เมนูทั้งหมด
+                ['m-games', 'm-topup', 'm-inbox', 'm-history', 'nav-topup', 'nav-inbox'].forEach(id => {
+                    if(document.getElementById(id)) document.getElementById(id).classList.remove('hidden');
+                });
+
                 if(st.u.role==='admin') { 
                     document.getElementById('adminMenuArea').classList.remove('hidden');
                     if(document.getElementById('p-admin').classList.contains('active')) drawAdmin(updateForm);
@@ -456,7 +475,6 @@
             });
         }
 
-        // หน้าแรก: การ์ดแบบใหม่ตามภาพตัวอย่างเป๊ะๆ
         function drawProds() {
             let cx = document.getElementById('prodsArea'); 
             let arr = [...st.prods];
@@ -471,9 +489,7 @@
                 
                 return `
                 <div class="cute-card cursor-pointer group" onclick="buy('${p.id}', '${p.name}', ${p.price})">
-                    <div class="img-container">
-                        <div class="img-slider border border-pBg shadow-sm">${badge}${imgs}</div>
-                    </div>
+                    <div class="img-container"><div class="img-slider border border-pBg shadow-sm">${badge}${imgs}</div></div>
                     <div class="p-3 flex-1 flex flex-col justify-between bg-white mt-1">
                         <div>
                             <h4 class="font-bold text-gray-800 text-[0.85rem] leading-tight mb-1 truncate">${p.name}</h4>
@@ -488,7 +504,6 @@
             }).join('');
         }
 
-        // เกมทั้งหมด: แบ่งหมวดหมู่ และการ์ดแบบใหม่
         function drawAllGames() {
             let cx = document.getElementById('allGamesArea');
             let grouped = {};
@@ -507,9 +522,7 @@
                     let badge = `<span class="bg-green-100 text-green-600 text-[0.65rem] px-2 py-0.5 rounded-md absolute top-2 right-2 z-10 font-bold border border-green-200"><i class="fa-solid fa-box"></i> ${p.amount} ${p.unit}</span>`;
                     html += `
                     <div class="cute-card cursor-pointer group" onclick="buy('${p.id}', '${p.name}', ${p.price})">
-                        <div class="img-container">
-                            <div class="img-slider border border-pBg shadow-sm">${badge}${imgs}</div>
-                        </div>
+                        <div class="img-container"><div class="img-slider border border-pBg shadow-sm">${badge}${imgs}</div></div>
                         <div class="p-3 flex-1 flex flex-col justify-between bg-white mt-1">
                             <div>
                                 <h4 class="font-bold text-gray-800 text-[0.85rem] leading-tight mb-1 truncate">${p.name}</h4>
@@ -538,6 +551,7 @@
         }
 
         function buy(id, name, prc) {
+            // เช็คว่าล็อกอินหรือยัง
             if(!st.u) return go('auth');
             if(String(st.sys.isOpen) !== 'true') return Swal.fire('ปิดร้าน', 'ขออภัยค่ะ ร้านปิดให้บริการชั่วคราว', 'warning');
 
@@ -558,7 +572,7 @@
             }).then(async (res) => {
                 if (res.isConfirmed) {
                     let d = window.buyType === 'uid' ? document.getElementById('gUid').value : `ID/M:${document.getElementById('gMail').value} P:${document.getElementById('gPass').value}`;
-                    if(!d || d.includes('undefined')) return Swal.fire('อ๊ะ!', 'กรอกข้อมูลตัวละครให้ครบด้วยน้า', 'error');
+                    if(!d || d.includes('undefined') || d === 'ID/M: P:') return Swal.fire('อ๊ะ!', 'กรอกข้อมูลตัวละครให้ครบด้วยน้า', 'error');
                     
                     Swal.fire({title:'กำลังสั่งซื้อ...', didOpen:()=>Swal.showLoading()});
                     let r = await fetchAPI('order', {userId:st.u.userId, product:name, price:prc, loginType:window.buyType, gameData:d});
@@ -576,9 +590,18 @@
         }
 
         function go(p) {
+            // ระบบป้องกัน หากไม่ล็อกอิน เข้าได้แค่ หน้าหลัก(ดูได้อย่างเดียว) และ หน้าล็อกอิน
+            if (!st.u && p !== 'auth' && p !== 'home' && p !== 'contact') {
+                Swal.fire('แจ้งเตือน', 'กรุณาเข้าสู่ระบบก่อนใช้งานค่ะ', 'warning');
+                p = 'auth';
+            }
+
             document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
             document.getElementById(`p-${p}`).classList.add('active');
             document.getElementById('mainMenu').classList.add('hidden');
+            
+            document.querySelectorAll('.nav-item').forEach(e=>e.classList.remove('active'));
+            if(document.getElementById(`nav-${p}`)) document.getElementById(`nav-${p}`).classList.add('active');
             window.scrollTo(0,0);
         }
 
@@ -635,7 +658,7 @@
             document.getElementById('inboxArea').innerHTML = st.inb.length===0 ? '<div class="text-center py-5 text-gray-400 font-semibold">ไม่มีข้อความค่ะ</div>' : st.inb.map(m=>`<div class="bg-pBg p-4 rounded-2xl mb-3"><p class="text-[0.7rem] text-gray-500 font-bold mb-1"><i class="fa-solid fa-clock"></i> ${new Date(m.time).toLocaleString('th-TH')}</p><p class="font-semibold text-gray-800 text-sm">${m.msg}</p></div>`).join('');
             
             document.getElementById('uOrderList').innerHTML = '<tr><th>เวลา</th><th>Order</th><th>แพ็กเกจ</th><th>สถานะ</th></tr>' + st.uOrd.map(o => {
-                let sColor = o.stat === 'สำเร็จ' || o.stat === 'Success' ? 'text-green-500' : o.stat === 'ยกเลิก' ? 'text-red-500' : 'text-yellow-500';
+                let sColor = (o.stat === 'สำเร็จ' || o.stat === 'Success') ? 'text-green-500' : o.stat === 'ยกเลิก' ? 'text-red-500' : 'text-yellow-500';
                 let sText = o.stat === 'Pending' ? 'รอดำเนินการ' : o.stat;
                 return `<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.oid.substring(0,8)}</td><td>${o.prod}</td><td><span class="${sColor} font-bold">${sText}</span></td></tr>`;
             }).join('');
@@ -668,7 +691,7 @@
             document.getElementById('tb-prods').innerHTML = '<tr><th>หมวด</th><th>ชื่อแพ็กเกจ</th><th>ราคา</th><th>จัดการ</th></tr>' + st.prods.map(p=>`<tr><td>${p.category}</td><td>${p.name}</td><td>฿${p.price}</td><td><button onclick="adEditP('${p.id}')" class="text-blue-500 mr-3"><i class="fa-solid fa-pen"></i></button><button onclick="adDelP('${p.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
             document.getElementById('tb-works').innerHTML = '<tr><th>หมวด</th><th>จำนวนรูป</th><th>ลบ</th></tr>' + st.wrks.map(w=>`<tr><td>${w.cat}</td><td>${w.imgs.split(',').length} รูป</td><td><button onclick="adDelW('${w.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
             
-            // หน้าออเดอร์ เพิ่ม Dropdown ให้อัปเดตสถานะ
+            // หน้าออเดอร์ แอดมิน
             document.getElementById('tb-orders').innerHTML = '<tr><th>เวลา</th><th>User</th><th>แพ็กเกจ</th><th>ข้อมูลเกม</th><th>อัปเดตสถานะ</th></tr>' + st.adm.orders.map(o=>`<tr>
                 <td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td>
                 <td>${o.uid}</td>
@@ -754,7 +777,7 @@
             if(r && r.status==='success') loadData();
         }
 
-        // ฟังก์ชันกดอัปเดตสถานะออเดอร์
+        // ฟังก์ชันกดอัปเดตสถานะออเดอร์ (แอดมิน)
         async function adUpdOrder(oid, uid) {
             let sel = document.getElementById('stat_' + oid);
             let newStat = sel.value;
