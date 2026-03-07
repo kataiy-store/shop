@@ -90,7 +90,8 @@
     </nav>
 
     <div class="marquee-box shadow-inner"><div class="marquee-content" id="uiMarq"><i class="fa-solid fa-bullhorn"></i> <span data-l="alertWait">กำลังเชื่อมต่อระบบ...</span></div></div>
-    <div id="uiStatus" class="max-w-6xl mx-auto mt-4 mx-4 p-3 rounded-xl text-center font-semibold text-white shadow-sm" style="display:none;"></div>
+    
+    <div id="uiStatus" style="display:none;"></div>
 
     <main class="max-w-6xl mx-auto p-4 min-h-[75vh]">
         
@@ -152,20 +153,19 @@
             <div class="bg-white p-6 max-w-md mx-auto rounded-2xl border border-pMain shadow-sm">
                 <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-wallet"></i> <span data-l="hTop">เติมเงิน (ยอดเข้าอัตโนมัติ)</span></h2>
                 <div class="flex gap-2 mb-4 bg-pBg p-1.5 rounded-xl overflow-x-auto hide-scroll text-sm">
-                    <button id="bBank" class="flex-1 py-2 px-3 rounded-lg bg-pDark text-white font-semibold" onclick="setPay('bank')"><i class="fa-solid fa-building-columns"></i> <span data-l="bBank">ธนาคาร</span></button>
-                    <button id="bTrue" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold" onclick="setPay('true')"><i class="fa-solid fa-mobile-screen"></i> <span data-l="bTrue">วอเลท</span></button>
-                    <button id="bInter" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold" onclick="setPay('inter')"><i class="fa-solid fa-globe"></i> <span data-l="bInter">ตปท.</span></button>
+                    <button id="bBank" class="flex-1 py-2 px-3 rounded-lg bg-pDark text-white font-semibold shadow-sm" onclick="setPay('bank')"><i class="fa-solid fa-building-columns"></i> <span data-l="bBank">ธนาคาร</span></button>
+                    <button id="bTrue" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold smooth" onclick="setPay('true')"><i class="fa-solid fa-mobile-screen"></i> <span data-l="bTrue">วอเลท</span></button>
+                    <button id="bInter" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold smooth" onclick="setPay('inter')"><i class="fa-solid fa-globe"></i> <span data-l="bInter">ตปท.</span></button>
                 </div>
                 <img id="qrImg" src="" class="mx-auto w-48 h-48 rounded-xl border border-pMain p-2 bg-white object-contain mb-4">
                 
-                <input type="number" id="tAmt" class="inp-cute mb-3 text-center font-bold text-lg text-pDark" data-p="phAmt" placeholder="จำนวนเงิน (มีทศนิยมได้)" step="0.01">
-                <input type="time" id="tTime" class="inp-cute mb-3 text-center">
+                <input type="number" id="tAmt" class="inp-cute mb-3 text-center font-bold text-lg text-pDark" data-p="phAmt" placeholder="จำนวนเงินโอน" step="0.01">
                 <input type="text" id="tRef" class="inp-cute mb-4 text-center uppercase tracking-widest font-bold text-pDark" data-p="phRef" placeholder="6 ตัวท้ายสลิป (A-Z, 0-9)" maxlength="6">
                 <label class="block text-center mb-6 cursor-pointer bg-pBg border-2 border-dashed border-pDark p-4 rounded-xl hover:bg-pink-100 smooth">
                     <i class="fa-solid fa-cloud-arrow-up text-3xl text-pDark mb-2"></i> <br><span class="text-sm font-semibold text-gray-600" data-l="txtUpload">กดเพื่อแนบรูปสลิป</span>
                     <input type="file" id="tFile" accept="image/*" class="hidden">
                 </label>
-                <button onclick="doTopup()" class="btn-cute text-lg"><i class="fa-solid fa-paper-plane"></i> <span data-l="btnTopup">ยืนยันแจ้งโอน</span></button>
+                <button onclick="doTopup()" class="btn-cute text-lg shadow-sm"><i class="fa-solid fa-paper-plane"></i> <span data-l="btnTopup">แจ้งโอนเงิน</span></button>
             </div>
         </section>
 
@@ -180,11 +180,11 @@
         </section>
 
         <section id="p-admin" class="page hidden">
-            <h2 class="text-2xl font-bold text-red-500 mb-6"><i class="fa-solid fa-user-shield"></i> ระบบจัดการหลังบ้าน</h2>
+            <h2 class="text-2xl font-bold text-red-500 mb-6"><i class="fa-solid fa-user-shield"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></h2>
             
             <div class="flex gap-2 mb-6 overflow-x-auto hide-scroll pb-2 border-b border-pMain">
                 <button class="bg-red-100 text-red-600 px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('set')"><i class="fa-solid fa-gear"></i> ตั้งค่าเว็บ</button>
-                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('prod')"><i class="fa-solid fa-box-open"></i> สินค้า</button>
+                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('prod')"><i class="fa-solid fa-box-open"></i> สินค้า/เกม</button>
                 <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('work')"><i class="fa-solid fa-images"></i> งานป้าย</button>
                 <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('topup')"><i class="fa-solid fa-money-bill-wave"></i> ยอดโอน</button>
                 <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('order')"><i class="fa-solid fa-shopping-cart"></i> ออเดอร์</button>
@@ -268,7 +268,7 @@
         
         let st = { sys:{}, prods:[], wrks:[], u:null, inb:[], uOrd:[], adm:null, busy:false, pay:'bank', curCat:'all', lang: localStorage.getItem('ks_lang') || 'th' };
 
-        // 🟢 Dictionary แปลภาษาครอบคลุมทั้งเว็บ
+        // Dictionary แปลภาษาครอบคลุมทั้งเว็บ (รวมถึงสถานะร้าน)
         const dict = {
             th: {
                 mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ / สมัคร',
@@ -289,7 +289,7 @@
                 phUidMail:'UID or Email', phPass:'Password', phUid:'Set UserID', phMail:'Your Email', phPass2:'Set Password', phPass3:'Confirm Password',
                 phAmt:'Amount', phRef:'Last 6 Ref Chars', txtUpload:'Click to attach slip', btnTopup:'Submit Topup',
                 btnLog:'Login', btnReg:'Register', noAcc:'No account? Register', hasAcc:'Have account? Login',
-                out:'Logout', adm:'Admin Panel', stOpen:'Store is Open', stClose:'Store is Temporarily Closed',
+                out:'Logout', adm:'Admin Panel', stOpen:'Store is Open', stClose:'Temporarily Closed',
                 thTime:'Time', thOrder:'Order', thProd:'Game/Product', thStat:'Status', statWait:'Pending', statDone:'Success', noData:'No Data Available',
                 alertNoUser:'Please login first', alertWait:'Processing...', alertOk:'Success', alertErr:'Error', btnAck:'Acknowledge',
                 btnBuy:'Buy Now', btnCancel:'Cancel', tBuy:'Confirm Order', tPrc:'Price', tBal:'Your Balance', tUid:'Enter Game UID'
@@ -320,7 +320,7 @@
             if(st.prods.length) { drawProds(); drawAllGames(); }
             if(st.u) {
                 drawInbox();
-                document.getElementById('authMenuArea').innerHTML = `<button onclick="out()" class="block w-full text-left px-5 py-3 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-6 text-center"></i> ${t('out')}</button>`;
+                document.getElementById('authMenuArea').innerHTML = `<button onclick="out()" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-right-from-bracket w-6 text-center"></i> ${t('out')}</button>`;
                 document.getElementById('fLog').innerHTML = `<button onclick="out()" class="btn-cute !bg-red-400"><i class="fa-solid fa-right-from-bracket"></i> ${t('out')}</button>`;
             }
         }
@@ -329,7 +329,7 @@
             st.lang = document.getElementById('lang').value;
             localStorage.setItem('ks_lang', st.lang);
             applyLang();
-            loadData(false, false); // อัปเดต UI 
+            loadData(false, false); 
         }
 
         window.onload = () => {
@@ -382,12 +382,13 @@
             
             document.getElementById('uiMarq').innerHTML = `<i class="fa-solid fa-bullhorn"></i> ${st.sys.announcement||''} &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fa-solid fa-star"></i> ล่าสุด: ${st.history?st.history.join(' &nbsp;|&nbsp; '):''}`;
 
+            // 🟢 ป้ายสถานะแบบเล็ก (ป้ายแคปซูล)
             let stat = document.getElementById('uiStatus'); stat.style.display = 'block';
             if(st.sys.isOpen === 'true') { 
-                stat.className='max-w-6xl mx-auto mt-4 mx-4 p-2 rounded-xl text-center font-bold text-pDark bg-white shadow-sm border border-pMain'; 
+                stat.className='w-fit mx-auto mt-3 px-4 py-1 rounded-full text-xs md:text-sm font-bold text-pDark bg-white shadow-sm border border-pMain'; 
                 stat.innerHTML=`<i class="fa-solid fa-door-open"></i> <span data-l="stOpen">${t('stOpen')}</span>`; 
             } else { 
-                stat.className='max-w-6xl mx-auto mt-4 mx-4 p-2 rounded-xl text-center font-bold text-white bg-red-400 shadow-sm'; 
+                stat.className='w-fit mx-auto mt-3 px-4 py-1 rounded-full text-xs md:text-sm font-bold text-white bg-red-400 shadow-sm'; 
                 stat.innerHTML=`<i class="fa-solid fa-door-closed"></i> <span data-l="stClose">${t('stClose')}</span>`; 
             }
 
