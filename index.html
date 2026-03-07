@@ -6,21 +6,21 @@
     <title id="pageTitle">kataiy-store</title>
     <link id="favicon" rel="icon" type="image/png" href="">
     
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { theme: { extend: { colors: { pBg: '#FFF0F5', pMain: '#FFC0CB', pDark: '#FF69B4', pBtn: '#FF8DA1' } } } }
+        tailwind.config = { theme: { extend: { colors: { pBg: '#FFF0F5', pMain: '#FFB6C1', pDark: '#FF69B4', pBtn: '#FF8DA1' } } } }
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
-        body { font-family: 'Prompt', sans-serif; background-color: #FFF0F5; color: #4A4A4A; overflow-x: hidden; }
+        body { font-family: 'Kanit', sans-serif; background-color: #FFF0F5; color: #4A4A4A; overflow-x: hidden; }
         .smooth { transition: all 0.3s ease; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         
-        .marquee-box { overflow: hidden; white-space: nowrap; background: #FFC0CB; color: white; padding: 6px; font-weight: 500; font-size: 0.9rem; }
+        .marquee-box { overflow: hidden; white-space: nowrap; background: #FFB6C1; color: white; padding: 6px; font-weight: 500; font-size: 0.9rem; }
         .marquee-content { display: inline-block; animation: scroll 25s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
         
@@ -28,32 +28,23 @@
         .page.active { display: block; }
         @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        .cute-card { background: white; border-radius: 20px; border: 2px solid transparent; box-shadow: 0 4px 15px rgba(255,105,180, 0.1); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
-        .cute-card:hover { border-color: #FFC0CB; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,105,180, 0.2); }
-        .img-slider { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden; border-radius: 18px 18px 0 0;}
-        .slider-item { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 10px; opacity: 0; transition: opacity 0.8s; }
+        .cute-card { background: white; border-radius: 16px; border: 2px solid transparent; box-shadow: 0 2px 10px rgba(255,105,180, 0.1); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+        .cute-card:hover { border-color: #FFB6C1; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(255,105,180, 0.2); }
+        .img-slider { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden;}
+        .slider-item { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 5px; opacity: 0; transition: opacity 0.8s; }
         .slider-item.active { opacity: 1; }
         
-        .inp-cute { width: 100%; border: 2px solid #FFC0CB; border-radius: 16px; padding: 12px 16px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Prompt', sans-serif; font-size: 0.95rem; }
-        .inp-cute:focus { border-color: #FF69B4; box-shadow: 0 0 8px rgba(255,105,180,0.3); }
-        .inp-admin { width: 100%; border: 1.5px solid #FFC0CB; border-radius: 12px; padding: 10px 14px; background: #FFF0F5; outline: none; transition: 0.3s; font-family: 'Prompt', sans-serif; font-size: 0.9rem; color: #4A4A4A; }
-        .inp-admin:focus { border-color: #FF69B4; background: #FFF; box-shadow: 0 0 5px rgba(255,105,180,0.2); }
-        
+        .inp-cute { width: 100%; border: 2px solid #FFB6C1; border-radius: 12px; padding: 12px 16px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Kanit', sans-serif; }
+        .inp-cute:focus { border-color: #FF69B4; box-shadow: 0 0 5px rgba(255,105,180,0.3); }
         .btn-cute { background: #FF8DA1; color: white; border-radius: 99px; padding: 12px 24px; font-weight: 600; width: 100%; display: block; text-align: center; border: none; cursor: pointer; transition: 0.2s;}
-        .btn-cute:hover { background: #FF69B4; transform: scale(1.02); }
+        .btn-cute:hover { background: #FF69B4; }
         
-        .swal2-popup { border-radius: 24px !important; font-family: 'Prompt', sans-serif !important; border: 3px solid #FFC0CB !important; }
+        .swal2-popup { border-radius: 20px !important; font-family: 'Kanit', sans-serif !important; border: 3px solid #FFB6C1 !important; }
         .swal2-confirm { border-radius: 99px !important; background: #FF69B4 !important; }
 
-        .admin-card { background: white; border-radius: 24px; border: 1px solid #FFC0CB; padding: 24px; box-shadow: 0 4px 15px rgba(255,105,180, 0.05); margin-bottom: 24px; }
-        .admin-header { font-size: 1.25rem; font-weight: 600; color: #FF69B4; border-bottom: 2px solid #FFF0F5; padding-bottom: 12px; margin-bottom: 16px; }
-        .admin-label { display: block; font-size: 0.8rem; font-weight: 600; color: #9CA3AF; margin-bottom: 4px; }
-        
         .admin-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .admin-table th { background: #FFF0F5; color: #FF69B4; padding: 12px; text-align: left; border-bottom: 2px solid #FFC0CB; font-weight: 600; }
-        .admin-table td { padding: 12px; border-bottom: 1px solid #FFC0CB; color: #4A4A4A; }
-        .ad-tab-btn { padding: 8px 20px; border-radius: 99px; font-weight: 600; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: 0.2s; background: white; color: #FF69B4; border: 1px solid #FFC0CB; }
-        .ad-tab-btn.active { background: #FF69B4; color: white; border-color: #FF69B4; box-shadow: 0 4px 10px rgba(255,105,180, 0.3); }
+        .admin-table th { background: #FFF0F5; color: #FF69B4; padding: 10px; text-align: left; border-bottom: 2px solid #FFB6C1; }
+        .admin-table td { padding: 10px; border-bottom: 1px solid #FFB6C1; color: #4A4A4A; }
     </style>
 </head>
 <body>
@@ -62,15 +53,15 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3 cursor-pointer" onclick="go('home')">
                 <img id="uiLogo" src="" class="w-10 h-10 rounded-full border border-pMain object-cover shadow-sm bg-white">
-                <h1 id="uiName" class="text-xl md:text-2xl font-bold text-pDark">Loading...</h1>
+                <h1 id="uiName" class="text-xl font-bold text-pDark">Loading...</h1>
             </div>
             
             <div class="flex items-center gap-4">
-                <select id="lang" onchange="chgLang()" class="bg-pBg border border-pMain rounded-full px-3 py-1.5 text-sm font-semibold text-pDark outline-none hidden md:block cursor-pointer">
+                <select id="lang" onchange="chgLang()" class="bg-pBg border border-pMain rounded-lg px-2 py-1 text-sm font-semibold text-pDark outline-none cursor-pointer">
                     <option value="th">TH</option><option value="en">EN</option><option value="la">LA</option>
                 </select>
                 
-                <div id="uBadge" class="hidden font-semibold text-pDark text-sm bg-pBg border border-pMain px-4 py-1.5 rounded-full shadow-sm cursor-pointer hover:bg-pMain hover:text-white smooth" onclick="go('inbox')">
+                <div id="uBadge" class="hidden font-semibold text-pDark text-sm bg-pBg border border-pMain px-3 py-1 rounded-full shadow-sm cursor-pointer hover:bg-pMain hover:text-white smooth" onclick="go('inbox')">
                     <i class="fa-solid fa-user"></i> <span id="uId"></span> | <i class="fa-solid fa-coins"></i> <span id="uBal">0.00</span>
                 </div>
 
@@ -80,39 +71,41 @@
             </div>
         </div>
         
-        <div id="mainMenu" class="hidden absolute right-4 top-16 bg-white rounded-2xl shadow-xl w-56 py-2 z-50 border border-pMain overflow-hidden">
+        <div id="mainMenu" class="hidden absolute right-4 top-16 bg-white rounded-xl shadow-xl w-56 py-2 z-50 border border-pMain">
             <button onclick="go('home')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-house w-6 text-center"></i> <span data-l="mHome">หน้าหลัก</span></button>
             <button onclick="go('games')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-gamepad w-6 text-center"></i> <span data-l="mGames">เกมทั้งหมด</span></button>
             <button onclick="go('topup')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-wallet w-6 text-center"></i> <span data-l="mTopup">เติมเงิน</span></button>
             <button onclick="go('inbox')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-envelope w-6 text-center"></i> <span data-l="mInbox">กล่องข้อความ</span></button>
+            <button onclick="go('history')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-clock-rotate-left w-6 text-center"></i> <span data-l="mHist">ประวัติการสั่งซื้อ</span></button>
             <button onclick="go('contact')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-phone w-6 text-center"></i> <span data-l="mCont">ติดต่อเรา</span></button>
             
-            <div id="adminMenuArea" class="hidden border-t border-pMain mt-1 pt-1 bg-red-50">
-                <button onclick="go('admin')" class="block w-full text-left px-5 py-3 hover:bg-red-100 text-red-500 font-bold smooth"><i class="fa-solid fa-user-shield w-6 text-center"></i> <span data-l="adm">ระบบแอดมิน</span></button>
+            <div id="adminMenuArea" class="hidden border-t border-pMain mt-1 pt-1">
+                <button onclick="go('admin')" class="block w-full text-left px-5 py-3 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-user-shield w-6 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
             </div>
 
             <div id="authMenuArea" class="border-t border-pMain mt-1 pt-1">
-                <button onclick="go('auth')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-6 text-center"></i> <span data-l="mLogin">เข้าสู่ระบบ / สมัคร</span></button>
+                <button onclick="go('auth')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-6 text-center"></i> <span data-l="mLogin">เข้าสู่ระบบ / สมัครสมาชิก</span></button>
             </div>
         </div>
     </nav>
 
     <div class="marquee-box shadow-inner"><div class="marquee-content" id="uiMarq"><i class="fa-solid fa-bullhorn"></i> <span data-l="alertWait">กำลังเชื่อมต่อระบบ...</span></div></div>
-    <div id="uiStatus" class="max-w-6xl mx-auto mt-4 mx-4 p-3 rounded-2xl text-center font-semibold text-white shadow-sm" style="display:none;"></div>
+    
+    <div id="uiStatus" class="max-w-6xl mx-auto mt-4 mx-4 p-3 rounded-xl text-center font-semibold text-white shadow-sm" style="display:none;"></div>
 
     <main class="max-w-6xl mx-auto p-4 min-h-[75vh]">
         
         <section id="p-home" class="page active">
-            <a id="uiBanL" href="#" target="_blank"><img id="uiBan" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-3xl shadow-sm border-2 border-white mb-6 hidden"></a>
+            <a id="uiBanL" href="#" target="_blank"><img id="uiBan" class="w-full aspect-[21/9] md:aspect-[32/9] object-cover rounded-2xl shadow-sm border border-pMain mb-6 hidden"></a>
             
-            <div class="flex flex-col md:flex-row justify-between items-center mb-6 border-b-2 border-pMain pb-3 gap-3">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 border-b-2 border-pMain pb-2 gap-3">
                 <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star"></i> <span data-l="hRec">บริการแนะนำ</span></h2>
                 <select id="catFilter" class="inp-cute !py-1.5 !w-full md:!w-64 text-pDark font-semibold" onchange="drawProds()">
                     <option value="all" data-l="catAll">หมวดหมู่ทั้งหมด</option>
                 </select>
             </div>
             
-            <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+            <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 <div class="col-span-full text-center py-10 text-pMain"><i class="fa-solid fa-spinner fa-spin text-3xl"></i></div>
             </div>
             
@@ -128,21 +121,21 @@
         </section>
 
         <section id="p-contact" class="page">
-            <div class="bg-white p-8 max-w-md mx-auto mt-10 rounded-3xl border border-pMain shadow-sm text-center">
+            <div class="bg-white p-6 max-w-md mx-auto mt-10 rounded-2xl border border-pMain shadow-sm text-center">
                 <h2 class="text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-address-book"></i> <span data-l="hCont">ช่องทางการติดต่อ</span></h2>
                 <div id="contactList" class="flex flex-col gap-4"></div>
             </div>
         </section>
 
         <section id="p-auth" class="page">
-            <div class="bg-white p-6 md:p-8 max-w-sm mx-auto mt-10 rounded-3xl border border-pMain shadow-sm">
+            <div class="bg-white p-6 md:p-8 max-w-sm mx-auto mt-10 rounded-2xl border border-pMain shadow-sm">
                 <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-user-check"></i> <span id="authTitle" data-l="hLog">เข้าสู่ระบบ</span></h2>
                 
                 <div id="fLog">
                     <input type="text" id="lUser" class="inp-cute mb-4" data-p="phUidMail" placeholder="UID หรือ Email">
                     <input type="password" id="lPass" class="inp-cute mb-6" data-p="phPass" placeholder="รหัสผ่าน">
                     <button onclick="doAuth('login')" class="btn-cute shadow-sm"><i class="fa-solid fa-arrow-right-to-bracket"></i> <span data-l="btnLog">เข้าสู่ระบบ</span></button>
-                    <p class="text-center mt-5 text-sm font-medium text-gray-500 cursor-pointer hover:text-pDark smooth" onclick="swAuth('reg')" data-l="noAcc">ยังไม่มีบัญชี? สมัครสมาชิก</p>
+                    <p class="text-center mt-4 text-sm font-semibold text-gray-500 cursor-pointer hover:text-pDark smooth" onclick="swAuth('reg')" data-l="noAcc">ยังไม่มีบัญชี? สมัครสมาชิก</p>
                 </div>
                 
                 <div id="fReg" class="hidden">
@@ -151,143 +144,102 @@
                     <input type="password" id="rPass" class="inp-cute mb-3" data-p="phPass2" placeholder="ตั้งรหัสผ่าน">
                     <input type="password" id="rPass2" class="inp-cute mb-6" data-p="phPass3" placeholder="ยืนยันรหัสผ่าน">
                     <button onclick="doAuth('register')" class="btn-cute shadow-sm"><i class="fa-solid fa-user-plus"></i> <span data-l="btnReg">สมัครสมาชิก</span></button>
-                    <p class="text-center mt-5 text-sm font-medium text-gray-500 cursor-pointer hover:text-pDark smooth" onclick="swAuth('log')" data-l="hasAcc">มีบัญชีแล้ว? เข้าระบบเลย</p>
+                    <p class="text-center mt-4 text-sm font-semibold text-gray-500 cursor-pointer hover:text-pDark smooth" onclick="swAuth('log')" data-l="hasAcc">มีบัญชีแล้ว? เข้าระบบเลย</p>
                 </div>
             </div>
         </section>
 
         <section id="p-topup" class="page">
-            <div class="bg-white p-8 max-w-md mx-auto rounded-3xl border border-pMain shadow-sm">
-                <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-wallet"></i> <span data-l="hTop">เติมเงิน (ออโต้)</span></h2>
-                <div class="flex gap-2 mb-6 bg-pBg p-1.5 rounded-2xl overflow-x-auto hide-scroll text-sm">
-                    <button id="bBank" class="flex-1 py-2 px-3 rounded-xl bg-pDark text-white font-semibold shadow-sm" onclick="setPay('bank')"><i class="fa-solid fa-building-columns"></i> <span data-l="bBank">ธนาคาร</span></button>
-                    <button id="bTrue" class="flex-1 py-2 px-3 rounded-xl bg-transparent text-gray-500 font-semibold smooth" onclick="setPay('true')"><i class="fa-solid fa-mobile-screen"></i> <span data-l="bTrue">วอเลท</span></button>
-                    <button id="bInter" class="flex-1 py-2 px-3 rounded-xl bg-transparent text-gray-500 font-semibold smooth" onclick="setPay('inter')"><i class="fa-solid fa-globe"></i> <span data-l="bInter">ตปท.</span></button>
+            <div class="bg-white p-6 max-w-md mx-auto rounded-2xl border border-pMain shadow-sm">
+                <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-wallet"></i> <span data-l="hTop">เติมเงิน (ยอดเข้าอัตโนมัติ)</span></h2>
+                <div class="flex gap-2 mb-4 bg-pBg p-1.5 rounded-xl overflow-x-auto hide-scroll text-sm">
+                    <button id="bBank" class="flex-1 py-2 px-3 rounded-lg bg-pDark text-white font-semibold" onclick="setPay('bank')"><i class="fa-solid fa-building-columns"></i> <span data-l="bBank">ธนาคาร</span></button>
+                    <button id="bTrue" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold" onclick="setPay('true')"><i class="fa-solid fa-mobile-screen"></i> <span data-l="bTrue">วอเลท</span></button>
+                    <button id="bInter" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold" onclick="setPay('inter')"><i class="fa-solid fa-globe"></i> <span data-l="bInter">ตปท.</span></button>
                 </div>
-                <img id="qrImg" src="" class="mx-auto w-48 h-48 rounded-2xl border-2 border-pMain p-2 bg-white object-contain mb-6 shadow-sm">
+                <img id="qrImg" src="" class="mx-auto w-48 h-48 rounded-xl border border-pMain p-2 bg-white object-contain mb-4">
                 
                 <input type="number" id="tAmt" class="inp-cute mb-3 text-center font-bold text-lg text-pDark" data-p="phAmt" placeholder="จำนวนเงินโอน" step="0.01">
                 <input type="text" id="tRef" class="inp-cute mb-4 text-center uppercase tracking-widest font-bold text-pDark" data-p="phRef" placeholder="6 ตัวท้ายสลิป (A-Z, 0-9)" maxlength="6">
-                <label class="block text-center mb-6 cursor-pointer bg-pBg border-2 border-dashed border-pDark p-5 rounded-2xl hover:bg-pink-100 smooth">
+                <label class="block text-center mb-6 cursor-pointer bg-pBg border-2 border-dashed border-pDark p-4 rounded-xl hover:bg-pink-100 smooth">
                     <i class="fa-solid fa-cloud-arrow-up text-3xl text-pDark mb-2"></i> <br><span class="text-sm font-semibold text-gray-600" data-l="txtUpload">กดเพื่อแนบรูปสลิป</span>
                     <input type="file" id="tFile" accept="image/*" class="hidden">
                 </label>
-                <button onclick="doTopup()" class="btn-cute text-lg shadow-sm"><i class="fa-solid fa-paper-plane"></i> <span data-l="btnTopup">แจ้งโอนเงิน</span></button>
+                <button onclick="doTopup()" class="btn-cute text-lg"><i class="fa-solid fa-paper-plane"></i> <span data-l="btnTopup">แจ้งโอนเงิน</span></button>
             </div>
         </section>
 
         <section id="p-inbox" class="page">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white p-6 rounded-3xl border border-pMain shadow-sm">
-                    <h2 class="text-2xl font-bold text-pDark mb-4 border-b-2 border-pMain pb-2"><i class="fa-solid fa-bell"></i> <span data-l="hInb">กล่องข้อความ</span></h2>
-                    <div id="inboxArea" class="space-y-3 max-h-[500px] overflow-y-auto pr-2"></div>
-                </div>
-                <div class="bg-white p-6 rounded-3xl border border-pMain shadow-sm">
-                    <h2 class="text-2xl font-bold text-pDark mb-4 border-b-2 border-pMain pb-2"><i class="fa-solid fa-clock-rotate-left"></i> <span data-l="mHist">ประวัติสั่งซื้อ</span></h2>
-                    <div class="overflow-x-auto"><table class="admin-table w-full" id="uOrderList"></table></div>
-                </div>
-            </div>
+            <h2 class="text-2xl font-bold text-pDark mb-4"><i class="fa-solid fa-envelope-open-text"></i> <span data-l="hInb">กล่องข้อความ</span></h2>
+            <div class="bg-white p-5 rounded-2xl border border-pMain shadow-sm"><div id="inboxArea" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div></div>
+        </section>
+        
+        <section id="p-history" class="page">
+            <h2 class="text-2xl font-bold text-pDark mb-4"><i class="fa-solid fa-clock-rotate-left"></i> <span data-l="mHist">ประวัติสั่งซื้อ</span></h2>
+            <div class="bg-white p-5 rounded-2xl border border-pMain shadow-sm"><div class="overflow-x-auto"><table class="admin-table w-full" id="uOrderList"></table></div></div>
         </section>
 
         <section id="p-admin" class="page hidden">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-3xl font-bold text-red-500"><i class="fa-solid fa-user-shield"></i> <span data-l="adm">ระบบแอดมิน</span></h2>
-            </div>
+            <h2 class="text-2xl font-bold text-red-500 mb-6"><i class="fa-solid fa-user-shield"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></h2>
             
-            <div class="flex gap-3 mb-6 overflow-x-auto hide-scroll pb-2 border-b border-pMain">
-                <button class="ad-tab-btn active" onclick="swAd('set')"><i class="fa-solid fa-gear"></i> ตั้งค่าเว็บ</button>
-                <button class="ad-tab-btn" onclick="swAd('prod')"><i class="fa-solid fa-box-open"></i> สินค้า</button>
-                <button class="ad-tab-btn" onclick="swAd('work')"><i class="fa-solid fa-images"></i> งานป้าย</button>
-                <button class="ad-tab-btn" onclick="swAd('topup')"><i class="fa-solid fa-money-bill-wave"></i> ยอดโอน</button>
-                <button class="ad-tab-btn" onclick="swAd('order')"><i class="fa-solid fa-shopping-cart"></i> ออเดอร์</button>
+            <div class="flex gap-2 mb-6 overflow-x-auto hide-scroll pb-2 border-b border-pMain">
+                <button class="bg-red-100 text-red-600 px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('set')"><i class="fa-solid fa-gear"></i> ตั้งค่าเว็บ</button>
+                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('prod')"><i class="fa-solid fa-box-open"></i> สินค้า/เกม</button>
+                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('topup')"><i class="fa-solid fa-money-bill-wave"></i> ยอดโอน</button>
+                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('order')"><i class="fa-solid fa-shopping-cart"></i> ออเดอร์</button>
             </div>
 
-            <div id="ad-set" class="ad-sec space-y-6">
-                <div class="admin-card">
-                    <h3 class="admin-header"><i class="fa-solid fa-store"></i> ข้อมูลทั่วไปของร้าน</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><span class="admin-label">ชื่อเว็บ</span><input id="s_name" class="inp-admin"></div>
-                        <div><span class="admin-label">ลิงก์โลโก้เว็บ</span><input id="s_logo" class="inp-admin"></div>
-                        <div><span class="admin-label">ประกาศร้าน (Marquee)</span><input id="s_ann" class="inp-admin"></div>
-                        <div><span class="admin-label">สถานะร้าน (true/false)</span><select id="s_open" class="inp-admin"><option value="true">เปิดร้าน</option><option value="false">ปิดร้าน</option></select></div>
-                    </div>
-                </div>
+            <div id="ad-set" class="bg-white p-5 rounded-2xl shadow-sm border border-pMain ad-sec">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div><label class="text-xs font-semibold text-gray-500">ชื่อเว็บ</label><input id="s_name" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">ลิงก์ Logo</label><input id="s_logo" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">ประกาศ (Marquee)</label><input id="s_ann" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">แบนเนอร์ยาว</label><input id="s_ban" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">ลิงก์คลิกแบนเนอร์</label><input id="s_banL" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">สถานะร้าน (true/false)</label><select id="s_open" class="inp-cute !py-2 !text-sm"><option value="true">เปิดร้าน</option><option value="false">ปิดร้าน</option></select></div>
+                    
+                    <div class="col-span-full mt-2 border-t border-pMain pt-2"><h3 class="font-bold text-pDark">Popup ตอนเข้าเว็บ</h3></div>
+                    <div><label class="text-xs font-semibold text-gray-500">หัวข้อ Popup</label><input id="s_popH" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">รูป Popup</label><input id="s_popI" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">ข้อความ Popup</label><input id="s_popT" class="inp-cute !py-2 !text-sm"></div>
 
-                <div class="admin-card">
-                    <h3 class="admin-header"><i class="fa-solid fa-images"></i> แบนเนอร์ & ป๊อปอัป</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><span class="admin-label">รูปแบนเนอร์ (แนวยาว)</span><input id="s_ban" class="inp-admin"></div>
-                        <div><span class="admin-label">ลิงก์เมื่อคลิกแบนเนอร์</span><input id="s_banL" class="inp-admin"></div>
-                        <div><span class="admin-label">หัวข้อ Popup ตอนเปิดเว็บ</span><input id="s_popH" class="inp-admin"></div>
-                        <div><span class="admin-label">รูปภาพ Popup</span><input id="s_popI" class="inp-admin"></div>
-                        <div class="md:col-span-2"><span class="admin-label">ข้อความใต้ Popup</span><input id="s_popT" class="inp-admin"></div>
-                    </div>
+                    <div class="col-span-full mt-2 border-t border-pMain pt-2"><h3 class="font-bold text-pDark">ช่องทางชำระ & ติดต่อ</h3></div>
+                    <div><label class="text-xs font-semibold text-gray-500">QR ธนาคาร</label><input id="s_qrB" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">QR ทรูมันนี่</label><input id="s_qrT" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">QR ต่างประเทศ</label><input id="s_qrI" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">Email แอดมิน (รับแจ้งเตือน)</label><input id="s_mail" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">Facebook URL</label><input id="s_fb" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">Line URL</label><input id="s_line" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-gray-500">เบอร์โทร</label><input id="s_phone" class="inp-cute !py-2 !text-sm"></div>
+                    <div class="col-span-1 md:col-span-2"><label class="text-xs font-semibold text-gray-500">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ลง Inbox ลูกค้า)</label><input id="s_msgS" class="inp-cute !py-2 !text-sm"></div>
                 </div>
-
-                <div class="admin-card">
-                    <h3 class="admin-header"><i class="fa-solid fa-wallet"></i> ชำระเงิน & แจ้งเตือน</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div><span class="admin-label">QR Code ธนาคาร</span><input id="s_qrB" class="inp-admin"></div>
-                        <div><span class="admin-label">QR Code ทรูมันนี่</span><input id="s_qrT" class="inp-admin"></div>
-                        <div><span class="admin-label">QR Code ต่างประเทศ</span><input id="s_qrI" class="inp-admin"></div>
-                        <div class="md:col-span-3"><span class="admin-label">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ส่งเข้า Inbox อัตโนมัติ)</span><input id="s_msgS" class="inp-admin"></div>
-                    </div>
-                </div>
-
-                <div class="admin-card">
-                    <h3 class="admin-header"><i class="fa-solid fa-address-book"></i> ช่องทางติดต่อ</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><span class="admin-label">Email แอดมิน (รับแจ้งเตือน)</span><input id="s_mail" class="inp-admin"></div>
-                        <div><span class="admin-label">Facebook URL</span><input id="s_fb" class="inp-admin"></div>
-                        <div><span class="admin-label">Line URL</span><input id="s_line" class="inp-admin"></div>
-                        <div><span class="admin-label">เบอร์โทรศัพท์</span><input id="s_phone" class="inp-admin"></div>
-                    </div>
-                </div>
-
-                <button onclick="adSaveSet()" class="btn-cute !w-auto !inline-block text-lg shadow-sm"><i class="fa-solid fa-save"></i> บันทึกการตั้งค่าทั้งหมด</button>
+                <button onclick="adSaveSet()" class="btn-cute mt-5 !w-auto !inline-block"><i class="fa-solid fa-save"></i> บันทึกการตั้งค่าทั้งหมด</button>
             </div>
 
-            <div id="ad-prod" class="ad-sec hidden space-y-6">
-                <div class="admin-card" id="prodFormBox">
-                    <h3 class="admin-header" id="prodFormTitle"><i class="fa-solid fa-plus-circle"></i> เพิ่ม / แก้ไข สินค้า</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-pBg p-4 rounded-xl border border-pMain space-y-3">
-                            <input type="hidden" id="p_id">
-                            <div><span class="admin-label text-pDark">*หมวดหมู่ (เช่น ROV, FreeFire)</span><input id="p_cat" class="inp-admin !bg-white"></div>
-                            <div><span class="admin-label text-pDark">ลิงก์รูปไอคอนหมวดหมู่ (ใส่แค่อันแรกของหมวด)</span><input id="p_catI" class="inp-admin !bg-white"></div>
-                        </div>
-                        <div class="bg-pBg p-4 rounded-xl border border-pMain grid grid-cols-2 gap-3">
-                            <div class="col-span-2"><span class="admin-label text-pDark">*ชื่อบริการ / แพ็กเกจ</span><input id="p_name" class="inp-admin !bg-white"></div>
-                            <div><span class="admin-label text-pDark">*จำนวน</span><input id="p_amt" class="inp-admin !bg-white"></div>
-                            <div><span class="admin-label text-pDark">หน่วย (เพชร, คูปอง)</span><input id="p_unit" class="inp-admin !bg-white"></div>
-                            <div><span class="admin-label text-pDark">*ราคา (บาท)</span><input type="number" id="p_prc" class="inp-admin !bg-white" step="0.01"></div>
-                            <div><span class="admin-label text-pDark">ส่วนลด % (ถ้ามี)</span><input type="number" id="p_disc" class="inp-admin !bg-white"></div>
-                            <div class="col-span-2"><span class="admin-label text-pDark">*รูปลิงก์สินค้า (หลายรูปคั่นด้วย , จะสลับเอง 5 วิ)</span><input id="p_img" class="inp-admin !bg-white"></div>
-                        </div>
+            <div id="ad-prod" class="bg-white p-5 rounded-2xl shadow-sm border border-pMain ad-sec hidden">
+                <div class="bg-pBg p-4 rounded-xl mb-6 border border-pMain" id="prodFormBox">
+                    <h3 class="font-bold text-pDark mb-3" id="prodFormTitle"><i class="fa-solid fa-plus-circle"></i> เพิ่ม/แก้ไข สินค้าเกม</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <input type="hidden" id="p_id">
+                        <input id="p_catI" class="inp-cute !py-2 !text-sm" placeholder="ลิงก์รูปหมวดหมู่ (ถ้ามี)">
+                        <input id="p_cat" class="inp-cute !py-2 !text-sm" placeholder="*หมวดหมู่ (เช่น ROV)">
+                        <input id="p_name" class="inp-cute !py-2 !text-sm" placeholder="*ชื่อแพ็กเกจ">
+                        <input id="p_amt" class="inp-cute !py-2 !text-sm" placeholder="*จำนวน">
+                        <input id="p_unit" class="inp-cute !py-2 !text-sm" placeholder="หน่วย (เช่น เพชร, คูปอง)">
+                        <input type="number" id="p_prc" class="inp-cute !py-2 !text-sm" placeholder="*ราคา (บาท)" step="0.01">
+                        <input type="number" id="p_disc" class="inp-cute !py-2 !text-sm" placeholder="ส่วนลด %">
+                        <input id="p_img" class="col-span-2 md:col-span-4 inp-cute !py-2 !text-sm" placeholder="*ลิงก์รูปภาพ (หลายรูปคั่นด้วย ,)">
                     </div>
-                    <div class="flex gap-3 mt-5">
-                        <button onclick="adSaveProd()" class="btn-cute !w-auto" id="btnSaveProd"><i class="fa-solid fa-save"></i> บันทึกข้อมูลสินค้า</button>
-                        <button onclick="adCancelEdit()" class="btn-cute !w-auto !bg-gray-400 hidden" id="btnCancelProd">ยกเลิกการแก้ไข</button>
+                    <div class="flex gap-2 mt-4">
+                        <button onclick="adSaveProd()" class="btn-cute !w-auto !py-2 !text-sm" id="btnSaveProd"><i class="fa-solid fa-save"></i> บันทึกข้อมูล</button>
+                        <button onclick="adCancelEdit()" class="btn-cute !w-auto !py-2 !text-sm !bg-gray-400 hidden" id="btnCancelProd">ยกเลิก</button>
                     </div>
                 </div>
-                <div class="admin-card overflow-x-auto"><table class="admin-table" id="tb-prods"></table></div>
+                <div class="overflow-x-auto"><table class="admin-table" id="tb-prods"></table></div>
             </div>
 
-            <div id="ad-work" class="ad-sec hidden space-y-6">
-                <div class="admin-card">
-                    <h3 class="admin-header"><i class="fa-solid fa-palette"></i> เพิ่มงานป้าย</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div><span class="admin-label">หมวดหมู่ป้าย</span><input id="w_cat" class="inp-admin"></div>
-                        <div><span class="admin-label">ลิงก์เชื่อม Line</span><input id="w_line" class="inp-admin"></div>
-                        <div class="md:col-span-3"><span class="admin-label">ลิงก์รูปภาพ (คั่นด้วย , สูงสุด 10 รูป)</span><input id="w_img" class="inp-admin"></div>
-                    </div>
-                    <button onclick="adAddWork()" class="btn-cute mt-5 !w-auto !inline-block"><i class="fa-solid fa-plus"></i> เพิ่มงานป้าย</button>
-                </div>
-                <div class="admin-card overflow-x-auto"><table class="admin-table" id="tb-works"></table></div>
-            </div>
-
-            <div id="ad-topup" class="ad-sec hidden"><div class="admin-card overflow-x-auto"><table class="admin-table min-w-max" id="tb-topups"></table></div></div>
-            <div id="ad-order" class="ad-sec hidden"><div class="admin-card overflow-x-auto"><table class="admin-table min-w-max" id="tb-orders"></table></div></div>
+            <div id="ad-topup" class="bg-white p-4 rounded-2xl shadow-sm border border-pMain ad-sec hidden overflow-x-auto"><table class="admin-table min-w-max" id="tb-topups"></table></div>
+            <div id="ad-order" class="bg-white p-4 rounded-2xl shadow-sm border border-pMain ad-sec hidden overflow-x-auto"><table class="admin-table min-w-max" id="tb-orders"></table></div>
         </section>
 
     </main>
@@ -302,7 +254,7 @@
         
         let st = { sys:{}, prods:[], wrks:[], u:null, inb:[], uOrd:[], adm:null, busy:false, pay:'bank', curCat:'all', lang: localStorage.getItem('ks_lang') || 'th' };
 
-        // 🟢 ระบบ Dictionary สำหรับแปลภาษาทั้งหน้าเว็บ 100%
+        // Dictionary สำหรับแปลภาษาคลุมทั้งเว็บ
         const dict = {
             th: {
                 mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ / สมัคร',
@@ -312,7 +264,7 @@
                 phAmt:'จำนวนเงินโอน', phRef:'6 ตัวท้ายสลิป (A-Z, 0-9)', txtUpload:'กดเพื่อแนบรูปสลิป', btnTopup:'แจ้งโอนเงิน',
                 btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิก', noAcc:'ยังไม่มีบัญชี? สมัครสมาชิก', hasAcc:'มีบัญชีแล้ว? เข้าระบบเลย',
                 out:'ออกจากระบบ', adm:'ระบบจัดการหลังบ้าน',
-                thTime:'เวลา', thOrder:'ออเดอร์', thProd:'สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', noData:'ไม่มีข้อมูลค่ะ',
+                thTime:'เวลา', thOrder:'ออเดอร์', thProd:'เกม/สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', noData:'ไม่มีข้อมูลค่ะ',
                 alertNoUser:'กรุณาเข้าสู่ระบบก่อน', alertWait:'รอแป๊บนึงน้า...', alertOk:'สำเร็จ', alertErr:'ผิดพลาด',
                 btnBuy:'สั่งซื้อเลย', btnCancel:'ยกเลิก', tBuy:'ยืนยันสั่งซื้อ', tPrc:'ราคา', tBal:'ยอดเงินคุณ', tUid:'กรอก UID เกม'
             },
@@ -324,7 +276,7 @@
                 phAmt:'Amount', phRef:'Last 6 Ref Chars', txtUpload:'Click to attach slip', btnTopup:'Submit Topup',
                 btnLog:'Login', btnReg:'Register', noAcc:'No account? Register', hasAcc:'Have account? Login',
                 out:'Logout', adm:'Admin Panel',
-                thTime:'Time', thOrder:'Order', thProd:'Product', thStat:'Status', statWait:'Pending', statDone:'Success', noData:'No Data Available',
+                thTime:'Time', thOrder:'Order', thProd:'Game/Product', thStat:'Status', statWait:'Pending', statDone:'Success', noData:'No Data Available',
                 alertNoUser:'Please login first', alertWait:'Processing...', alertOk:'Success', alertErr:'Error',
                 btnBuy:'Buy Now', btnCancel:'Cancel', tBuy:'Confirm Order', tPrc:'Price', tBal:'Your Balance', tUid:'Enter Game UID'
             },
@@ -336,30 +288,24 @@
                 phAmt:'ຈຳນວນເງິນ', phRef:'6 ຕົວທ້າຍສະລິບ', txtUpload:'ກົດເພື່ອແນບສະລິບ', btnTopup:'ແຈ້ງໂອນເງິນ',
                 btnLog:'ເຂົ້າສູ່ລະບົບ', btnReg:'ສະໝັກສະມາຊິກ', noAcc:'ຍັງບໍ່ມີບັນຊີ? ສະໝັກສະມາຊິກ', hasAcc:'ມີບັນຊີແລ້ວ? ເຂົ້າລະບົບເລີຍ',
                 out:'ອອກຈາກລະບົບ', adm:'ລະບົບແອັດມິນ',
-                thTime:'ເວລາ', thOrder:'ອໍເດີ', thProd:'ສິນຄ້າ', thStat:'ສະຖານະ', statWait:'ລໍຖ້າ', statDone:'ສຳເລັດ', noData:'ບໍ່ມີຂໍ້ມູນ',
+                thTime:'ເວລາ', thOrder:'ອໍເດີ', thProd:'ເກມ/ສິນຄ້າ', thStat:'ສະຖານະ', statWait:'ລໍຖ້າ', statDone:'ສຳເລັດ', noData:'ບໍ່ມີຂໍ້ມູນ',
                 alertNoUser:'ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນ', alertWait:'ກຳລັງດຳເນີນການ...', alertOk:'ສຳເລັດ', alertErr:'ຜິດພາດ',
                 btnBuy:'ສັ່ງຊື້ເລີຍ', btnCancel:'ຍົກເລີກ', tBuy:'ຢືນຢັນສັ່ງຊື້', tPrc:'ລາຄາ', tBal:'ຍອດເງິນຂອງທ່ານ', tUid:'ກະລຸນາໃສ່ UID ເກມ'
             }
         };
 
-        // ฟังก์ชันดึงคำแปล
         function t(key) { return dict[st.lang] && dict[st.lang][key] ? dict[st.lang][key] : key; }
 
         function applyLang() {
-            // อัปเดต HTML Tags
             document.querySelectorAll('[data-l]').forEach(el => el.innerText = t(el.getAttribute('data-l')));
             document.querySelectorAll('[data-p]').forEach(el => el.placeholder = t(el.getAttribute('data-p')));
             
-            // อัปเดตส่วนที่ Generate ด้วย JS
-            if(st.prods.length) { drawProds(); drawAllGames(); }
-            if(st.u) drawInbox();
-            
-            // จัดการ Option หมวดหมู่ทั้งหมด
             let opt = document.querySelector('option[value="all"]');
             if(opt) opt.innerText = t('catAll');
             
-            // เปลี่ยนข้อความ Auth Menu ถ้าล็อกอินแล้ว
+            if(st.prods.length) { drawProds(); drawAllGames(); }
             if(st.u) {
+                drawInbox();
                 document.getElementById('authMenuArea').innerHTML = `<button onclick="out()" class="block w-full text-left px-5 py-3 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-6 text-center"></i> ${t('out')}</button>`;
                 document.getElementById('fLog').innerHTML = `<button onclick="out()" class="btn-cute !bg-red-400"><i class="fa-solid fa-right-from-bracket"></i> ${t('out')}</button>`;
             }
@@ -431,14 +377,13 @@
             } else {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uId').innerText = st.u.userId; document.getElementById('uBal').innerText = st.u.balance.toFixed(2);
-                
                 if(st.u.role==='admin') { 
                     document.getElementById('adminMenuArea').classList.remove('hidden');
                     if(document.getElementById('p-admin').classList.contains('active')) drawAdmin(updateForm);
                 }
             }
 
-            applyLang(); // เรียก ApplyLang เพื่อครอบคลุมทั้งหมด
+            applyLang(); 
 
             if(!silent && st.sys.popImg && !sessionStorage.getItem('popS')) {
                 Swal.fire({ title: st.sys.popHead, text: st.sys.popTxt, imageUrl: st.sys.popImg, imageWidth: '100%', confirmButtonText: 'OK' });
@@ -501,16 +446,6 @@
                 html += `</div></div>`;
             }
             cx.innerHTML = html || `<div class="text-center py-10 text-gray-400 font-bold">${t('noData')}</div>`;
-        }
-
-        function drawWorks() {
-            let cx = document.getElementById('worksArea'); let gr = document.getElementById('gridWorks');
-            if(st.wrks.length === 0) return cx.classList.add('hidden');
-            cx.classList.remove('hidden');
-            gr.innerHTML = st.wrks.map(w => {
-                let imgs = w.imgs.split(',').map(i=>`<img src="${i.trim()}" class="slider-item ${i===w.imgs.split(',')[0]?'active':''}">`).join('');
-                return `<a href="${w.line||'#'}" target="_blank" class="cute-card hover:scale-105 smooth cursor-pointer"><div class="img-slider">${imgs}</div><div class="p-2 text-center text-sm font-bold text-pDark bg-pBg">หมวด: ${w.cat||'ป้าย'}</div></a>`;
-            }).join('');
         }
 
         function buy(id, name, prc) {
@@ -608,7 +543,7 @@
 
         function drawInbox() {
             if(!st.u) return;
-            document.getElementById('inboxArea').innerHTML = st.inb.length===0 ? `<div class="text-center py-5 text-gray-400 font-semibold">${t('noData')}</div>` : st.inb.map(m=>`<div class="bg-pBg p-4 rounded-2xl mb-3"><p class="text-[0.7rem] text-pDark font-bold mb-1"><i class="fa-solid fa-clock"></i> ${new Date(m.time).toLocaleString('th-TH')}</p><p class="font-semibold text-gray-700 text-sm">${m.msg}</p></div>`).join('');
+            document.getElementById('inboxArea').innerHTML = st.inb.length===0 ? `<div class="text-center py-5 text-gray-400 font-semibold">${t('noData')}</div>` : st.inb.map(m=>`<div class="bg-pBg p-4 rounded-xl mb-3"><p class="text-[0.7rem] text-pDark font-bold mb-1"><i class="fa-solid fa-clock"></i> ${new Date(m.time).toLocaleString('th-TH')}</p><p class="font-semibold text-gray-700 text-sm">${m.msg}</p></div>`).join('');
             document.getElementById('uOrderList').innerHTML = `<tr><th>${t('thTime')}</th><th>${t('thOrder')}</th><th>${t('thProd')}</th><th>${t('thStat')}</th></tr>` + st.uOrd.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.oid.substring(0,8)}</td><td>${o.prod}</td><td>${o.stat==='Pending'?`<span class="text-yellow-500 font-bold">${t('statWait')}</span>`:`<span class="text-green-500 font-bold">${t('statDone')}</span>`}</td></tr>`).join('');
         }
 
@@ -616,8 +551,10 @@
         function swAd(x) {
             document.querySelectorAll('.ad-sec').forEach(e=>e.classList.add('hidden'));
             document.getElementById(`ad-${x}`).classList.remove('hidden');
-            document.querySelectorAll('.ad-tab-btn').forEach(e=>e.classList.remove('active'));
-            event.target.classList.add('active');
+            document.querySelectorAll('.ad-tab-btn').forEach(e=>e.classList.replace('bg-red-100','bg-pBg'));
+            document.querySelectorAll('.ad-tab-btn').forEach(e=>e.classList.replace('text-red-600','text-pDark'));
+            event.target.classList.replace('bg-pBg','bg-red-100');
+            event.target.classList.replace('text-pDark','text-red-600');
         }
 
         function drawAdmin(forceForm = false) {
@@ -635,8 +572,7 @@
             }
 
             document.getElementById('tb-prods').innerHTML = '<tr><th>หมวด</th><th>ชื่อเกม/สินค้า</th><th>ราคา</th><th>จัดการ</th></tr>' + st.prods.map(p=>`<tr><td>${p.category}</td><td>${p.name}</td><td>฿${p.price}</td><td><button onclick="adEditP('${p.id}')" class="text-blue-500 mr-3"><i class="fa-solid fa-pen"></i></button><button onclick="adDelP('${p.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
-            document.getElementById('tb-works').innerHTML = '<tr><th>หมวด</th><th>จำนวนรูป</th><th>ลบ</th></tr>' + st.wrks.map(w=>`<tr><td>${w.cat}</td><td>${w.imgs.split(',').length} รูป</td><td><button onclick="adDelW('${w.id}')" class="text-red-500"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
-            document.getElementById('tb-topups').innerHTML = '<tr><th>เวลา</th><th>User</th><th>ยอด</th><th>อ้างอิง</th><th>สลิป</th><th>สถานะ</th></tr>' + st.adm.topups.map(t=>`<tr><td>${new Date(t.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${t.uid}</td><td>${t.amt}</td><td>${t.ref}</td><td><a href="${t.img}" target="_blank" class="text-pDark underline">ดู</a></td><td><span class="text-green-500 font-bold">เข้าออโต้</span></td></tr>`).join('');
+            document.getElementById('tb-topups').innerHTML = '<tr><th>เวลา</th><th>User</th><th>ยอด</th><th>อ้างอิง</th><th>สลิป</th><th>สถานะ</th></tr>' + st.adm.topups.map(t=>`<tr><td>${new Date(t.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${t.uid}</td><td>${t.amt}</td><td>${t.ref}</td><td><a href="${t.img}" target="_blank" class="text-pDark underline">ดู</a></td><td><span class="text-green-500 font-bold">อัตโนมัติ</span></td></tr>`).join('');
             document.getElementById('tb-orders').innerHTML = '<tr><th>เวลา</th><th>User</th><th>เกม/สินค้า</th><th>ข้อมูลเกม</th><th>จัดการ</th></tr>' + st.adm.orders.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.uid}</td><td>${o.prod}</td><td><span class="bg-pBg p-1.5 rounded font-bold">${o.data}</span></td><td>${o.stat==='Pending'?`<button onclick="adUpd('order','${o.oid}','${o.uid}',0)" class="bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-bold">เสร็จสิ้น</button>`:'<span class="text-green-500 font-bold">สำเร็จ</span>'}</td></tr>`).join('');
         }
 
@@ -683,20 +619,6 @@
         async function adDelP(id) {
             if(!confirm('ลบเกม/สินค้านี้?')) return;
             let r = await fetchAPI('adminManageProd', {act:'del', id:id});
-            if(r && r.status==='success') loadData();
-        }
-
-        async function adAddWork() {
-            let p = { act:'add', cat:document.getElementById('w_cat').value, line:document.getElementById('w_line').value, imgs:document.getElementById('w_img').value };
-            if(!p.imgs) return Swal.fire('อ๊ะ!','ใส่รูปลิงก์ด้วยจ้า','warning');
-            Swal.fire({title:'กำลังเพิ่ม...', didOpen:()=>Swal.showLoading()});
-            let r = await fetchAPI('adminManageWork', p);
-            if(r && r.status==='success') { Swal.fire('สำเร็จ','','success'); document.getElementById('w_img').value=''; loadData(); }
-        }
-
-        async function adDelW(id) {
-            if(!confirm('ลบงานป้ายนี้?')) return;
-            let r = await fetchAPI('adminManageWork', {act:'del', id:id});
             if(r && r.status==='success') loadData();
         }
 
