@@ -15,11 +15,11 @@
             theme: { 
                 extend: { 
                     colors: { 
-                        pBg: '#FDF2F8',   /* ชมพูอ่อนพาสเทล (Background) */
-                        pMain: '#E9D5FF', /* ม่วงอ่อน (Border/Line) */
-                        pDark: '#7E22CE', /* ม่วงเข้ม (Text/Icon) */
-                        pBtn: '#A855F7',  /* ม่วงปุ่มกดหลัก */
-                        pPink: '#FBCFE8'  /* ชมพูไฮไลท์ */
+                        pBg: '#FDF2F8',   
+                        pMain: '#E9D5FF', 
+                        pDark: '#7E22CE', 
+                        pBtn: '#A855F7',  
+                        pPink: '#FBCFE8'  
                     } 
                 } 
             } 
@@ -66,7 +66,7 @@
         }
 
         /* ==========================================================================
-           CUTE MARQUEE COMPONENT 
+           CUTE MARQUEE COMPONENT
            ========================================================================== */
         .marquee-wrapper {
             width: 100%;
@@ -486,7 +486,7 @@
             </div>
             <div class="marquee-text-container">
                 <div class="marquee-content" id="uiMarq">
-                    กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล กรุณารอสักครู่นะคะ...
+                    กำลังเชื่อมต่อฐานข้อมูล กรุณารอสักครู่...
                 </div>
             </div>
         </div>
@@ -502,22 +502,22 @@
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-users"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stUsr">ผู้ใช้งานทั้งหมด</span>
-                    <h3 id="pubUsers" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">...</h3>
+                    <h3 id="pubUsers" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">0</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-cart-shopping"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stOrd">จำนวนออเดอร์</span>
-                    <h3 id="pubOrders" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">...</h3>
+                    <h3 id="pubOrders" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">0</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-green-100 text-green-600 shadow-sm"><i class="fa-solid fa-money-bill-wave"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stTop">ยอดเติมเงินสะสม</span>
-                    <h3 id="pubTopups" class="text-lg md:text-xl font-extrabold text-green-600 mt-1">...</h3>
+                    <h3 id="pubTopups" class="text-lg md:text-xl font-extrabold text-green-600 mt-1">฿0.00</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-red-100 text-red-500 shadow-sm"><i class="fa-solid fa-sack-dollar"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stSal">ยอดขายสำเร็จ</span>
-                    <h3 id="pubSales" class="text-lg md:text-xl font-extrabold text-red-500 mt-1">...</h3>
+                    <h3 id="pubSales" class="text-lg md:text-xl font-extrabold text-red-500 mt-1">฿0.00</h3>
                 </div>
             </div>
 
@@ -528,7 +528,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-pMain pb-5 gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div>
-                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star mr-2 text-pBtn"></i><span data-l="hRec">บริการแนะนำ</span></h2>
+                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><span data-l="hRec">บริการแนะนำ</span></h2>
                 </div>
                 <div class="w-full md:w-auto">
                    <select id="catFilter" class="input-pastel !py-2.5 !w-full md:!w-80 text-pDark font-bold shadow-sm" onchange="renderProductCatalog()">
@@ -538,9 +538,9 @@
             </div>
             
             <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
-                <div class="col-span-full text-center py-20 text-pDark opacity-50">
+                <div class="col-span-full text-center py-20 text-pDark opacity-50" id="loadingSpinner">
                     <i class="fa-solid fa-spinner fa-spin text-5xl mb-4"></i>
-                    <p class="font-bold tracking-widest mt-2 uppercase">กำลังดึงข้อมูลจากฐานข้อมูล...</p>
+                    <p class="font-bold tracking-widest mt-2 uppercase">กำลังซิงค์ข้อมูล...</p>
                 </div>
             </div>
             
@@ -699,7 +699,7 @@
                         <div><label class="admin-label">Facebook (URL)</label><input type="text" id="s_fb" class="inp-admin"></div>
                         <div><label class="admin-label">Line (URL)</label><input type="text" id="s_line" class="inp-admin"></div>
                         <div><label class="admin-label">เบอร์โทรศัพท์ติดต่อ</label><input type="text" id="s_phone" class="inp-admin"></div>
-                        <div class="md:col-span-2"><label class="admin-label">ข้อความบอทตอบกลับเมื่อลูกค้าสั่งซื้อสำเร็จ (ส่งเข้า Inbox ลูกค้า)</label><input type="text" id="s_msgS" class="inp-admin"></div>
+                        <div class="md:col-span-2"><label class="admin-label">ข้อความบอทตอบกลับเมื่อลูกค้าสั่งซื้อสำเร็จ (ส่งเข้า Inbox)</label><input type="text" id="s_msgS" class="inp-admin"></div>
                     </div>
                 </div>
                 
@@ -729,7 +729,7 @@
                         </div>
                     </div>
                     <div class="flex gap-4 mt-8">
-                        <button type="button" onclick="persistProductData()" class="btn-pastel flex-1 text-lg shadow-lg" id="btnSaveProd"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้า</button>
+                        <button type="button" onclick="persistProductData()" class="btn-pastel flex-1 text-lg shadow-lg" id="btnSaveProd"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้าลงระบบ</button>
                         <button type="button" onclick="resetAdminProductForm()" class="btn-outline !bg-gray-100 !text-gray-500 !border-gray-300 hidden shadow-md" id="btnCancelEdit">ยกเลิก</button>
                     </div>
                 </div>
@@ -768,7 +768,7 @@
     </footer>
 
     <script>
-        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ลงในนี้ (ต้องเป็นของที่คุณ Deploy ใหม่ล่าสุด) 🔴🔴🔴
+        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ที่นี่ (ห้ามมีช่องว่าง) 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwUMa943t7APJoNlGsDPF3QuZcYIw7ab2_9HReCFCsbp5jI61G7rQGW1rKFeLhhE2u5iA/exec';
         
         /**
@@ -884,6 +884,8 @@
             AppState.lang = document.getElementById('lang').value;
             localStorage.setItem('ks_lang', AppState.lang);
             applyLanguageToDOM();
+            
+            // อัปเดตข้อมูลหลังเปลี่ยนภาษา (ทำงานเงียบ)
             fetchSystemDataSilently(true, false); 
         }
 
@@ -924,7 +926,7 @@
         }
 
         /**
-         * 3. API Communication Engine (Fail-Safe text/plain)
+         * 3. API Communication Engine (Try-Catch Protected)
          */
         async function transmitDataToAPI(action, payload) {
             if (AppState.busy) { return null; }
@@ -950,7 +952,7 @@
             } catch (err) {
                 AppState.busy = false;
                 console.error("API Transmission Failed:", err);
-                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ตหรือ Deploy Web App ใหม่' };
+                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ต' };
             }
         }
 
@@ -988,11 +990,10 @@
                     }
                     if (res.adminData) AppState.adm = res.adminData;
                     
-                    // ป้องกัน UI Crash ขัดขวางการดึงข้อมูลครั้งต่อไป
                     try {
                         renderDOMEngine(isSilent, updateAdminForms);
                     } catch(uiError) {
-                        console.error("UI Render Blocked an Error:", uiError);
+                        console.error("UI Render Error:", uiError);
                     }
                 }
             } catch (error) {
@@ -1001,7 +1002,7 @@
         }
 
         /**
-         * 5. UI Rendering System
+         * 5. UI Rendering System (Core DOM Manipulator)
          */
         function renderDOMEngine(isSilent, updateForms) {
             document.title = AppState.sys.storeName || 'kataiy';
@@ -1009,7 +1010,7 @@
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiName').innerText = AppState.sys.storeName || 'kataiy';
 
-            // Public Stats Update
+            // 🌟 Render Public Statistics (อัปเดตสถิติหน้าแรกให้ทุกคนเห็น) 🌟
             if(AppState.stats) {
                 document.getElementById('pubUsers').innerText = AppState.stats.usersCount || 0;
                 document.getElementById('pubOrders').innerText = AppState.stats.ordersCount || 0;
@@ -1017,7 +1018,7 @@
                 document.getElementById('pubSales').innerText = '฿' + parseFloat(AppState.stats.salesAmount || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
             }
 
-            // Banner
+            // Banner Mechanism
             const bannerElement = document.getElementById('bannerContainer');
             if (AppState.sys.banner) {
                 bannerElement.classList.remove('hidden');
@@ -1027,7 +1028,7 @@
                 bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=kataiy+store" class="banner-item active">`;
             }
 
-            // Cute Marquee
+            // Cute Marquee Logic
             const marqueeBlock = document.getElementById('uiMarq');
             const noticeText = AppState.sys.announcement || '';
             const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-paw text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการ 100%';
@@ -1050,6 +1051,9 @@
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('uId').innerText = AppState.u.userId;
                 
+                // Clear original Auth form
+                document.getElementById('fLog').innerHTML = `<button type="button" onclick="out()" class="btn-pastel !bg-red-400 w-full text-xl mt-6 shadow-sm"><i class="fa-solid fa-power-off mr-2"></i> ${translator('out')}</button>`;
+                
                 if(AppState.u.role === 'admin') {
                     if (document.getElementById('p-admin').classList.contains('active')) renderAdminDashboard(updateForms);
                 }
@@ -1070,7 +1074,7 @@
             const productContainer = document.getElementById('prodsArea');
             const selectedFilter = document.getElementById('catFilter').value;
             
-            // กรองเฉพาะแถวที่มีข้อมูลรหัสและชื่อจริงๆ ป้องกันชีตว่างเปล่า
+            // กรองเฉพาะแถวที่ไม่ได้ว่างเปล่า
             const validProds = AppState.prods.filter(p => p.id && p.id !== 'undefined' && String(p.id).trim() !== '');
 
             const filterDropdown = document.getElementById('catFilter');
@@ -1086,13 +1090,14 @@
                 return;
             }
 
+            // นำสินค้ามาเรียงวาดขึ้นจอใหม่
             productContainer.innerHTML = displayPool.map(p => {
                 const imgUrls = (p.images || '').split(',').map(s => s.trim()).filter(Boolean);
                 const imgHtml = imgUrls.length > 0 ? imgUrls.map((url, index) => `<img src="${url}" class="slider-image ${index === 0 ? 'active' : ''}">`).join('') : '<div class="w-full h-full bg-gray-200"></div>';
                 const discountHTML = p.discount > 0 ? `<span class="absolute top-4 right-4 bg-red-500 text-white text-[0.65rem] font-extrabold px-3 py-1 rounded-full z-10 shadow-lg">-${p.discount}%</span>` : '';
                 
                 return `
-                <div class="product-card cursor-pointer animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                <div class="product-card animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                     <div class="img-box">${discountHTML}${imgHtml}</div>
                     <div class="p-5 flex-1 flex flex-col justify-between text-center bg-white">
                         <div>
@@ -1130,7 +1135,7 @@
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         ${catMap[catName].map(p => `
-                            <div class="product-card cursor-pointer group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                            <div class="product-card group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                                 <div class="img-box bg-pBg border-b border-pMain"><img src="${(p.images || '').split(',')[0].trim()}" class="slider-image active group-hover:scale-110 smooth"></div>
                                 <div class="p-4 text-center">
                                     <h4 class="font-bold text-gray-800 text-xs mb-2 line-clamp-1">${p.name}</h4>
@@ -1238,15 +1243,14 @@
             const response = await transmitDataToAPI(actionType, dataset);
             
             if (response && response.status === 'success') {
-                // บันทึกข้อมูลลง Cache เครื่อง
+                // บันทึกข้อมูลลง Cache
                 localStorage.setItem('ks_usr', JSON.stringify(response.user));
                 
-                // 🟢 FORCE HARD RELOAD 🟢
-                // เมื่อล็อกอินสำเร็จ จะเคลียร์หน้าจอและบังคับเริ่มกระบวนการวาดเมนูใหม่ทั้งหมด
+                // 🟢 FORCE HARD RELOAD: ล้างหน้าจอแล้วเริ่มใหม่ทั้งหมด 🟢
                 Swal.fire({ 
                     icon: 'success', 
                     title: translator('alertOk'), 
-                    text: 'เข้าสู่ระบบสำเร็จ! กำลังพากลับไปหน้าหลัก...', 
+                    text: 'เข้าสู่ระบบสำเร็จ! กำลังพาเข้าสู่หน้าหลัก...', 
                     timer: 1500, 
                     showConfirmButton: false 
                 }).then(() => {
@@ -1523,7 +1527,7 @@
 
         function resetAdminProductForm() {
             ['p_id','p_cat','p_catI','p_name','p_amt','p_unit','p_prc','p_disc','p_img'].forEach(id => document.getElementById(id).value = '');
-            document.getElementById('prodFormTitle').innerHTML = `<i class="fa-solid fa-plus-circle mr-2 text-pBtn"></i> เพิ่มสินค้าใหม่เข้าระบบ`;
+            document.getElementById('prodFormTitle').innerHTML = `<i class="fa-solid fa-plus-circle mr-2 text-pBtn"></i> เพิ่มสินค้าใหม่ลงระบบ`;
             document.getElementById('btnSaveProd').innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้าใหม่';
             document.getElementById('btnCancelEdit').classList.add('hidden');
         }
@@ -1586,9 +1590,10 @@
         }
 
         function handleBannerClick() { if(AppState.sys.bannerLink) window.open(AppState.sys.bannerLink, '_blank'); }
-
+        
         /**
-         * 10. SYSTEM BOOTSTRAP (เริ่มทำงานทันทีโดยไม่ต้องรอ API)
+         * 10. SYSTEM BOOTSTRAP
+         * เริ่มทำงานทันทีเมื่อเปิดหน้าเว็บ (ไม่รอ DB)
          */
         window.addEventListener("DOMContentLoaded", () => {
             // โหลดภาษา
@@ -1604,7 +1609,7 @@
                 localStorage.removeItem('ks_usr'); 
             }
             
-            // 🟢 วาดหน้าจอทันที เพื่อให้เห็นเมนูและกดใช้งานได้ทันที 🟢
+            // 🟢 วาดเมนูทันที ไม่ต้องรอ API เพื่อไม่ให้ปุ่มค้าง 🟢
             buildDynamicSidebarMenu();
             applyLanguageToDOM();
             
