@@ -9,18 +9,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { theme: { extend: { colors: { pBg: '#FFF0F5', pMain: '#FFB6C1', pDark: '#FF69B4', pBtn: '#FF8DA1' } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        pBg: '#FDF2F8',   /* ชมพูอ่อนพาสเทล (พื้นหลัง) */
+                        pMain: '#E9D5FF', /* ม่วงอ่อน (กรอบ/เส้น) */
+                        pDark: '#7E22CE', /* ม่วงเข้ม (ตัวหนังสือ/ไอคอน) */
+                        pBtn: '#A855F7'   /* ม่วงพาสเทล (ปุ่มกด) */
+                    } 
+                } 
+            } 
+        }
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
-        body { font-family: 'Kanit', sans-serif; background-color: #FFF0F5; color: #4A4A4A; overflow-x: hidden; }
+        body { font-family: 'Kanit', sans-serif; background-color: #FDF2F8; color: #4A4A4A; overflow-x: hidden; }
         .smooth { transition: all 0.3s ease; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         
-        .marquee-box { overflow: hidden; white-space: nowrap; background: #FFB6C1; color: white; padding: 6px; font-weight: 500; font-size: 0.9rem; }
+        .marquee-box { overflow: hidden; white-space: nowrap; background: #E9D5FF; color: #7E22CE; padding: 6px; font-weight: 500; font-size: 0.9rem; }
         .marquee-content { display: inline-block; animation: scroll 25s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
         
@@ -28,29 +39,27 @@
         .page.active { display: block; }
         @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        /* สไตล์แบนเนอร์ (แก้ไขให้สลับรูปได้ และไม่หายไป) */
-        .banner-slider { position: relative; width: 100%; overflow: hidden; border-radius: 16px; border: 1px solid #FFB6C1; box-shadow: 0 2px 10px rgba(255,105,180, 0.1); cursor: pointer; }
-        .banner-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s; }
-        .banner-item.active { opacity: 1; z-index: 1; }
-
-        /* สไตล์การ์ดสินค้า */
-        .cute-card { background: white; border-radius: 16px; border: 2px solid transparent; box-shadow: 0 2px 10px rgba(255,105,180, 0.1); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
-        .cute-card:hover { border-color: #FFB6C1; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(255,105,180, 0.2); }
+        .cute-card { background: white; border-radius: 16px; border: 2px solid transparent; box-shadow: 0 2px 10px rgba(168,85,247, 0.1); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+        .cute-card:hover { border-color: #E9D5FF; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(168,85,247, 0.2); }
         .img-slider { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden;}
         .slider-item { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 5px; opacity: 0; transition: opacity 0.8s; }
         .slider-item.active { opacity: 1; }
         
-        .inp-cute { width: 100%; border: 2px solid #FFB6C1; border-radius: 12px; padding: 12px 16px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Kanit', sans-serif; }
-        .inp-cute:focus { border-color: #FF69B4; box-shadow: 0 0 5px rgba(255,105,180,0.3); }
-        .btn-cute { background: #FF8DA1; color: white; border-radius: 99px; padding: 12px 24px; font-weight: 600; width: 100%; display: block; text-align: center; border: none; cursor: pointer; transition: 0.2s;}
-        .btn-cute:hover { background: #FF69B4; }
+        .banner-slider { position: relative; overflow: hidden; }
+        .banner-item { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; opacity: 0; transition: opacity 0.8s; }
+        .banner-item.active { opacity: 1; }
+
+        .inp-cute { width: 100%; border: 2px solid #E9D5FF; border-radius: 12px; padding: 12px 16px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Kanit', sans-serif; color: #7E22CE; }
+        .inp-cute:focus { border-color: #A855F7; box-shadow: 0 0 5px rgba(168,85,247,0.3); }
+        .btn-cute { background: #A855F7; color: white; border-radius: 99px; padding: 12px 24px; font-weight: 600; width: 100%; display: block; text-align: center; border: none; cursor: pointer; transition: 0.2s;}
+        .btn-cute:hover { background: #9333EA; }
         
-        .swal2-popup { border-radius: 20px !important; font-family: 'Kanit', sans-serif !important; border: 3px solid #FFB6C1 !important; }
-        .swal2-confirm { border-radius: 99px !important; background: #FF69B4 !important; }
+        .swal2-popup { border-radius: 20px !important; font-family: 'Kanit', sans-serif !important; border: 3px solid #E9D5FF !important; }
+        .swal2-confirm { border-radius: 99px !important; background: #A855F7 !important; }
 
         .admin-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .admin-table th { background: #FFF0F5; color: #FF69B4; padding: 10px; text-align: left; border-bottom: 2px solid #FFB6C1; }
-        .admin-table td { padding: 10px; border-bottom: 1px solid #FFB6C1; color: #4A4A4A; }
+        .admin-table th { background: #FDF2F8; color: #7E22CE; padding: 10px; text-align: left; border-bottom: 2px solid #E9D5FF; }
+        .admin-table td { padding: 10px; border-bottom: 1px solid #E9D5FF; color: #4A4A4A; }
     </style>
 </head>
 <body>
@@ -67,7 +76,7 @@
                     <option value="th">TH</option><option value="en">EN</option><option value="la">LA</option>
                 </select>
                 
-                <div id="uBadge" class="hidden font-semibold text-pDark text-sm bg-pBg border border-pMain px-3 py-1 rounded-full shadow-sm cursor-pointer hover:bg-pMain hover:text-white smooth" onclick="go('inbox')">
+                <div id="uBadge" class="hidden font-semibold text-pDark text-sm bg-pBg border border-pMain px-3 py-1 rounded-full shadow-sm cursor-pointer hover:bg-pMain smooth" onclick="go('inbox')">
                     <i class="fa-solid fa-user"></i> <span id="uId"></span> | <i class="fa-solid fa-coins"></i> <span id="uBal">0.00</span>
                 </div>
 
@@ -86,11 +95,11 @@
             <button onclick="go('contact')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-medium smooth"><i class="fa-solid fa-address-book w-6 text-center"></i> <span data-l="mCont">ติดต่อเรา</span></button>
             
             <div id="adminMenuArea" class="hidden border-t border-pMain mt-1 pt-1">
-                <button onclick="go('admin')" class="block w-full text-left px-5 py-3 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-user-shield w-6 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
+                <button onclick="go('admin')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-user-shield w-6 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
             </div>
 
             <div id="authMenuArea" class="border-t border-pMain mt-1 pt-1">
-                <button onclick="go('auth')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-6 text-center"></i> <span data-l="mLogin">เข้าสู่ระบบ / สมัคร</span></button>
+                <button onclick="go('auth')" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-6 text-center"></i> <span data-l="mLogin">เข้าสู่ระบบ / สมัคร</span></button>
             </div>
         </div>
     </nav>
@@ -102,9 +111,7 @@
     <main class="max-w-6xl mx-auto p-4 min-h-[75vh]">
         
         <section id="p-home" class="page active">
-            <div id="bannerContainer" class="banner-slider aspect-[21/9] md:aspect-[32/9] mb-6" onclick="if(st.sys.bannerLink) window.open(st.sys.bannerLink, '_blank')">
-                <img src="https://placehold.co/1200x400/FFF0F5/FF69B4?text=Banner" class="banner-item active">
-            </div>
+            <a id="uiBanL" href="#" target="_blank" class="block w-full aspect-[21/9] md:aspect-[32/9] rounded-2xl shadow-sm border-2 border-white mb-6 hidden banner-slider"></a>
             
             <div class="flex flex-col md:flex-row justify-between items-center mb-6 border-b-2 border-pMain pb-2 gap-3">
                 <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star"></i> <span data-l="hRec">บริการแนะนำ</span></h2>
@@ -114,7 +121,7 @@
             </div>
             
             <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <div class="col-span-full text-center py-10 text-pMain"><i class="fa-solid fa-spinner fa-spin text-3xl"></i></div>
+                <div class="col-span-full text-center py-10 text-pDark"><i class="fa-solid fa-spinner fa-spin text-3xl"></i></div>
             </div>
             
             <div id="worksArea" class="mt-12 hidden">
@@ -160,26 +167,26 @@
         <section id="p-topup" class="page">
             <div class="bg-white p-6 max-w-md mx-auto rounded-2xl border border-pMain shadow-sm">
                 <h2 class="text-center text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-wallet"></i> <span data-l="hTop">เติมเงิน (ยอดเข้าอัตโนมัติ)</span></h2>
-                <div class="flex gap-2 mb-4 bg-pBg p-1.5 rounded-xl overflow-x-auto hide-scroll text-sm">
-                    <button id="bBank" class="flex-1 py-2 px-3 rounded-lg bg-pDark text-white font-semibold" onclick="setPay('bank')"><i class="fa-solid fa-building-columns"></i> <span data-l="bBank">ธนาคาร</span></button>
-                    <button id="bTrue" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold smooth" onclick="setPay('true')"><i class="fa-solid fa-mobile-screen"></i> <span data-l="bTrue">วอเลท</span></button>
-                    <button id="bInter" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold smooth" onclick="setPay('inter')"><i class="fa-solid fa-globe"></i> <span data-l="bInter">ตปท.</span></button>
+                <div class="flex gap-2 mb-4 bg-pBg p-1.5 rounded-xl overflow-x-auto hide-scroll text-sm border border-pMain">
+                    <button id="bBank" class="flex-1 py-2 px-3 rounded-lg bg-pBtn text-white font-semibold shadow-sm" onclick="setPay('bank')"><i class="fa-solid fa-building-columns"></i> <span data-l="bBank">ธนาคาร</span></button>
+                    <button id="bTrue" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-pDark font-semibold smooth hover:bg-white" onclick="setPay('true')"><i class="fa-solid fa-mobile-screen"></i> <span data-l="bTrue">วอเลท</span></button>
+                    <button id="bInter" class="flex-1 py-2 px-3 rounded-lg bg-transparent text-pDark font-semibold smooth hover:bg-white" onclick="setPay('inter')"><i class="fa-solid fa-globe"></i> <span data-l="bInter">ตปท.</span></button>
                 </div>
-                <img id="qrImg" src="https://placehold.co/400x400/FFF0F5/FF69B4?text=QR" class="mx-auto w-48 h-48 rounded-xl border border-pMain p-2 bg-white object-contain mb-4">
+                <img id="qrImg" src="" class="mx-auto w-48 h-48 rounded-xl border border-pMain p-2 bg-white object-contain mb-4">
                 
                 <input type="number" id="tAmt" class="inp-cute mb-3 text-center font-bold text-lg text-pDark" data-p="phAmt" placeholder="จำนวนเงินโอน" step="0.01">
                 <input type="text" id="tRef" class="inp-cute mb-4 text-center uppercase tracking-widest font-bold text-pDark" data-p="phRef" placeholder="6 ตัวท้ายสลิป (A-Z, 0-9)" maxlength="6">
-                <label class="block text-center mb-6 cursor-pointer bg-pBg border-2 border-dashed border-pDark p-4 rounded-xl hover:bg-pink-100 smooth">
-                    <i class="fa-solid fa-cloud-arrow-up text-3xl text-pDark mb-2"></i> <br><span class="text-sm font-semibold text-gray-600" data-l="txtUpload">กดเพื่อแนบรูปสลิป</span>
+                <label class="block text-center mb-6 cursor-pointer bg-pBg border-2 border-dashed border-pMain p-4 rounded-xl hover:bg-pMain hover:text-white smooth text-pDark">
+                    <i class="fa-solid fa-cloud-arrow-up text-3xl mb-2"></i> <br><span class="text-sm font-semibold" data-l="txtUpload">กดเพื่อแนบรูปสลิป</span>
                     <input type="file" id="tFile" accept="image/*" class="hidden">
                 </label>
-                <button onclick="doTopup()" class="btn-cute text-lg"><i class="fa-solid fa-paper-plane"></i> <span data-l="btnTopup">ยืนยันแจ้งโอน</span></button>
+                <button onclick="doTopup()" class="btn-cute text-lg shadow-sm"><i class="fa-solid fa-paper-plane"></i> <span data-l="btnTopup">แจ้งโอนเงิน</span></button>
             </div>
         </section>
 
         <section id="p-inbox" class="page">
             <h2 class="text-2xl font-bold text-pDark mb-4"><i class="fa-solid fa-envelope-open-text"></i> <span data-l="hInb">กล่องข้อความ</span></h2>
-            <div class="bg-white p-5 rounded-2xl border border-pMain shadow-sm"><div id="inboxArea" class="space-y-3 max-h-[500px] overflow-y-auto pr-2"></div></div>
+            <div class="bg-white p-5 rounded-2xl border border-pMain shadow-sm"><div id="inboxArea" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div></div>
         </section>
         
         <section id="p-history" class="page">
@@ -188,39 +195,39 @@
         </section>
 
         <section id="p-admin" class="page hidden">
-            <h2 class="text-2xl font-bold text-red-500 mb-6"><i class="fa-solid fa-user-shield"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></h2>
+            <h2 class="text-2xl font-bold text-pDark mb-6"><i class="fa-solid fa-user-shield"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></h2>
             
             <div class="flex gap-2 mb-6 overflow-x-auto hide-scroll pb-2 border-b border-pMain">
-                <button class="bg-red-100 text-red-600 px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('set')"><i class="fa-solid fa-gear"></i> ตั้งค่าเว็บ</button>
-                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('prod')"><i class="fa-solid fa-box-open"></i> สินค้า/เกม</button>
-                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('work')"><i class="fa-solid fa-images"></i> งานป้าย</button>
-                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('topup')"><i class="fa-solid fa-money-bill-wave"></i> ยอดโอน</button>
-                <button class="bg-pBg text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('order')"><i class="fa-solid fa-shopping-cart"></i> ออเดอร์</button>
+                <button class="bg-pMain text-pDark px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('set')"><i class="fa-solid fa-gear"></i> ตั้งค่าเว็บ</button>
+                <button class="bg-white text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('prod')"><i class="fa-solid fa-box-open"></i> สินค้า/เกม</button>
+                <button class="bg-white text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('work')"><i class="fa-solid fa-images"></i> งานป้าย</button>
+                <button class="bg-white text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('topup')"><i class="fa-solid fa-money-bill-wave"></i> ยอดโอน</button>
+                <button class="bg-white text-pDark border border-pMain px-4 py-2 rounded-full font-semibold whitespace-nowrap ad-tab-btn" onclick="swAd('order')"><i class="fa-solid fa-shopping-cart"></i> ออเดอร์</button>
             </div>
 
             <div id="ad-set" class="bg-white p-5 rounded-2xl shadow-sm border border-pMain ad-sec">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div><label class="text-xs font-semibold text-gray-500">ชื่อเว็บ</label><input id="s_name" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">ลิงก์ Logo</label><input id="s_logo" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">ประกาศ (Marquee)</label><input id="s_ann" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">แบนเนอร์ยาว (หลายรูปคั่น ,)</label><input id="s_ban" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">ลิงก์คลิกแบนเนอร์</label><input id="s_banL" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">สถานะร้าน (true/false)</label><select id="s_open" class="inp-cute !py-2 !text-sm"><option value="true">เปิดร้าน</option><option value="false">ปิดร้าน</option></select></div>
+                    <div><label class="text-xs font-semibold text-pDark">ชื่อเว็บ</label><input id="s_name" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">ลิงก์ Logo</label><input id="s_logo" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">ประกาศ (Marquee)</label><input id="s_ann" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">แบนเนอร์ยาว (หลายรูปคั่น ,)</label><input id="s_ban" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">ลิงก์คลิกแบนเนอร์</label><input id="s_banL" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">สถานะร้าน (true/false)</label><select id="s_open" class="inp-cute !py-2 !text-sm"><option value="true">เปิดร้าน</option><option value="false">ปิดร้าน</option></select></div>
                     
                     <div class="col-span-full mt-2 border-t border-pMain pt-2"><h3 class="font-bold text-pDark">Popup ตอนเข้าเว็บ</h3></div>
-                    <div><label class="text-xs font-semibold text-gray-500">หัวข้อ Popup</label><input id="s_popH" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">รูป Popup</label><input id="s_popI" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">ข้อความ Popup</label><input id="s_popT" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">หัวข้อ Popup</label><input id="s_popH" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">รูป Popup</label><input id="s_popI" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">ข้อความ Popup</label><input id="s_popT" class="inp-cute !py-2 !text-sm"></div>
 
                     <div class="col-span-full mt-2 border-t border-pMain pt-2"><h3 class="font-bold text-pDark">ช่องทางชำระ & ติดต่อ</h3></div>
-                    <div><label class="text-xs font-semibold text-gray-500">QR ธนาคาร</label><input id="s_qrB" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">QR ทรูมันนี่</label><input id="s_qrT" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">QR ต่างประเทศ</label><input id="s_qrI" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">Email แอดมิน (รับแจ้งเตือน)</label><input id="s_mail" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">Facebook URL</label><input id="s_fb" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">Line URL</label><input id="s_line" class="inp-cute !py-2 !text-sm"></div>
-                    <div><label class="text-xs font-semibold text-gray-500">เบอร์โทร</label><input id="s_phone" class="inp-cute !py-2 !text-sm"></div>
-                    <div class="col-span-1 md:col-span-2"><label class="text-xs font-semibold text-gray-500">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ลง Inbox ลูกค้า)</label><input id="s_msgS" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">QR ธนาคาร</label><input id="s_qrB" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">QR ทรูมันนี่</label><input id="s_qrT" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">QR ต่างประเทศ</label><input id="s_qrI" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">Email แอดมิน</label><input id="s_mail" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">Facebook URL</label><input id="s_fb" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">Line URL</label><input id="s_line" class="inp-cute !py-2 !text-sm"></div>
+                    <div><label class="text-xs font-semibold text-pDark">เบอร์โทร</label><input id="s_phone" class="inp-cute !py-2 !text-sm"></div>
+                    <div class="col-span-1 md:col-span-2"><label class="text-xs font-semibold text-pDark">ข้อความแจ้งเมื่อสั่งซื้อสำเร็จ (ลง Inbox ลูกค้า)</label><input id="s_msgS" class="inp-cute !py-2 !text-sm"></div>
                 </div>
                 <button onclick="adSaveSet()" class="btn-cute mt-5 !w-auto !inline-block"><i class="fa-solid fa-save"></i> บันทึกการตั้งค่าทั้งหมด</button>
             </div>
@@ -282,8 +289,8 @@
                 hRec:'บริการแนะนำ', catAll:'หมวดหมู่ทั้งหมด', hAll:'เกมและบริการทั้งหมด', hCont:'ช่องทางการติดต่อ', hLog:'เข้าสู่ระบบ', hReg:'สมัครสมาชิก',
                 hTop:'เติมเงิน (ยอดเข้าออโต้)', hInb:'แจ้งเตือน', hWork:'ตัวอย่างงานป้าย', bBank:'ธนาคาร', bTrue:'วอเลท', bInter:'ตปท.',
                 phUidMail:'UID หรือ Email', phPass:'รหัสผ่าน', phUid:'ตั้งชื่อ UserID (ไว้ล็อกอิน)', phMail:'อีเมลของคุณ', phPass2:'ตั้งรหัสผ่าน', phPass3:'ยืนยันรหัสผ่าน',
-                phAmt:'จำนวนเงิน (มีทศนิยมได้)', phRef:'6 ตัวท้ายสลิป (A-Z, 0-9)', txtUpload:'กดเพื่อแนบรูปสลิป', btnTopup:'ยืนยันแจ้งโอน',
-                btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิก (พร้อมล็อกอิน)', noAcc:'ยังไม่มีบัญชี? สมัครสมาชิก', hasAcc:'มีบัญชีแล้ว? เข้าระบบเลย',
+                phAmt:'จำนวนเงินโอน', phRef:'6 ตัวท้ายสลิป (A-Z, 0-9)', txtUpload:'กดเพื่อแนบรูปสลิป', btnTopup:'แจ้งโอนเงิน',
+                btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิก', noAcc:'ยังไม่มีบัญชี? สมัครสมาชิก', hasAcc:'มีบัญชีแล้ว? เข้าระบบเลย',
                 out:'ออกจากระบบ', adm:'ระบบจัดการหลังบ้าน', stOpen:'เปิดให้บริการปกติค่ะ', stClose:'ปิดให้บริการชั่วคราวค่ะ',
                 thTime:'เวลา', thOrder:'ออเดอร์', thProd:'เกม/สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', noData:'ไม่มีข้อมูลค่ะ',
                 alertNoUser:'กรุณาเข้าสู่ระบบก่อน', alertWait:'รอแป๊บนึงน้า...', alertOk:'สำเร็จ', alertErr:'ผิดพลาด', btnAck:'รับทราบจ้า',
@@ -327,8 +334,8 @@
             if(st.prods.length) { drawProds(); drawAllGames(); }
             if(st.u) {
                 drawInbox();
-                document.getElementById('authMenuArea').innerHTML = `<button onclick="out()" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pMain font-bold smooth"><i class="fa-solid fa-right-from-bracket w-6 text-center"></i> ${t('out')}</button>`;
-                document.getElementById('fLog').innerHTML = `<button onclick="out()" class="btn-cute !bg-red-400"><i class="fa-solid fa-right-from-bracket"></i> ${t('out')}</button>`;
+                document.getElementById('authMenuArea').innerHTML = `<button onclick="out()" class="block w-full text-left px-5 py-3 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-right-from-bracket w-6 text-center"></i> ${t('out')}</button>`;
+                document.getElementById('fLog').innerHTML = `<button onclick="out()" class="btn-cute !bg-pMain"><i class="fa-solid fa-right-from-bracket"></i> ${t('out')}</button>`;
             }
         }
 
@@ -379,23 +386,22 @@
             document.getElementById('uiName').innerText = st.sys.storeName; document.getElementById('fName').innerText = st.sys.storeName;
             document.getElementById('uiLogo').src = st.sys.logo;
             
-            // Banner (แก้ให้แบนเนอร์แสดงผลเสมอ และสไลด์ได้)
-            let bCont = document.getElementById('bannerContainer');
-            if(st.sys.banner) {
-                bCont.classList.remove('hidden');
-                let bImgs = st.sys.banner.split(',').map(i=>i.trim());
-                bCont.innerHTML = bImgs.map((img, i) => `<img src="${img}" class="banner-item ${i===0?'active':''}">`).join('');
-            }
-
             let conHtml = '';
             if(st.sys.contactFB) conHtml += `<a href="${st.sys.contactFB}" target="_blank" class="bg-pBg p-4 rounded-2xl block text-pDark font-bold hover:bg-pMain hover:text-white smooth"><i class="fa-brands fa-facebook text-2xl mb-1"></i><br>Facebook</a>`;
             if(st.sys.contactLine) conHtml += `<a href="${st.sys.contactLine}" target="_blank" class="bg-green-50 p-4 rounded-2xl block text-green-500 font-bold hover:bg-green-500 hover:text-white smooth"><i class="fa-brands fa-line text-2xl mb-1"></i><br>Line Official</a>`;
             if(st.sys.contactPhone) conHtml += `<a href="tel:${st.sys.contactPhone}" class="bg-pBg p-4 rounded-2xl block text-pDark font-bold hover:bg-pMain hover:text-white smooth"><i class="fa-solid fa-phone text-2xl mb-1"></i><br>โทรติดต่อ</a>`;
             document.getElementById('contactList').innerHTML = conHtml || `<div class="text-gray-400">${t('noData')}</div>`;
+
+            let bCont = document.getElementById('uiBanL');
+            if(st.sys.banner) {
+                bCont.classList.remove('hidden');
+                bCont.href = st.sys.bannerLink || '#';
+                let bImgs = st.sys.banner.split(',').map(i=>i.trim());
+                bCont.innerHTML = bImgs.map((img, i) => `<img src="${img}" class="banner-item ${i===0?'active':''}">`).join('');
+            } else { bCont.classList.add('hidden'); }
             
             document.getElementById('uiMarq').innerHTML = `<i class="fa-solid fa-bullhorn"></i> ${st.sys.announcement||''} &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fa-solid fa-star"></i> ล่าสุด: ${st.history?st.history.join(' &nbsp;|&nbsp; '):''}`;
 
-            // ป้ายสถานะแบบเล็ก น่ารัก
             let stat = document.getElementById('uiStatus'); stat.style.display = 'block';
             if(st.sys.isOpen === 'true') { 
                 stat.className='w-fit mx-auto mt-3 px-4 py-1.5 rounded-full text-xs md:text-sm font-bold text-pDark bg-white shadow-sm border border-pMain'; 
@@ -441,7 +447,7 @@
 
             cx.innerHTML = arr.map(p => {
                 let imgs = p.images.split(',').map(i=>`<img src="${i.trim()}" class="slider-item ${i===p.images.split(',')[0]?'active':''}">`).join('');
-                let disc = p.discount > 0 ? `<span class="bg-red-400 text-white text-xs px-2 py-0.5 rounded-full absolute top-2 right-2 z-10 font-bold">-${p.discount}%</span>` : '';
+                let disc = p.discount > 0 ? `<span class="bg-pDark text-white text-xs px-2 py-0.5 rounded-full absolute top-2 right-2 z-10 font-bold">-${p.discount}%</span>` : '';
                 return `
                 <div class="cute-card cursor-pointer" onclick="buy('${p.id}', '${p.name}', ${p.price})">
                     <div class="img-slider">${disc}${imgs}</div>
@@ -507,7 +513,7 @@
                        </div>
                        <div class="flex gap-2 mb-3">
                          <button id="bUid" class="flex-1 py-2 rounded-full bg-pDark text-white font-bold" onclick="togBuy('uid')">UID</button>
-                         <button id="bMail" class="flex-1 py-2 rounded-full bg-gray-200 text-gray-600 font-bold" onclick="togBuy('mail')">Mail/Pass</button>
+                         <button id="bMail" class="flex-1 py-2 rounded-full bg-white text-gray-600 font-bold border border-pMain" onclick="togBuy('mail')">Mail/Pass</button>
                        </div>
                        <div id="buyInp"><input type="text" id="gUid" class="inp-cute text-center" placeholder="${t('tUid')}"></div>`,
                 showCancelButton: true, confirmButtonText: t('btnBuy'), cancelButtonText: t('btnCancel'),
@@ -527,8 +533,8 @@
         
         window.togBuy = (x) => {
             window.buyType = x;
-            document.getElementById('bUid').className = x==='uid'?'flex-1 py-2 rounded-full bg-pDark text-white font-bold':'flex-1 py-2 rounded-full bg-gray-200 text-gray-600 font-bold';
-            document.getElementById('bMail').className = x==='mail'?'flex-1 py-2 rounded-full bg-pDark text-white font-bold':'flex-1 py-2 rounded-full bg-gray-200 text-gray-600 font-bold';
+            document.getElementById('bUid').className = x==='uid'?'flex-1 py-2 rounded-full bg-pDark text-white font-bold':'flex-1 py-2 rounded-full bg-white text-gray-600 font-bold border border-pMain';
+            document.getElementById('bMail').className = x==='mail'?'flex-1 py-2 rounded-full bg-pDark text-white font-bold':'flex-1 py-2 rounded-full bg-white text-gray-600 font-bold border border-pMain';
             document.getElementById('buyInp').innerHTML = x==='uid' ? `<input type="text" id="gUid" class="inp-cute text-center" placeholder="${t('tUid')}">` : `<input type="text" id="gMail" class="inp-cute mb-2 text-center" placeholder="Email / ID"><input type="text" id="gPass" class="inp-cute text-center" placeholder="Password">`;
         }
 
@@ -541,7 +547,7 @@
 
         function setPay(m) {
             st.pay = m;
-            ['Bank','True','Inter'].forEach(x=>{ document.getElementById(`b${x}`).className = m===x.toLowerCase()?'flex-1 py-2 px-3 rounded-lg bg-pDark text-white font-semibold shadow-sm':'flex-1 py-2 px-3 rounded-lg bg-transparent text-gray-500 font-semibold smooth'; });
+            ['Bank','True','Inter'].forEach(x=>{ document.getElementById(`b${x}`).className = m===x.toLowerCase()?'flex-1 py-2 px-3 rounded-lg bg-pBtn text-white font-semibold shadow-sm':'flex-1 py-2 px-3 rounded-lg bg-transparent text-pDark font-semibold smooth border border-pMain'; });
             document.getElementById('qrImg').src = m==='bank'?st.sys.qrBank:m==='true'?st.sys.qrTrue:st.sys.qrInter;
         }
 
@@ -589,7 +595,7 @@
 
         function drawInbox() {
             if(!st.u) return;
-            document.getElementById('inboxArea').innerHTML = st.inb.length===0 ? `<div class="text-center py-5 text-gray-400 font-semibold">${t('noData')}</div>` : st.inb.map(m=>`<div class="bg-pBg p-4 rounded-xl mb-3"><p class="text-[0.7rem] text-pDark font-bold mb-1"><i class="fa-solid fa-clock"></i> ${new Date(m.time).toLocaleString('th-TH')}</p><p class="font-semibold text-gray-700 text-sm">${m.msg}</p></div>`).join('');
+            document.getElementById('inboxArea').innerHTML = st.inb.length===0 ? `<div class="text-center py-5 text-pDark font-semibold">${t('noData')}</div>` : st.inb.map(m=>`<div class="bg-pBg p-4 rounded-xl mb-3"><p class="text-[0.7rem] text-pDark font-bold mb-1"><i class="fa-solid fa-clock"></i> ${new Date(m.time).toLocaleString('th-TH')}</p><p class="font-semibold text-gray-700 text-sm">${m.msg}</p></div>`).join('');
             document.getElementById('uOrderList').innerHTML = `<tr><th>${t('thTime')}</th><th>${t('thOrder')}</th><th>${t('thProd')}</th><th>${t('thStat')}</th></tr>` + st.uOrd.map(o=>`<tr><td>${new Date(o.time).toLocaleString('th-TH').split(' ')[0]}</td><td>${o.oid.substring(0,8)}</td><td>${o.prod}</td><td>${o.stat==='Pending'?`<span class="text-yellow-500 font-bold">${t('statWait')}</span>`:`<span class="text-green-500 font-bold">${t('statDone')}</span>`}</td></tr>`).join('');
         }
 
@@ -597,10 +603,10 @@
         function swAd(x) {
             document.querySelectorAll('.ad-sec').forEach(e=>e.classList.add('hidden'));
             document.getElementById(`ad-${x}`).classList.remove('hidden');
-            document.querySelectorAll('.ad-tab-btn').forEach(e=>e.classList.replace('bg-red-100','bg-pBg'));
-            document.querySelectorAll('.ad-tab-btn').forEach(e=>e.classList.replace('text-red-600','text-pDark'));
-            event.target.classList.replace('bg-pBg','bg-red-100');
-            event.target.classList.replace('text-pDark','text-red-600');
+            document.querySelectorAll('.ad-tab-btn').forEach(e=>e.classList.replace('bg-pMain','bg-pBg'));
+            document.querySelectorAll('.ad-tab-btn').forEach(e=>e.classList.replace('text-white','text-pDark'));
+            event.target.classList.replace('bg-pBg','bg-pMain');
+            event.target.classList.replace('text-pDark','text-white');
         }
 
         function drawAdmin(forceForm = false) {
