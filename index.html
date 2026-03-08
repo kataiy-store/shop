@@ -66,7 +66,7 @@
         }
 
         /* ==========================================================================
-           CUTE MARQUEE COMPONENT (Fixed Scroll from edge to edge)
+           CUTE MARQUEE COMPONENT 
            ========================================================================== */
         .marquee-wrapper {
             width: 100%;
@@ -123,7 +123,6 @@
             padding-top: 2px;
         }
         
-        /* แก้ไขให้เลื่อนเข้าสุดจากขอบขวา และออกสุดขอบซ้าย */
         @keyframes scrollCute { 
             0% { transform: translateX(100vw); } 
             100% { transform: translateX(-100%); } 
@@ -469,15 +468,13 @@
                 <p class="text-[0.65rem] font-bold text-gray-400 uppercase tracking-widest" data-l="mMenu">Menu / เมนู</p>
             </div>
             
-            <div id="dynamicMenuArea">
-                </div>
+            <div id="dynamicMenuArea"></div>
             
             <div id="adminMenuArea" class="hidden border-t-2 border-pMain mt-2 pt-2 bg-purple-50">
                 <button type="button" onclick="navigatePage('admin')" class="block w-full text-left px-8 py-4 hover:bg-pMain text-pDark font-bold smooth text-red-600"><i class="fa-solid fa-user-shield w-8 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
             </div>
 
-            <div id="authMenuArea" class="border-t-2 border-pMain mt-2 pt-2">
-                </div>
+            <div id="authMenuArea" class="border-t-2 border-pMain mt-2 pt-2"></div>
         </div>
     </nav>
 
@@ -489,7 +486,7 @@
             </div>
             <div class="marquee-text-container">
                 <div class="marquee-content" id="uiMarq">
-                    กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล...
+                    กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล กรุณารอสักครู่นะคะ...
                 </div>
             </div>
         </div>
@@ -531,7 +528,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-pMain pb-5 gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div>
-                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><span data-l="hRec">บริการแนะนำ</span></h2>
+                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star mr-2 text-pBtn"></i><span data-l="hRec">บริการแนะนำ</span></h2>
                 </div>
                 <div class="w-full md:w-auto">
                    <select id="catFilter" class="input-pastel !py-2.5 !w-full md:!w-80 text-pDark font-bold shadow-sm" onchange="renderProductCatalog()">
@@ -543,7 +540,7 @@
             <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
                 <div class="col-span-full text-center py-20 text-pDark opacity-50">
                     <i class="fa-solid fa-spinner fa-spin text-5xl mb-4"></i>
-                    <p class="font-bold tracking-widest mt-2 uppercase">กำลังดึงข้อมูลฐานข้อมูล...</p>
+                    <p class="font-bold tracking-widest mt-2 uppercase">กำลังดึงข้อมูลจากฐานข้อมูล...</p>
                 </div>
             </div>
             
@@ -573,7 +570,7 @@
 
         <section id="p-auth" class="page-section">
             <div class="bg-white p-8 md:p-12 max-w-md mx-auto mt-10 rounded-[40px] border-2 border-pMain shadow-2xl z-999 relative">
-                <h2 class="text-center text-3xl font-bold text-pDark mb-10 tracking-tight"><i class="fa-solid fa-user-shield mr-2 text-pBtn"></i> <span id="authTitle" data-l="hLog">เข้าสู่ระบบ</span></h2>
+                <h2 class="text-center text-3xl font-bold text-pDark mb-10 tracking-tight"><i class="fa-solid fa-user-lock mr-2 text-pBtn"></i> <span id="authTitle" data-l="hLog">เข้าสู่ระบบ</span></h2>
                 
                 <div id="fLog">
                     <div class="space-y-6">
@@ -586,12 +583,12 @@
                             <input type="password" id="lPass" class="input-pastel shadow-sm" data-p="phPass" placeholder="รหัสผ่าน" required>
                         </div>
                         <button type="button" onclick="executeAuthenticationProcess('login')" class="btn-pastel w-full text-xl mt-6 shadow-xl">
-                            <span data-l="btnLog">เข้าสู่ระบบ</span> <i class="fa-solid fa-circle-arrow-right ml-1"></i>
+                            <span data-l="btnLog">เข้าสู่ระบบ</span> <i class="fa-solid fa-circle-arrow-right ml-2"></i>
                         </button>
                     </div>
                     <div class="text-center mt-10 border-t border-pMain pt-6">
                         <p class="text-sm font-bold text-gray-400" data-l="noAcc">ยังไม่มีบัญชีสมาชิก?</p>
-                        <button type="button" class="text-pDark font-extrabold mt-2 hover:text-pBtn underline smooth" onclick="switchAuthView('reg')" data-l="hReg">สมัครสมาชิกที่นี่</button>
+                        <button type="button" class="text-pBtn font-extrabold mt-2 hover:text-pDark underline smooth" onclick="switchAuthView('reg')" data-l="hReg">สมัครสมาชิกที่นี่</button>
                     </div>
                 </div>
                 
@@ -732,7 +729,7 @@
                         </div>
                     </div>
                     <div class="flex gap-4 mt-8">
-                        <button type="button" onclick="persistProductData()" class="btn-pastel flex-1 text-lg shadow-lg" id="btnSaveProd"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้าลงระบบ</button>
+                        <button type="button" onclick="persistProductData()" class="btn-pastel flex-1 text-lg shadow-lg" id="btnSaveProd"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้า</button>
                         <button type="button" onclick="resetAdminProductForm()" class="btn-outline !bg-gray-100 !text-gray-500 !border-gray-300 hidden shadow-md" id="btnCancelEdit">ยกเลิก</button>
                     </div>
                 </div>
@@ -771,7 +768,7 @@
     </footer>
 
     <script>
-        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ลงในนี้ (ตรวจสอบให้แน่ใจว่าไม่มีช่องว่าง) 🔴🔴🔴
+        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ลงในนี้ (ต้องเป็นของที่คุณ Deploy ใหม่ล่าสุด) 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwUMa943t7APJoNlGsDPF3QuZcYIw7ab2_9HReCFCsbp5jI61G7rQGW1rKFeLhhE2u5iA/exec';
         
         /**
@@ -927,7 +924,7 @@
         }
 
         /**
-         * 3. API Communication Engine (Try-Catch Safe)
+         * 3. API Communication Engine (Fail-Safe text/plain)
          */
         async function transmitDataToAPI(action, payload) {
             if (AppState.busy) { return null; }
@@ -991,6 +988,7 @@
                     }
                     if (res.adminData) AppState.adm = res.adminData;
                     
+                    // ป้องกัน UI Crash ขัดขวางการดึงข้อมูลครั้งต่อไป
                     try {
                         renderDOMEngine(isSilent, updateAdminForms);
                     } catch(uiError) {
@@ -1029,10 +1027,10 @@
                 bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=kataiy+store" class="banner-item active">`;
             }
 
-            // Cute Marquee Logic
+            // Cute Marquee
             const marqueeBlock = document.getElementById('uiMarq');
             const noticeText = AppState.sys.announcement || '';
-            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-paw text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการแล้ว 100%';
+            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-paw text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการ 100%';
             marqueeBlock.innerHTML = `<span class="mr-4 font-bold text-pDark">${noticeText}</span> <i class="fa-solid fa-bolt text-yellow-400 mr-2"></i> <span class="text-gray-500">${historyFeed}</span>`;
 
             // Status Capsule
@@ -1046,13 +1044,11 @@
                 stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-white rounded-full"></span> ${translator('stClose')}`;
             }
 
-            // User Identity Rendering
+            // Authentication UI Injection
             if (AppState.u) {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('uId').innerText = AppState.u.userId;
-                
-                document.getElementById('fLog').innerHTML = `<button type="button" onclick="out()" class="btn-pastel !bg-red-400 w-full text-xl mt-6 shadow-sm"><i class="fa-solid fa-power-off mr-2"></i> ${translator('out')}</button>`;
                 
                 if(AppState.u.role === 'admin') {
                     if (document.getElementById('p-admin').classList.contains('active')) renderAdminDashboard(updateForms);
@@ -1074,13 +1070,16 @@
             const productContainer = document.getElementById('prodsArea');
             const selectedFilter = document.getElementById('catFilter').value;
             
+            // กรองเฉพาะแถวที่มีข้อมูลรหัสและชื่อจริงๆ ป้องกันชีตว่างเปล่า
+            const validProds = AppState.prods.filter(p => p.id && p.id !== 'undefined' && String(p.id).trim() !== '');
+
             const filterDropdown = document.getElementById('catFilter');
-            const allCategories = [...new Set(AppState.prods.map(p => p.category))];
+            const allCategories = [...new Set(validProds.map(p => p.category))].filter(c => c && c !== 'undefined');
             const memoryVal = filterDropdown.value;
             filterDropdown.innerHTML = `<option value="all">${translator('catAll')}</option>` + allCategories.sort().map(c => `<option value="${c}">${c}</option>`).join('');
-            filterDropdown.value = memoryVal;
+            filterDropdown.value = memoryVal && allCategories.includes(memoryVal) ? memoryVal : 'all';
 
-            let displayPool = AppState.prods.filter(p => selectedFilter === 'all' || p.category === selectedFilter);
+            let displayPool = validProds.filter(p => selectedFilter === 'all' || p.category === selectedFilter);
             
             if (displayPool.length === 0) {
                 productContainer.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest">${translator('noData')}</div>`;
@@ -1088,8 +1087,8 @@
             }
 
             productContainer.innerHTML = displayPool.map(p => {
-                const imgUrls = p.images.split(',').map(s => s.trim());
-                const imgHtml = imgUrls.map((url, index) => `<img src="${url}" class="slider-image ${index === 0 ? 'active' : ''}">`).join('');
+                const imgUrls = (p.images || '').split(',').map(s => s.trim()).filter(Boolean);
+                const imgHtml = imgUrls.length > 0 ? imgUrls.map((url, index) => `<img src="${url}" class="slider-image ${index === 0 ? 'active' : ''}">`).join('') : '<div class="w-full h-full bg-gray-200"></div>';
                 const discountHTML = p.discount > 0 ? `<span class="absolute top-4 right-4 bg-red-500 text-white text-[0.65rem] font-extrabold px-3 py-1 rounded-full z-10 shadow-lg">-${p.discount}%</span>` : '';
                 
                 return `
@@ -1097,12 +1096,12 @@
                     <div class="img-box">${discountHTML}${imgHtml}</div>
                     <div class="p-5 flex-1 flex flex-col justify-between text-center bg-white">
                         <div>
-                            <span class="text-[0.6rem] font-bold text-pDark bg-pBg px-3 py-1 rounded-lg mb-3 inline-block uppercase tracking-widest border border-pMain">${p.category}</span>
-                            <h4 class="font-bold text-gray-800 text-sm mb-2 leading-snug line-clamp-2">${p.name}</h4>
-                            <p class="text-[0.7rem] font-bold text-gray-400 mb-4 uppercase tracking-wider">${p.amount} ${p.unit}</p>
+                            <span class="text-[0.6rem] font-bold text-pDark bg-pBg px-3 py-1 rounded-lg mb-3 inline-block uppercase tracking-widest border border-pMain">${p.category || 'ทั่วไป'}</span>
+                            <h4 class="font-bold text-gray-800 text-sm mb-2 leading-snug line-clamp-2">${p.name || 'ไม่มีชื่อสินค้า'}</h4>
+                            <p class="text-[0.7rem] font-bold text-gray-400 mb-4 uppercase tracking-wider">${p.amount || 0} ${p.unit || ''}</p>
                         </div>
                         <div class="bg-pBg rounded-2xl py-2 px-3 border border-pMain shadow-inner group-hover:bg-pMain smooth">
-                            <span class="text-pDark font-extrabold text-xl">฿${parseFloat(p.price).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                            <span class="text-pDark font-extrabold text-xl">฿${parseFloat(p.price || 0).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                         </div>
                     </div>
                 </div>`;
@@ -1111,8 +1110,9 @@
 
         function renderGamesListing() {
             const container = document.getElementById('allGamesArea');
+            const validProds = AppState.prods.filter(p => p.id && p.id !== 'undefined' && String(p.id).trim() !== '');
             const catMap = {};
-            AppState.prods.forEach(p => {
+            validProds.forEach(p => {
                 if(!catMap[p.category]) catMap[p.category] = [];
                 catMap[p.category].push(p);
             });
@@ -1126,15 +1126,15 @@
                 <div class="bg-white p-8 rounded-[35px] shadow-sm border-2 border-pMain">
                     <div class="flex items-center gap-4 mb-8">
                         ${catIcon}
-                        <h3 class="text-2xl font-extrabold text-pDark tracking-tighter uppercase">${catName}</h3>
+                        <h3 class="text-2xl font-extrabold text-pDark tracking-tighter uppercase">${catName || 'ทั่วไป'}</h3>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         ${catMap[catName].map(p => `
                             <div class="product-card cursor-pointer group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
-                                <div class="img-box bg-pBg border-b border-pMain"><img src="${p.images.split(',')[0].trim()}" class="slider-image active group-hover:scale-110 smooth"></div>
+                                <div class="img-box bg-pBg border-b border-pMain"><img src="${(p.images || '').split(',')[0].trim()}" class="slider-image active group-hover:scale-110 smooth"></div>
                                 <div class="p-4 text-center">
                                     <h4 class="font-bold text-gray-800 text-xs mb-2 line-clamp-1">${p.name}</h4>
-                                    <span class="text-pBtn font-extrabold text-[0.95rem]">฿${p.price.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                                    <span class="text-pBtn font-extrabold text-[0.95rem]">฿${parseFloat(p.price || 0).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                                 </div>
                             </div>
                         `).join('')}
@@ -1150,13 +1150,13 @@
             if (!AppState.wrks.length) { wrap.classList.add('hidden'); return; }
             wrap.classList.remove('hidden');
             grid.innerHTML = AppState.wrks.map(w => {
-                const picUrls = w.imgs.split(',').map(s => s.trim());
+                const picUrls = (w.imgs || '').split(',').map(s => s.trim()).filter(Boolean);
                 const picHTML = picUrls.map((url, i) => `<img src="${url}" class="slider-image ${i === 0 ? 'active' : ''}">`).join('');
                 return `
                 <div class="product-card cursor-pointer smooth hover:scale-105" onclick="window.open('${w.line || '#'}','_blank')">
                     <div class="img-box">${picHTML}</div>
                     <div class="p-3 text-center bg-pBg border-t border-pMain">
-                        <span class="text-[0.65rem] font-extrabold text-pDark uppercase tracking-widest">${w.cat}</span>
+                        <span class="text-[0.65rem] font-extrabold text-pDark uppercase tracking-widest">${w.cat || 'ผลงาน'}</span>
                     </div>
                 </div>`;
             }).join('');
@@ -1198,7 +1198,7 @@
         }
 
         /**
-         * 6. User Authentication Engine (🟢 FORCE HARD RELOAD FIXED 🟢)
+         * 6. User Authentication Engine (💥 FORCE HARD RELOAD FIX 💥)
          */
         function switchAuthView(mode) {
             document.getElementById('fLog').classList.toggle('hidden', mode !== 'log');
@@ -1238,14 +1238,15 @@
             const response = await transmitDataToAPI(actionType, dataset);
             
             if (response && response.status === 'success') {
-                // บันทึกข้อมูลลงเครื่อง
+                // บันทึกข้อมูลลง Cache เครื่อง
                 localStorage.setItem('ks_usr', JSON.stringify(response.user));
                 
-                // 🟢 FORCE HARD RELOAD TO RENDER EVERYTHING FRESH 🟢
+                // 🟢 FORCE HARD RELOAD 🟢
+                // เมื่อล็อกอินสำเร็จ จะเคลียร์หน้าจอและบังคับเริ่มกระบวนการวาดเมนูใหม่ทั้งหมด
                 Swal.fire({ 
                     icon: 'success', 
                     title: translator('alertOk'), 
-                    text: 'เข้าสู่ระบบสำเร็จ! กำลังพาเข้าสู่หน้าหลัก...', 
+                    text: 'เข้าสู่ระบบสำเร็จ! กำลังพากลับไปหน้าหลัก...', 
                     timer: 1500, 
                     showConfirmButton: false 
                 }).then(() => {
@@ -1254,7 +1255,7 @@
                 });
 
             } else {
-                Swal.fire({icon: 'error', title: 'การเข้าสู่ระบบล้มเหลว', text: response ? response.message : 'เกิดข้อผิดพลาดในการเชื่อมต่อ'});
+                Swal.fire({icon: 'error', title: 'การเข้าสู่ระบบล้มเหลว', text: response ? response.message : 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์'});
             }
         }
 
@@ -1369,7 +1370,10 @@
                     } else {
                         collectedData = `ID/Mail: ${document.getElementById('gMailInp').value} | Pass: ${document.getElementById('gPassInp').value}`;
                     }
-                    if (!collectedData || collectedData.includes('undefined')) { Swal.showValidationMessage('รบกวนกรอกข้อมูลตัวละครให้ครบด้วยน้า'); return false; }
+                    if (!collectedData || collectedData.includes('undefined') || collectedData.trim() === '') { 
+                        Swal.showValidationMessage('รบกวนกรอกข้อมูลตัวละครให้ครบด้วยน้า'); 
+                        return false; 
+                    }
                     return { loginType: loginType, gameData: collectedData };
                 }
             }).then(async (result) => {
@@ -1418,7 +1422,6 @@
         function renderAdminDashboard(forceFormRefresh) {
             if(!AppState.adm) return;
 
-            // Form Anti-Overwrite logic
             if (forceFormRefresh) {
                 document.getElementById('s_name').value = AppState.sys.storeName || '';
                 document.getElementById('s_logo').value = AppState.sys.logo || '';
@@ -1428,7 +1431,6 @@
                 document.getElementById('s_popH').value = AppState.sys.popHead || '';
                 document.getElementById('s_popI').value = AppState.sys.popImg || '';
                 document.getElementById('s_popT').value = AppState.sys.popTxt || '';
-                // 🟢 แปลงค่าก่อนนำไปเซ็ตกลับให้ช่อง Select 🟢
                 document.getElementById('s_open').value = String(AppState.sys.isOpen) === 'true' ? 'true' : 'false';
                 document.getElementById('s_qrB').value = AppState.sys.qrBank || '';
                 document.getElementById('s_qrT').value = AppState.sys.qrTrue || '';
@@ -1440,13 +1442,14 @@
                 document.getElementById('s_msgS').value = AppState.sys.msgSuccess || '';
             }
 
+            const validProds = AppState.prods.filter(p => p.id && p.id !== 'undefined' && String(p.id).trim() !== '');
             const prodTable = document.getElementById('tb-prods');
             prodTable.innerHTML = `<tr><th>CATEGORY</th><th>PACKAGE NAME</th><th>PRICE</th><th>ACTIONS</th></tr>` + 
-                AppState.prods.map(p => `
+                validProds.map(p => `
                 <tr>
-                    <td class="font-bold text-pDark uppercase text-[0.7rem] tracking-widest">${p.category}</td>
+                    <td class="font-bold text-pDark uppercase text-[0.7rem] tracking-widest">${p.category || 'ทั่วไป'}</td>
                     <td class="font-medium">${p.name}</td>
-                    <td class="font-bold text-pDark">฿${p.price.toFixed(2)}</td>
+                    <td class="font-bold text-pDark">฿${parseFloat(p.price||0).toFixed(2)}</td>
                     <td>
                         <button type="button" onclick="editAdminProduct('${p.id}')" class="text-blue-500 mr-5 hover:scale-125 smooth"><i class="fa-solid fa-pen-to-square"></i></button>
                         <button type="button" onclick="deleteAdminProduct('${p.id}')" class="text-red-500 hover:scale-125 smooth"><i class="fa-solid fa-trash-can"></i></button>
@@ -1473,7 +1476,7 @@
                 AppState.wrks.map(w => `
                 <tr>
                     <td class="font-bold uppercase tracking-widest text-[0.75rem]">${w.cat}</td>
-                    <td class="font-medium">${w.imgs.split(',').length} รูปภาพในสไลด์</td>
+                    <td class="font-medium">${(w.imgs||'').split(',').length} รูปภาพในสไลด์</td>
                     <td><button type="button" onclick="deleteAdminWork('${w.id}')" class="text-red-500 hover:scale-125 smooth"><i class="fa-solid fa-trash-can"></i></button></td>
                 </tr>
             `).join('');
@@ -1520,7 +1523,7 @@
 
         function resetAdminProductForm() {
             ['p_id','p_cat','p_catI','p_name','p_amt','p_unit','p_prc','p_disc','p_img'].forEach(id => document.getElementById(id).value = '');
-            document.getElementById('prodFormTitle').innerHTML = `<i class="fa-solid fa-plus-circle mr-2 text-pBtn"></i> เพิ่มสินค้าใหม่ลงระบบ`;
+            document.getElementById('prodFormTitle').innerHTML = `<i class="fa-solid fa-plus-circle mr-2 text-pBtn"></i> เพิ่มสินค้าใหม่เข้าระบบ`;
             document.getElementById('btnSaveProd').innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้าใหม่';
             document.getElementById('btnCancelEdit').classList.add('hidden');
         }
@@ -1583,15 +1586,15 @@
         }
 
         function handleBannerClick() { if(AppState.sys.bannerLink) window.open(AppState.sys.bannerLink, '_blank'); }
-        
+
         /**
-         * 10. Initialization Process (Boot)
+         * 10. SYSTEM BOOTSTRAP (เริ่มทำงานทันทีโดยไม่ต้องรอ API)
          */
         window.addEventListener("DOMContentLoaded", () => {
-            // Restore Language
+            // โหลดภาษา
             document.getElementById('lang').value = AppState.lang;
             
-            // Safe Session Read
+            // อ่านค่า User จาก Cache อย่างปลอดภัย
             try {
                 const session = localStorage.getItem('ks_usr');
                 if (session && session !== 'undefined') {
@@ -1601,17 +1604,17 @@
                 localStorage.removeItem('ks_usr'); 
             }
             
-            // Build UI framework before DB fetch
+            // 🟢 วาดหน้าจอทันที เพื่อให้เห็นเมนูและกดใช้งานได้ทันที 🟢
             buildDynamicSidebarMenu();
             applyLanguageToDOM();
             
-            // Initial Fetch
+            // เริ่มต้นดึงข้อมูลแบบเบื้องหลัง
             fetchSystemDataSilently(false, true); 
             
-            // Polling interval
+            // ตั้งเวลา Polling ดึงข้อมูลใหม่เงียบๆ ทุก 3 วิ
             setInterval(() => fetchSystemDataSilently(true, false), 3000); 
             
-            // Image Slider Interval
+            // ตั้งเวลา Slider หมุนรูปทุก 5 วิ
             setInterval(() => {
                 document.querySelectorAll('.img-box, .banner-slider').forEach(s => {
                     let imgs = s.querySelectorAll('img, .slider-image, .banner-item');
