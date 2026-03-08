@@ -15,10 +15,10 @@
             theme: { 
                 extend: { 
                     colors: { 
-                        pBg: '#FDF2F8',   /* ชมพูอ่อนพาสเทล (พื้นหลังหลัก) */
-                        pMain: '#E9D5FF', /* ม่วงอ่อน (เส้นขอบและกรอบ) */
-                        pDark: '#7E22CE', /* ม่วงเข้ม (ตัวหนังสือ, ไอคอนหลัก) */
-                        pBtn: '#A855F7',  /* ม่วงปุ่มกด (Primary Action) */
+                        pBg: '#FDF2F8',   /* ชมพูอ่อน (Background) */
+                        pMain: '#E9D5FF', /* ม่วงอ่อน (Border/Line) */
+                        pDark: '#7E22CE', /* ม่วงเข้ม (Text/Icon) */
+                        pBtn: '#A855F7',  /* ม่วงปุ่มกดหลัก */
                         pPink: '#FBCFE8'  /* ชมพูไฮไลท์ */
                     } 
                 } 
@@ -31,7 +31,7 @@
     
     <style>
         /* --------------------------------------------------------------------------
-           CORE CSS ARCHITECTURE
+           BASE UI FRAMEWORK
            -------------------------------------------------------------------------- */
         body { 
             font-family: 'Prompt', sans-serif; 
@@ -41,10 +41,17 @@
             scroll-behavior: smooth; 
         }
         
-        .smooth { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .hide-scroll::-webkit-scrollbar { display: none; }
+        .smooth { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
         
-        /* Marquee Animation System */
+        .hide-scroll::-webkit-scrollbar { 
+            display: none; 
+        }
+        
+        /* --------------------------------------------------------------------------
+           ANIMATIONS & TRANSITIONS
+           -------------------------------------------------------------------------- */
         .marquee-container { 
             overflow: hidden; 
             white-space: nowrap; 
@@ -55,18 +62,33 @@
             font-size: 0.9rem; 
             border-bottom: 2px solid #D8B4FE; 
         }
-        .marquee-content { display: inline-block; animation: scrollMarquee 35s linear infinite; }
-        @keyframes scrollMarquee { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
         
-        /* SPA View Transitions */
-        .page-section { display: none; opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
-        .page-section.active { display: block; opacity: 1; transform: translateY(0); }
+        .marquee-content { 
+            display: inline-block; 
+            animation: scrollMarquee 35s linear infinite; 
+        }
+        
+        @keyframes scrollMarquee { 
+            0% { transform: translateX(100vw); } 
+            100% { transform: translateX(-100%); } 
+        }
+        
+        .page-section { 
+            display: none; 
+            opacity: 0; 
+            transform: translateY(15px); 
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
+        }
+        
+        .page-section.active { 
+            display: block; 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
         
         /* --------------------------------------------------------------------------
-           CUSTOM UI COMPONENTS (CARDS, BUTTONS, INPUTS)
+           COMPONENTS (CARDS, BUTTONS, INPUTS)
            -------------------------------------------------------------------------- */
-        
-        /* Public Stat Cards (สำหรับโชว์สถิติหน้าแรกให้ทุกคนเห็น) */
         .stat-card-public { 
             background: white; 
             border-radius: 20px; 
@@ -76,11 +98,13 @@
             box-shadow: 0 4px 15px rgba(126, 34, 206, 0.05); 
             transition: 0.3s; 
         }
+        
         .stat-card-public:hover { 
             border-color: #E9D5FF; 
             transform: translateY(-4px); 
             box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); 
         }
+        
         .stat-icon { 
             width: 48px; 
             height: 48px; 
@@ -92,7 +116,6 @@
             font-size: 1.4rem; 
         }
 
-        /* Product Catalog Cards */
         .product-card { 
             background: white; 
             border-radius: 24px; 
@@ -104,22 +127,61 @@
             transition: 0.4s; 
             cursor: pointer; 
         }
+        
         .product-card:hover { 
             border-color: #A855F7; 
             transform: translateY(-5px); 
             box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); 
         }
         
-        .img-box { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden; }
-        .img-box img { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 10px; opacity: 0; transition: opacity 0.8s ease-in-out; }
-        .img-box img.active { opacity: 1; }
+        .img-box { 
+            position: relative; 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            background: #FFF; 
+            overflow: hidden; 
+        }
         
-        /* Banner Slider */
-        .banner-slider { position: relative; overflow: hidden; border-radius: 24px; border: 2px solid #E9D5FF; background: #FFF; box-shadow: 0 4px 15px rgba(0,0,0,0.03); cursor: pointer; }
-        .banner-item { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; opacity: 0; transition: opacity 1.2s; }
-        .banner-item.active { opacity: 1; z-index: 1; }
+        .img-box img { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            padding: 10px; 
+            opacity: 0; 
+            transition: opacity 0.8s ease-in-out; 
+        }
+        
+        .img-box img.active { 
+            opacity: 1; 
+        }
+        
+        .banner-slider { 
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 24px; 
+            border: 2px solid #E9D5FF; 
+            background: #FFF; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            cursor: pointer; 
+        }
+        
+        .banner-item { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            top: 0; 
+            left: 0; 
+            opacity: 0; 
+            transition: opacity 1.2s; 
+        }
+        
+        .banner-item.active { 
+            opacity: 1; 
+            z-index: 1; 
+        }
 
-        /* Form Inputs */
         .input-pastel { 
             width: 100%; 
             border: 2.5px solid #E9D5FF; 
@@ -132,9 +194,12 @@
             color: #7E22CE; 
             font-weight: 500; 
         }
-        .input-pastel:focus { border-color: #A855F7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
         
-        /* Action Buttons */
+        .input-pastel:focus { 
+            border-color: #A855F7; 
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); 
+        }
+        
         .btn-pastel { 
             background: #A855F7; 
             color: white; 
@@ -147,9 +212,13 @@
             transition: 0.3s; 
             box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); 
         }
-        .btn-pastel:hover { background: #9333EA; transform: scale(1.02); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); }
         
-        /* Status Capsule (Small Minimal) */
+        .btn-pastel:hover { 
+            background: #9333EA; 
+            transform: scale(1.02); 
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); 
+        }
+        
         .status-capsule { 
             font-size: 0.75rem; 
             font-weight: 700; 
@@ -164,33 +233,136 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
         }
 
-        /* SweetAlert Override */
-        .swal2-popup { border-radius: 28px !important; border: 4px solid #E9D5FF !important; font-family: 'Prompt', sans-serif !important; }
-        .swal2-confirm { border-radius: 99px !important; background: #A855F7 !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important;}
-        .swal2-cancel { border-radius: 99px !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important;}
+        .swal2-popup { 
+            border-radius: 28px !important; 
+            border: 4px solid #E9D5FF !important; 
+            font-family: 'Prompt', sans-serif !important; 
+        }
+        
+        .swal2-confirm { 
+            border-radius: 99px !important; 
+            background: #A855F7 !important; 
+            padding: 12px 30px !important; 
+            font-weight: bold !important; 
+            outline: none !important; 
+            border: none !important;
+        }
+        
+        .swal2-cancel { 
+            border-radius: 99px !important; 
+            padding: 12px 30px !important; 
+            font-weight: bold !important; 
+            outline: none !important; 
+            border: none !important;
+        }
 
         /* --------------------------------------------------------------------------
-           ADMIN DASHBOARD STYLES
+           ADMIN DASHBOARD UI
            -------------------------------------------------------------------------- */
-        .admin-section { background: white; border-radius: 24px; border: 1.5px solid #E9D5FF; padding: 30px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .admin-header { font-size: 1.4rem; font-weight: 700; color: #7E22CE; margin-bottom: 20px; border-left: 5px solid #A855F7; padding-left: 15px; }
-        .admin-label { font-size: 0.8rem; font-weight: 600; color: #9333EA; margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        .admin-section { 
+            background: white; 
+            border-radius: 24px; 
+            border: 1.5px solid #E9D5FF; 
+            padding: 30px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02); 
+        }
         
-        .inp-admin { width: 100%; border: 1.5px solid #E9D5FF; border-radius: 12px; padding: 12px 15px; background: #FDF2F8; outline: none; transition: 0.2s; font-size: 0.95rem; color: #4A4A4A; font-family: 'Prompt', sans-serif; }
-        .inp-admin:focus { border-color: #A855F7; background: #FFF; box-shadow: 0 0 8px rgba(168, 85, 247, 0.15); }
+        .admin-header { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            color: #7E22CE; 
+            margin-bottom: 20px; 
+            border-left: 5px solid #A855F7; 
+            padding-left: 15px; 
+        }
         
-        .admin-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 0.9rem; }
-        .admin-table th { background: #FDF2F8; color: #7E22CE; padding: 15px; text-align: left; font-weight: 600; border-bottom: 2px solid #E9D5FF; }
-        .admin-table td { padding: 15px; background: white; border-top: 1px solid #E9D5FF; border-bottom: 1px solid #E9D5FF; }
-        .admin-table tr td:first-child { border-left: 1px solid #E9D5FF; border-radius: 12px 0 0 12px; }
-        .admin-table tr td:last-child { border-right: 1px solid #E9D5FF; border-radius: 0 12px 12px 0; }
+        .admin-label { 
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            color: #9333EA; 
+            margin-bottom: 6px; 
+            display: block; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
         
-        .ad-tab-btn { padding: 12px 25px; border-radius: 99px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.3s; background: white; color: #A855F7; border: 2px solid #E9D5FF; white-space: nowrap; }
-        .ad-tab-btn:hover { background: #FDF2F8; }
-        .ad-tab-btn.active { background: linear-gradient(135deg, #A855F7, #7E22CE); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); }
-
-        /* Block Overlay elements to ensure clickability */
-        .z-max { z-index: 9999; }
+        .inp-admin { 
+            width: 100%; 
+            border: 1.5px solid #E9D5FF; 
+            border-radius: 12px; 
+            padding: 12px 15px; 
+            background: #FDF2F8; 
+            outline: none; 
+            transition: 0.2s; 
+            font-size: 0.95rem; 
+            color: #4A4A4A; 
+            font-family: 'Prompt', sans-serif; 
+        }
+        
+        .inp-admin:focus { 
+            border-color: #A855F7; 
+            background: #FFF; 
+            box-shadow: 0 0 8px rgba(168, 85, 247, 0.15); 
+        }
+        
+        .admin-table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0 8px; 
+            font-size: 0.9rem; 
+        }
+        
+        .admin-table th { 
+            background: #FDF2F8; 
+            color: #7E22CE; 
+            padding: 15px; 
+            text-align: left; 
+            font-weight: 600; 
+            border-bottom: 2px solid #E9D5FF; 
+        }
+        
+        .admin-table td { 
+            padding: 15px; 
+            background: white; 
+            border-top: 1px solid #E9D5FF; 
+            border-bottom: 1px solid #E9D5FF; 
+            color: #4B5563; 
+        }
+        
+        .admin-table tr td:first-child { 
+            border-left: 1px solid #E9D5FF; 
+            border-radius: 12px 0 0 12px; 
+        }
+        
+        .admin-table tr td:last-child { 
+            border-right: 1px solid #E9D5FF; 
+            border-radius: 0 12px 12px 0; 
+        }
+        
+        .ad-tab-btn { 
+            padding: 12px 25px; 
+            border-radius: 99px; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            background: white; 
+            color: #A855F7; 
+            border: 2px solid #E9D5FF; 
+            white-space: nowrap; 
+        }
+        
+        .ad-tab-btn:hover { 
+            background: #FDF2F8; 
+        }
+        
+        .ad-tab-btn.active { 
+            background: linear-gradient(135deg, #A855F7, #7E22CE); 
+            color: white; 
+            border-color: transparent; 
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); 
+        }
     </style>
 </head>
 <body>
@@ -198,7 +370,7 @@
     <nav class="bg-white shadow-md sticky top-0 z-50 border-b-2 border-pMain">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
             
-            <div class="flex items-center gap-4 cursor-pointer group" onclick="executeNavigation('home')">
+            <div class="flex items-center gap-4 cursor-pointer group" onclick="navigatePage('home')">
                 <img id="uiLogo" src="" class="w-12 h-12 rounded-full border-2 border-pMain object-cover shadow-sm bg-white group-hover:rotate-6 smooth">
                 <div>
                     <h1 id="uiName" class="text-xl font-bold text-pDark tracking-tight leading-none">Loading...</h1>
@@ -213,11 +385,11 @@
                     <option value="la">ພາສາລາວ (LA)</option>
                 </select>
                 
-                <div id="uBadge" class="hidden font-bold text-pDark text-sm bg-pBg border-2 border-pMain px-4 py-1.5 rounded-full shadow-sm cursor-pointer hover:bg-pMain smooth" onclick="executeNavigation('inbox')">
+                <div id="uBadge" class="hidden font-bold text-pDark text-sm bg-pBg border-2 border-pMain px-4 py-1.5 rounded-full shadow-sm cursor-pointer hover:bg-pMain smooth" onclick="navigatePage('inbox')">
                     <i class="fa-solid fa-wallet mr-1 text-pBtn"></i> <span id="uBal">0.00</span>
                 </div>
 
-                <button type="button" class="text-pDark text-2xl hover:text-pBtn smooth p-2" onclick="toggleDropdownMenu()">
+                <button type="button" class="text-pDark text-2xl hover:text-pBtn smooth p-2" onclick="toggleSidebarMenu()">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </button>
             </div>
@@ -229,24 +401,24 @@
             </div>
             
             <div id="dynamicMenuArea">
-                <button type="button" onclick="executeNavigation('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span data-l="mHome">หน้าหลัก</span></button>
-                <button type="button" onclick="executeNavigation('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span data-l="mGames">เกมทั้งหมด</span></button>
-                <button type="button" onclick="executeNavigation('contact')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-address-book w-8 text-center text-pBtn"></i> <span data-l="mCont">ติดต่อเรา</span></button>
+                <button type="button" onclick="navigatePage('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span data-l="mHome">หน้าหลัก</span></button>
+                <button type="button" onclick="navigatePage('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span data-l="mGames">เกมทั้งหมด</span></button>
+                <button type="button" onclick="navigatePage('contact')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-address-book w-8 text-center text-pBtn"></i> <span data-l="mCont">ติดต่อเรา</span></button>
             </div>
             
             <div id="adminMenuArea" class="hidden border-t-2 border-pMain mt-2 pt-2 bg-purple-50">
-                <button type="button" onclick="executeNavigation('admin')" class="block w-full text-left px-8 py-4 hover:bg-pMain text-pDark font-bold smooth text-red-600"><i class="fa-solid fa-user-shield w-8 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
+                <button type="button" onclick="navigatePage('admin')" class="block w-full text-left px-8 py-4 hover:bg-pMain text-pDark font-bold smooth text-red-600"><i class="fa-solid fa-user-shield w-8 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
             </div>
 
             <div id="authMenuArea" class="border-t-2 border-pMain mt-2 pt-2">
-                <button type="button" onclick="executeNavigation('auth')" class="block w-full text-left px-8 py-4 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-8 text-center text-pBtn"></i> <span data-l="mLogin">เข้าสู่ระบบ / สมัคร</span></button>
+                <button type="button" id="btnAuthNav" onclick="navigatePage('auth')" class="block w-full text-left px-8 py-4 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-8 text-center text-pBtn"></i> <span data-l="mLogin">เข้าสู่ระบบ / สมัคร</span></button>
             </div>
         </div>
     </nav>
 
     <div class="marquee-container shadow-inner">
         <div class="marquee-content" id="uiMarq">
-            <i class="fa-solid fa-bullhorn mr-3"></i> <span data-l="alertWait">กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล...</span>
+            <i class="fa-solid fa-bullhorn mr-3"></i> <span data-l="alertWait">ระบบกำลังตรวจสอบข้อมูล...</span>
         </div>
     </div>
     
@@ -298,7 +470,7 @@
             <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
                 <div class="col-span-full text-center py-20 text-pDark opacity-50">
                     <i class="fa-solid fa-spinner fa-spin text-5xl mb-4"></i>
-                    <p class="font-bold tracking-widest">กำลังดึงข้อมูลฐานข้อมูล...</p>
+                    <p class="font-bold tracking-widest">กำลังเชื่อมต่อฐานข้อมูล...</p>
                 </div>
             </div>
             
@@ -333,14 +505,14 @@
                 <div id="fLog">
                     <div class="space-y-6">
                         <div>
-                            <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest">Username / Email</label>
+                            <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest">Username or Email</label>
                             <input type="text" id="lUser" class="input-pastel shadow-sm" data-p="phUidMail" placeholder="UserID หรือ Email" required>
                         </div>
                         <div>
                             <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest">Password</label>
                             <input type="password" id="lPass" class="input-pastel shadow-sm" data-p="phPass" placeholder="รหัสผ่าน" required>
                         </div>
-                        <button type="button" onclick="triggerAuthProcess('login')" class="btn-pastel w-full text-xl mt-6 shadow-xl">
+                        <button type="button" onclick="executeAuthentication('login')" class="btn-pastel w-full text-xl mt-6 shadow-xl">
                             <span data-l="btnLog">เข้าสู่ระบบ</span> <i class="fa-solid fa-circle-arrow-right ml-2"></i>
                         </button>
                     </div>
@@ -356,7 +528,9 @@
                         <input type="email" id="rMail" class="input-pastel" data-p="phMail" placeholder="อีเมลของคุณ">
                         <input type="password" id="rPass" class="input-pastel" data-p="phPass2" placeholder="ตั้งรหัสผ่าน">
                         <input type="password" id="rPass2" class="input-pastel" data-p="phPass3" placeholder="ยืนยันรหัสผ่าน">
-                        <button type="button" onclick="triggerAuthProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิก</span></button>
+                        <button type="button" onclick="executeAuthentication('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl">
+                            <i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิก</span>
+                        </button>
                     </div>
                     <div class="text-center mt-8 border-t border-pMain pt-6">
                         <button type="button" class="text-gray-500 font-bold hover:text-pDark smooth" onclick="switchAuthView('log')" data-l="hasAcc">มีบัญชีอยู่แล้ว? เข้าสู่ระบบเลย</button>
@@ -397,7 +571,7 @@
                     <input type="file" id="tFile" accept="image/*" class="hidden">
                 </label>
                 
-                <button type="button" onclick="submitTopupTransaction()" id="btnSubmitTopup" class="btn-pastel w-full text-2xl py-5 shadow-xl font-bold"><i class="fa-solid fa-paper-plane mr-2"></i> <span data-l="btnTopup">ยืนยันการแจ้งโอน</span></button>
+                <button type="button" onclick="submitTopupTransaction()" class="btn-pastel w-full text-2xl py-5 shadow-xl font-bold"><i class="fa-solid fa-paper-plane mr-2"></i> <span data-l="btnTopup">ยืนยันการแจ้งโอน</span></button>
             </div>
         </section>
 
@@ -526,63 +700,110 @@
     </footer>
 
     <script>
-        // 🔴🔴🔴 API URL: ตรวจสอบและใส่ URL ของคุณให้ถูกต้องที่นี่ 🔴🔴🔴
+        // 🔴🔴🔴 API URL: โปรดนำ URL จาก Google Apps Script ของคุณมาใส่ 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbxXYEwOAYFjx5DA4tDshg_N0vEdwr8gd9keNTOWfaCyTiY_7JkUzC_9qehsL60Hg36l0g/exec';
         
         /**
-         * Global App State Object
-         * บริหารจัดการข้อมูลภายในเว็บไซต์ (Single Source of Truth)
+         * Global App State (Single Source of Truth)
          */
         const AppState = { 
-            sys: {},         // ข้อมูลตั้งค่า
-            prods: [],       // ข้อมูลสินค้า
-            wrks: [],        // ข้อมูลพอร์ตฟอลิโอ
-            history: [],     // ประวัติประกาศล่าสุด
-            stats: null,     // สถิติ Public Stats สำหรับหน้าแรก
-            u: null,         // ข้อมูลลูกค้าที่ล็อกอิน
-            inb: [],         // ข้อความแจ้งเตือนส่วนตัว
-            uOrd: [],        // ประวัติการสั่งซื้อส่วนตัว
-            adm: null,       // ข้อมูลเฉพาะแอดมิน
-            busy: false,     // ล็อกระบบระหว่างประมวลผลป้องกันกดรัว
-            pay: 'bank',     // สถานะช่องทางการชำระเงินที่เลือก
-            curCat: 'all',   // หมวดหมู่สินค้าที่เลือก
-            lang: localStorage.getItem('ks_lang') || 'th' // ภาษาของระบบ
+            sys: {},         // Settings Database
+            prods: [],       // Products Database
+            wrks: [],        // Works Database
+            history: [],     // Marquee Orders
+            stats: null,     // Public Stats for Homepage
+            u: null,         // Current Logged In User
+            inb: [],         // User Notification Inbox
+            uOrd: [],        // User Orders History
+            adm: null,       // Admin Detailed Data
+            busy: false,     // Fetch Lock to prevent spam
+            pay: 'bank',     // Payment Method State
+            curCat: 'all',   // Category Filter State
+            lang: localStorage.getItem('ks_lang') || 'th' // App Language
         };
 
+        const LangDict = {
+            th: {
+                stUsr:'ผู้ใช้ทั้งหมด', stOrd:'จำนวนออเดอร์', stTop:'ยอดเติมเงินสะสม', stSal:'ยอดขายสำเร็จ',
+                mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ / สมัคร',
+                hRec:'บริการแนะนำ', catAll:'หมวดหมู่ทั้งหมด', hAll:'เกมและบริการทั้งหมด', hCont:'ช่องทางการติดต่อ', hLog:'เข้าสู่ระบบ', hReg:'สมัครสมาชิก',
+                hTop:'เติมเงิน (ยอดเข้าออโต้)', hInb:'แจ้งเตือน', hWork:'ตัวอย่างงานป้าย', bBank:'ธนาคาร', bTrue:'วอเลท', bInter:'ตปท.',
+                phUidMail:'UserID หรือ Email', phPass:'รหัสผ่าน', phUid:'ตั้งชื่อ UserID', phMail:'อีเมลของคุณ', phPass2:'ตั้งรหัสผ่าน', phPass3:'ยืนยันรหัสผ่าน',
+                phAmt:'จำนวนเงิน (ทศนิยมได้)', phRef:'รหัสอ้างอิง 6 ตัวท้าย', txtUpload:'คลิกแนบสลิปโอนเงิน', btnTopup:'ยืนยันการแจ้งโอน',
+                btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิกใหม่', noAcc:'ไม่มีบัญชี? สมัครสมาชิก', hasAcc:'มีบัญชีแล้ว? เข้าระบบ',
+                out:'ออกจากระบบ', adm:'จัดการหลังบ้าน', stOpen:'เปิดให้บริการปกติค่ะ', stClose:'ปิดให้บริการชั่วคราวค่ะ',
+                thTime:'เวลา', thOrder:'ออเดอร์', thProd:'สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', noData:'ไม่มีข้อมูลค่ะ',
+                alertWait:'ระบบกำลังประมวลผล...', alertOk:'สำเร็จแล้วค่ะ!', alertErr:'เกิดข้อผิดพลาด', btnAck:'ตกลง',
+                btnBuy:'สั่งเติมเกม', btnCancel:'ยกเลิก', tBuy:'ยืนยันการสั่งซื้อ', tPrc:'ราคาแพ็กเกจ', tBal:'ยอดเงินคงเหลือ', tUid:'กรอกข้อมูล UID เกม', mMenu:'เมนู'
+            },
+            en: {
+                stUsr:'Total Users', stOrd:'Total Orders', stTop:'Total Topups', stSal:'Total Sales',
+                mHome:'Home', mGames:'All Games', mTopup:'Topup', mInbox:'Inbox', mHist:'History', mCont:'Contact Us', mLogin:'Sign In / Up',
+                hRec:'Featured Services', catAll:'All Categories', hAll:'Game Topups', hCont:'Contact Channels', hLog:'Sign In', hReg:'Sign Up',
+                hTop:'Topup Wallet (Auto)', hInb:'Notifications', hWork:'Showcase', bBank:'Bank Transfer', bTrue:'E-Wallet', bInter:'Global',
+                phUidMail:'UserID or Email', phPass:'Password', phUid:'Set Username', phMail:'Your Email', phPass2:'Set Password', phPass3:'Confirm Password',
+                phAmt:'Amount', phRef:'Ref Code (Last 6)', txtUpload:'Upload transfer slip', btnTopup:'Submit Topup',
+                btnLog:'Login', btnReg:'Register Now', noAcc:'No account? Register', hasAcc:'Have account? Sign in',
+                out:'Logout', adm:'Admin Panel', stOpen:'Store is Open', stClose:'Temporarily Closed',
+                thTime:'Time', thOrder:'Order ID', thProd:'Item', thStat:'Status', statWait:'Pending', statDone:'Success', noData:'No Data Available',
+                alertWait:'Processing...', alertOk:'Success!', alertErr:'Something went wrong', btnAck:'OK',
+                btnBuy:'Buy Now', btnCancel:'Cancel', tBuy:'Confirm Order', tPrc:'Price', tBal:'Balance', tUid:'Enter Game UID', mMenu:'Menu'
+            },
+            la: {
+                stUsr:'ຜູ້ໃຊ້ທັງໝົດ', stOrd:'ຈຳນວນອໍເດີ', stTop:'ຍອດຕື່ມເງິນສະສົມ', stSal:'ຍອດຂາຍສຳເລັດ',
+                mHome:'ໜ້າຫຼັກ', mGames:'ເກມທັງໝົດ', mTopup:'ຕື່ມເງິນ', mInbox:'ກ່ອງຂໍ້ຄວາມ', mHist:'ປະຫວັດສັ່ງຊື້', mCont:'ຕິດຕໍ່ພວກເຮົາ', mLogin:'ເຂົ້າສູ່ລະບົບ / ສະໝັກ',
+                hRec:'ບໍລິການແນະນຳ', catAll:'ໝວດໝູ່ທັງໝົດ', hAll:'ເກມແລະບໍລິການທັງໝົດ', hCont:'ຊ່ອງທາງການຕິດຕໍ່', hLog:'ເຂົ້າສູ່ລະບົບ', hReg:'ສະໝັກສະມາຊິກ',
+                hTop:'ຕື່ມເງິນ (ອັດຕະໂນມັດ)', hInb:'ແຈ້ງເຕືອນ', hWork:'ຕົວຢ່າງງານປ້າຍ', bBank:'ທະນາຄານ', bTrue:'ວໍເລັດ', bInter:'ຕປທ.',
+                phUidMail:'UserID ຫລື Email', phPass:'ລະຫັດຜ່ານ', phUid:'ຕັ້ງຊື່ UserID', phMail:'ອີເມວຂອງທ່ານ', phPass2:'ຕັ້ງລະຫັດຜ່ານ', phPass3:'ຢືນຢັນລະຫັດຜ່ານ',
+                phAmt:'ຈຳນວນເງິນ', phRef:'6 ຕົວທ້າຍສະລິບ', txtUpload:'ກົດເພື່ອແນບສະລິບ', btnTopup:'ແຈ້ງໂອນເງິນ',
+                btnLog:'ເຂົ້າສູ່ລະບົບ', btnReg:'ສະໝັກສະມາຊິກ', noAcc:'ຍັງບໍ່ມີບັນຊີ? ສະໝັກ', hasAcc:'ມີບັນຊີແລ້ວ? ເຂົ້າລະບົບ',
+                out:'ອອກຈາກລະບົບ', adm:'ລະບົບແອັດມິນ', stOpen:'ເປີດໃຫ້ບໍລິການປົກກະຕິ', stClose:'ປິດໃຫ້ບໍລິການຊົ່ວຄາວ',
+                thTime:'ເວລາ', thOrder:'ອໍເດີ', thProd:'ເກມ/ສິນຄ້າ', thStat:'ສະຖານະ', statWait:'ລໍຖ້າ', statDone:'ສຳເລັດ', noData:'ບໍ່ມີຂໍ້ມູນ',
+                alertWait:'ລໍຖ້າຈັກຄາວ...', alertOk:'ສຳເລັດແລ້ວ!', alertErr:'ຜິດພາດ', btnAck:'ຕົກລົງ',
+                btnBuy:'ສັ່ງຊື້ເລີຍ', btnCancel:'ຍົກເລີກ', tBuy:'ຢືນຢັນສັ່ງຊື້', tPrc:'ລາຄາ', tBal:'ຍອດເງິນ', tUid:'ກະລຸນາໃສ່ UID ເກມ', mMenu:'ເມນູ'
+            }
+        };
+
+        const translator = (key) => LangDict[AppState.lang][key] || key;
+
         /**
-         * 1. Navigation & Route Guard (ระบบป้องกันหน้าเว็บสำคัญ)
+         * 1. Navigation Flow & Protection
          */
-        function executeNavigation(targetPageId) {
-            const isUserLoggedIn = !!AppState.u;
-            const protectedRoutes = ['topup', 'inbox', 'history', 'admin'];
+        function requireAuthValidation(targetId) {
+            const loggedIn = !!AppState.u;
+            const protectedZones = ['topup', 'inbox', 'history', 'admin'];
             
-            // ป้องกันเส้นทาง หากผู้ใช้พยายามเข้าเมนูที่ต้อง Login
-            if (protectedRoutes.includes(targetPageId) && !isUserLoggedIn) {
+            // ถ้าพยายามเข้าหน้าสงวนสิทธิ์แต่ยังไม่ล็อกอิน ให้ดีดไปหน้า Auth
+            if (protectedZones.includes(targetId) && !loggedIn) {
                 Swal.fire({
                     icon: 'warning', 
-                    title: 'จำกัดการเข้าถึง', 
+                    title: 'ขออภัยค่ะ', 
                     text: 'กรุณาเข้าสู่ระบบหรือสมัครสมาชิกก่อนเข้าใช้งานเมนูนี้นะคะ',
-                    confirmButtonText: 'รับทราบค่ะ'
+                    confirmButtonText: 'รับทราบ'
                 });
-                return; // หยุดการทำงาน ไม่เปลี่ยนหน้า
+                return 'auth'; 
             }
             
-            // ป้องกันไม่ใช่ Admin เข้าสู่หลังบ้าน
-            if (targetPageId === 'admin' && (!isUserLoggedIn || AppState.u.role !== 'admin')) {
-                Swal.fire({icon: 'error', title: 'ไม่อนุญาต', text: 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้ค่ะ'});
-                return;
+            // ตรวจสอบสิทธิ์แอดมิน
+            if (targetId === 'admin' && (!loggedIn || AppState.u.role !== 'admin')) {
+                Swal.fire({icon: 'error', title: 'ไม่อนุญาต', text: 'หน้านี้สงวนสิทธิ์เฉพาะผู้ดูแลระบบค่ะ'});
+                return 'home';
             }
 
-            // หากผ่านด่านแล้ว ให้เปลี่ยนหน้า
+            return targetId;
+        }
+
+        function navigatePage(id) {
+            const safeId = requireAuthValidation(id);
+
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-            const targetElement = document.getElementById(`p-${targetPageId}`);
-            if(targetElement) targetElement.classList.add('active');
+            const targetNode = document.getElementById(`p-${safeId}`);
+            if(targetNode) targetNode.classList.add('active');
             
             document.getElementById('mainMenu').classList.add('hidden');
             window.scrollTo({top: 0, behavior: 'smooth'});
             
-            // ถ้าเข้าหน้าแอดมิน ให้วาดข้อมูลใหม่
-            if(targetPageId === 'admin') renderAdminDashboard(true);
+            if(safeId === 'admin') renderAdminDashboard(true);
         }
 
         function toggleSidebarMenu() {
@@ -590,45 +811,70 @@
         }
 
         /**
-         * 2. Protected API Communication Engine
-         * ใช้ text/plain ป้องกันปัญหา CORS Request ของ Google Apps Script
+         * 2. Translation Manager
+         */
+        function chgLang() {
+            AppState.lang = document.getElementById('lang').value;
+            localStorage.setItem('ks_lang', AppState.lang);
+            applyLanguageToDOM();
+            fetchSystemDataSilently(true, false); 
+        }
+
+        function applyLanguageToDOM() {
+            document.querySelectorAll('[data-l]').forEach(el => el.innerText = translator(el.getAttribute('data-l')));
+            document.querySelectorAll('[data-p]').forEach(el => el.placeholder = translator(el.getAttribute('data-p')));
+            renderDynamicSidebarMenu(); // วาดเมนูใหม่ตามภาษา
+        }
+
+        function renderDynamicSidebarMenu() {
+            const menuArea = document.getElementById('dynamicMenuArea');
+            let html = '';
+            
+            html += `<button type="button" onclick="navigatePage('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span data-l="mHome">${translator('mHome')}</span></button>`;
+            html += `<button type="button" onclick="navigatePage('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span data-l="mGames">${translator('mGames')}</span></button>`;
+            
+            // เมนูที่ต้องการ Login ถึงจะเห็น
+            if (AppState.u) {
+                html += `<button type="button" onclick="navigatePage('topup')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-wallet w-8 text-center text-pBtn"></i> <span data-l="mTopup">${translator('mTopup')}</span></button>`;
+                html += `<button type="button" onclick="navigatePage('inbox')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-envelope w-8 text-center text-pBtn"></i> <span data-l="mInbox">${translator('mInbox')}</span></button>`;
+                html += `<button type="button" onclick="navigatePage('history')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-clock-rotate-left w-8 text-center text-pBtn"></i> <span data-l="mHist">${translator('mHist')}</span></button>`;
+            }
+            
+            html += `<button type="button" onclick="navigatePage('contact')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-address-book w-8 text-center text-pBtn"></i> <span data-l="mCont">${translator('mCont')}</span></button>`;
+            
+            menuArea.innerHTML = html;
+        }
+
+        /**
+         * 3. API Communication Setup (Strict Mode)
+         * บังคับใช้ text/plain เพื่อป้องกันเบราว์เซอร์บล็อกคำสั่ง (CORS)
          */
         async function transmitToAPI(action, payload) {
-            if (AppState.busy) {
-                console.warn("API is busy. Request blocked.");
-                return null;
-            }
+            if (AppState.busy) return null;
             AppState.busy = true;
-            
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
-                    body: JSON.stringify({ action: action, payload: payload }),
+                    body: JSON.stringify({ action, payload }),
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    redirect: 'follow' // จำเป็นมากสำหรับ Google Apps Script
+                    redirect: 'follow'
                 });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP Error: ${response.status}`);
-                }
-                
+                if (!response.ok) throw new Error("HTTP Status Error");
                 const jsonResponse = await response.json();
                 AppState.busy = false;
                 return jsonResponse;
-                
             } catch (err) {
                 AppState.busy = false;
-                console.error("API Transmission Failed Critical Error:", err);
-                Swal.close(); // ปิดโหลดดิ้งถ้าค้าง
-                return { status: 'error', message: 'ไม่สามารถติดต่อเซิร์ฟเวอร์ฐานข้อมูลได้' };
+                console.error("API Error:", err);
+                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ตหรือ URL' };
             }
         }
 
         /**
-         * 3. Background Sync System (Polling 3s)
+         * 4. System Initialization & Polling
          */
         async function fetchSystemDataSilently(isSilent = false, updateAdminForms = false) {
-            // ไม่ล็อก AppState.busy เพื่อให้ Background Task ทำงานอิสระ
+            AppState.busy = false; // ปลดล็อกเพื่อให้ Polling ทำงานเป็น Background
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -638,7 +884,6 @@
                 });
                 
                 if (!response.ok) throw new Error("API Offline");
-                
                 const res = await response.json();
                 
                 if (res && res.status === 'success') {
@@ -646,7 +891,7 @@
                     AppState.prods = res.products;
                     AppState.wrks = res.works;
                     AppState.history = res.history;
-                    AppState.stats = res.stats; 
+                    AppState.stats = res.stats; // Public Stats from Backend
                     
                     if (res.user) {
                         AppState.u = res.user;
@@ -660,23 +905,20 @@
                 }
             } catch (error) {
                 console.error("Silent Fetch Failed", error);
-                if (!isSilent) {
-                    Swal.fire('เชื่อมต่อล้มเหลว', 'เกิดปัญหาในการดึงข้อมูล กรุณาตรวจสอบลิงก์ Web App API', 'error');
-                }
+                if (!isSilent) Swal.fire('Error', 'ไม่สามารถดึงข้อมูลจากระบบหลังบ้านได้', 'error');
             }
         }
 
         /**
-         * 4. UI Rendering System (Core DOM Manipulator)
+         * 5. UI Rendering & DOM Manipulation
          */
         function renderDOMEngine(isSilent, updateForms) {
-            // Title & Meta
             document.title = AppState.sys.storeName + " | Store";
             document.getElementById('favicon').href = AppState.sys.logo;
             document.getElementById('uiLogo').src = AppState.sys.logo;
             document.getElementById('uiName').innerText = AppState.sys.storeName;
 
-            // 🌟 Render Public Statistics (ทุกคนเห็น)
+            // 🌟 PUBLIC STATS 🌟 (หน้าแรกให้ทุกคนเห็น)
             if(AppState.stats) {
                 document.getElementById('pubUsers').innerText = AppState.stats.usersCount || 0;
                 document.getElementById('pubOrders').innerText = AppState.stats.ordersCount || 0;
@@ -684,54 +926,53 @@
                 document.getElementById('pubSales').innerText = '฿' + parseFloat(AppState.stats.salesAmount || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
             }
 
-            // Hero Banner Slider
+            // Banner Mechanism
             const bannerElement = document.getElementById('bannerContainer');
             if (AppState.sys.banner) {
                 bannerElement.classList.remove('hidden');
                 const imagesList = AppState.sys.banner.split(',').map(s => s.trim());
                 bannerElement.innerHTML = imagesList.map((url, i) => `<img src="${url}" class="banner-item ${i === 0 ? 'active' : ''}">`).join('');
             } else {
-                bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=Kataiy+Store" class="banner-item active">`;
+                bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=Premium+Store" class="banner-item active">`;
             }
 
-            // Marquee Information Bar
+            // Marquee
             const marqueeBlock = document.getElementById('uiMarq');
             const noticeText = AppState.sys.announcement || '';
-            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join('  ★  ') : 'ระบบพร้อมให้บริการ 100%';
+            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join('  ★  ') : 'ระบบพร้อมให้บริการแล้ว 100%';
             marqueeBlock.innerHTML = `<i class="fa-solid fa-bullhorn mr-3 text-pDark"></i> ${noticeText} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa-solid fa-shield-heart mr-2 text-pDark"></i> ${historyFeed}`;
 
-            // Small Capsule Status Badge
+            // Status Capsule
             const stBox = document.getElementById('uiStatus');
             stBox.style.display = 'block';
             if (AppState.sys.isOpen === 'true') {
                 stBox.className = 'status-capsule text-pDark bg-white shadow-sm';
-                stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> ${t('stOpen')}`;
+                stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> ${translator('stOpen')}`;
             } else {
                 stBox.className = 'status-capsule text-white bg-red-400 shadow-sm border-none';
-                stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-white rounded-full"></span> ${t('stClose')}`;
+                stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-white rounded-full"></span> ${translator('stClose')}`;
             }
 
-            // Authentication Interface Rendering
+            // User Identity & Menus
             if (AppState.u) {
-                // Logged In State
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('uId').innerText = AppState.u.userId;
+                
+                document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="out()" class="block w-full text-left px-8 py-4 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-8 text-center text-red-400"></i> ${translator('out')}</button>`;
+                document.getElementById('fLog').innerHTML = `<button type="button" onclick="out()" class="btn-pastel !bg-red-400 w-full text-xl mt-6 shadow-sm"><i class="fa-solid fa-power-off mr-2"></i> ${translator('out')}</button>`;
                 
                 if(AppState.u.role === 'admin') {
                     document.getElementById('adminMenuArea').classList.remove('hidden');
                     if (document.getElementById('p-admin').classList.contains('active')) renderAdminDashboard(updateForms);
                 }
             } else {
-                // Logged Out State
                 document.getElementById('uBadge').classList.add('hidden');
                 document.getElementById('adminMenuArea').classList.add('hidden');
+                document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="navigatePage('auth')" class="block w-full text-left px-8 py-4 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-8 text-center text-pBtn"></i> ${translator('mLogin')}</button>`;
             }
 
-            // Dynamic Sub-menus
             renderDynamicSidebarMenu();
-            
-            // Sub-systems
             renderProductCatalog();
             renderGamesListing();
             renderPortfolioGallery();
@@ -740,51 +981,20 @@
             applyLanguageToDOM();
         }
 
-        /**
-         * Dynamic Sidebar Builder
-         * วาดเมนูซ่อนตามสิทธิ์การล็อกอิน (ซ่อนปุ่มเติมเงินจากคนไม่ล็อกอิน)
-         */
-        function renderDynamicSidebarMenu() {
-            const menuArea = document.getElementById('dynamicMenuArea');
-            let html = '';
-            
-            html += `<button type="button" onclick="executeNavigation('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span data-l="mHome">${t('mHome')}</span></button>`;
-            html += `<button type="button" onclick="executeNavigation('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span data-l="mGames">${t('mGames')}</span></button>`;
-            
-            // Show protected routes ONLY if user is logged in
-            if (AppState.u) {
-                html += `<button type="button" onclick="executeNavigation('topup')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-wallet w-8 text-center text-pBtn"></i> <span data-l="mTopup">${t('mTopup')}</span></button>`;
-                html += `<button type="button" onclick="executeNavigation('inbox')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-envelope w-8 text-center text-pBtn"></i> <span data-l="mInbox">${t('mInbox')}</span></button>`;
-                html += `<button type="button" onclick="executeNavigation('history')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-clock-rotate-left w-8 text-center text-pBtn"></i> <span data-l="mHist">${t('mHist')}</span></button>`;
-            }
-            
-            html += `<button type="button" onclick="executeNavigation('contact')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-address-book w-8 text-center text-pBtn"></i> <span data-l="mCont">${t('mCont')}</span></button>`;
-            
-            menuArea.innerHTML = html;
-
-            // Auth Button Switch
-            if (AppState.u) {
-                document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="out()" class="block w-full text-left px-8 py-4 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-8 text-center text-red-400"></i> ${t('out')}</button>`;
-            } else {
-                document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="executeNavigation('auth')" class="block w-full text-left px-8 py-4 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-8 text-center text-pBtn"></i> ${t('mLogin')}</button>`;
-            }
-        }
-
         function renderProductCatalog() {
             const productContainer = document.getElementById('prodsArea');
             const selectedFilter = document.getElementById('catFilter').value;
             
-            // Sync Category Dropdown
             const filterDropdown = document.getElementById('catFilter');
             const allCategories = [...new Set(AppState.prods.map(p => p.category))];
             const memoryVal = filterDropdown.value;
-            filterDropdown.innerHTML = `<option value="all">${t('catAll')}</option>` + allCategories.sort().map(c => `<option value="${c}">${c}</option>`).join('');
+            filterDropdown.innerHTML = `<option value="all">${translator('catAll')}</option>` + allCategories.sort().map(c => `<option value="${c}">${c}</option>`).join('');
             filterDropdown.value = memoryVal;
 
             let displayPool = AppState.prods.filter(p => selectedFilter === 'all' || p.category === selectedFilter);
             
             if (displayPool.length === 0) {
-                productContainer.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest">${t('noData')}</div>`;
+                productContainer.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest">${translator('noData')}</div>`;
                 return;
             }
 
@@ -794,7 +1004,7 @@
                 const discountHTML = p.discount > 0 ? `<span class="absolute top-4 right-4 bg-red-500 text-white text-[0.65rem] font-extrabold px-3 py-1 rounded-full z-10 shadow-lg">-${p.discount}%</span>` : '';
                 
                 return `
-                <div class="product-card animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                <div class="product-card cursor-pointer animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                     <div class="img-box">${discountHTML}${imgHtml}</div>
                     <div class="p-5 flex-1 flex flex-col justify-between text-center bg-white">
                         <div>
@@ -831,7 +1041,7 @@
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         ${catMap[catName].map(p => `
-                            <div class="product-card group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                            <div class="product-card cursor-pointer group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                                 <div class="img-box bg-pBg border-b border-pMain"><img src="${p.images.split(',')[0].trim()}" class="slider-image active group-hover:scale-110 smooth"></div>
                                 <div class="p-4 text-center">
                                     <h4 class="font-bold text-gray-800 text-xs mb-2 line-clamp-1">${p.name}</h4>
@@ -842,7 +1052,7 @@
                     </div>
                 </div>`;
             }
-            container.innerHTML = finalHTML || `<div class="text-center py-10 text-gray-400 font-bold">${t('noData')}</div>`;
+            container.innerHTML = finalHTML || `<div class="text-center py-10 text-gray-400 font-bold">${translator('noData')}</div>`;
         }
 
         function renderPortfolioGallery() {
@@ -866,7 +1076,7 @@
         function renderUserPersonalData() {
             if (!AppState.u) return;
             const notifBox = document.getElementById('inboxArea');
-            notifBox.innerHTML = AppState.inb.length === 0 ? `<div class="text-center py-10 text-gray-400 font-medium">${t('noData')}</div>` : AppState.inb.map(msg => `
+            notifBox.innerHTML = AppState.inb.length === 0 ? `<div class="text-center py-10 text-gray-400 font-medium">${translator('noData')}</div>` : AppState.inb.map(msg => `
                 <div class="bg-pBg p-5 rounded-3xl border-l-8 border-pBtn shadow-sm animate-pageFadeIn">
                     <p class="text-[0.65rem] font-bold text-pDark mb-1 uppercase tracking-widest opacity-70"><i class="fa-solid fa-clock mr-1"></i> ${new Date(msg.time).toLocaleString('th-TH')}</p>
                     <p class="font-bold text-gray-700 text-sm leading-relaxed">${msg.msg}</p>
@@ -874,7 +1084,7 @@
             `).join('');
 
             const historyTbl = document.getElementById('uOrderList');
-            historyTbl.innerHTML = `<tr><th>${t('thTime')}</th><th>${t('thOrder')}</th><th>${t('thProd')}</th><th>${t('thStat')}</th></tr>` + 
+            historyTbl.innerHTML = `<tr><th>${translator('thTime')}</th><th>${translator('thOrder')}</th><th>${translator('thProd')}</th><th>${translator('thStat')}</th></tr>` + 
                 AppState.uOrd.map(o => `
                 <tr>
                     <td class="whitespace-nowrap font-medium text-gray-500">${new Date(o.time).toLocaleDateString('th-TH')}</td>
@@ -882,7 +1092,7 @@
                     <td class="font-bold text-pDark">${o.prod}</td>
                     <td>
                         <span class="px-4 py-1.5 rounded-full text-[0.65rem] font-extrabold shadow-sm ${o.stat === 'Pending' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}">
-                            ${o.stat === 'Pending' ? t('statWait') : t('statDone')}
+                            ${o.stat === 'Pending' ? translator('statWait') : translator('statDone')}
                         </span>
                     </td>
                 </tr>
@@ -895,61 +1105,50 @@
             if (AppState.sys.contactFB) content += `<a href="${AppState.sys.contactFB}" target="_blank" class="flex items-center justify-center gap-4 bg-pBg p-5 rounded-3xl smooth hover:bg-pMain text-pDark font-bold border-2 border-pMain shadow-sm"><i class="fa-brands fa-facebook-f w-6 text-2xl"></i> FACEBOOK OFFICIAL</a>`;
             if (AppState.sys.contactLine) content += `<a href="${AppState.sys.contactLine}" target="_blank" class="flex items-center justify-center gap-4 bg-green-50 p-5 rounded-3xl smooth hover:bg-green-100 text-green-600 font-bold border-2 border-green-200 shadow-sm"><i class="fa-brands fa-line w-6 text-2xl"></i> LINE OFFICIAL</a>`;
             if (AppState.sys.contactPhone) content += `<a href="tel:${AppState.sys.contactPhone}" class="flex items-center justify-center gap-4 bg-pBg p-5 rounded-3xl smooth hover:bg-pMain text-pDark font-bold border-2 border-pMain shadow-sm"><i class="fa-solid fa-phone-volume w-6 text-2xl"></i> ${AppState.sys.contactPhone}</a>`;
-            listArea.innerHTML = content || `<div class="text-gray-400 font-medium">${t('noData')}</div>`;
+            listArea.innerHTML = content || `<div class="text-gray-400 font-medium">${translator('noData')}</div>`;
         }
 
         /**
-         * 5. User Authentication Logic (Fixed & Guaranteed)
+         * 6. User Authentication Engine (Fixed & Tested)
          */
         function switchAuthView(mode) {
             document.getElementById('fLog').classList.toggle('hidden', mode !== 'log');
             document.getElementById('fReg').classList.toggle('hidden', mode !== 'reg');
-            document.getElementById('authTitle').innerHTML = mode === 'log' ? `<i class="fa-solid fa-user-lock mr-2 text-pBtn"></i> ${t('hLog')}` : `<i class="fa-solid fa-user-plus mr-2 text-pBtn"></i> ${t('hReg')}`;
+            document.getElementById('authTitle').innerHTML = mode === 'log' ? `<i class="fa-solid fa-user-lock mr-2 text-pBtn"></i> ${translator('hLog')}` : `<i class="fa-solid fa-user-plus mr-2 text-pBtn"></i> ${translator('hReg')}`;
         }
 
         async function executeAuthentication(actionType) {
-            Swal.fire({ title: t('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
+            Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
             
-            let dataset = {};
+            let payloadData = {};
             if (actionType === 'login') {
-                dataset = { 
-                    idOrEmail: document.getElementById('lUser').value.trim(), 
-                    password: document.getElementById('lPass').value.trim() 
-                };
-                if (!dataset.idOrEmail || !dataset.password) { 
-                    Swal.fire('ข้อมูลไม่ครบ', 'กรุณากรอกข้อมูลให้ครบถ้วนเพื่อเข้าสู่ระบบค่ะ', 'warning'); 
-                    return; 
-                }
+                const uId = document.getElementById('lUser').value.trim();
+                const uPw = document.getElementById('lPass').value.trim();
+                if (!uId || !uPw) { Swal.fire('ข้อมูลไม่ครบ', 'กรุณากรอกไอดีและรหัสผ่านให้ครบค่ะ', 'warning'); return; }
+                payloadData = { idOrEmail: uId, password: uPw };
             } else {
-                dataset = { 
-                    userId: document.getElementById('rUid').value.trim(), 
-                    email: document.getElementById('rMail').value.trim(), 
-                    password: document.getElementById('rPass').value.trim() 
-                };
-                const confPass = document.getElementById('rPass2').value.trim();
-                if (!dataset.userId || !dataset.email || !dataset.password) { 
-                    Swal.fire('ข้อมูลไม่ครบ', 'กรุณากรอกข้อมูลในฟอร์มสมัครสมาชิกให้ครบถ้วนนะคะ', 'warning'); 
-                    return; 
-                }
-                if (dataset.password !== confPass) { 
-                    Swal.fire('รหัสผ่านไม่ตรง', 'รหัสผ่านยืนยันไม่ตรงกันค่ะ รบกวนพิมพ์ใหม่อีกครั้ง', 'error'); 
-                    return; 
-                }
+                const nUid = document.getElementById('rUid').value.trim();
+                const nEmail = document.getElementById('rMail').value.trim();
+                const nPw = document.getElementById('rPass').value.trim();
+                const nPw2 = document.getElementById('rPass2').value.trim();
+                
+                if (!nUid || !nEmail || !nPw) { Swal.fire('ข้อมูลไม่ครบ', 'กรุณากรอกฟอร์มให้ครบถ้วน', 'warning'); return; }
+                if (nPw !== nPw2) { Swal.fire('รหัสผ่านผิดพลาด', 'รหัสผ่านยืนยันไม่ตรงกันค่ะ', 'error'); return; }
+                payloadData = { userId: nUid, email: nEmail, password: nPw };
             }
 
-            const response = await transmitToAPI(actionType, dataset);
+            const response = await transmitToAPI(actionType, payloadData);
             
             if (response && response.status === 'success') {
                 AppState.u = response.user;
                 localStorage.setItem('ks_usr', JSON.stringify(response.user));
-                Swal.fire({ icon: 'success', title: t('alertOk'), text: 'ยินดีต้อนรับเข้าสู่ระบบค่ะ', timer: 1500, showConfirmButton: false });
+                Swal.fire({ icon: 'success', title: translator('alertOk'), text: 'เข้าสู่ระบบเรียบร้อย', timer: 1500, showConfirmButton: false });
                 
-                // Refresh data and jump to Home
                 fetchSystemDataSilently(true, true).then(() => {
-                    executeNavigation('home');
+                    navigatePage('home');
                 });
             } else {
-                Swal.fire({icon: 'error', title: 'ผิดพลาด', text: response ? response.message : 'ระบบไม่ตอบสนอง กรุณาลองใหม่'});
+                Swal.fire({icon: 'error', title: 'ผิดพลาด', text: response ? response.message : 'ระบบ API ไม่ตอบสนอง'});
             }
         }
 
@@ -959,75 +1158,66 @@
         }
 
         /**
-         * 6. Financial Top-up Control
+         * 7. Auto-Topup & Ordering Engine
          */
         function changePaymentMode(modeStr) {
             AppState.pay = modeStr;
             ['bBank', 'bTrue', 'bInter'].forEach(id => {
                 const btnEl = document.getElementById(id);
                 const isActive = id === 'b' + modeStr.charAt(0).toUpperCase() + modeStr.slice(1);
-                btnEl.className = isActive ? 'flex-1 py-3 px-4 rounded-2xl bg-pBtn text-white font-bold shadow-lg smooth' : 'flex-1 py-3 px-4 rounded-2xl bg-transparent text-pDark font-bold smooth hover:bg-white';
+                btnEl.className = isActive ? 'flex-1 py-3 px-4 rounded-2xl bg-pBtn text-white font-bold shadow-lg smooth' : 'flex-1 py-3 px-4 rounded-2xl bg-transparent text-pDark font-bold smooth hover:bg-white border border-pMain';
             });
-            const imgEl = document.getElementById('qrImg');
-            imgEl.src = modeStr === 'bank' ? AppState.sys.qrBank : modeStr === 'true' ? AppState.sys.qrTrue : AppState.sys.qrInter;
+            document.getElementById('qrImg').src = modeStr === 'bank' ? AppState.sys.qrBank : modeStr === 'true' ? AppState.sys.qrTrue : AppState.sys.qrInter;
         }
 
-        async function submitAutomaticTopup() {
-            if (!AppState.u) { executeNavigation('auth'); return; }
+        async function submitTopupTransaction() {
+            if (!AppState.u) { navigatePage('auth'); return; }
             
             const amountVal = document.getElementById('tAmt').value;
             const refVal = document.getElementById('tRef').value.toUpperCase();
             const slipUpload = document.getElementById('tFile').files[0];
 
             const regexValidator = /^[A-Z0-9]{6}$/;
-            if (!regexValidator.test(refVal)) { Swal.fire('ข้อมูลไม่ถูกต้อง', 'รหัสอ้างอิงสลิปต้องเป็นตัวอักษรภาษาอังกฤษหรือตัวเลข 6 หลักท้ายสลิปค่ะ', 'warning'); return; }
-            if (!amountVal || !refVal || !slipUpload) { Swal.fire('ข้อมูลไม่ครบ', 'กรุณากรอกจำนวนเงินและแนบไฟล์รูปสลิปให้ครบถ้วนนะคะ', 'warning'); return; }
+            if (!regexValidator.test(refVal)) { Swal.fire('ข้อมูลไม่ถูกต้อง', 'รหัสสลิปต้องเป็นตัวอักษรภาษาอังกฤษหรือตัวเลข 6 หลัก', 'warning'); return; }
+            if (!amountVal || !refVal || !slipUpload) { Swal.fire('ข้อมูลไม่ครบ', 'กรุณาแนบไฟล์รูปสลิปและกรอกยอดเงินด้วยค่ะ', 'warning'); return; }
 
             const fr = new FileReader();
             fr.onload = async () => {
-                Swal.fire({ title: t('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
+                Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
                 const res = await transmitToAPI('topup', {
-                    userId: AppState.u.userId,
-                    amount: amountVal,
-                    refCode: refVal,
-                    method: AppState.pay,
-                    imageBase64: fr.result
+                    userId: AppState.u.userId, amount: amountVal, refCode: refVal, method: AppState.pay, imageBase64: fr.result
                 });
                 
                 if (res && res.status === 'success') {
-                    Swal.fire({ icon: 'success', title: t('alertOk'), text: `ระบบตรวจสอบสลิปสำเร็จ ยอดเงิน ฿${amountVal} เข้าบัญชีแล้วค่ะ!`, confirmButtonText: t('btnAck') });
+                    Swal.fire({ icon: 'success', title: translator('alertOk'), text: `ยอดเงิน ฿${amountVal} เข้าบัญชีแล้วค่ะ!`, confirmButtonText: translator('btnAck'), confirmButtonColor: '#A855F7' });
                     document.getElementById('tAmt').value = ''; document.getElementById('tRef').value = '';
                     fetchSystemDataSilently(); 
                 } else {
-                    Swal.fire('ขออภัยค่ะ', res ? res.message : 'ระบบตรวจสลิปขัดข้อง', 'error');
+                    Swal.fire('Oops!', res ? res.message : 'ระบบขัดข้อง', 'error');
                 }
             };
             fr.readAsDataURL(slipUpload);
         }
 
-        /**
-         * 7. Smart Order Placement System
-         */
         function launchOrderProcess(prodId, prodName, prodPrice) {
-            // ระบบป้องกันการซื้อถ้าไม่ได้ล็อกอิน (เตะไปหน้า Login)
             if (!AppState.u) { 
-                Swal.fire('หยุดก่อน!', 'กรุณาเข้าสู่ระบบ หรือ สมัครสมาชิก ก่อนทำรายการสั่งซื้อสินค้านะคะ', 'warning');
-                executeNavigation('auth'); 
+                Swal.fire('หยุดก่อน!', 'กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้านะคะ', 'warning');
+                navigatePage('auth'); 
                 return; 
             }
-            if (AppState.sys.isOpen !== 'true') { Swal.fire('ขออภัยค่ะ', t('stClose'), 'error'); return; }
+            if (AppState.sys.isOpen !== 'true') { Swal.fire('ขออภัยค่ะ', translator('stClose'), 'error'); return; }
             
             Swal.fire({
-                title: t('tBuy'),
+                title: translator('tBuy'),
                 html: `
                     <div class="bg-white p-6 rounded-3xl mb-6 text-left border-2 border-pMain shadow-sm">
                         <p class="text-pDark font-extrabold text-xl mb-4 text-center uppercase tracking-tight">${prodName}</p>
                         <div class="flex justify-between items-center font-bold mb-2 pb-2 border-b border-gray-100">
-                            <span class="text-gray-400 text-xs">${t('tPrc')}</span>
+                            <span class="text-gray-400 text-xs">${translator('tPrc')}</span>
                             <span class="text-pDark text-lg">฿${prodPrice.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                         </div>
                         <div class="flex justify-between items-center font-bold">
-                            <span class="text-gray-400 text-xs">${t('tBal')}</span>
+                            <span class="text-gray-400 text-xs">${translator('tBal')}</span>
                             <span class="text-green-500 text-lg">฿${AppState.u.balance.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                         </div>
                     </div>
@@ -1037,13 +1227,13 @@
                             <option value="mail">เติมผ่าน Email + Password</option>
                         </select>
                         <div id="orderInputArea">
-                           <input type="text" id="gDataInp" class="input-pastel text-center shadow-sm" placeholder="${t('tUid')}">
+                           <input type="text" id="gDataInp" class="input-pastel text-center shadow-sm" placeholder="${translator('tUid')}">
                         </div>
                     </div>
                 `,
                 showCancelButton: true,
-                confirmButtonText: t('btnBuy'),
-                cancelButtonText: t('btnCancel'),
+                confirmButtonText: translator('btnBuy'),
+                cancelButtonText: translator('btnCancel'),
                 preConfirm: () => {
                     let collectedData = '';
                     const loginType = document.getElementById('loginTypeSel').value;
@@ -1052,24 +1242,20 @@
                     } else {
                         collectedData = `ID/Mail: ${document.getElementById('gMailInp').value} | Pass: ${document.getElementById('gPassInp').value}`;
                     }
-                    if (!collectedData || collectedData.includes('undefined')) { Swal.showValidationMessage('รบกวนกรอกข้อมูลตัวละครให้ครบด้วยน้า'); return false; }
+                    if (!collectedData || collectedData.includes('undefined')) { Swal.showValidationMessage('กรอกข้อมูลให้ครบด้วยน้า'); return false; }
                     return { loginType: loginType, gameData: collectedData };
                 }
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({ title: t('alertWait'), didOpen: () => Swal.showLoading() });
+                    Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading() });
                     const res = await transmitToAPI('order', {
-                        userId: AppState.u.userId,
-                        product: prodName,
-                        price: prodPrice,
-                        loginType: result.value.loginType,
-                        gameData: result.value.gameData
+                        userId: AppState.u.userId, product: prodName, price: prodPrice, loginType: result.value.loginType, gameData: result.value.gameData
                     });
                     if (res && res.status === 'success') {
-                        Swal.fire({ icon: 'success', title: t('alertOk'), text: AppState.sys.msgSuccess });
+                        Swal.fire({ icon: 'success', title: translator('alertOk'), text: AppState.sys.msgSuccess });
                         fetchSystemDataSilently();
                     } else {
-                        Swal.fire('ยอดเงินไม่พอ', res ? res.message : 'ยอดเงินในระบบไม่พอค่ะ กรุณาเติมเงินก่อนนะคะ', 'error');
+                        Swal.fire('ยอดเงินไม่พอ', res ? res.message : 'กรุณาเติมเงินก่อนนะคะ', 'error');
                     }
                 }
             });
@@ -1079,7 +1265,7 @@
             const lType = document.getElementById('loginTypeSel').value;
             const targetArea = document.getElementById('orderInputArea');
             if(lType === 'uid') {
-                targetArea.innerHTML = `<input type="text" id="gDataInp" class="input-pastel text-center shadow-sm" placeholder="${t('tUid')}">`;
+                targetArea.innerHTML = `<input type="text" id="gDataInp" class="input-pastel text-center shadow-sm" placeholder="${translator('tUid')}">`;
             } else {
                 targetArea.innerHTML = `
                     <input type="text" id="gMailInp" class="input-pastel text-center shadow-sm mb-3" placeholder="Email หรือ ID ล็อกอินเกม">
@@ -1101,7 +1287,6 @@
         function renderAdminDashboard(forceFormRefresh) {
             if(!AppState.adm) return;
 
-            // Form Anti-Overwrite logic
             if (forceFormRefresh) {
                 document.getElementById('s_name').value = AppState.sys.storeName || '';
                 document.getElementById('s_logo').value = AppState.sys.logo || '';
@@ -1122,7 +1307,6 @@
                 document.getElementById('s_msgS').value = AppState.sys.msgSuccess || '';
             }
 
-            // Products Table Render
             const prodTable = document.getElementById('tb-prods');
             prodTable.innerHTML = `<tr><th>CATEGORY</th><th>PACKAGE NAME</th><th>PRICE</th><th>ACTIONS</th></tr>` + 
                 AppState.prods.map(p => `
@@ -1137,7 +1321,6 @@
                 </tr>
             `).join('');
 
-            // Orders Queue Table Render
             const ordTable = document.getElementById('tb-orders');
             ordTable.innerHTML = `<tr><th>DATE</th><th>USER</th><th>ORDER DETAILS</th><th>GAME DATA</th><th>ACTION</th></tr>` + 
                 AppState.adm.allOrders.map(o => `
@@ -1152,7 +1335,6 @@
                 </tr>
             `).join('');
 
-            // Works Portfolio Table Render
             const wrkTable = document.getElementById('tb-works');
             wrkTable.innerHTML = `<tr><th>CATEGORY</th><th>IMAGES COUNT</th><th>ACTION</th></tr>` + 
                 AppState.wrks.map(w => `
@@ -1220,10 +1402,9 @@
                 disc: document.getElementById('p_disc').value, imgs: document.getElementById('p_img').value
             };
             if(!dataToSave.name || !dataToSave.price || !dataToSave.imgs || !dataToSave.cat) { 
-                Swal.fire('แจ้งเตือน', 'รบกวนกรอกช่องที่มีเครื่องหมาย * ให้ครบด้วยนะคะ', 'warning'); 
+                Swal.fire('Oops', 'รบกวนกรอกช่องที่มีเครื่องหมาย * ให้ครบด้วยนะคะ', 'warning'); 
                 return; 
             }
-            
             Swal.fire({ title: 'กำลังบันทึกข้อมูลสินค้า...', didOpen: () => Swal.showLoading() });
             const r = await transmitToAPI('adminManageProd', dataToSave);
             if (r && r.status === 'success') {
@@ -1234,7 +1415,7 @@
         }
 
         async function deleteAdminProduct(uid) {
-            const prompt = await Swal.fire({ title: 'ลบสินค้านี้?', text: "ข้อมูลนี้จะหายไปจากหน้าร้านถาวร ยืนยันไหมคะ?", icon: 'warning', showCancelButton: true, confirmButtonColor: '#EF4444', cancelButtonColor: '#D1D5DB' });
+            const prompt = await Swal.fire({ title: 'ลบสินค้านี้?', text: "ข้อมูลนี้จะหายไปถาวร ยืนยันไหมคะ?", icon: 'warning', showCancelButton: true, confirmButtonColor: '#EF4444' });
             if (prompt.isConfirmed) {
                 const r = await transmitToAPI('adminManageProd', { act: 'del', id: uid });
                 if (r && r.status === 'success') fetchSystemDataSilently();
@@ -1242,19 +1423,13 @@
         }
 
         async function persistPortfolioWork() {
-            const payloadData = { 
-                act: 'add', 
-                cat: document.getElementById('w_cat').value || 'งานป้าย', 
-                imgs: document.getElementById('w_img').value,
-                line: ''
-            };
-            if(!payloadData.imgs) { Swal.fire('แจ้งเตือน', 'กรุณาใส่ลิงก์รูปภาพตัวอย่างงานด้วยค่ะ', 'warning'); return; }
+            const payloadData = { act: 'add', cat: document.getElementById('w_cat').value || 'งานป้าย', imgs: document.getElementById('w_img').value, line: '' };
+            if(!payloadData.imgs) { Swal.fire('แจ้งเตือน', 'กรุณาใส่ลิงก์รูปภาพด้วยค่ะ', 'warning'); return; }
             Swal.fire({ title: 'กำลังอัปโหลดงานป้าย...', didOpen: () => Swal.showLoading() });
             const r = await transmitToAPI('adminManageWork', payloadData);
             if (r && r.status === 'success') {
                 Swal.fire('สำเร็จ', 'เพิ่มตัวอย่างงานป้ายเข้าสู่ระบบเรียบร้อย', 'success');
-                document.getElementById('w_img').value = '';
-                fetchSystemDataSilently();
+                document.getElementById('w_img').value = ''; fetchSystemDataSilently();
             }
         }
 
@@ -1269,18 +1444,18 @@
             Swal.fire({ title: 'กำลังอัปเดตสถานะออเดอร์...', didOpen: () => Swal.showLoading() });
             const r = await transmitToAPI('adminUpdateStatus', { type: 'order', id: oid, uid: targetUid });
             if (r && r.status === 'success') {
-                Swal.fire('สำเร็จ!', 'เปลี่ยนสถานะออเดอร์เป็นเสร็จสิ้นแล้วค่ะ', 'success');
-                fetchSystemDataSilently();
+                Swal.fire('สำเร็จ!', 'เปลี่ยนสถานะออเดอร์เป็นเสร็จสิ้นแล้วค่ะ', 'success'); fetchSystemDataSilently();
             }
         }
 
-        function handleBannerClick() {
-            if(AppState.sys.bannerLink) window.open(AppState.sys.bannerLink, '_blank');
-        }
+        function handleBannerClick() { if(AppState.sys.bannerLink) window.open(AppState.sys.bannerLink, '_blank'); }
         
-        // Ensure initial initialization calls proper setup
-        document.addEventListener("DOMContentLoaded", () => {
-            // Setup events if needed statically
+        // Setup initial boot
+        window.addEventListener("DOMContentLoaded", () => {
+            try {
+                const storedUser = localStorage.getItem('ks_usr');
+                if (storedUser && storedUser !== 'undefined') AppState.u = JSON.parse(storedUser);
+            } catch(e) { localStorage.removeItem('ks_usr'); }
         });
     </script>
 </body>
