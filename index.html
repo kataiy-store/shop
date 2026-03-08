@@ -30,9 +30,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
-        /* --------------------------------------------------------------------------
-           1. BASE UI FRAMEWORK & ANIMATIONS
-           -------------------------------------------------------------------------- */
+        /* ==========================================================================
+           GLOBAL STYLES & UX
+           ========================================================================== */
         body { 
             font-family: 'Prompt', sans-serif; 
             background-color: #FDF2F8; 
@@ -41,9 +41,17 @@
             scroll-behavior: smooth; 
         }
         
-        .smooth { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .hide-scroll::-webkit-scrollbar { display: none; }
+        .smooth { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
         
+        .hide-scroll::-webkit-scrollbar { 
+            display: none; 
+        }
+        
+        /* ==========================================================================
+           PAGE TRANSITIONS
+           ========================================================================== */
         .page-section { 
             display: none; 
             opacity: 0; 
@@ -57,9 +65,9 @@
             transform: translateY(0); 
         }
 
-        /* --------------------------------------------------------------------------
-           2. CUTE MARQUEE COMPONENT (ป้ายเลื่อนแบบแคปซูล น่ารัก)
-           -------------------------------------------------------------------------- */
+        /* ==========================================================================
+           CUTE MARQUEE COMPONENT
+           ========================================================================== */
         .marquee-wrapper {
             width: 100%;
             max-width: 1152px;
@@ -73,11 +81,10 @@
             background: white;
             border: 2.5px solid #E9D5FF;
             border-radius: 99px;
-            padding: 6px 8px 6px 8px;
+            padding: 6px 8px;
             display: flex;
             align-items: center;
             box-shadow: 0 4px 15px rgba(168, 85, 247, 0.08);
-            position: relative;
             overflow: hidden;
         }
         
@@ -121,9 +128,9 @@
             100% { transform: translateX(-100%); } 
         }
 
-        /* --------------------------------------------------------------------------
-           3. PUBLIC STATS & CARDS
-           -------------------------------------------------------------------------- */
+        /* ==========================================================================
+           PUBLIC STATS & PRODUCT CARDS
+           ========================================================================== */
         .stat-card-public { 
             background: white; 
             border-radius: 20px; 
@@ -133,8 +140,23 @@
             box-shadow: 0 4px 15px rgba(126, 34, 206, 0.05); 
             transition: 0.3s; 
         }
-        .stat-card-public:hover { border-color: #E9D5FF; transform: translateY(-4px); box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); }
-        .stat-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-size: 1.4rem; }
+        
+        .stat-card-public:hover { 
+            border-color: #E9D5FF; 
+            transform: translateY(-4px); 
+            box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); 
+        }
+        
+        .stat-icon { 
+            width: 48px; 
+            height: 48px; 
+            border-radius: 14px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0 auto 12px auto; 
+            font-size: 1.4rem; 
+        }
 
         .product-card { 
             background: white; 
@@ -147,57 +169,274 @@
             transition: 0.4s; 
             cursor: pointer; 
         }
-        .product-card:hover { border-color: #A855F7; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); }
         
-        .img-box { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden; }
-        .img-box img { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 10px; opacity: 0; transition: opacity 0.8s ease-in-out; }
-        .img-box img.active { opacity: 1; }
+        .product-card:hover { 
+            border-color: #A855F7; 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); 
+        }
         
-        .banner-slider { position: relative; overflow: hidden; border-radius: 24px; border: 2px solid #E9D5FF; background: #FFF; box-shadow: 0 4px 15px rgba(0,0,0,0.03); cursor: pointer; }
-        .banner-item { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; opacity: 0; transition: opacity 1.2s; }
-        .banner-item.active { opacity: 1; z-index: 1; }
+        .img-box { 
+            position: relative; 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            background: #FFF; 
+            overflow: hidden; 
+        }
+        
+        .img-box img { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            padding: 10px; 
+            opacity: 0; 
+            transition: opacity 0.8s ease-in-out; 
+        }
+        
+        .img-box img.active { 
+            opacity: 1; 
+        }
+        
+        .banner-slider { 
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 24px; 
+            border: 2px solid #E9D5FF; 
+            background: #FFF; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            cursor: pointer; 
+        }
+        
+        .banner-item { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            top: 0; 
+            left: 0; 
+            opacity: 0; 
+            transition: opacity 1.2s; 
+        }
+        
+        .banner-item.active { 
+            opacity: 1; 
+            z-index: 1; 
+        }
 
-        /* --------------------------------------------------------------------------
-           4. FORMS, BUTTONS & OTHERS
-           -------------------------------------------------------------------------- */
-        .input-pastel { width: 100%; border: 2.5px solid #E9D5FF; border-radius: 16px; padding: 14px 20px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Prompt', sans-serif; color: #7E22CE; font-weight: 500; }
-        .input-pastel:focus { border-color: #A855F7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
+        /* ==========================================================================
+           FORMS, BUTTONS & SWEETALERT
+           ========================================================================== */
+        .input-pastel { 
+            width: 100%; 
+            border: 2.5px solid #E9D5FF; 
+            border-radius: 16px; 
+            padding: 14px 20px; 
+            background: #FFF; 
+            outline: none; 
+            transition: 0.3s; 
+            font-family: 'Prompt', sans-serif; 
+            color: #7E22CE; 
+            font-weight: 500; 
+        }
         
-        .btn-pastel { background: #A855F7; color: white; border-radius: 99px; padding: 14px 28px; font-weight: 600; text-align: center; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); }
-        .btn-pastel:hover { background: #9333EA; transform: scale(1.02); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); }
-        .btn-pastel:disabled { background: #D1D5DB; cursor: not-allowed; transform: none; box-shadow: none; }
+        .input-pastel:focus { 
+            border-color: #A855F7; 
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); 
+        }
         
-        .status-capsule { font-size: 0.75rem; font-weight: 700; padding: 6px 18px; border-radius: 99px; width: fit-content; margin: 15px auto; border: 1.5px solid currentColor; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .btn-pastel { 
+            background: #A855F7; 
+            color: white; 
+            border-radius: 99px; 
+            padding: 14px 28px; 
+            font-weight: 600; 
+            text-align: center; 
+            border: none; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); 
+            width: 100%;
+        }
+        
+        .btn-pastel:hover { 
+            background: #9333EA; 
+            transform: scale(1.02); 
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); 
+        }
+        
+        .btn-outline { 
+            background: white; 
+            color: #A855F7; 
+            border: 2.5px solid #A855F7; 
+            border-radius: 99px; 
+            padding: 14px 28px; 
+            font-weight: 600; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            width: 100%;
+        }
 
-        .swal2-popup { border-radius: 28px !important; border: 4px solid #E9D5FF !important; font-family: 'Prompt', sans-serif !important; }
-        .swal2-confirm { border-radius: 99px !important; background: #A855F7 !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important;}
-        .swal2-cancel { border-radius: 99px !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important;}
-
-        /* --------------------------------------------------------------------------
-           5. ADMIN DASHBOARD STYLES
-           -------------------------------------------------------------------------- */
-        .admin-section { background: white; border-radius: 24px; border: 1.5px solid #E9D5FF; padding: 30px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .admin-header { font-size: 1.4rem; font-weight: 700; color: #7E22CE; margin-bottom: 20px; border-left: 5px solid #A855F7; padding-left: 15px; }
-        .admin-label { font-size: 0.8rem; font-weight: 600; color: #9333EA; margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
-        .inp-admin { width: 100%; border: 1.5px solid #E9D5FF; border-radius: 12px; padding: 12px 15px; background: #FDF2F8; outline: none; transition: 0.2s; font-size: 0.95rem; color: #4A4A4A; font-family: 'Prompt', sans-serif; }
-        .inp-admin:focus { border-color: #A855F7; background: #FFF; box-shadow: 0 0 8px rgba(168, 85, 247, 0.15); }
+        .btn-outline:hover {
+            background: #FDF2F8;
+            transform: scale(1.02);
+        }
         
-        .admin-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 0.9rem; }
-        .admin-table th { background: #FDF2F8; color: #7E22CE; padding: 15px; text-align: left; font-weight: 600; border-bottom: 2px solid #E9D5FF; }
-        .admin-table td { padding: 15px; background: white; border-top: 1px solid #E9D5FF; border-bottom: 1px solid #E9D5FF; color: #4B5563; }
-        .admin-table tr td:first-child { border-left: 1px solid #E9D5FF; border-radius: 12px 0 0 12px; }
-        .admin-table tr td:last-child { border-right: 1px solid #E9D5FF; border-radius: 0 12px 12px 0; }
-        
-        .ad-tab-btn { padding: 12px 25px; border-radius: 99px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.3s; background: white; color: #A855F7; border: 2px solid #E9D5FF; white-space: nowrap; }
-        .ad-tab-btn:hover { background: #FDF2F8; }
-        .ad-tab-btn.active { background: linear-gradient(135deg, #A855F7, #7E22CE); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); }
+        .status-capsule { 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            padding: 5px 16px; 
+            border-radius: 99px; 
+            width: fit-content; 
+            margin: 12px auto; 
+            border: 1.5px solid currentColor; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+        }
 
+        .swal2-popup { 
+            border-radius: 28px !important; 
+            border: 4px solid #E9D5FF !important; 
+            font-family: 'Prompt', sans-serif !important; 
+        }
+        
+        .swal2-confirm { 
+            border-radius: 99px !important; 
+            background: #A855F7 !important; 
+            padding: 12px 30px !important; 
+            font-weight: bold !important; 
+            outline: none !important; 
+            border: none !important;
+        }
+        
+        .swal2-cancel { 
+            border-radius: 99px !important; 
+            padding: 12px 30px !important; 
+            font-weight: bold !important; 
+            outline: none !important; 
+            border: none !important;
+            background: #E5E7EB !important;
+            color: #4A4A4A !important;
+        }
+
+        /* ==========================================================================
+           ADMIN DASHBOARD UI
+           ========================================================================== */
+        .admin-section { 
+            background: white; 
+            border-radius: 24px; 
+            border: 1.5px solid #E9D5FF; 
+            padding: 30px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02); 
+        }
+        
+        .admin-header { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            color: #7E22CE; 
+            margin-bottom: 20px; 
+            border-left: 5px solid #A855F7; 
+            padding-left: 15px; 
+        }
+        
+        .admin-label { 
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            color: #9333EA; 
+            margin-bottom: 6px; 
+            display: block; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+        
+        .inp-admin { 
+            width: 100%; 
+            border: 1.5px solid #E9D5FF; 
+            border-radius: 12px; 
+            padding: 12px 15px; 
+            background: #FDF2F8; 
+            outline: none; 
+            transition: 0.2s; 
+            font-size: 0.95rem; 
+            color: #4A4A4A; 
+            font-family: 'Prompt', sans-serif; 
+        }
+        
+        .inp-admin:focus { 
+            border-color: #A855F7; 
+            background: #FFF; 
+            box-shadow: 0 0 8px rgba(168, 85, 247, 0.15); 
+        }
+        
+        .admin-table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0 8px; 
+            font-size: 0.9rem; 
+        }
+        
+        .admin-table th { 
+            background: #FDF2F8; 
+            color: #7E22CE; 
+            padding: 15px; 
+            text-align: left; 
+            font-weight: 600; 
+            border-bottom: 2px solid #E9D5FF; 
+        }
+        
+        .admin-table td { 
+            padding: 15px; 
+            background: white; 
+            border-top: 1px solid #E9D5FF; 
+            border-bottom: 1px solid #E9D5FF; 
+            color: #4B5563; 
+        }
+        
+        .admin-table tr td:first-child { 
+            border-left: 1px solid #E9D5FF; 
+            border-radius: 12px 0 0 12px; 
+        }
+        
+        .admin-table tr td:last-child { 
+            border-right: 1px solid #E9D5FF; 
+            border-radius: 0 12px 12px 0; 
+        }
+        
+        .ad-tab-btn { 
+            padding: 12px 25px; 
+            border-radius: 99px; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            background: white; 
+            color: #A855F7; 
+            border: 2px solid #E9D5FF; 
+            white-space: nowrap; 
+        }
+        
+        .ad-tab-btn:hover { 
+            background: #FDF2F8; 
+        }
+        
+        .ad-tab-btn.active { 
+            background: linear-gradient(135deg, #A855F7, #7E22CE); 
+            color: white; 
+            border-color: transparent; 
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); 
+        }
+        
+        /* แก้ปัญหาการทับซ้อนของ Z-Index */
         .z-999 { z-index: 999; }
     </style>
 </head>
 <body>
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b-2 border-pMain">
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-2 border-pMain">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
             
             <div class="flex items-center gap-4 cursor-pointer group" onclick="navigatePage('home')">
@@ -226,7 +465,23 @@
         </div>
         
         <div id="mainMenu" class="hidden absolute right-4 top-16 bg-white rounded-3xl shadow-2xl w-64 py-4 z-50 border-2 border-pMain overflow-hidden animate-pageFadeIn">
+            <div class="px-6 pb-4 border-b border-gray-100 mb-2">
+                <p class="text-[0.65rem] font-bold text-gray-400 uppercase tracking-widest" data-l="mMenu">Menu / เมนู</p>
             </div>
+            
+            <div id="dynamicMenuArea">
+                <button type="button" onclick="navigatePage('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span data-l="mHome">หน้าหลัก</span></button>
+                <button type="button" onclick="navigatePage('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span data-l="mGames">เกมและบริการทั้งหมด</span></button>
+            </div>
+            
+            <div id="adminMenuArea" class="hidden border-t-2 border-pMain mt-2 pt-2 bg-purple-50">
+                <button type="button" onclick="navigatePage('admin')" class="block w-full text-left px-8 py-4 hover:bg-pMain text-pDark font-bold smooth text-red-600"><i class="fa-solid fa-user-shield w-8 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
+            </div>
+
+            <div id="authMenuArea" class="border-t-2 border-pMain mt-2 pt-2">
+                <button type="button" onclick="navigatePage('auth')" class="block w-full text-left px-8 py-4 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-8 text-center text-pBtn"></i> <span data-l="mLogin">เข้าสู่ระบบ / สมัคร</span></button>
+            </div>
+        </div>
     </nav>
 
     <div class="marquee-wrapper">
@@ -237,7 +492,7 @@
             </div>
             <div class="marquee-text-container">
                 <div class="marquee-content" id="uiMarq">
-                    กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล กรุณารอสักครู่...
+                    กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล กรุณารอสักครู่นะคะ...
                 </div>
             </div>
         </div>
@@ -253,22 +508,22 @@
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-users"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stUsr">ผู้ใช้งานทั้งหมด</span>
-                    <h3 id="pubUsers" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">...</h3>
+                    <h3 id="pubUsers" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">0</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-cart-shopping"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stOrd">จำนวนออเดอร์</span>
-                    <h3 id="pubOrders" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">...</h3>
+                    <h3 id="pubOrders" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">0</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-green-100 text-green-600 shadow-sm"><i class="fa-solid fa-money-bill-wave"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stTop">ยอดเติมเงินสะสม</span>
-                    <h3 id="pubTopups" class="text-lg md:text-xl font-extrabold text-green-600 mt-1">...</h3>
+                    <h3 id="pubTopups" class="text-lg md:text-xl font-extrabold text-green-600 mt-1">฿0.00</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-red-100 text-red-500 shadow-sm"><i class="fa-solid fa-sack-dollar"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stSal">ยอดขายสำเร็จ</span>
-                    <h3 id="pubSales" class="text-lg md:text-xl font-extrabold text-red-500 mt-1">...</h3>
+                    <h3 id="pubSales" class="text-lg md:text-xl font-extrabold text-red-500 mt-1">฿0.00</h3>
                 </div>
             </div>
 
@@ -326,7 +581,7 @@
                 <div id="fLog">
                     <div class="space-y-6">
                         <div>
-                            <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest">Username / Email</label>
+                            <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest">Username or Email</label>
                             <input type="text" id="lUser" class="input-pastel shadow-sm" data-p="phUidMail" placeholder="UserID หรือ Email" required>
                         </div>
                         <div>
@@ -349,7 +604,7 @@
                         <input type="email" id="rMail" class="input-pastel" data-p="phMail" placeholder="อีเมลของคุณ">
                         <input type="password" id="rPass" class="input-pastel" data-p="phPass2" placeholder="ตั้งรหัสผ่าน">
                         <input type="password" id="rPass2" class="input-pastel" data-p="phPass3" placeholder="ยืนยันรหัสผ่าน">
-                        <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิก</span></button>
+                        <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิกใหม่</span></button>
                     </div>
                     <div class="text-center mt-8 border-t border-pMain pt-6">
                         <button type="button" class="text-gray-500 font-bold hover:text-pDark smooth" onclick="switchAuthView('log')" data-l="hasAcc">มีบัญชีอยู่แล้ว? เข้าสู่ระบบเลย</button>
@@ -411,9 +666,9 @@
             
             <div class="flex gap-4 mb-10 overflow-x-auto hide-scroll pb-3 border-b-2 border-pBg">
                 <button type="button" class="ad-tab-btn active shadow-sm" onclick="switchAdminTab('set')"><i class="fa-solid fa-sliders mr-2"></i> ตั้งค่าเว็บไซต์</button>
-                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('prod')"><i class="fa-solid fa-box-open mr-2"></i> จัดการสินค้า</button>
-                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('work')"><i class="fa-solid fa-images mr-2"></i> จัดการงานป้าย</button>
-                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('order')"><i class="fa-solid fa-list-check mr-2"></i> คิวออเดอร์</button>
+                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('prod')"><i class="fa-solid fa-box-open mr-2"></i> จัดการสินค้า</button>
+                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('work')"><i class="fa-solid fa-images mr-2"></i> จัดการงานป้าย</button>
+                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('order')"><i class="fa-solid fa-list-check mr-2"></i> คิวออเดอร์</button>
             </div>
 
             <div id="ad-set" class="ad-sec space-y-8 animate-pageFadeIn">
@@ -455,7 +710,7 @@
                 </div>
                 
                 <div class="flex justify-end pt-4 pb-10">
-                    <button type="button" onclick="persistSystemSettings()" class="btn-pastel !w-full md:!w-80 text-xl py-4 shadow-xl"><i class="fa-solid fa-floppy-disk mr-2"></i> บันทึกข้อมูลตั้งค่า</button>
+                    <button type="button" onclick="persistSystemSettings()" class="btn-pastel !w-full md:!w-80 text-xl py-4 shadow-xl"><i class="fa-solid fa-floppy-disk mr-2"></i> บันทึกข้อมูลการตั้งค่า</button>
                 </div>
             </div>
 
@@ -480,7 +735,7 @@
                         </div>
                     </div>
                     <div class="flex gap-4 mt-8">
-                        <button type="button" onclick="persistProductData()" class="btn-pastel flex-1 text-lg shadow-lg" id="btnSaveProd"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้า</button>
+                        <button type="button" onclick="persistProductData()" class="btn-pastel flex-1 text-lg shadow-lg" id="btnSaveProd"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้าลงระบบ</button>
                         <button type="button" onclick="resetAdminProductForm()" class="btn-outline !bg-gray-100 !text-gray-500 !border-gray-300 hidden shadow-md" id="btnCancelEdit">ยกเลิก</button>
                     </div>
                 </div>
@@ -519,23 +774,24 @@
     </footer>
 
     <script>
-        // 🔴🔴🔴 API URL: ใส่ลิงก์จาก Google Apps Script ที่ช่องนี้เลยครับ 🔴🔴🔴
+        // 🔴🔴🔴 API URL ของคุณโซ 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwUMa943t7APJoNlGsDPF3QuZcYIw7ab2_9HReCFCsbp5jI61G7rQGW1rKFeLhhE2u5iA/exec';
         
         /**
-         * Global App State (Single Source of Truth)
+         * Global App State Object
+         * บริหารจัดการข้อมูลภายในเว็บไซต์ทั้งหมด
          */
         const AppState = { 
             sys: { storeName: 'kataiy', logo: 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg' },
             prods: [],       
             wrks: [],        
             history: [],     
-            stats: null,     // สถิติ Public Stats สำหรับหน้าแรก
-            u: null,         // ข้อมูลลูกค้าที่ล็อกอิน
+            stats: null,     
+            u: null,         
             inb: [],         
             uOrd: [],        
             adm: null,       
-            busy: false,     // ล็อกระบบระหว่างประมวลผลป้องกันกดรัว
+            busy: false,     
             pay: 'bank',     
             curCat: 'all',   
             lang: localStorage.getItem('ks_lang') || 'th' 
@@ -587,6 +843,7 @@
 
         /**
          * 1. Navigation Flow & Route Protection
+         * บังคับให้หน้าเว็บเปลี่ยนเมนูอย่างถูกต้อง
          */
         function requireAuthValidation(targetId) {
             const loggedIn = !!AppState.u;
@@ -644,14 +901,19 @@
             buildDynamicSidebarMenu();
         }
 
-        // 🟢 วาดเมนูใหม่ทุกครั้ง เพื่อป้องกันปุ่มหาย 🟢
+        /**
+         * สำคัญมาก: สร้างเมนู 3 ขีดแบบ Real-time 
+         * จะซ่อนหรือโชว์เมนูไหน ขึ้นอยู่กับว่า User Login แล้วหรือยัง
+         */
         function buildDynamicSidebarMenu() {
             const menuArea = document.getElementById('dynamicMenuArea');
             let html = '';
             
+            // Public Menus (เห็นทุกคน)
             html += `<button type="button" onclick="navigatePage('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span data-l="mHome">${translator('mHome')}</span></button>`;
             html += `<button type="button" onclick="navigatePage('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span data-l="mGames">${translator('mGames')}</span></button>`;
             
+            // Protected Menus (เห็นเฉพาะคน Login)
             if (AppState.u) {
                 html += `<button type="button" onclick="navigatePage('topup')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-wallet w-8 text-center text-pBtn"></i> <span data-l="mTopup">${translator('mTopup')}</span></button>`;
                 html += `<button type="button" onclick="navigatePage('inbox')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-envelope w-8 text-center text-pBtn"></i> <span data-l="mInbox">${translator('mInbox')}</span></button>`;
@@ -662,14 +924,14 @@
             
             menuArea.innerHTML = html;
 
-            // Admin Menu Display Check
+            // Admin Menu Button Logic
             if (AppState.u && AppState.u.role === 'admin') {
                 document.getElementById('adminMenuArea').classList.remove('hidden');
             } else {
                 document.getElementById('adminMenuArea').classList.add('hidden');
             }
 
-            // Authentication Button Swap
+            // Auth Menu Button Logic
             if (AppState.u) {
                 document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="out()" class="block w-full text-left px-8 py-4 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-8 text-center text-red-400"></i> ${translator('out')}</button>`;
             } else {
@@ -678,7 +940,7 @@
         }
 
         /**
-         * 3. API Communication Engine (Fail-Safe text/plain)
+         * 3. Secure API Communication (POST & Try-Catch Protected)
          */
         async function transmitDataToAPI(action, payload) {
             if (AppState.busy) { return null; }
@@ -703,7 +965,7 @@
             } catch (err) {
                 AppState.busy = false;
                 console.error("API Transmission Failed:", err);
-                return { status: 'error', message: 'การเชื่อมต่อถูกปฏิเสธโดยเซิร์ฟเวอร์' };
+                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ตหรือ Deploy Web App ใหม่' };
             }
         }
 
@@ -711,7 +973,7 @@
          * 4. System Initialization & Polling
          */
         async function fetchSystemDataSilently(isSilent = false, updateAdminForms = false) {
-            AppState.busy = false; 
+            AppState.busy = false; // ปลดล็อกสำหรับการรันพื้นหลัง
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -731,7 +993,7 @@
                     AppState.prods = res.products;
                     AppState.wrks = res.works;
                     AppState.history = res.history;
-                    AppState.stats = res.stats;
+                    AppState.stats = res.stats; 
                     
                     if (res.user) {
                         AppState.u = res.user;
@@ -741,7 +1003,7 @@
                     }
                     if (res.adminData) AppState.adm = res.adminData;
                     
-                    // 🟢 WRAP IN TRY-CATCH TO PREVENT UI BUGS FROM CRASHING FETCH 🟢
+                    // ป้องกัน Error ระหว่างวาดหน้าจอ
                     try {
                         renderDOMEngine(isSilent, updateAdminForms);
                     } catch(uiError) {
@@ -749,9 +1011,9 @@
                     }
                 }
             } catch (error) {
-                console.error("Fetch Failed", error);
+                console.error("Polling Failed", error);
                 if (!isSilent) {
-                    document.getElementById('uiMarq').innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-500 mr-2"></i> ขาดการเชื่อมต่อฐานข้อมูล โปรดรีเฟรชหน้าเว็บ`;
+                    Swal.fire('เชื่อมต่อไม่ได้', 'กรุณาตรวจสอบว่า API URL ถูกต้องและตั้งค่าแบบ Anyone แล้ว', 'error');
                 }
             }
         }
@@ -765,7 +1027,7 @@
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiName').innerText = AppState.sys.storeName || 'kataiy';
 
-            // Public Stats Update
+            // 🌟 Render Public Statistics (อัปเดตสถิติให้ทุกคนเห็นบนหน้าแรก) 🌟
             if(AppState.stats) {
                 document.getElementById('pubUsers').innerText = AppState.stats.usersCount || 0;
                 document.getElementById('pubOrders').innerText = AppState.stats.ordersCount || 0;
@@ -773,21 +1035,21 @@
                 document.getElementById('pubSales').innerText = '฿' + parseFloat(AppState.stats.salesAmount || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
             }
 
-            // Banner
+            // Banner Mechanism
             const bannerElement = document.getElementById('bannerContainer');
             if (AppState.sys.banner) {
                 bannerElement.classList.remove('hidden');
                 const imagesList = AppState.sys.banner.split(',').map(s => s.trim());
                 bannerElement.innerHTML = imagesList.map((url, i) => `<img src="${url}" class="banner-item ${i === 0 ? 'active' : ''}">`).join('');
             } else {
-                bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=Premium+Store" class="banner-item active">`;
+                bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=kataiy+store" class="banner-item active">`;
             }
 
-            // Cute Marquee Logic
+            // Cute Marquee Information Bar
             const marqueeBlock = document.getElementById('uiMarq');
             const noticeText = AppState.sys.announcement || '';
             const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-paw text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการ 100%';
-            marqueeBlock.innerHTML = `<span class="mr-4 font-bold">${noticeText}</span> <i class="fa-solid fa-bolt text-yellow-400 mr-2"></i> ${historyFeed}`;
+            marqueeBlock.innerHTML = `<span class="mr-4 font-bold text-pDark">${noticeText}</span> <i class="fa-solid fa-bolt text-yellow-400 mr-2"></i> <span class="text-gray-500">${historyFeed}</span>`;
 
             // Status Capsule
             const stBox = document.getElementById('uiStatus');
@@ -806,7 +1068,7 @@
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('uId').innerText = AppState.u.userId;
                 
-                // Clear Auth form and show Log Out
+                // Set the correct form block
                 document.getElementById('fLog').innerHTML = `<button type="button" onclick="out()" class="btn-pastel !bg-red-400 w-full text-xl mt-6 shadow-sm"><i class="fa-solid fa-power-off mr-2"></i> ${translator('out')}</button>`;
                 
                 if(AppState.u.role === 'admin') {
@@ -816,7 +1078,6 @@
                 document.getElementById('uBadge').classList.add('hidden');
             }
 
-            // Execution
             buildDynamicSidebarMenu();
             renderProductCatalog();
             renderGamesListing();
@@ -849,7 +1110,7 @@
                 const discountHTML = p.discount > 0 ? `<span class="absolute top-4 right-4 bg-red-500 text-white text-[0.65rem] font-extrabold px-3 py-1 rounded-full z-10 shadow-lg">-${p.discount}%</span>` : '';
                 
                 return `
-                <div class="product-card cursor-pointer animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                <div class="product-card animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                     <div class="img-box">${discountHTML}${imgHtml}</div>
                     <div class="p-5 flex-1 flex flex-col justify-between text-center bg-white">
                         <div>
@@ -886,7 +1147,7 @@
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         ${catMap[catName].map(p => `
-                            <div class="product-card cursor-pointer group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                            <div class="product-card group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                                 <div class="img-box bg-pBg border-b border-pMain"><img src="${p.images.split(',')[0].trim()}" class="slider-image active group-hover:scale-110 smooth"></div>
                                 <div class="p-4 text-center">
                                     <h4 class="font-bold text-gray-800 text-xs mb-2 line-clamp-1">${p.name}</h4>
@@ -909,7 +1170,7 @@
                 const picUrls = w.imgs.split(',').map(s => s.trim());
                 const picHTML = picUrls.map((url, i) => `<img src="${url}" class="slider-image ${i === 0 ? 'active' : ''}">`).join('');
                 return `
-                <div class="product-card cursor-pointer smooth hover:scale-105" onclick="window.open('${w.line || '#'}','_blank')">
+                <div class="product-card smooth hover:scale-105" onclick="window.open('${w.line || '#'}','_blank')">
                     <div class="img-box">${picHTML}</div>
                     <div class="p-3 text-center bg-pBg border-t border-pMain">
                         <span class="text-[0.65rem] font-extrabold text-pDark uppercase tracking-widest">${w.cat}</span>
@@ -954,7 +1215,7 @@
         }
 
         /**
-         * 6. User Authentication Engine (🟢 FIXED RELOAD FUNCTIONALITY 🟢)
+         * 6. User Authentication Engine (💥 FORCE HARD RELOAD FIX 💥)
          */
         function switchAuthView(mode) {
             document.getElementById('fLog').classList.toggle('hidden', mode !== 'log');
@@ -994,19 +1255,19 @@
             const response = await transmitDataToAPI(actionType, dataset);
             
             if (response && response.status === 'success') {
-                // เก็บค่าผู้ใช้ลง Cache
+                // บันทึกข้อมูลลงเครื่อง
                 localStorage.setItem('ks_usr', JSON.stringify(response.user));
                 
-                // 🟢 FORCE HARD RELOAD TO RENDER EVERYTHING FRESH 🟢
+                // 🟢 สำคัญ: บังคับรีโหลดหน้าเว็บทันทีเพื่อล้างข้อมูลเดิมและเปิดเมนูทั้งหมด
                 Swal.fire({ 
                     icon: 'success', 
                     title: translator('alertOk'), 
-                    text: 'เข้าสู่ระบบสำเร็จ! กำลังโหลดข้อมูลร้านค้า...', 
+                    text: 'เข้าสู่ระบบสำเร็จ! กำลังพาเข้าสู่ระบบ...', 
                     timer: 1500, 
                     showConfirmButton: false 
                 }).then(() => {
-                    // กลับไปหน้าแรกและรีโหลดแบบ Hard Reset
                     window.location.href = window.location.pathname; 
+                    window.location.reload(true); 
                 });
 
             } else {
@@ -1028,7 +1289,7 @@
                 if (result.isConfirmed) {
                     AppState.u = null;
                     localStorage.removeItem('ks_usr');
-                    window.location.reload(); 
+                    window.location.reload(true); 
                 }
             });
         }
@@ -1061,11 +1322,7 @@
             fr.onload = async () => {
                 Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
                 const res = await transmitDataToAPI('topup', {
-                    userId: AppState.u.userId,
-                    amount: amountVal,
-                    refCode: refVal,
-                    method: AppState.pay,
-                    imageBase64: fr.result
+                    userId: AppState.u.userId, amount: amountVal, refCode: refVal, method: AppState.pay, imageBase64: fr.result
                 });
                 
                 if (res && res.status === 'success') {
@@ -1084,7 +1341,7 @@
          */
         function launchOrderProcess(prodId, prodName, prodPrice) {
             if (!AppState.u) { 
-                Swal.fire('หยุดก่อน!', 'กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้านะคะ', 'warning');
+                Swal.fire('หยุดก่อน!', 'กรุณาเข้าสู่ระบบ หรือ สมัครสมาชิก ก่อนทำรายการสั่งซื้อสินค้านะคะ', 'warning');
                 navigatePage('auth'); 
                 return; 
             }
@@ -1132,11 +1389,7 @@
                 if (result.isConfirmed) {
                     Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading() });
                     const res = await transmitDataToAPI('order', {
-                        userId: AppState.u.userId,
-                        product: prodName,
-                        price: prodPrice,
-                        loginType: result.value.loginType,
-                        gameData: result.value.gameData
+                        userId: AppState.u.userId, product: prodName, price: prodPrice, loginType: result.value.loginType, gameData: result.value.gameData
                     });
                     if (res && res.status === 'success') {
                         Swal.fire({ icon: 'success', title: translator('alertOk'), text: AppState.sys.msgSuccess });
@@ -1303,7 +1556,7 @@
         }
 
         async function deleteAdminProduct(uid) {
-            const prompt = await Swal.fire({ title: 'ลบสินค้านี้?', text: "ข้อมูลนี้จะหายไปถาวร ยืนยันไหมคะ?", icon: 'warning', showCancelButton: true, confirmButtonColor: '#EF4444' });
+            const prompt = await Swal.fire({ title: 'ลบสินค้านี้?', text: "ข้อมูลนี้จะหายไปจากหน้าร้านถาวร ยืนยันไหมคะ?", icon: 'warning', showCancelButton: true, confirmButtonColor: '#EF4444' });
             if (prompt.isConfirmed) {
                 const r = await transmitDataToAPI('adminManageProd', { act: 'del', id: uid });
                 if (r && r.status === 'success') fetchSystemDataSilently();
@@ -1337,15 +1590,15 @@
         }
 
         function handleBannerClick() { if(AppState.sys.bannerLink) window.open(AppState.sys.bannerLink, '_blank'); }
-        
+
         /**
-         * 10. Initialization Process (Boot)
+         * 10. SYSTEM BOOTSTRAP (เริ่มทำงานทันทีโดยไม่ต้องรอ API)
          */
         window.addEventListener("DOMContentLoaded", () => {
-            // Restore Language
+            // โหลดภาษา
             document.getElementById('lang').value = AppState.lang;
             
-            // Safe Session Read
+            // อ่านค่า User จาก Cache แบบเซฟ 100%
             try {
                 const session = localStorage.getItem('ks_usr');
                 if (session && session !== 'undefined') {
@@ -1355,17 +1608,17 @@
                 localStorage.removeItem('ks_usr'); 
             }
             
-            // Build UI framework before DB fetch
+            // 🟢 วาดเมนูทันที ไม่ต้องรอ API 🟢
             buildDynamicSidebarMenu();
             applyLanguageToDOM();
             
-            // Initial Fetch
+            // เริ่มต้นดึงข้อมูลแบบ Background
             fetchSystemDataSilently(false, true); 
             
-            // Polling interval
+            // ตั้งเวลา Polling ดึงข้อมูลใหม่ทุก 3 วิ
             setInterval(() => fetchSystemDataSilently(true, false), 3000); 
             
-            // Image Slider Interval
+            // ตั้งเวลา Slider หมุนรูป (5 วิ)
             setInterval(() => {
                 document.querySelectorAll('.img-box, .banner-slider').forEach(s => {
                     let imgs = s.querySelectorAll('img, .slider-image, .banner-item');
