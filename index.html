@@ -15,10 +15,10 @@
             theme: { 
                 extend: { 
                     colors: { 
-                        pBg: '#FDF2F8',   /* ชมพูอ่อนพาสเทล (พื้นหลัง) */
-                        pMain: '#E9D5FF', /* ม่วงอ่อน (เส้นขอบ) */
-                        pDark: '#7E22CE', /* ม่วงเข้ม (ตัวหนังสือ, ไอคอน) */
-                        pBtn: '#A855F7',  /* ม่วงปุ่มกด */
+                        pBg: '#FDF2F8',   /* ชมพูอ่อนพาสเทล (Background) */
+                        pMain: '#E9D5FF', /* ม่วงอ่อน (Border/Line) */
+                        pDark: '#7E22CE', /* ม่วงเข้ม (Text/Icon) */
+                        pBtn: '#A855F7',  /* ม่วงปุ่มกดหลัก */
                         pPink: '#FBCFE8'  /* ชมพูไฮไลท์ */
                     } 
                 } 
@@ -31,7 +31,7 @@
     
     <style>
         /* --------------------------------------------------------------------------
-           GLOBAL STYLES & ANIMATIONS
+           1. BASE UI FRAMEWORK & ANIMATIONS
            -------------------------------------------------------------------------- */
         body { 
             font-family: 'Prompt', sans-serif; 
@@ -43,27 +43,6 @@
         
         .smooth { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .hide-scroll::-webkit-scrollbar { display: none; }
-        
-        .marquee-box { 
-            overflow: hidden; 
-            white-space: nowrap; 
-            background: #E9D5FF; 
-            color: #7E22CE; 
-            padding: 10px; 
-            font-weight: 500; 
-            font-size: 0.9rem; 
-            border-bottom: 2px solid #D8B4FE; 
-        }
-        
-        .marquee-content { 
-            display: inline-block; 
-            animation: scrollMarquee 30s linear infinite; 
-        }
-        
-        @keyframes scrollMarquee { 
-            0% { transform: translateX(100vw); } 
-            100% { transform: translateX(-100%); } 
-        }
         
         .page-section { 
             display: none; 
@@ -77,9 +56,74 @@
             opacity: 1; 
             transform: translateY(0); 
         }
-        
+
         /* --------------------------------------------------------------------------
-           CARDS & COMPONENTS
+           2. CUTE MARQUEE COMPONENT (ป้ายเลื่อนแบบใหม่ น่ารักกว่าเดิม)
+           -------------------------------------------------------------------------- */
+        .marquee-wrapper {
+            width: 100%;
+            max-width: 1152px;
+            margin: 15px auto 5px auto;
+            padding: 0 15px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .marquee-cute-pill {
+            background: white;
+            border: 2.5px solid #E9D5FF;
+            border-radius: 99px;
+            padding: 6px 8px 6px 8px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .marquee-badge {
+            background: linear-gradient(135deg, #A855F7, #7E22CE);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 8px 18px;
+            border-radius: 99px;
+            margin-right: 12px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(126, 34, 206, 0.3);
+            letter-spacing: 0.5px;
+        }
+        
+        .marquee-text-container {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            /* ใส่ Mask ทำให้ข้อความค่อยๆ จางหายตรงขอบ */
+            mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+        }
+        
+        .marquee-content { 
+            display: inline-block; 
+            animation: scrollCute 25s linear infinite; 
+            color: #7E22CE;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding-top: 2px;
+        }
+        
+        @keyframes scrollCute { 
+            0% { transform: translateX(100%); } 
+            100% { transform: translateX(-100%); } 
+        }
+
+        /* --------------------------------------------------------------------------
+           3. PUBLIC STATS & CARDS
            -------------------------------------------------------------------------- */
         .stat-card-public { 
             background: white; 
@@ -90,21 +134,8 @@
             box-shadow: 0 4px 15px rgba(126, 34, 206, 0.05); 
             transition: 0.3s; 
         }
-        .stat-card-public:hover { 
-            border-color: #E9D5FF; 
-            transform: translateY(-3px); 
-            box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); 
-        }
-        .stat-icon { 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            margin: 0 auto 10px auto; 
-            font-size: 1.2rem; 
-        }
+        .stat-card-public:hover { border-color: #E9D5FF; transform: translateY(-4px); box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); }
+        .stat-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-size: 1.4rem; }
 
         .product-card { 
             background: white; 
@@ -117,106 +148,34 @@
             transition: 0.4s; 
             cursor: pointer; 
         }
-        .product-card:hover { 
-            border-color: #A855F7; 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); 
-        }
+        .product-card:hover { border-color: #A855F7; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); }
         
-        .img-box { 
-            position: relative; 
-            width: 100%; 
-            aspect-ratio: 1/1; 
-            background: #FFF; 
-            overflow: hidden; 
-        }
-        .img-box img { 
-            position: absolute; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-            padding: 10px; 
-            opacity: 0; 
-            transition: opacity 0.8s ease-in-out; 
-        }
+        .img-box { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden; }
+        .img-box img { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 10px; opacity: 0; transition: opacity 0.8s ease-in-out; }
         .img-box img.active { opacity: 1; }
         
-        .banner-slider { 
-            position: relative; 
-            overflow: hidden; 
-            border-radius: 24px; 
-            border: 2px solid #E9D5FF; 
-            background: #FFF; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
-            cursor: pointer; 
-        }
-        .banner-item { 
-            position: absolute; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            top: 0; 
-            left: 0; 
-            opacity: 0; 
-            transition: opacity 1.5s; 
-        }
+        .banner-slider { position: relative; overflow: hidden; border-radius: 24px; border: 2px solid #E9D5FF; background: #FFF; box-shadow: 0 4px 15px rgba(0,0,0,0.03); cursor: pointer; }
+        .banner-item { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; opacity: 0; transition: opacity 1.2s; }
         .banner-item.active { opacity: 1; z-index: 1; }
 
-        .input-pastel { 
-            width: 100%; 
-            border: 2.5px solid #E9D5FF; 
-            border-radius: 16px; 
-            padding: 14px 20px; 
-            background: #FFF; 
-            outline: none; 
-            transition: 0.3s; 
-            font-family: 'Prompt', sans-serif; 
-            color: #7E22CE; 
-            font-weight: 500; 
-        }
-        .input-pastel:focus { 
-            border-color: #A855F7; 
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); 
-        }
+        /* --------------------------------------------------------------------------
+           4. FORMS, BUTTONS & OTHERS
+           -------------------------------------------------------------------------- */
+        .input-pastel { width: 100%; border: 2.5px solid #E9D5FF; border-radius: 16px; padding: 14px 20px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Prompt', sans-serif; color: #7E22CE; font-weight: 500; }
+        .input-pastel:focus { border-color: #A855F7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
         
-        .btn-pastel { 
-            background: #A855F7; 
-            color: white; 
-            border-radius: 99px; 
-            padding: 14px 28px; 
-            font-weight: 600; 
-            text-align: center; 
-            border: none; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); 
-        }
-        .btn-pastel:hover { 
-            background: #9333EA; 
-            transform: scale(1.02); 
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); 
-        }
+        .btn-pastel { background: #A855F7; color: white; border-radius: 99px; padding: 14px 28px; font-weight: 600; text-align: center; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); }
+        .btn-pastel:hover { background: #9333EA; transform: scale(1.02); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); }
+        .btn-pastel:disabled { background: #D1D5DB; cursor: not-allowed; transform: none; box-shadow: none; }
         
-        .status-capsule { 
-            font-size: 0.75rem; 
-            font-weight: 700; 
-            padding: 5px 16px; 
-            border-radius: 99px; 
-            width: fit-content; 
-            margin: 12px auto; 
-            border: 1.5px solid currentColor; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
-        }
+        .status-capsule { font-size: 0.75rem; font-weight: 700; padding: 6px 18px; border-radius: 99px; width: fit-content; margin: 15px auto; border: 1.5px solid currentColor; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 
         .swal2-popup { border-radius: 28px !important; border: 4px solid #E9D5FF !important; font-family: 'Prompt', sans-serif !important; }
         .swal2-confirm { border-radius: 99px !important; background: #A855F7 !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important;}
         .swal2-cancel { border-radius: 99px !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important;}
 
         /* --------------------------------------------------------------------------
-           ADMIN DASHBOARD UI
+           5. ADMIN DASHBOARD STYLES
            -------------------------------------------------------------------------- */
         .admin-section { background: white; border-radius: 24px; border: 1.5px solid #E9D5FF; padding: 30px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
         .admin-header { font-size: 1.4rem; font-weight: 700; color: #7E22CE; margin-bottom: 20px; border-left: 5px solid #A855F7; padding-left: 15px; }
@@ -268,12 +227,33 @@
         </div>
         
         <div id="mainMenu" class="hidden absolute right-4 top-16 bg-white rounded-3xl shadow-2xl w-64 py-4 z-50 border-2 border-pMain overflow-hidden animate-pageFadeIn">
+            <div class="px-6 pb-4 border-b border-gray-100 mb-2">
+                <p class="text-[0.65rem] font-bold text-gray-400 uppercase tracking-widest" data-l="mMenu">Menu / เมนู</p>
             </div>
+            
+            <div id="dynamicMenuArea">
+                </div>
+            
+            <div id="adminMenuArea" class="hidden border-t-2 border-pMain mt-2 pt-2 bg-purple-50">
+                <button type="button" onclick="navigatePage('admin')" class="block w-full text-left px-8 py-4 hover:bg-pMain text-pDark font-bold smooth text-red-600"><i class="fa-solid fa-user-shield w-8 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
+            </div>
+
+            <div id="authMenuArea" class="border-t-2 border-pMain mt-2 pt-2">
+                </div>
+        </div>
     </nav>
 
-    <div class="marquee-container shadow-inner">
-        <div class="marquee-content" id="uiMarq">
-            <i class="fa-solid fa-bullhorn mr-3"></i> <span data-l="alertWait">กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล...</span>
+    <div class="marquee-wrapper">
+        <div class="marquee-cute-pill">
+            <div class="marquee-badge">
+                <i class="fa-solid fa-bullhorn fa-shake"></i>
+                <span>อัปเดตล่าสุด</span>
+            </div>
+            <div class="marquee-text-container">
+                <div class="marquee-content" id="uiMarq">
+                    กำลังเตรียมระบบ กรุณารอสักครู่...
+                </div>
+            </div>
         </div>
     </div>
     
@@ -286,23 +266,23 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10 mt-2" id="publicStatsContainer">
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-users"></i></div>
-                    <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stUsr">ผู้ใช้ทั้งหมด</span>
-                    <h3 id="pubUsers" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">...</h3>
+                    <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stUsr">ผู้ใช้งานทั้งหมด</span>
+                    <h3 id="pubUsers" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">0</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-cart-shopping"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stOrd">จำนวนออเดอร์</span>
-                    <h3 id="pubOrders" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">...</h3>
+                    <h3 id="pubOrders" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">0</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-green-100 text-green-600 shadow-sm"><i class="fa-solid fa-money-bill-wave"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stTop">ยอดเติมเงินสะสม</span>
-                    <h3 id="pubTopups" class="text-lg md:text-xl font-extrabold text-green-600 mt-1">...</h3>
+                    <h3 id="pubTopups" class="text-lg md:text-xl font-extrabold text-green-600 mt-1">฿0.00</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-red-100 text-red-500 shadow-sm"><i class="fa-solid fa-sack-dollar"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stSal">ยอดขายสำเร็จ</span>
-                    <h3 id="pubSales" class="text-lg md:text-xl font-extrabold text-red-500 mt-1">...</h3>
+                    <h3 id="pubSales" class="text-lg md:text-xl font-extrabold text-red-500 mt-1">฿0.00</h3>
                 </div>
             </div>
 
@@ -313,7 +293,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-pMain pb-5 gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div>
-                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><span data-l="hRec">บริการแนะนำ</span></h2>
+                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star mr-2 text-pBtn"></i><span data-l="hRec">บริการแนะนำ</span></h2>
                 </div>
                 <div class="w-full md:w-auto">
                    <select id="catFilter" class="input-pastel !py-2.5 !w-full md:!w-80 text-pDark font-bold shadow-sm" onchange="renderProductCatalog()">
@@ -325,7 +305,7 @@
             <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
                 <div class="col-span-full text-center py-20 text-pDark opacity-50">
                     <i class="fa-solid fa-spinner fa-spin text-5xl mb-4"></i>
-                    <p class="font-bold tracking-widest uppercase">กำลังเชื่อมต่อฐานข้อมูล...</p>
+                    <p class="font-bold tracking-widest mt-2">กำลังเชื่อมต่อฐานข้อมูล...</p>
                 </div>
             </div>
             
@@ -338,7 +318,7 @@
         <section id="p-games" class="page-section">
             <div class="flex items-center justify-center gap-4 mb-10 border-b-2 border-pMain pb-4">
                 <i class="fa-solid fa-gamepad text-3xl text-pBtn"></i>
-                <h2 class="text-3xl font-extrabold text-pDark tracking-tighter uppercase"><span data-l="hAll">เกมและบริการทั้งหมด</span></h2>
+                <h2 class="text-3xl font-extrabold text-pDark uppercase tracking-widest"><span data-l="hAll">เกมและบริการทั้งหมด</span></h2>
             </div>
             <div id="allGamesArea" class="space-y-12"></div>
         </section>
@@ -346,7 +326,7 @@
         <section id="p-contact" class="page-section">
             <div class="bg-white p-10 md:p-16 max-w-xl mx-auto mt-10 rounded-[40px] border-2 border-pMain shadow-2xl text-center">
                 <div class="w-20 h-20 bg-pBg rounded-full flex items-center justify-center mx-auto mb-6 text-pBtn text-4xl shadow-inner border border-pMain">
-                    <i class="fa-solid fa-paper-plane"></i>
+                    <i class="fa-solid fa-headset"></i>
                 </div>
                 <h2 class="text-3xl font-extrabold text-pDark mb-10 tracking-tight"><span data-l="hCont">ช่องทางการติดต่อ</span></h2>
                 <div id="contactList" class="flex flex-col gap-5"></div>
@@ -355,7 +335,7 @@
 
         <section id="p-auth" class="page-section">
             <div class="bg-white p-8 md:p-12 max-w-md mx-auto mt-10 rounded-[40px] border-2 border-pMain shadow-2xl z-999 relative">
-                <h2 class="text-center text-3xl font-bold text-pDark mb-10 tracking-tight"><i class="fa-solid fa-user-shield mr-2 text-pBtn"></i> <span id="authTitle" data-l="hLog">เข้าสู่ระบบ</span></h2>
+                <h2 class="text-center text-3xl font-bold text-pDark mb-10 tracking-tight"><i class="fa-solid fa-user-lock mr-2 text-pBtn"></i> <span id="authTitle" data-l="hLog">เข้าสู่ระบบ</span></h2>
                 
                 <div id="fLog">
                     <div class="space-y-6">
@@ -367,13 +347,13 @@
                             <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest">Password</label>
                             <input type="password" id="lPass" class="input-pastel shadow-sm" data-p="phPass" placeholder="รหัสผ่าน" required>
                         </div>
-                        <button type="button" onclick="executeAuthenticationProcess('login')" class="btn-main w-full text-xl mt-6 shadow-xl">
-                            <span data-l="btnLog">เข้าสู่ระบบ</span> <i class="fa-solid fa-circle-arrow-right ml-1"></i>
+                        <button type="button" onclick="executeAuthenticationProcess('login')" class="btn-pastel w-full text-xl mt-6 shadow-xl">
+                            <span data-l="btnLog">เข้าสู่ระบบ</span> <i class="fa-solid fa-circle-arrow-right ml-2"></i>
                         </button>
                     </div>
                     <div class="text-center mt-10 border-t border-pMain pt-6">
                         <p class="text-sm font-bold text-gray-400" data-l="noAcc">ยังไม่มีบัญชีสมาชิก?</p>
-                        <button type="button" class="text-pDark font-extrabold mt-2 hover:text-pBtn underline smooth" onclick="switchAuthView('reg')" data-l="hReg">สมัครสมาชิกที่นี่</button>
+                        <button type="button" class="text-pBtn font-extrabold mt-2 hover:text-pDark underline smooth" onclick="switchAuthView('reg')" data-l="hReg">สมัครสมาชิกที่นี่</button>
                     </div>
                 </div>
                 
@@ -383,7 +363,7 @@
                         <input type="email" id="rMail" class="input-pastel" data-p="phMail" placeholder="อีเมลของคุณ">
                         <input type="password" id="rPass" class="input-pastel" data-p="phPass2" placeholder="ตั้งรหัสผ่าน">
                         <input type="password" id="rPass2" class="input-pastel" data-p="phPass3" placeholder="ยืนยันรหัสผ่าน">
-                        <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-main w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิกใหม่</span></button>
+                        <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิก</span></button>
                     </div>
                     <div class="text-center mt-8 border-t border-pMain pt-6">
                         <button type="button" class="text-gray-500 font-bold hover:text-pDark smooth" onclick="switchAuthView('log')" data-l="hasAcc">มีบัญชีอยู่แล้ว? เข้าสู่ระบบเลย</button>
@@ -410,21 +390,21 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div class="col-span-full">
                         <span class="admin-label ml-4 text-pDark font-bold text-[0.7rem]">TRANSFER AMOUNT / จำนวนเงินโอน</span>
-                        <input type="number" id="tAmt" class="input-pastel text-center font-extrabold text-2xl text-pDark" data-p="phAmt" placeholder="0.00" step="0.01">
+                        <input type="number" id="tAmt" class="input-pastel text-center font-extrabold text-2xl text-pDark shadow-sm" data-p="phAmt" placeholder="0.00" step="0.01">
                     </div>
                     <div class="col-span-full">
                         <span class="admin-label ml-4 text-pDark font-bold text-[0.7rem]">REF CODE / รหัส 6 ตัวท้ายสลิป</span>
-                        <input type="text" id="tRef" class="input-pastel text-center uppercase tracking-widest font-extrabold text-pDark" data-p="phRef" placeholder="XXXXXX" maxlength="6">
+                        <input type="text" id="tRef" class="input-pastel text-center uppercase tracking-widest font-extrabold text-pDark shadow-sm" data-p="phRef" placeholder="XXXXXX" maxlength="6">
                     </div>
                 </div>
 
                 <label class="block text-center mb-10 cursor-pointer bg-pBg border-4 border-dashed border-pMain p-10 rounded-[35px] hover:bg-pMain hover:text-white smooth text-pDark group shadow-sm">
                     <i class="fa-solid fa-cloud-arrow-up text-5xl mb-4 group-hover:bounce"></i> <br>
-                    <span class="text-sm font-extrabold uppercase tracking-widest" data-l="txtUpload">คลิกอัปโหลดไฟล์สลิป</span>
+                    <span class="text-sm font-extrabold uppercase tracking-widest" data-l="txtUpload">คลิกเพื่ออัปโหลดไฟล์สลิป</span>
                     <input type="file" id="tFile" accept="image/*" class="hidden">
                 </label>
                 
-                <button type="button" onclick="submitTopupTransaction()" id="btnSubmitTopup" class="btn-main w-full text-2xl py-5 shadow-xl font-bold"><i class="fa-solid fa-paper-plane mr-2"></i> <span data-l="btnTopup">ยืนยันการแจ้งโอน</span></button>
+                <button type="button" onclick="submitTopupTransaction()" id="btnSubmitTopup" class="btn-pastel w-full text-2xl py-5 shadow-xl font-bold tracking-tighter"><i class="fa-solid fa-paper-plane mr-2"></i> <span data-l="btnTopup">ยืนยันการแจ้งโอน</span></button>
             </div>
         </section>
 
@@ -445,9 +425,9 @@
             
             <div class="flex gap-4 mb-10 overflow-x-auto hide-scroll pb-3 border-b-2 border-pBg">
                 <button type="button" class="ad-tab-btn active shadow-sm" onclick="switchAdminTab('set')"><i class="fa-solid fa-sliders mr-2"></i> ตั้งค่าเว็บไซต์</button>
-                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('prod')"><i class="fa-solid fa-box-open mr-2"></i> จัดการสินค้า</button>
-                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('work')"><i class="fa-solid fa-images mr-2"></i> จัดการงานป้าย</button>
-                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('order')"><i class="fa-solid fa-list-check mr-2"></i> คิวออเดอร์</button>
+                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('prod')"><i class="fa-solid fa-box-open mr-2"></i> จัดการสินค้า</button>
+                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('work')"><i class="fa-solid fa-images mr-2"></i> จัดการงานป้าย</button>
+                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('order')"><i class="fa-solid fa-list-check mr-2"></i> คิวออเดอร์</button>
             </div>
 
             <div id="ad-set" class="ad-sec space-y-8 animate-pageFadeIn">
@@ -480,16 +460,16 @@
                         <div><label class="admin-label">QR ทรูมันนี่</label><input type="text" id="s_qrT" class="inp-admin"></div>
                         <div><label class="admin-label">QR ต่างประเทศ</label><input type="text" id="s_qrI" class="inp-admin"></div>
                         <div class="col-span-full border-t border-pMain my-3"></div>
-                        <div><label class="admin-label">อีเมลแอดมิน (ใช้รับแจ้งเตือนเมื่อโอน/สั่งซื้อ)</label><input type="email" id="s_mail" class="inp-admin"></div>
+                        <div><label class="admin-label">อีเมลแอดมิน (ใช้รับแจ้งเตือน)</label><input type="email" id="s_mail" class="inp-admin"></div>
                         <div><label class="admin-label">Facebook (URL)</label><input type="text" id="s_fb" class="inp-admin"></div>
                         <div><label class="admin-label">Line (URL)</label><input type="text" id="s_line" class="inp-admin"></div>
                         <div><label class="admin-label">เบอร์โทรศัพท์ติดต่อ</label><input type="text" id="s_phone" class="inp-admin"></div>
-                        <div class="md:col-span-2"><label class="admin-label">ข้อความบอทตอบกลับเมื่อลูกค้าสั่งซื้อสำเร็จ (ส่งเข้า Inbox)</label><input type="text" id="s_msgS" class="inp-admin"></div>
+                        <div class="md:col-span-2"><label class="admin-label">ข้อความบอทตอบกลับเมื่อลูกค้าสั่งซื้อสำเร็จ (ส่งเข้า Inbox ลูกค้า)</label><input type="text" id="s_msgS" class="inp-admin"></div>
                     </div>
                 </div>
                 
                 <div class="flex justify-end pt-4 pb-10">
-                    <button type="button" onclick="persistSystemSettings()" class="btn-main !w-full md:!w-80 text-xl py-4 shadow-xl"><i class="fa-solid fa-floppy-disk mr-2"></i> บันทึกข้อมูลตั้งค่า</button>
+                    <button type="button" onclick="persistSystemSettings()" class="btn-pastel !w-full md:!w-80 text-xl py-4 shadow-xl"><i class="fa-solid fa-floppy-disk mr-2"></i> บันทึกข้อมูลตั้งค่า</button>
                 </div>
             </div>
 
@@ -532,7 +512,7 @@
                         <div><label class="admin-label">ชื่อหมวดหมู่งาน</label><input type="text" id="w_cat" class="inp-admin"></div>
                         <div class="md:col-span-2"><label class="admin-label">ลิงก์รูปภาพ (หลายรูปคั่นด้วย ,)</label><input type="text" id="w_img" class="inp-admin"></div>
                     </div>
-                    <button type="button" onclick="persistPortfolioWork()" class="btn-main mt-6 shadow-md"><i class="fa-solid fa-plus-circle mr-2"></i> เพิ่มพอร์ตฟอลิโองานป้าย</button>
+                    <button type="button" onclick="persistPortfolioWork()" class="btn-pastel mt-6 shadow-md"><i class="fa-solid fa-plus-circle mr-2"></i> เพิ่มพอร์ตฟอลิโองานป้าย</button>
                 </div>
                 <div class="admin-section p-0 overflow-hidden"><table class="admin-table w-full" id="tb-works"></table></div>
             </div>
@@ -553,19 +533,19 @@
     </footer>
 
     <script>
-        // 🔴🔴🔴 API URL: ลิงก์ใหม่ของคุณโซ (เช็คว่าถูกต้องและไม่มีช่องว่าง) 🔴🔴🔴
+        // 🔴🔴🔴 API URL ของคุณโซ 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwHB_NMJkqF6XUxuoX4NIn4YCRFes73e8NRT70ce69TwDSPpTsPHS3eRk5PqoA7GYWyug/exec';
         
         /**
-         * Global App State (ศูนย์กลางเก็บข้อมูล)
+         * Global App State Object
          */
         const AppState = { 
             sys: { storeName: 'kataiy', logo: 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg' },
             prods: [],       
             wrks: [],        
             history: [],     
-            stats: null,     // ข้อมูลสถิติของเว็บ (Public)
-            u: null,         // ข้อมูลลูกค้าที่ล็อกอินอยู่
+            stats: null,     
+            u: null,         
             inb: [],         
             uOrd: [],        
             adm: null,       
@@ -665,7 +645,6 @@
 
         /**
          * 2. Translation & Dynamic Menu Building
-         * สร้างเมนูจาก Javascript เพื่อป้องกันเมนูซ้อนทับและหาย
          */
         function executeLanguageChange() {
             AppState.lang = document.getElementById('lang').value;
@@ -680,6 +659,7 @@
             buildDynamicSidebarMenu();
         }
 
+        // สร้างเมนู 3 ขีด แบบ Real-time ตามสถานะ Login
         function buildDynamicSidebarMenu() {
             const menuArea = document.getElementById('dynamicMenuArea');
             let html = '';
@@ -698,6 +678,13 @@
             html += `<button type="button" onclick="navigatePage('contact')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-address-book w-8 text-center text-pBtn"></i> <span data-l="mCont">${translator('mCont')}</span></button>`;
             
             menuArea.innerHTML = html;
+
+            // Admin Button Switch
+            if (AppState.u && AppState.u.role === 'admin') {
+                document.getElementById('adminMenuArea').classList.remove('hidden');
+            } else {
+                document.getElementById('adminMenuArea').classList.add('hidden');
+            }
 
             // Auth Button Switch (Login / Logout)
             if (AppState.u) {
@@ -754,7 +741,6 @@
                 });
                 
                 if (!response.ok) throw new Error("API Offline");
-                
                 const rawText = await response.text();
                 if (rawText.includes("<html")) throw new Error("Permissions Denied");
                 
@@ -779,12 +765,12 @@
                 }
             } catch (error) {
                 console.error("Polling Failed", error);
-                if (!isSilent) Swal.fire('Error', 'ไม่สามารถเชื่อมต่อฐานข้อมูลได้', 'error');
+                if (!isSilent) Swal.fire('Error', 'ไม่สามารถเชื่อมต่อฐานข้อมูลได้ กรุณาตรวจสอบ URL API', 'error');
             }
         }
 
         /**
-         * 5. User Authentication Logic (Fixed Refreshing)
+         * 5. User Authentication Logic (💥 FORCE RELOAD 💥)
          */
         function switchAuthView(mode) {
             document.getElementById('fLog').classList.toggle('hidden', mode !== 'log');
@@ -824,10 +810,8 @@
             const response = await transmitDataToAPI(actionType, dataset);
             
             if (response && response.status === 'success') {
-                AppState.u = response.user;
                 localStorage.setItem('ks_usr', JSON.stringify(response.user));
-                
-                // 🟢 FORCE RELOAD AFTER LOGIN TO FIX ALL UI BUGS 🟢
+                // 🟢 FORCE RELOAD AFTER LOGIN 🟢
                 Swal.fire({ 
                     icon: 'success', 
                     title: translator('alertOk'), 
@@ -835,7 +819,8 @@
                     timer: 1500, 
                     showConfirmButton: false 
                 }).then(() => {
-                    window.location.reload(); 
+                    window.location.href = window.location.pathname; // กลับหน้าหลักและรีโหลด
+                    window.location.reload(true); 
                 });
 
             } else {
@@ -863,7 +848,7 @@
         }
 
         /**
-         * 6. DOM Rendering System
+         * 6. UI DOM Manipulator
          */
         function renderDOMEngine(isSilent, updateForms) {
             document.title = AppState.sys.storeName || 'kataiy';
@@ -871,7 +856,7 @@
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiName').innerText = AppState.sys.storeName || 'kataiy';
 
-            // 🌟 Render Public Statistics (อัปเดตสถิติให้ทุกคนเห็น) 🌟
+            // Public Stats
             if(AppState.stats) {
                 document.getElementById('pubUsers').innerText = AppState.stats.usersCount || 0;
                 document.getElementById('pubOrders').innerText = AppState.stats.ordersCount || 0;
@@ -879,20 +864,21 @@
                 document.getElementById('pubSales').innerText = '฿' + parseFloat(AppState.stats.salesAmount || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
             }
 
+            // Banner
             const bannerElement = document.getElementById('bannerContainer');
             if (AppState.sys.banner) {
                 bannerElement.classList.remove('hidden');
                 const imagesList = AppState.sys.banner.split(',').map(s => s.trim());
                 bannerElement.innerHTML = imagesList.map((url, i) => `<img src="${url}" class="banner-item ${i === 0 ? 'active' : ''}">`).join('');
-            } else {
-                bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=kataiy+store" class="banner-item active">`;
             }
 
+            // Cute Marquee
             const marqueeBlock = document.getElementById('uiMarq');
             const noticeText = AppState.sys.announcement || '';
-            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join('  ★  ') : 'ระบบพร้อมให้บริการ 100%';
-            marqueeBlock.innerHTML = `<i class="fa-solid fa-bullhorn mr-3 text-pDark"></i> ${noticeText} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa-solid fa-shield-heart mr-2 text-pDark"></i> ${historyFeed}`;
+            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-paw text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการ 100%';
+            marqueeBlock.innerHTML = `<span class="mr-4">${noticeText}</span> <i class="fa-solid fa-bolt text-yellow-400 mr-2"></i> ${historyFeed}`;
 
+            // Status Capsule
             const stBox = document.getElementById('uiStatus');
             stBox.style.display = 'block';
             if (AppState.sys.isOpen === 'true') {
@@ -903,19 +889,17 @@
                 stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-white rounded-full"></span> ${translator('stClose')}`;
             }
 
-            // User Specific UI updates
+            // User Identity Rendering
             if (AppState.u) {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('uId').innerText = AppState.u.userId;
                 
                 if(AppState.u.role === 'admin') {
-                    document.getElementById('adminMenuArea').classList.remove('hidden');
                     if (document.getElementById('p-admin').classList.contains('active')) renderAdminDashboard(updateForms);
                 }
             } else {
                 document.getElementById('uBadge').classList.add('hidden');
-                document.getElementById('adminMenuArea').classList.add('hidden');
             }
 
             buildDynamicSidebarMenu();
@@ -950,7 +934,7 @@
                 const discountHTML = p.discount > 0 ? `<span class="absolute top-4 right-4 bg-red-500 text-white text-[0.65rem] font-extrabold px-3 py-1 rounded-full z-10 shadow-lg">-${p.discount}%</span>` : '';
                 
                 return `
-                <div class="product-card cursor-pointer animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                <div class="product-card animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                     <div class="img-box">${discountHTML}${imgHtml}</div>
                     <div class="p-5 flex-1 flex flex-col justify-between text-center bg-white">
                         <div>
@@ -987,7 +971,7 @@
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         ${catMap[catName].map(p => `
-                            <div class="product-card cursor-pointer group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                            <div class="product-card group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                                 <div class="img-box bg-pBg border-b border-pMain"><img src="${p.images.split(',')[0].trim()}" class="slider-image active group-hover:scale-110 smooth"></div>
                                 <div class="p-4 text-center">
                                     <h4 class="font-bold text-gray-800 text-xs mb-2 line-clamp-1">${p.name}</h4>
@@ -1010,7 +994,7 @@
                 const picUrls = w.imgs.split(',').map(s => s.trim());
                 const picHTML = picUrls.map((url, i) => `<img src="${url}" class="slider-image ${i === 0 ? 'active' : ''}">`).join('');
                 return `
-                <div class="product-card cursor-pointer smooth hover:scale-105" onclick="window.open('${w.line || '#'}','_blank')">
+                <div class="product-card smooth hover:scale-105" onclick="window.open('${w.line || '#'}','_blank')">
                     <div class="img-box">${picHTML}</div>
                     <div class="p-3 text-center bg-pBg border-t border-pMain">
                         <span class="text-[0.65rem] font-extrabold text-pDark uppercase tracking-widest">${w.cat}</span>
@@ -1048,14 +1032,14 @@
         function renderContactInfo() {
             const listArea = document.getElementById('contactList');
             let content = '';
-            if (AppState.sys.contactFB) content += `<a href="${AppState.sys.contactFB}" target="_blank" class="flex items-center justify-center gap-4 bg-pBg p-5 rounded-3xl smooth hover:bg-pMain text-pDark font-bold border-2 border-pMain shadow-sm"><i class="fa-brands fa-facebook-f w-6 text-2xl"></i> FACEBOOK OFFICIAL</a>`;
+            if (AppState.sys.contactFB) content += `<a href="${AppState.sys.contactFB}" target="_blank" class="flex items-center justify-center gap-4 bg-pBg p-5 rounded-3xl smooth hover:bg-pMain text-pDark font-bold border-2 border-pMain shadow-sm"><i class="fa-brands fa-facebook-f w-6 text-2xl text-pBtn"></i> FACEBOOK OFFICIAL</a>`;
             if (AppState.sys.contactLine) content += `<a href="${AppState.sys.contactLine}" target="_blank" class="flex items-center justify-center gap-4 bg-green-50 p-5 rounded-3xl smooth hover:bg-green-100 text-green-600 font-bold border-2 border-green-200 shadow-sm"><i class="fa-brands fa-line w-6 text-2xl"></i> LINE OFFICIAL</a>`;
-            if (AppState.sys.contactPhone) content += `<a href="tel:${AppState.sys.contactPhone}" class="flex items-center justify-center gap-4 bg-pBg p-5 rounded-3xl smooth hover:bg-pMain text-pDark font-bold border-2 border-pMain shadow-sm"><i class="fa-solid fa-phone-volume w-6 text-2xl"></i> ${AppState.sys.contactPhone}</a>`;
+            if (AppState.sys.contactPhone) content += `<a href="tel:${AppState.sys.contactPhone}" class="flex items-center justify-center gap-4 bg-pBg p-5 rounded-3xl smooth hover:bg-pMain text-pDark font-bold border-2 border-pMain shadow-sm"><i class="fa-solid fa-phone-volume w-6 text-2xl text-pBtn"></i> ${AppState.sys.contactPhone}</a>`;
             listArea.innerHTML = content || `<div class="text-gray-400 font-medium">${translator('noData')}</div>`;
         }
 
         /**
-         * 7. Financial Top-up Control
+         * 7. Top-up & Order Transactions
          */
         function changePaymentMode(modeStr) {
             AppState.pay = modeStr;
@@ -1082,11 +1066,7 @@
             fr.onload = async () => {
                 Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
                 const res = await transmitDataToAPI('topup', {
-                    userId: AppState.u.userId,
-                    amount: amountVal,
-                    refCode: refVal,
-                    method: AppState.pay,
-                    imageBase64: fr.result
+                    userId: AppState.u.userId, amount: amountVal, refCode: refVal, method: AppState.pay, imageBase64: fr.result
                 });
                 
                 if (res && res.status === 'success') {
@@ -1100,12 +1080,9 @@
             fr.readAsDataURL(slipUpload);
         }
 
-        /**
-         * 8. Smart Order System
-         */
         function launchOrderProcess(prodId, prodName, prodPrice) {
             if (!AppState.u) { 
-                Swal.fire('หยุดก่อน!', 'กรุณาเข้าสู่ระบบ หรือ สมัครสมาชิก ก่อนทำรายการสั่งซื้อสินค้านะคะ', 'warning');
+                Swal.fire('หยุดก่อน!', 'กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้านะคะ', 'warning');
                 navigatePage('auth'); 
                 return; 
             }
@@ -1146,24 +1123,20 @@
                     } else {
                         collectedData = `ID/Mail: ${document.getElementById('gMailInp').value} | Pass: ${document.getElementById('gPassInp').value}`;
                     }
-                    if (!collectedData || collectedData.includes('undefined')) { Swal.showValidationMessage('รบกวนกรอกข้อมูลตัวละครให้ครบด้วยน้า'); return false; }
+                    if (!collectedData || collectedData.includes('undefined')) { Swal.showValidationMessage('รบกวนกรอกข้อมูลให้ครบด้วยน้า'); return false; }
                     return { loginType: loginType, gameData: collectedData };
                 }
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading() });
                     const res = await transmitDataToAPI('order', {
-                        userId: AppState.u.userId,
-                        product: prodName,
-                        price: prodPrice,
-                        loginType: result.value.loginType,
-                        gameData: result.value.gameData
+                        userId: AppState.u.userId, product: prodName, price: prodPrice, loginType: result.value.loginType, gameData: result.value.gameData
                     });
                     if (res && res.status === 'success') {
                         Swal.fire({ icon: 'success', title: translator('alertOk'), text: AppState.sys.msgSuccess });
                         fetchSystemDataSilently();
                     } else {
-                        Swal.fire('ยอดเงินไม่พอ', res ? res.message : 'ยอดเงินในระบบไม่พอค่ะ กรุณาเติมเงินก่อนนะคะ', 'error');
+                        Swal.fire('ยอดเงินไม่พอ', res ? res.message : 'กรุณาเติมเงินก่อนนะคะ', 'error');
                     }
                 }
             });
@@ -1183,7 +1156,7 @@
         }
 
         // ==========================================
-        // 9. ADMIN DASHBOARD CONTROLLER (SECURE)
+        // 8. ADMIN DASHBOARD CONTROLLER
         // ==========================================
         function switchAdminTab(tabID) {
             document.querySelectorAll('.ad-sec').forEach(el => el.classList.add('hidden'));
@@ -1324,7 +1297,7 @@
         }
 
         async function deleteAdminProduct(uid) {
-            const prompt = await Swal.fire({ title: 'ลบสินค้านี้?', text: "ข้อมูลนี้จะหายไปถาวร ยืนยันไหมคะ?", icon: 'warning', showCancelButton: true, confirmButtonColor: '#EF4444' });
+            const prompt = await Swal.fire({ title: 'ลบสินค้านี้?', text: "ข้อมูลนี้จะหายไปจากหน้าร้านถาวร ยืนยันไหมคะ?", icon: 'warning', showCancelButton: true, confirmButtonColor: '#EF4444' });
             if (prompt.isConfirmed) {
                 const r = await transmitDataToAPI('adminManageProd', { act: 'del', id: uid });
                 if (r && r.status === 'success') fetchSystemDataSilently();
@@ -1358,29 +1331,31 @@
         }
 
         function handleBannerClick() { if(AppState.sys.bannerLink) window.open(AppState.sys.bannerLink, '_blank'); }
-        
+
         /**
-         * 10. Initialization Process (Boot)
+         * 9. Boot Initialization
          */
         window.addEventListener("DOMContentLoaded", () => {
             document.getElementById('lang').value = AppState.lang;
             
             try {
                 const session = localStorage.getItem('ks_usr');
-                if (session && session !== 'undefined') AppState.u = JSON.parse(session);
+                if (session && session !== 'undefined') {
+                    AppState.u = JSON.parse(session);
+                }
             } catch(e) { 
                 localStorage.removeItem('ks_usr'); 
             }
             
+            // วาดเมนู 3 ขีดทันที ไม่ต้องรอ API
+            buildDynamicSidebarMenu();
             applyLanguageToDOM();
             
-            // Initial data pull
+            // ดึงข้อมูล
             fetchSystemDataSilently(false, true); 
             
-            // Interval for auto-refresh
             setInterval(() => fetchSystemDataSilently(true, false), 3000); 
             
-            // Interval for sliders
             setInterval(() => {
                 document.querySelectorAll('.img-box, .banner-slider').forEach(s => {
                     let imgs = s.querySelectorAll('img, .slider-image, .banner-item');
