@@ -66,7 +66,7 @@
         }
 
         /* ==========================================================================
-           CUTE MARQUEE COMPONENT
+           CUTE MARQUEE COMPONENT (Fixed Scroll from edge to edge)
            ========================================================================== */
         .marquee-wrapper {
             width: 100%;
@@ -123,8 +123,9 @@
             padding-top: 2px;
         }
         
+        /* แก้ไขให้เลื่อนเข้าสุดจากขอบขวา และออกสุดขอบซ้าย */
         @keyframes scrollCute { 
-            0% { transform: translateX(100%); } 
+            0% { transform: translateX(100vw); } 
             100% { transform: translateX(-100%); } 
         }
 
@@ -430,7 +431,6 @@
             box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); 
         }
         
-        /* แก้ปัญหาการทับซ้อนของ Z-Index */
         .z-999 { z-index: 999; }
     </style>
 </head>
@@ -470,17 +470,14 @@
             </div>
             
             <div id="dynamicMenuArea">
-                <button type="button" onclick="navigatePage('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span data-l="mHome">หน้าหลัก</span></button>
-                <button type="button" onclick="navigatePage('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span data-l="mGames">เกมและบริการทั้งหมด</span></button>
-            </div>
+                </div>
             
             <div id="adminMenuArea" class="hidden border-t-2 border-pMain mt-2 pt-2 bg-purple-50">
                 <button type="button" onclick="navigatePage('admin')" class="block w-full text-left px-8 py-4 hover:bg-pMain text-pDark font-bold smooth text-red-600"><i class="fa-solid fa-user-shield w-8 text-center"></i> <span data-l="adm">ระบบจัดการหลังบ้าน</span></button>
             </div>
 
             <div id="authMenuArea" class="border-t-2 border-pMain mt-2 pt-2">
-                <button type="button" onclick="navigatePage('auth')" class="block w-full text-left px-8 py-4 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-8 text-center text-pBtn"></i> <span data-l="mLogin">เข้าสู่ระบบ / สมัคร</span></button>
-            </div>
+                </div>
         </div>
     </nav>
 
@@ -492,7 +489,7 @@
             </div>
             <div class="marquee-text-container">
                 <div class="marquee-content" id="uiMarq">
-                    กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล กรุณารอสักครู่นะคะ...
+                    กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล...
                 </div>
             </div>
         </div>
@@ -508,22 +505,22 @@
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-users"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stUsr">ผู้ใช้งานทั้งหมด</span>
-                    <h3 id="pubUsers" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">0</h3>
+                    <h3 id="pubUsers" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">...</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-cart-shopping"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stOrd">จำนวนออเดอร์</span>
-                    <h3 id="pubOrders" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">0</h3>
+                    <h3 id="pubOrders" class="text-xl md:text-2xl font-extrabold text-pDark mt-1">...</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-green-100 text-green-600 shadow-sm"><i class="fa-solid fa-money-bill-wave"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stTop">ยอดเติมเงินสะสม</span>
-                    <h3 id="pubTopups" class="text-lg md:text-xl font-extrabold text-green-600 mt-1">฿0.00</h3>
+                    <h3 id="pubTopups" class="text-lg md:text-xl font-extrabold text-green-600 mt-1">...</h3>
                 </div>
                 <div class="stat-card-public">
                     <div class="stat-icon bg-red-100 text-red-500 shadow-sm"><i class="fa-solid fa-sack-dollar"></i></div>
                     <span class="text-[0.65rem] font-bold text-gray-500 uppercase tracking-widest" data-l="stSal">ยอดขายสำเร็จ</span>
-                    <h3 id="pubSales" class="text-lg md:text-xl font-extrabold text-red-500 mt-1">฿0.00</h3>
+                    <h3 id="pubSales" class="text-lg md:text-xl font-extrabold text-red-500 mt-1">...</h3>
                 </div>
             </div>
 
@@ -534,7 +531,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-pMain pb-5 gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div>
-                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star mr-2 text-pBtn"></i><span data-l="hRec">บริการแนะนำ</span></h2>
+                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><span data-l="hRec">บริการแนะนำ</span></h2>
                 </div>
                 <div class="w-full md:w-auto">
                    <select id="catFilter" class="input-pastel !py-2.5 !w-full md:!w-80 text-pDark font-bold shadow-sm" onchange="renderProductCatalog()">
@@ -546,7 +543,7 @@
             <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
                 <div class="col-span-full text-center py-20 text-pDark opacity-50">
                     <i class="fa-solid fa-spinner fa-spin text-5xl mb-4"></i>
-                    <p class="font-bold tracking-widest mt-2 uppercase">กำลังซิงค์ข้อมูล...</p>
+                    <p class="font-bold tracking-widest mt-2 uppercase">กำลังดึงข้อมูลฐานข้อมูล...</p>
                 </div>
             </div>
             
@@ -576,7 +573,7 @@
 
         <section id="p-auth" class="page-section">
             <div class="bg-white p-8 md:p-12 max-w-md mx-auto mt-10 rounded-[40px] border-2 border-pMain shadow-2xl z-999 relative">
-                <h2 class="text-center text-3xl font-bold text-pDark mb-10 tracking-tight"><i class="fa-solid fa-user-lock mr-2 text-pBtn"></i> <span id="authTitle" data-l="hLog">เข้าสู่ระบบ</span></h2>
+                <h2 class="text-center text-3xl font-bold text-pDark mb-10 tracking-tight"><i class="fa-solid fa-user-shield mr-2 text-pBtn"></i> <span id="authTitle" data-l="hLog">เข้าสู่ระบบ</span></h2>
                 
                 <div id="fLog">
                     <div class="space-y-6">
@@ -589,12 +586,12 @@
                             <input type="password" id="lPass" class="input-pastel shadow-sm" data-p="phPass" placeholder="รหัสผ่าน" required>
                         </div>
                         <button type="button" onclick="executeAuthenticationProcess('login')" class="btn-pastel w-full text-xl mt-6 shadow-xl">
-                            <span data-l="btnLog">เข้าสู่ระบบ</span> <i class="fa-solid fa-circle-arrow-right ml-2"></i>
+                            <span data-l="btnLog">เข้าสู่ระบบ</span> <i class="fa-solid fa-circle-arrow-right ml-1"></i>
                         </button>
                     </div>
                     <div class="text-center mt-10 border-t border-pMain pt-6">
                         <p class="text-sm font-bold text-gray-400" data-l="noAcc">ยังไม่มีบัญชีสมาชิก?</p>
-                        <button type="button" class="text-pBtn font-extrabold mt-2 hover:text-pDark underline smooth" onclick="switchAuthView('reg')" data-l="hReg">สมัครสมาชิกที่นี่</button>
+                        <button type="button" class="text-pDark font-extrabold mt-2 hover:text-pBtn underline smooth" onclick="switchAuthView('reg')" data-l="hReg">สมัครสมาชิกที่นี่</button>
                     </div>
                 </div>
                 
@@ -604,7 +601,7 @@
                         <input type="email" id="rMail" class="input-pastel" data-p="phMail" placeholder="อีเมลของคุณ">
                         <input type="password" id="rPass" class="input-pastel" data-p="phPass2" placeholder="ตั้งรหัสผ่าน">
                         <input type="password" id="rPass2" class="input-pastel" data-p="phPass3" placeholder="ยืนยันรหัสผ่าน">
-                        <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิกใหม่</span></button>
+                        <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิก</span></button>
                     </div>
                     <div class="text-center mt-8 border-t border-pMain pt-6">
                         <button type="button" class="text-gray-500 font-bold hover:text-pDark smooth" onclick="switchAuthView('log')" data-l="hasAcc">มีบัญชีอยู่แล้ว? เข้าสู่ระบบเลย</button>
@@ -666,9 +663,9 @@
             
             <div class="flex gap-4 mb-10 overflow-x-auto hide-scroll pb-3 border-b-2 border-pBg">
                 <button type="button" class="ad-tab-btn active shadow-sm" onclick="switchAdminTab('set')"><i class="fa-solid fa-sliders mr-2"></i> ตั้งค่าเว็บไซต์</button>
-                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('prod')"><i class="fa-solid fa-box-open mr-2"></i> จัดการสินค้า</button>
-                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('work')"><i class="fa-solid fa-images mr-2"></i> จัดการงานป้าย</button>
-                <button type="button" class="ad-tab-btn shadow-sm" onclick="switchAdminTab('order')"><i class="fa-solid fa-list-check mr-2"></i> คิวออเดอร์</button>
+                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('prod')"><i class="fa-solid fa-box-open mr-2"></i> จัดการสินค้า</button>
+                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('work')"><i class="fa-solid fa-images mr-2"></i> จัดการงานป้าย</button>
+                <button type="button" class="ad-tab-btn" onclick="switchAdminTab('order')"><i class="fa-solid fa-list-check mr-2"></i> คิวออเดอร์</button>
             </div>
 
             <div id="ad-set" class="ad-sec space-y-8 animate-pageFadeIn">
@@ -710,7 +707,7 @@
                 </div>
                 
                 <div class="flex justify-end pt-4 pb-10">
-                    <button type="button" onclick="persistSystemSettings()" class="btn-pastel !w-full md:!w-80 text-xl py-4 shadow-xl"><i class="fa-solid fa-floppy-disk mr-2"></i> บันทึกข้อมูลการตั้งค่า</button>
+                    <button type="button" onclick="persistSystemSettings()" class="btn-pastel !w-full md:!w-80 text-xl py-4 shadow-xl"><i class="fa-solid fa-floppy-disk mr-2"></i> บันทึกข้อมูลตั้งค่า</button>
                 </div>
             </div>
 
@@ -774,12 +771,11 @@
     </footer>
 
     <script>
-        // 🔴🔴🔴 API URL ของคุณโซ 🔴🔴🔴
+        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ลงในนี้ (ตรวจสอบให้แน่ใจว่าไม่มีช่องว่าง) 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwUMa943t7APJoNlGsDPF3QuZcYIw7ab2_9HReCFCsbp5jI61G7rQGW1rKFeLhhE2u5iA/exec';
         
         /**
          * Global App State Object
-         * บริหารจัดการข้อมูลภายในเว็บไซต์ทั้งหมด
          */
         const AppState = { 
             sys: { storeName: 'kataiy', logo: 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg' },
@@ -843,7 +839,6 @@
 
         /**
          * 1. Navigation Flow & Route Protection
-         * บังคับให้หน้าเว็บเปลี่ยนเมนูอย่างถูกต้อง
          */
         function requireAuthValidation(targetId) {
             const loggedIn = !!AppState.u;
@@ -901,19 +896,13 @@
             buildDynamicSidebarMenu();
         }
 
-        /**
-         * สำคัญมาก: สร้างเมนู 3 ขีดแบบ Real-time 
-         * จะซ่อนหรือโชว์เมนูไหน ขึ้นอยู่กับว่า User Login แล้วหรือยัง
-         */
         function buildDynamicSidebarMenu() {
             const menuArea = document.getElementById('dynamicMenuArea');
             let html = '';
             
-            // Public Menus (เห็นทุกคน)
             html += `<button type="button" onclick="navigatePage('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span data-l="mHome">${translator('mHome')}</span></button>`;
             html += `<button type="button" onclick="navigatePage('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span data-l="mGames">${translator('mGames')}</span></button>`;
             
-            // Protected Menus (เห็นเฉพาะคน Login)
             if (AppState.u) {
                 html += `<button type="button" onclick="navigatePage('topup')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-wallet w-8 text-center text-pBtn"></i> <span data-l="mTopup">${translator('mTopup')}</span></button>`;
                 html += `<button type="button" onclick="navigatePage('inbox')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-envelope w-8 text-center text-pBtn"></i> <span data-l="mInbox">${translator('mInbox')}</span></button>`;
@@ -924,14 +913,12 @@
             
             menuArea.innerHTML = html;
 
-            // Admin Menu Button Logic
             if (AppState.u && AppState.u.role === 'admin') {
                 document.getElementById('adminMenuArea').classList.remove('hidden');
             } else {
                 document.getElementById('adminMenuArea').classList.add('hidden');
             }
 
-            // Auth Menu Button Logic
             if (AppState.u) {
                 document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="out()" class="block w-full text-left px-8 py-4 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-8 text-center text-red-400"></i> ${translator('out')}</button>`;
             } else {
@@ -940,7 +927,7 @@
         }
 
         /**
-         * 3. Secure API Communication (POST & Try-Catch Protected)
+         * 3. API Communication Engine (Try-Catch Safe)
          */
         async function transmitDataToAPI(action, payload) {
             if (AppState.busy) { return null; }
@@ -956,6 +943,7 @@
                 
                 if (!response.ok) throw new Error("HTTP connection failed");
                 const rawText = await response.text();
+                
                 if (rawText.includes("<!DOCTYPE html>")) throw new Error("API HTML Error");
                 
                 const jsonResponse = JSON.parse(rawText);
@@ -973,7 +961,7 @@
          * 4. System Initialization & Polling
          */
         async function fetchSystemDataSilently(isSilent = false, updateAdminForms = false) {
-            AppState.busy = false; // ปลดล็อกสำหรับการรันพื้นหลัง
+            AppState.busy = false; 
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -1003,7 +991,6 @@
                     }
                     if (res.adminData) AppState.adm = res.adminData;
                     
-                    // ป้องกัน Error ระหว่างวาดหน้าจอ
                     try {
                         renderDOMEngine(isSilent, updateAdminForms);
                     } catch(uiError) {
@@ -1012,14 +999,11 @@
                 }
             } catch (error) {
                 console.error("Polling Failed", error);
-                if (!isSilent) {
-                    Swal.fire('เชื่อมต่อไม่ได้', 'กรุณาตรวจสอบว่า API URL ถูกต้องและตั้งค่าแบบ Anyone แล้ว', 'error');
-                }
             }
         }
 
         /**
-         * 5. UI Rendering System (Core DOM Manipulator)
+         * 5. UI Rendering System
          */
         function renderDOMEngine(isSilent, updateForms) {
             document.title = AppState.sys.storeName || 'kataiy';
@@ -1027,7 +1011,7 @@
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiName').innerText = AppState.sys.storeName || 'kataiy';
 
-            // 🌟 Render Public Statistics (อัปเดตสถิติให้ทุกคนเห็นบนหน้าแรก) 🌟
+            // Public Stats Update
             if(AppState.stats) {
                 document.getElementById('pubUsers').innerText = AppState.stats.usersCount || 0;
                 document.getElementById('pubOrders').innerText = AppState.stats.ordersCount || 0;
@@ -1035,7 +1019,7 @@
                 document.getElementById('pubSales').innerText = '฿' + parseFloat(AppState.stats.salesAmount || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
             }
 
-            // Banner Mechanism
+            // Banner
             const bannerElement = document.getElementById('bannerContainer');
             if (AppState.sys.banner) {
                 bannerElement.classList.remove('hidden');
@@ -1045,16 +1029,16 @@
                 bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=kataiy+store" class="banner-item active">`;
             }
 
-            // Cute Marquee Information Bar
+            // Cute Marquee Logic
             const marqueeBlock = document.getElementById('uiMarq');
             const noticeText = AppState.sys.announcement || '';
-            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-paw text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการ 100%';
+            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-paw text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการแล้ว 100%';
             marqueeBlock.innerHTML = `<span class="mr-4 font-bold text-pDark">${noticeText}</span> <i class="fa-solid fa-bolt text-yellow-400 mr-2"></i> <span class="text-gray-500">${historyFeed}</span>`;
 
             // Status Capsule
             const stBox = document.getElementById('uiStatus');
             stBox.style.display = 'block';
-            if (AppState.sys.isOpen === 'true') {
+            if (String(AppState.sys.isOpen) === 'true') {
                 stBox.className = 'status-capsule text-pDark bg-white shadow-sm';
                 stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> ${translator('stOpen')}`;
             } else {
@@ -1062,13 +1046,12 @@
                 stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-white rounded-full"></span> ${translator('stClose')}`;
             }
 
-            // Authentication UI Injection
+            // User Identity Rendering
             if (AppState.u) {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
                 document.getElementById('uId').innerText = AppState.u.userId;
                 
-                // Set the correct form block
                 document.getElementById('fLog').innerHTML = `<button type="button" onclick="out()" class="btn-pastel !bg-red-400 w-full text-xl mt-6 shadow-sm"><i class="fa-solid fa-power-off mr-2"></i> ${translator('out')}</button>`;
                 
                 if(AppState.u.role === 'admin') {
@@ -1110,7 +1093,7 @@
                 const discountHTML = p.discount > 0 ? `<span class="absolute top-4 right-4 bg-red-500 text-white text-[0.65rem] font-extrabold px-3 py-1 rounded-full z-10 shadow-lg">-${p.discount}%</span>` : '';
                 
                 return `
-                <div class="product-card animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                <div class="product-card cursor-pointer animate-pageFadeIn" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                     <div class="img-box">${discountHTML}${imgHtml}</div>
                     <div class="p-5 flex-1 flex flex-col justify-between text-center bg-white">
                         <div>
@@ -1147,7 +1130,7 @@
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         ${catMap[catName].map(p => `
-                            <div class="product-card group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
+                            <div class="product-card cursor-pointer group" onclick="launchOrderProcess('${p.id}', '${p.name}', ${p.price})">
                                 <div class="img-box bg-pBg border-b border-pMain"><img src="${p.images.split(',')[0].trim()}" class="slider-image active group-hover:scale-110 smooth"></div>
                                 <div class="p-4 text-center">
                                     <h4 class="font-bold text-gray-800 text-xs mb-2 line-clamp-1">${p.name}</h4>
@@ -1170,7 +1153,7 @@
                 const picUrls = w.imgs.split(',').map(s => s.trim());
                 const picHTML = picUrls.map((url, i) => `<img src="${url}" class="slider-image ${i === 0 ? 'active' : ''}">`).join('');
                 return `
-                <div class="product-card smooth hover:scale-105" onclick="window.open('${w.line || '#'}','_blank')">
+                <div class="product-card cursor-pointer smooth hover:scale-105" onclick="window.open('${w.line || '#'}','_blank')">
                     <div class="img-box">${picHTML}</div>
                     <div class="p-3 text-center bg-pBg border-t border-pMain">
                         <span class="text-[0.65rem] font-extrabold text-pDark uppercase tracking-widest">${w.cat}</span>
@@ -1215,7 +1198,7 @@
         }
 
         /**
-         * 6. User Authentication Engine (💥 FORCE HARD RELOAD FIX 💥)
+         * 6. User Authentication Engine (🟢 FORCE HARD RELOAD FIXED 🟢)
          */
         function switchAuthView(mode) {
             document.getElementById('fLog').classList.toggle('hidden', mode !== 'log');
@@ -1258,11 +1241,11 @@
                 // บันทึกข้อมูลลงเครื่อง
                 localStorage.setItem('ks_usr', JSON.stringify(response.user));
                 
-                // 🟢 สำคัญ: บังคับรีโหลดหน้าเว็บทันทีเพื่อล้างข้อมูลเดิมและเปิดเมนูทั้งหมด
+                // 🟢 FORCE HARD RELOAD TO RENDER EVERYTHING FRESH 🟢
                 Swal.fire({ 
                     icon: 'success', 
                     title: translator('alertOk'), 
-                    text: 'เข้าสู่ระบบสำเร็จ! กำลังพาเข้าสู่ระบบ...', 
+                    text: 'เข้าสู่ระบบสำเร็จ! กำลังพาเข้าสู่หน้าหลัก...', 
                     timer: 1500, 
                     showConfirmButton: false 
                 }).then(() => {
@@ -1322,7 +1305,11 @@
             fr.onload = async () => {
                 Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
                 const res = await transmitDataToAPI('topup', {
-                    userId: AppState.u.userId, amount: amountVal, refCode: refVal, method: AppState.pay, imageBase64: fr.result
+                    userId: AppState.u.userId,
+                    amount: amountVal,
+                    refCode: refVal,
+                    method: AppState.pay,
+                    imageBase64: fr.result
                 });
                 
                 if (res && res.status === 'success') {
@@ -1345,7 +1332,7 @@
                 navigatePage('auth'); 
                 return; 
             }
-            if (AppState.sys.isOpen !== 'true') { Swal.fire('ขออภัยค่ะ', translator('stClose'), 'error'); return; }
+            if (String(AppState.sys.isOpen) !== 'true') { Swal.fire('ขออภัยค่ะ', translator('stClose'), 'error'); return; }
             
             Swal.fire({
                 title: translator('tBuy'),
@@ -1389,7 +1376,11 @@
                 if (result.isConfirmed) {
                     Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading() });
                     const res = await transmitDataToAPI('order', {
-                        userId: AppState.u.userId, product: prodName, price: prodPrice, loginType: result.value.loginType, gameData: result.value.gameData
+                        userId: AppState.u.userId,
+                        product: prodName,
+                        price: prodPrice,
+                        loginType: result.value.loginType,
+                        gameData: result.value.gameData
                     });
                     if (res && res.status === 'success') {
                         Swal.fire({ icon: 'success', title: translator('alertOk'), text: AppState.sys.msgSuccess });
@@ -1427,6 +1418,7 @@
         function renderAdminDashboard(forceFormRefresh) {
             if(!AppState.adm) return;
 
+            // Form Anti-Overwrite logic
             if (forceFormRefresh) {
                 document.getElementById('s_name').value = AppState.sys.storeName || '';
                 document.getElementById('s_logo').value = AppState.sys.logo || '';
@@ -1436,7 +1428,8 @@
                 document.getElementById('s_popH').value = AppState.sys.popHead || '';
                 document.getElementById('s_popI').value = AppState.sys.popImg || '';
                 document.getElementById('s_popT').value = AppState.sys.popTxt || '';
-                document.getElementById('s_open').value = AppState.sys.isOpen || 'true';
+                // 🟢 แปลงค่าก่อนนำไปเซ็ตกลับให้ช่อง Select 🟢
+                document.getElementById('s_open').value = String(AppState.sys.isOpen) === 'true' ? 'true' : 'false';
                 document.getElementById('s_qrB').value = AppState.sys.qrBank || '';
                 document.getElementById('s_qrT').value = AppState.sys.qrTrue || '';
                 document.getElementById('s_qrI').value = AppState.sys.qrInter || '';
@@ -1590,15 +1583,15 @@
         }
 
         function handleBannerClick() { if(AppState.sys.bannerLink) window.open(AppState.sys.bannerLink, '_blank'); }
-
+        
         /**
-         * 10. SYSTEM BOOTSTRAP (เริ่มทำงานทันทีโดยไม่ต้องรอ API)
+         * 10. Initialization Process (Boot)
          */
         window.addEventListener("DOMContentLoaded", () => {
-            // โหลดภาษา
+            // Restore Language
             document.getElementById('lang').value = AppState.lang;
             
-            // อ่านค่า User จาก Cache แบบเซฟ 100%
+            // Safe Session Read
             try {
                 const session = localStorage.getItem('ks_usr');
                 if (session && session !== 'undefined') {
@@ -1608,17 +1601,17 @@
                 localStorage.removeItem('ks_usr'); 
             }
             
-            // 🟢 วาดเมนูทันที ไม่ต้องรอ API 🟢
+            // Build UI framework before DB fetch
             buildDynamicSidebarMenu();
             applyLanguageToDOM();
             
-            // เริ่มต้นดึงข้อมูลแบบ Background
+            // Initial Fetch
             fetchSystemDataSilently(false, true); 
             
-            // ตั้งเวลา Polling ดึงข้อมูลใหม่ทุก 3 วิ
+            // Polling interval
             setInterval(() => fetchSystemDataSilently(true, false), 3000); 
             
-            // ตั้งเวลา Slider หมุนรูป (5 วิ)
+            // Image Slider Interval
             setInterval(() => {
                 document.querySelectorAll('.img-box, .banner-slider').forEach(s => {
                     let imgs = s.querySelectorAll('img, .slider-image, .banner-item');
