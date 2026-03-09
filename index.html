@@ -439,25 +439,24 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
             
             <div class="flex items-center gap-4 cursor-pointer group" onclick="navigatePage('home')">
-                <img id="uiLogo" src="https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg" class="w-12 h-12 rounded-full border-2 border-pMain object-cover shadow-sm bg-white group-hover:rotate-6 smooth">
+                <img id="uiLogo" src="https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-pMain object-cover shadow-sm bg-white group-hover:rotate-6 smooth">
                 <div>
-                    <h1 id="uiName" class="text-xl font-bold text-pDark tracking-tight leading-none uppercase">kataiy</h1>
-                    <span class="text-[0.65rem] font-bold text-gray-400 uppercase tracking-widest">Premium Store</span>
+                    <h1 id="uiName" class="text-lg md:text-xl font-bold text-pDark tracking-tight leading-none uppercase">kataiy</h1>
+                    <span class="text-[0.6rem] md:text-[0.65rem] font-bold text-gray-400 uppercase tracking-widest">Premium Store</span>
                 </div>
             </div>
             
-            <div class="flex items-center gap-3">
-                <select id="lang" onchange="executeLanguageChange()" class="bg-pBg border-2 border-pMain rounded-full px-4 py-1.5 text-xs font-bold text-pDark outline-none cursor-pointer smooth hover:border-pBtn hidden md:block">
+            <div class="flex items-center gap-2 md:gap-3">
+                <select id="lang" onchange="executeLanguageChange()" class="bg-pBg border-2 border-pMain rounded-full px-2 md:px-4 py-1 md:py-1.5 text-[0.65rem] md:text-xs font-bold text-pDark outline-none cursor-pointer smooth hover:border-pBtn">
                     <option value="th">ภาษาไทย (TH)</option>
-                    <option value="en">ENGLISH (EN)</option>
                     <option value="la">ພາສາລາວ (LA)</option>
                 </select>
                 
-                <div id="uBadge" class="hidden font-bold text-pDark text-sm bg-pBg border-2 border-pMain px-4 py-1.5 rounded-full shadow-sm cursor-pointer hover:bg-pMain smooth" onclick="navigatePage('inbox')">
+                <div id="uBadge" class="hidden font-bold text-pDark text-xs md:text-sm bg-pBg border-2 border-pMain px-3 md:px-4 py-1 md:py-1.5 rounded-full shadow-sm cursor-pointer hover:bg-pMain smooth" onclick="navigatePage('inbox')">
                     <i class="fa-solid fa-wallet mr-1 text-pBtn"></i> <span id="uBal">0.00</span>
                 </div>
 
-                <button type="button" class="text-pDark text-2xl hover:text-pBtn smooth p-2" onclick="toggleSidebarMenu()">
+                <button type="button" class="text-pDark text-xl md:text-2xl hover:text-pBtn smooth p-2" onclick="toggleSidebarMenu()">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </button>
             </div>
@@ -486,7 +485,7 @@
             </div>
             <div class="marquee-text-container">
                 <div class="marquee-content" id="uiMarq">
-                    กำลังเชื่อมต่อฐานข้อมูล กรุณารอสักครู่...
+                    กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล กรุณารอสักครู่...
                 </div>
             </div>
         </div>
@@ -528,7 +527,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-pMain pb-5 gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div>
-                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><span data-l="hRec">บริการแนะนำ</span></h2>
+                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star mr-2 text-pBtn"></i><span data-l="hRec">บริการแนะนำ</span></h2>
                 </div>
                 <div class="w-full md:w-auto">
                    <select id="catFilter" class="input-pastel !py-2.5 !w-full md:!w-80 text-pDark font-bold shadow-sm" onchange="renderProductCatalog()">
@@ -538,9 +537,9 @@
             </div>
             
             <div id="prodsArea" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
-                <div class="col-span-full text-center py-20 text-pDark opacity-50" id="loadingSpinner">
+                <div class="col-span-full text-center py-20 text-pDark opacity-50">
                     <i class="fa-solid fa-spinner fa-spin text-5xl mb-4"></i>
-                    <p class="font-bold tracking-widest mt-2 uppercase">กำลังซิงค์ข้อมูล...</p>
+                    <p class="font-bold tracking-widest mt-2 uppercase">กำลังดึงข้อมูลฐานข้อมูล...</p>
                 </div>
             </div>
             
@@ -699,12 +698,12 @@
                         <div><label class="admin-label">Facebook (URL)</label><input type="text" id="s_fb" class="inp-admin"></div>
                         <div><label class="admin-label">Line (URL)</label><input type="text" id="s_line" class="inp-admin"></div>
                         <div><label class="admin-label">เบอร์โทรศัพท์ติดต่อ</label><input type="text" id="s_phone" class="inp-admin"></div>
-                        <div class="md:col-span-2"><label class="admin-label">ข้อความบอทตอบกลับเมื่อลูกค้าสั่งซื้อสำเร็จ (ส่งเข้า Inbox)</label><input type="text" id="s_msgS" class="inp-admin"></div>
+                        <div class="md:col-span-2"><label class="admin-label">ข้อความบอทตอบกลับเมื่อลูกค้าสั่งซื้อสำเร็จ (ส่งเข้า Inbox ลูกค้า)</label><input type="text" id="s_msgS" class="inp-admin"></div>
                     </div>
                 </div>
                 
                 <div class="flex justify-end pt-4 pb-10">
-                    <button type="button" onclick="persistSystemSettings()" class="btn-pastel !w-full md:!w-80 text-xl py-4 shadow-xl"><i class="fa-solid fa-floppy-disk mr-2"></i> บันทึกข้อมูลตั้งค่า</button>
+                    <button type="button" onclick="persistSystemSettings()" class="btn-pastel !w-full md:!w-80 text-xl py-4 shadow-xl"><i class="fa-solid fa-floppy-disk mr-2"></i> บันทึกข้อมูลการตั้งค่า</button>
                 </div>
             </div>
 
@@ -725,6 +724,7 @@
                                 <div><label class="admin-label text-pDark">* ราคาขาย (฿)</label><input type="number" id="p_prc" class="inp-admin !bg-white border-pMain" step="0.01"></div>
                                 <div><label class="admin-label text-pDark">ส่วนลด %</label><input type="number" id="p_disc" class="inp-admin !bg-white border-pMain"></div>
                                 <div class="col-span-2"><label class="admin-label text-pDark">* ลิงก์รูปภาพ (หลายรูปคั่นด้วย ,)</label><input type="text" id="p_img" class="inp-admin !bg-white border-pMain"></div>
+                                <div class="col-span-2"><label class="admin-label text-pDark">รายละเอียดเพิ่มเติม (แสดงให้ลูกค้าเห็น)</label><textarea id="p_det" class="inp-admin !bg-white border-pMain" rows="3" placeholder="กรอกข้อมูลรายละเอียดของสินค้าชิ้นนี้ (เว้นว่างได้)"></textarea></div>
                             </div>
                         </div>
                     </div>
@@ -768,7 +768,7 @@
     </footer>
 
     <script>
-        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ที่นี่ (ห้ามมีช่องว่าง) 🔴🔴🔴
+        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ลงในนี้ (ต้องเป็นของที่คุณ Deploy ใหม่ล่าสุด) 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwUMa943t7APJoNlGsDPF3QuZcYIw7ab2_9HReCFCsbp5jI61G7rQGW1rKFeLhhE2u5iA/exec';
         
         /**
@@ -804,19 +804,6 @@
                 alertWait:'ระบบกำลังประมวลผล...', alertOk:'สำเร็จแล้วค่ะ!', alertErr:'เกิดข้อผิดพลาด', btnAck:'ตกลง',
                 btnBuy:'สั่งเติมเกม', btnCancel:'ยกเลิก', tBuy:'ยืนยันการสั่งซื้อ', tPrc:'ราคาแพ็กเกจ', tBal:'ยอดเงินคงเหลือ', tUid:'กรอกข้อมูล UID เกม', mMenu:'เมนู'
             },
-            en: {
-                stUsr:'Total Users', stOrd:'Total Orders', stTop:'Total Topups', stSal:'Total Sales',
-                mHome:'Home', mGames:'All Games', mTopup:'Topup', mInbox:'Inbox', mHist:'History', mCont:'Contact Us', mLogin:'Sign In / Up',
-                hRec:'Featured Services', catAll:'All Categories', hAll:'Game Topups', hCont:'Contact Channels', hLog:'Sign In', hReg:'Sign Up',
-                hTop:'Topup Wallet (Auto)', hInb:'Notifications', hWork:'Showcase', bBank:'Bank Transfer', bTrue:'E-Wallet', bInter:'Global',
-                phUidMail:'UserID or Email', phPass:'Password', phUid:'Set Username', phMail:'Your Email', phPass2:'Set Password', phPass3:'Confirm Password',
-                phAmt:'Amount', phRef:'Ref Code (Last 6)', txtUpload:'Upload transfer slip', btnTopup:'Submit Topup',
-                btnLog:'Login', btnReg:'Register Now', noAcc:'No account? Register', hasAcc:'Have account? Sign in',
-                out:'Logout', adm:'Admin Panel', stOpen:'Store is Open', stClose:'Temporarily Closed',
-                thTime:'Time', thOrder:'Order ID', thProd:'Item', thStat:'Status', statWait:'Pending', statDone:'Success', noData:'No Data Available',
-                alertWait:'Processing...', alertOk:'Success!', alertErr:'Something went wrong', btnAck:'OK',
-                btnBuy:'Buy Now', btnCancel:'Cancel', tBuy:'Confirm Order', tPrc:'Price', tBal:'Balance', tUid:'Enter Game UID', mMenu:'Menu'
-            },
             la: {
                 stUsr:'ຜູ້ໃຊ້ທັງໝົດ', stOrd:'ຈຳນວນອໍເດີ', stTop:'ຍອດຕື່ມເງິນສະສົມ', stSal:'ຍອດຂາຍສຳເລັດ',
                 mHome:'ໜ້າຫຼັກ', mGames:'ເກມທັງໝົດ', mTopup:'ຕື່ມເງິນ', mInbox:'ກ່ອງຂໍ້ຄວາມ', mHist:'ປະຫວັດສັ່ງຊື້', mCont:'ຕິດຕໍ່ພວກເຮົາ', mLogin:'ເຂົ້າສູ່ລະບົບ / ສະໝັກ',
@@ -824,8 +811,8 @@
                 hTop:'ຕື່ມເງິນ (ອັດຕະໂນມັດ)', hInb:'ແຈ້ງເຕືອນ', hWork:'ຕົວຢ່າງງານປ້າຍ', bBank:'ທະນາຄານ', bTrue:'ວໍເລັດ', bInter:'ຕປທ.',
                 phUidMail:'UserID ຫລື Email', phPass:'ລະຫັດຜ່ານ', phUid:'ຕັ້ງຊື່ UserID', phMail:'ອີເມວຂອງທ່ານ', phPass2:'ຕັ້ງລະຫັດຜ່ານ', phPass3:'ຢືນຢັນລະຫັດຜ່ານ',
                 phAmt:'ຈຳນວນເງິນ', phRef:'6 ຕົວທ້າຍສະລິບ', txtUpload:'ກົດເພື່ອແນບສະລິບ', btnTopup:'ແຈ້ງໂອນເງິນ',
-                btnLog:'ເຂົ້າສູ່ລະບົບ', btnReg:'ສະໝັກສະມາຊິກ', noAcc:'ຍັງບໍ່ມີບັນຊີ?', hasAcc:'ມີບັນຊີແລ້ວ?',
-                out:'ອອກຈາກລະບົບ', adm:'ລະບົບແອັດມິນ', stOpen:'ເປີດປົກກະຕິ', stClose:'ປິດຊົ່ວຄາວ',
+                btnLog:'ເຂົ້າສູ່ລະບົບ', btnReg:'ສະໝັກສະມາຊິກ', noAcc:'ຍັງບໍ່ມີບັນຊີ? ສະໝັກ', hasAcc:'ມີບັນຊີແລ້ວ? ເຂົ້າລະບົບ',
+                out:'ອອກຈາກລະບົບ', adm:'ລະບົບແອັດມິນ', stOpen:'ເປີດໃຫ້ບໍລິການປົກກະຕິ', stClose:'ປິດໃຫ້ບໍລິການຊົ່ວຄາວ',
                 thTime:'ເວລາ', thOrder:'ອໍເດີ', thProd:'ເກມ/ສິນຄ້າ', thStat:'ສະຖານະ', statWait:'ລໍຖ້າ', statDone:'ສຳເລັດ', noData:'ບໍ່ມີຂໍ້ມູນ',
                 alertWait:'ລໍຖ້າຈັກຄາວ...', alertOk:'ສຳເລັດແລ້ວ!', alertErr:'ຜິດພາດ', btnAck:'ຕົກລົງ',
                 btnBuy:'ສັ່ງຊື້ເລີຍ', btnCancel:'ຍົກເລີກ', tBuy:'ຢືນຢັນສັ່ງຊື້', tPrc:'ລາຄາ', tBal:'ຍອດເງິນ', tUid:'ກະລຸນາໃສ່ UID ເກມ', mMenu:'ເມນູ'
@@ -885,7 +872,7 @@
             localStorage.setItem('ks_lang', AppState.lang);
             applyLanguageToDOM();
             
-            // อัปเดตข้อมูลหลังเปลี่ยนภาษา (ทำงานเงียบ)
+            // อัปเดตข้อมูลแบบเงียบๆ
             fetchSystemDataSilently(true, false); 
         }
 
@@ -919,7 +906,7 @@
             }
 
             if (AppState.u) {
-                document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="out()" class="block w-full text-left px-8 py-4 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-8 text-center text-red-400"></i> ${translator('out')}</button>`;
+                document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="out()" class="block w-full text-left px-8 py-4 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-power-off w-8 text-center text-red-400"></i> ${translator('out')}</button>`;
             } else {
                 document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="navigatePage('auth')" class="block w-full text-left px-8 py-4 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-8 text-center text-pBtn"></i> ${translator('mLogin')}</button>`;
             }
@@ -952,7 +939,7 @@
             } catch (err) {
                 AppState.busy = false;
                 console.error("API Transmission Failed:", err);
-                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ต' };
+                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ตหรือ Deploy Web App ใหม่' };
             }
         }
 
@@ -993,7 +980,7 @@
                     try {
                         renderDOMEngine(isSilent, updateAdminForms);
                     } catch(uiError) {
-                        console.error("UI Render Error:", uiError);
+                        console.error("UI Render Blocked an Error:", uiError);
                     }
                 }
             } catch (error) {
@@ -1010,7 +997,7 @@
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiName').innerText = AppState.sys.storeName || 'kataiy';
 
-            // 🌟 Render Public Statistics (อัปเดตสถิติหน้าแรกให้ทุกคนเห็น) 🌟
+            // Public Stats Update
             if(AppState.stats) {
                 document.getElementById('pubUsers').innerText = AppState.stats.usersCount || 0;
                 document.getElementById('pubOrders').innerText = AppState.stats.ordersCount || 0;
@@ -1018,7 +1005,7 @@
                 document.getElementById('pubSales').innerText = '฿' + parseFloat(AppState.stats.salesAmount || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
             }
 
-            // Banner Mechanism
+            // Banner
             const bannerElement = document.getElementById('bannerContainer');
             if (AppState.sys.banner) {
                 bannerElement.classList.remove('hidden');
@@ -1028,11 +1015,11 @@
                 bannerElement.innerHTML = `<img src="https://placehold.co/1200x400/FDF2F8/7E22CE?text=kataiy+store" class="banner-item active">`;
             }
 
-            // Cute Marquee Logic
+            // Cute Marquee
             const marqueeBlock = document.getElementById('uiMarq');
             const noticeText = AppState.sys.announcement || '';
-            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-paw text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการ 100%';
-            marqueeBlock.innerHTML = `<span class="mr-4 font-bold text-pDark">${noticeText}</span> <i class="fa-solid fa-bolt text-yellow-400 mr-2"></i> <span class="text-gray-500">${historyFeed}</span>`;
+            const historyFeed = (AppState.history && AppState.history.length) ? AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-bolt text-pBtn"></i>&nbsp;&nbsp; ') : 'ระบบพร้อมให้บริการ 100%';
+            marqueeBlock.innerHTML = `<span class="mr-4 font-bold text-pDark">${noticeText}</span> <i class="fa-solid fa-star text-yellow-400 mr-2"></i> <span class="text-gray-500">${historyFeed}</span>`;
 
             // Status Capsule
             const stBox = document.getElementById('uiStatus');
@@ -1049,10 +1036,6 @@
             if (AppState.u) {
                 document.getElementById('uBadge').classList.remove('hidden');
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
-                document.getElementById('uId').innerText = AppState.u.userId;
-                
-                // Clear original Auth form
-                document.getElementById('fLog').innerHTML = `<button type="button" onclick="out()" class="btn-pastel !bg-red-400 w-full text-xl mt-6 shadow-sm"><i class="fa-solid fa-power-off mr-2"></i> ${translator('out')}</button>`;
                 
                 if(AppState.u.role === 'admin') {
                     if (document.getElementById('p-admin').classList.contains('active')) renderAdminDashboard(updateForms);
@@ -1074,7 +1057,7 @@
             const productContainer = document.getElementById('prodsArea');
             const selectedFilter = document.getElementById('catFilter').value;
             
-            // กรองเฉพาะแถวที่ไม่ได้ว่างเปล่า
+            // กรองเฉพาะแถวที่ไม่ได้ว่างเปล่า (ป้องกันเว็บค้างจาก Data ในชีตที่ไม่สมบูรณ์)
             const validProds = AppState.prods.filter(p => p.id && p.id !== 'undefined' && String(p.id).trim() !== '');
 
             const filterDropdown = document.getElementById('catFilter');
@@ -1090,7 +1073,6 @@
                 return;
             }
 
-            // นำสินค้ามาเรียงวาดขึ้นจอใหม่
             productContainer.innerHTML = displayPool.map(p => {
                 const imgUrls = (p.images || '').split(',').map(s => s.trim()).filter(Boolean);
                 const imgHtml = imgUrls.length > 0 ? imgUrls.map((url, index) => `<img src="${url}" class="slider-image ${index === 0 ? 'active' : ''}">`).join('') : '<div class="w-full h-full bg-gray-200"></div>';
@@ -1203,7 +1185,7 @@
         }
 
         /**
-         * 6. User Authentication Engine (💥 FORCE HARD RELOAD FIX 💥)
+         * 6. User Authentication Engine (🟢 DYNAMIC UPDATE NO RELOAD 🟢)
          */
         function switchAuthView(mode) {
             document.getElementById('fLog').classList.toggle('hidden', mode !== 'log');
@@ -1230,7 +1212,7 @@
                 const nPw2 = document.getElementById('rPass2').value.trim();
                 
                 if (!nUid || !nEmail || !nPw) { 
-                    Swal.fire('ข้อมูลไม่ครบ', 'กรุณากรอกข้อมูลฟอร์มสมัครสมาชิกให้ครบถ้วนนะคะ', 'warning'); 
+                    Swal.fire('ข้อมูลไม่ครบ', 'กรุณากรอกข้อมูลฟอร์มให้ครบถ้วนนะคะ', 'warning'); 
                     return; 
                 }
                 if (nPw !== nPw2) { 
@@ -1245,17 +1227,19 @@
             if (response && response.status === 'success') {
                 // บันทึกข้อมูลลง Cache
                 localStorage.setItem('ks_usr', JSON.stringify(response.user));
+                AppState.u = response.user; // เซ็ตค่าทันที
                 
-                // 🟢 FORCE HARD RELOAD: ล้างหน้าจอแล้วเริ่มใหม่ทั้งหมด 🟢
                 Swal.fire({ 
                     icon: 'success', 
                     title: translator('alertOk'), 
-                    text: 'เข้าสู่ระบบสำเร็จ! กำลังพาเข้าสู่หน้าหลัก...', 
+                    text: 'เข้าสู่ระบบสำเร็จ!', 
                     timer: 1500, 
                     showConfirmButton: false 
                 }).then(() => {
-                    window.location.href = window.location.pathname; 
-                    window.location.reload(true); 
+                    // อัปเดตหน้าจอโดยไม่ต้องรีโหลด เพื่อให้การดึงข้อมูลต่อเนื่อง
+                    buildDynamicSidebarMenu();
+                    fetchSystemDataSilently(false, true);
+                    navigatePage('home');
                 });
 
             } else {
@@ -1277,7 +1261,9 @@
                 if (result.isConfirmed) {
                     AppState.u = null;
                     localStorage.removeItem('ks_usr');
-                    window.location.reload(true); 
+                    buildDynamicSidebarMenu();
+                    fetchSystemDataSilently(false, true);
+                    navigatePage('home');
                 }
             });
         }
@@ -1339,11 +1325,16 @@
             }
             if (String(AppState.sys.isOpen) !== 'true') { Swal.fire('ขออภัยค่ะ', translator('stClose'), 'error'); return; }
             
+            // ดึงรายละเอียดที่แอดมินเพิ่มมาโชว์ตรงนี้ด้วย
+            const prodDetails = AppState.prods.find(p => p.id === prodId)?.details || '';
+            const detailsHtml = prodDetails ? `<div class="bg-yellow-50 text-yellow-700 text-xs p-3 rounded-xl mb-4 font-bold text-center border border-yellow-200">${prodDetails}</div>` : '';
+
             Swal.fire({
                 title: translator('tBuy'),
                 html: `
                     <div class="bg-white p-6 rounded-3xl mb-6 text-left border-2 border-pMain shadow-sm">
                         <p class="text-pDark font-extrabold text-xl mb-4 text-center uppercase tracking-tight">${prodName}</p>
+                        ${detailsHtml}
                         <div class="flex justify-between items-center font-bold mb-2 pb-2 border-b border-gray-100">
                             <span class="text-gray-400 text-xs">${translator('tPrc')}</span>
                             <span class="text-pDark text-lg">฿${prodPrice.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
@@ -1426,6 +1417,7 @@
         function renderAdminDashboard(forceFormRefresh) {
             if(!AppState.adm) return;
 
+            // Form Anti-Overwrite logic
             if (forceFormRefresh) {
                 document.getElementById('s_name').value = AppState.sys.storeName || '';
                 document.getElementById('s_logo').value = AppState.sys.logo || '';
@@ -1518,6 +1510,7 @@
             document.getElementById('p_prc').value = p.price;
             document.getElementById('p_disc').value = p.discount;
             document.getElementById('p_img').value = p.images;
+            document.getElementById('p_det').value = p.details || '';
             
             document.getElementById('prodFormTitle').innerHTML = `<i class="fa-solid fa-pen-to-square mr-2 text-pBtn"></i> แก้ไขข้อมูลสินค้าเดิม`;
             document.getElementById('btnSaveProd').innerHTML = '<i class="fa-solid fa-save mr-2"></i> บันทึกการแก้ไข';
@@ -1526,8 +1519,8 @@
         }
 
         function resetAdminProductForm() {
-            ['p_id','p_cat','p_catI','p_name','p_amt','p_unit','p_prc','p_disc','p_img'].forEach(id => document.getElementById(id).value = '');
-            document.getElementById('prodFormTitle').innerHTML = `<i class="fa-solid fa-plus-circle mr-2 text-pBtn"></i> เพิ่มสินค้าใหม่ลงระบบ`;
+            ['p_id','p_cat','p_catI','p_name','p_amt','p_unit','p_prc','p_disc','p_img','p_det'].forEach(id => document.getElementById(id).value = '');
+            document.getElementById('prodFormTitle').innerHTML = `<i class="fa-solid fa-plus-circle mr-2 text-pBtn"></i> เพิ่มสินค้าใหม่เข้าระบบ`;
             document.getElementById('btnSaveProd').innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-2"></i> บันทึกข้อมูลสินค้าใหม่';
             document.getElementById('btnCancelEdit').classList.add('hidden');
         }
@@ -1539,8 +1532,10 @@
                 cat: document.getElementById('p_cat').value, catImg: document.getElementById('p_catI').value,
                 name: document.getElementById('p_name').value, amt: document.getElementById('p_amt').value,
                 unit: document.getElementById('p_unit').value, price: document.getElementById('p_prc').value,
-                disc: document.getElementById('p_disc').value, imgs: document.getElementById('p_img').value
+                disc: document.getElementById('p_disc').value, imgs: document.getElementById('p_img').value,
+                det: document.getElementById('p_det').value 
             };
+            
             if(!dataToSave.name || !dataToSave.price || !dataToSave.imgs || !dataToSave.cat) { 
                 Swal.fire('Oops', 'รบกวนกรอกช่องที่มีเครื่องหมาย * ให้ครบด้วยนะคะ', 'warning'); 
                 return; 
@@ -1549,9 +1544,9 @@
             Swal.fire({ title: 'กำลังบันทึกข้อมูลสินค้า...', didOpen: () => Swal.showLoading() });
             const r = await transmitDataToAPI('adminManageProd', dataToSave);
             if (r && r.status === 'success') {
-                Swal.fire('สำเร็จ!', 'จัดการข้อมูลสินค้าลงฐานข้อมูลเรียบร้อยค่ะ', 'success');
                 resetAdminProductForm();
-                fetchSystemDataSilently();
+                await fetchSystemDataSilently(true, false);
+                Swal.fire('สำเร็จ!', 'จัดการข้อมูลสินค้าลงฐานข้อมูลเรียบร้อยค่ะ', 'success');
             }
         }
 
@@ -1559,7 +1554,9 @@
             const prompt = await Swal.fire({ title: 'ลบสินค้านี้?', text: "ข้อมูลนี้จะหายไปจากหน้าร้านถาวร ยืนยันไหมคะ?", icon: 'warning', showCancelButton: true, confirmButtonColor: '#EF4444' });
             if (prompt.isConfirmed) {
                 const r = await transmitDataToAPI('adminManageProd', { act: 'del', id: uid });
-                if (r && r.status === 'success') fetchSystemDataSilently();
+                if (r && r.status === 'success') {
+                    await fetchSystemDataSilently(true, false);
+                }
             }
         }
 
@@ -1569,15 +1566,16 @@
             Swal.fire({ title: 'กำลังอัปโหลดงานป้าย...', didOpen: () => Swal.showLoading() });
             const r = await transmitDataToAPI('adminManageWork', payloadData);
             if (r && r.status === 'success') {
+                document.getElementById('w_img').value = ''; 
+                await fetchSystemDataSilently(true, false);
                 Swal.fire('สำเร็จ', 'เพิ่มตัวอย่างงานป้ายเข้าสู่ระบบเรียบร้อย', 'success');
-                document.getElementById('w_img').value = ''; fetchSystemDataSilently();
             }
         }
 
         async function deleteAdminWork(uid) {
             if(confirm('ยืนยันการลบงานป้ายนี้ออกจากระบบ?')) {
                 await transmitDataToAPI('adminManageWork', { act: 'del', id: uid });
-                fetchSystemDataSilently();
+                await fetchSystemDataSilently(true, false);
             }
         }
 
@@ -1585,21 +1583,22 @@
             Swal.fire({ title: 'กำลังอัปเดตสถานะออเดอร์...', didOpen: () => Swal.showLoading() });
             const r = await transmitDataToAPI('adminUpdateStatus', { type: 'order', id: oid, uid: targetUid });
             if (r && r.status === 'success') {
-                Swal.fire('สำเร็จ!', 'เปลี่ยนสถานะออเดอร์เป็นเสร็จสิ้นแล้วค่ะ', 'success'); fetchSystemDataSilently();
+                await fetchSystemDataSilently(true, false);
+                Swal.fire('สำเร็จ!', 'เปลี่ยนสถานะออเดอร์เป็นเสร็จสิ้นแล้วค่ะ', 'success'); 
             }
         }
 
         function handleBannerClick() { if(AppState.sys.bannerLink) window.open(AppState.sys.bannerLink, '_blank'); }
-        
+
         /**
-         * 10. SYSTEM BOOTSTRAP
-         * เริ่มทำงานทันทีเมื่อเปิดหน้าเว็บ (ไม่รอ DB)
+         * 10. SYSTEM BOOTSTRAP 
+         * เริ่มทำงานทันทีเมื่อเปิดหน้าเว็บ
          */
         window.addEventListener("DOMContentLoaded", () => {
             // โหลดภาษา
             document.getElementById('lang').value = AppState.lang;
             
-            // อ่านค่า User จาก Cache อย่างปลอดภัย
+            // อ่านค่า User จาก Cache แบบเซฟ 100%
             try {
                 const session = localStorage.getItem('ks_usr');
                 if (session && session !== 'undefined') {
@@ -1609,7 +1608,7 @@
                 localStorage.removeItem('ks_usr'); 
             }
             
-            // 🟢 วาดเมนูทันที ไม่ต้องรอ API เพื่อไม่ให้ปุ่มค้าง 🟢
+            // วาดเมนูทันที ไม่ต้องรอ API
             buildDynamicSidebarMenu();
             applyLanguageToDOM();
             
