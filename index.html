@@ -433,9 +433,9 @@
         .z-999 { z-index: 999; }
     </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b-2 border-pMain">
+    <nav class="bg-white shadow-md sticky top-0 z-50 border-b-2 border-pMain w-full">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
             
             <div class="flex items-center gap-4 cursor-pointer group" onclick="navigatePage('home')">
@@ -466,18 +466,15 @@
             <div class="px-6 pb-4 border-b border-gray-100 mb-2">
                 <p class="text-[0.65rem] font-bold text-gray-400 uppercase tracking-widest" data-l="mMenu">Menu / ເມນູ</p>
             </div>
-            
             <div id="dynamicMenuArea"></div>
-            
             <div id="adminMenuArea" class="hidden border-t-2 border-pMain mt-2 pt-2 bg-purple-50">
                 <button type="button" onclick="navigatePage('admin')" class="block w-full text-left px-8 py-4 hover:bg-pMain text-pDark font-bold smooth text-red-600"><i class="fa-solid fa-user-shield w-8 text-center"></i> <span data-l="adm">ຈັດການຫຼັງບ້ານ</span></button>
             </div>
-
             <div id="authMenuArea" class="border-t-2 border-pMain mt-2 pt-2"></div>
         </div>
     </nav>
 
-    <div class="marquee-wrapper">
+    <div class="marquee-wrapper w-full">
         <div class="marquee-cute-pill">
             <div class="marquee-badge">
                 <i class="fa-solid fa-bullhorn fa-shake"></i>
@@ -493,10 +490,9 @@
     
     <div id="uiStatus" style="display:none;"></div>
 
-    <main class="max-w-6xl mx-auto p-4 min-h-[80vh] relative z-10">
+    <main class="flex-grow w-full max-w-6xl mx-auto p-4 relative z-10">
         
         <section id="p-home" class="page-section active">
-            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10 mt-2" id="publicStatsContainer">
                 <div class="stat-card-public">
                     <div class="stat-icon bg-pMain text-pDark shadow-sm"><i class="fa-solid fa-users"></i></div>
@@ -527,7 +523,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-pMain pb-5 gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div>
-                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star mr-2 text-pBtn"></i><span data-l="hRec">ບໍລິການແນະນຳ</span></h2>
+                    <h2 class="text-2xl font-bold text-pDark" id="homeHead"><i class="fa-solid fa-star mr-2 text-pBtn"></i> <span data-l="hRec">ບໍລິການແນະນຳ</span></h2>
                 </div>
             </div>
             
@@ -564,7 +560,9 @@
 
         <section id="p-auth" class="page-section">
             <div class="bg-white p-8 md:p-12 max-w-md mx-auto mt-10 rounded-[40px] border-2 border-pMain shadow-2xl z-999 relative">
-                <h2 class="text-center text-3xl font-bold text-pDark mb-10 tracking-tight"><i class="fa-solid fa-user-lock mr-2 text-pBtn"></i> <span id="authTitle" data-l="hLog">ເຂົ້າສູ່ລະບົບ</span></h2>
+                <h2 class="text-center text-3xl font-bold text-pDark mb-10 tracking-tight">
+                    <span id="authTitle"><i class="fa-solid fa-user-lock mr-2 text-pBtn"></i> <span data-l="hLog">ເຂົ້າສູ່ລະບົບ</span></span>
+                </h2>
                 
                 <div id="fLog">
                     <div class="space-y-6">
@@ -588,15 +586,25 @@
                 
                 <div id="fReg" class="hidden">
                     <div class="space-y-4">
-                        <input type="text" id="rUid" class="input-pastel" data-p="phUid">
-                        <input type="email" id="rMail" class="input-pastel" data-p="phMail">
-                        <input type="password" id="rPass" class="input-pastel" data-p="phPass2">
-                        <input type="password" id="rPass2" class="input-pastel" data-p="phPass3">
+                        <input type="text" id="rUid" class="input-pastel" data-p="phUid" placeholder="ຕັ້ງຊື່ UserID">
+                        <input type="email" id="rMail" class="input-pastel" data-p="phMail" placeholder="ອີເມວຂອງທ່ານ">
+                        <input type="password" id="rPass" class="input-pastel" data-p="phPass2" placeholder="ຕັ້ງລະຫັດຜ່ານ">
+                        <input type="password" id="rPass2" class="input-pastel" data-p="phPass3" placeholder="ຢືນຢັນລະຫັດຜ່ານ">
                         <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">ສະໝັກສະມາຊິກ</span></button>
                     </div>
                     <div class="text-center mt-8 border-t border-pMain pt-6">
                         <button type="button" class="text-gray-500 font-bold hover:text-pDark smooth" onclick="switchAuthView('log')" data-l="hasAcc">ມີບັນຊີແລ້ວ? ເຂົ້າລະບົບ</button>
                     </div>
+                </div>
+
+                <div id="fLogout" class="hidden text-center">
+                    <div class="text-center text-pDark mb-6 font-bold text-lg">
+                        <i class="fa-solid fa-circle-user text-5xl mb-3 text-pBtn block"></i>
+                        <span id="displayUserUID"></span>
+                    </div>
+                    <button type="button" onclick="out()" class="btn-pastel !bg-red-400 w-full text-xl shadow-sm">
+                        <i class="fa-solid fa-power-off mr-2"></i> <span data-l="out">ອອກຈາກລະບົບ</span>
+                    </button>
                 </div>
             </div>
         </section>
@@ -698,7 +706,7 @@
                         <div><label class="admin-label" data-l="adFb">Facebook URL</label><input type="text" id="s_fb" class="inp-admin" data-p="adFb"></div>
                         <div><label class="admin-label" data-l="adLine">Line URL</label><input type="text" id="s_line" class="inp-admin" data-p="adLine"></div>
                         <div><label class="admin-label" data-l="adPhone">ເບີໂທຕິດຕໍ່</label><input type="text" id="s_phone" class="inp-admin" data-p="adPhone"></div>
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adMsgSuc">ຂໍ້ຄວາມຕອບກັບເມື່ອສັ່ງຊື້ສຳເລັດ</label><input type="text" id="s_msgS" class="inp-admin" data-p="adMsgSuc"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adMsgSuc">ຂໍ້ຄວາມຕອບກັບเมื่อสั่งซื้อสำเร็จ</label><input type="text" id="s_msgS" class="inp-admin" data-p="adMsgSuc"></div>
                     </div>
                 </div>
                 
@@ -770,13 +778,32 @@
 
     </main>
 
+    <footer class="w-full text-center py-10 text-pDark font-bold text-sm bg-white border-t-2 border-pMain mt-auto relative z-10">
+        <p class="mb-2"><i class="fa-solid fa-heart fa-beat text-red-400 mr-2"></i> &copy; 2026 <span id="fName">kataiy</span>. All rights reserved.</p>
+        <p class="text-[0.65rem] text-gray-400 tracking-[0.3em] uppercase">Premium Automated System</p>
+    </footer>
+
     <script>
-        // 🔴🔴🔴 API URL: ວາງລິ້ງ Web App ຂອງທ່ານບ່ອນນີ້ 🔴🔴🔴
+        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ที่นี่ (ห้ามมีช่องว่าง) 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwUMa943t7APJoNlGsDPF3QuZcYIw7ab2_9HReCFCsbp5jI61G7rQGW1rKFeLhhE2u5iA/exec';
         
+        /**
+         * Global App State Object
+         */
         const AppState = { 
             sys: { storeName: 'kataiy', logo: 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg' },
-            prods: [], wrks: [], history: [], stats: null, u: null, inb: [], uOrd: [], adm: null, busy: false, pay: 'bank', curCat: 'all', lang: localStorage.getItem('ks_lang') || 'la' 
+            prods: [], 
+            wrks: [], 
+            history: [], 
+            stats: null, 
+            u: null, 
+            inb: [], 
+            uOrd: [], 
+            adm: null, 
+            busy: false, 
+            pay: 'bank', 
+            curCat: 'all', 
+            lang: localStorage.getItem('ks_lang') || 'la' 
         };
 
         const ViewState = {
@@ -784,7 +811,7 @@
             allGamesArea: null 
         };
 
-        // 🟢 พจนานุกรมแปลภาษา 100% รวมหัวตารางหลังบ้าน 🟢
+        // 🟢 พจนานุกรมแปลภาษา 100% 🟢
         const LangDict = {
             th: {
                 stUsr:'ผู้ใช้งานทั้งหมด', stOrd:'จำนวนออเดอร์', stTop:'ยอดเติมเงินสะสม', stSal:'ยอดขายสำเร็จ', 
@@ -856,9 +883,46 @@
             return LangDict[AppState.lang][key] || key;
         }
 
+        // 🟢 ระบบแปลข้อความที่ดึงมาจาก Database (เช่น สินค้า / กล่องข้อความ) 🟢
+        function tDyn(text) {
+            if (!text) return '';
+            let str = String(text);
+            if (AppState.lang === 'la') {
+                return str.replace(/ยอดโอน/g, 'ຍອດໂອນ')
+                          .replace(/เข้าบัญชีเรียบร้อย ขอบคุณค่ะ/g, 'ເຂົ້າບັນຊີສຳເລັດແລ້ວ ຂອບໃຈ')
+                          .replace(/ออเดอร์หมายเลข/g, 'ອໍເດີໝາຍເລກ')
+                          .replace(/ดำเนินการสำเร็จแล้วค่ะ/g, 'ດຳເນີນການສຳເລັດແລ້ວ!')
+                          .replace(/รับยอดค่ะ รอยอดเข้า 5-10 นาทีค่ะ/g, 'ຮັບຍອດແລ້ວ ລໍຖ້າເງິນເຂົ້າ 5-10 ນາທີເດີ້')
+                          .replace(/ออเดอร์/g, 'ອໍເດີ')
+                          .replace(/สำเร็จแล้ว/g, 'ສຳເລັດແລ້ວ')
+                          .replace(/ทั่วไป/g, 'ທົ່ວໄປ')
+                          .replace(/ผลงาน/g, 'ຜົນງານ')
+                          .replace(/ไม่มีชื่อสินค้า/g, 'ບໍ່ມີຊື່ສິນຄ້າ')
+                          .replace(/รอคิว/g, 'ລໍຖ້າ')
+                          .replace(/สำเร็จ/g, 'ສຳເລັດ');
+            } else {
+                return str.replace(/ຍອດໂອນ/g, 'ยอดโอน')
+                          .replace(/ເຂົ້າບັນຊີສຳເລັດແລ້ວ ຂອບໃຈ/g, 'เข้าบัญชีเรียบร้อย ขอบคุณค่ะ')
+                          .replace(/ອໍເດີໝາຍເລກ/g, 'ออเดอร์หมายเลข')
+                          .replace(/ດຳເນີນການສຳເລັດແລ້ວ!/g, 'ดำเนินการสำเร็จแล้วค่ะ')
+                          .replace(/ຮັບຍອດແລ້ວ ລໍຖ້າເງິນເຂົ້າ 5-10 ນາທີເດີ້/g, 'รับยอดค่ะ รอยอดเข้า 5-10 นาทีค่ะ')
+                          .replace(/ອໍເດີ/g, 'ออเดอร์')
+                          .replace(/ສຳເລັດແລ້ວ/g, 'สำเร็จแล้ว')
+                          .replace(/ທົ່ວໄປ/g, 'ทั่วไป')
+                          .replace(/ຜົນງານ/g, 'ผลงาน')
+                          .replace(/ບໍ່ມີຊື່ສິນຄ້າ/g, 'ไม่มีชื่อสินค้า')
+                          .replace(/ລໍຖ້າ/g, 'รอคิว')
+                          .replace(/ສຳເລັດ/g, 'สำเร็จ');
+            }
+        }
+
+        /**
+         * 1. Navigation Flow & Route Protection
+         */
         function requireAuthValidation(targetId) {
             const loggedIn = !!AppState.u;
             const protectedZones = ['topup', 'inbox', 'history', 'admin'];
+            
             if (protectedZones.includes(targetId) && !loggedIn) {
                 Swal.fire({ icon: 'warning', title: translator('mustLogin'), confirmButtonColor: '#A855F7' });
                 return 'auth'; 
@@ -889,7 +953,6 @@
                 renderAdminDashboard(true);
             }
             
-            // รีเซ็ตหน้าหมวดหมู่เวลาสลับหน้า
             if(safeTarget === 'home') {
                 drawCategoryList('prodsArea');
             }
@@ -906,7 +969,7 @@
             AppState.lang = document.getElementById('lang').value;
             localStorage.setItem('ks_lang', AppState.lang);
             
-            // 🟢 วาดจอใหม่ทั้งหมดเพื่อให้ภาษาเปลี่ยนทันที 100% 🟢
+            // วาดหน้าจอใหม่ทันทีโดยดึง Dictionary และ tDyn
             renderDOMEngine(true, false); 
         }
 
@@ -920,66 +983,108 @@
             for(let i=0; i<pElements.length; i++) {
                 pElements[i].placeholder = translator(pElements[i].getAttribute('data-p'));
             }
-            
-            buildDynamicSidebarMenu();
         }
 
         function buildDynamicSidebarMenu() {
             const menuArea = document.getElementById('dynamicMenuArea');
-            let html = `<button type="button" onclick="navigatePage('home')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span>${translator('mHome')}</span></button>
-                        <button type="button" onclick="navigatePage('games')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span>${translator('mGames')}</span></button>`;
+            let html = '';
+            
+            html += '<button type="button" onclick="navigatePage(\'home\')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-house w-8 text-center text-pBtn"></i> <span>' + translator('mHome') + '</span></button>';
+            html += '<button type="button" onclick="navigatePage(\'games\')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-gamepad w-8 text-center text-pBtn"></i> <span>' + translator('mGames') + '</span></button>';
             
             if (AppState.u) {
-                html += `<button type="button" onclick="navigatePage('topup')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-wallet w-8 text-center text-pBtn"></i> <span>${translator('mTopup')}</span></button>
-                         <button type="button" onclick="navigatePage('inbox')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-envelope w-8 text-center text-pBtn"></i> <span>${translator('mInbox')}</span></button>
-                         <button type="button" onclick="navigatePage('history')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-clock-rotate-left w-8 text-center text-pBtn"></i> <span>${translator('mHist')}</span></button>`;
+                html += '<button type="button" onclick="navigatePage(\'topup\')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-wallet w-8 text-center text-pBtn"></i> <span>' + translator('mTopup') + '</span></button>';
+                html += '<button type="button" onclick="navigatePage(\'inbox\')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-envelope w-8 text-center text-pBtn"></i> <span>' + translator('mInbox') + '</span></button>';
+                html += '<button type="button" onclick="navigatePage(\'history\')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-clock-rotate-left w-8 text-center text-pBtn"></i> <span>' + translator('mHist') + '</span></button>';
             }
-            html += `<button type="button" onclick="navigatePage('contact')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-address-book w-8 text-center text-pBtn"></i> <span>${translator('mCont')}</span></button>`;
+            
+            html += '<button type="button" onclick="navigatePage(\'contact\')" class="block w-full text-left px-8 py-3.5 hover:bg-pBg text-pDark font-semibold smooth"><i class="fa-solid fa-address-book w-8 text-center text-pBtn"></i> <span>' + translator('mCont') + '</span></button>';
+            
             menuArea.innerHTML = html;
 
-            if (AppState.u && AppState.u.role === 'admin') document.getElementById('adminMenuArea').classList.remove('hidden');
-            else document.getElementById('adminMenuArea').classList.add('hidden');
-
-            if (AppState.u) document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="out()" class="block w-full text-left px-8 py-4 hover:bg-red-50 text-red-500 font-bold smooth"><i class="fa-solid fa-right-from-bracket w-8 text-center text-red-400"></i> ${translator('out')}</button>`;
-            else document.getElementById('authMenuArea').innerHTML = `<button type="button" onclick="navigatePage('auth')" class="block w-full text-left px-8 py-4 hover:bg-pBg text-pDark font-bold smooth"><i class="fa-solid fa-arrow-right-to-bracket w-8 text-center text-pBtn"></i> ${translator('mLogin')}</button>`;
+            if (AppState.u && AppState.u.role === 'admin') {
+                document.getElementById('adminMenuArea').classList.remove('hidden');
+            } else {
+                document.getElementById('adminMenuArea').classList.add('hidden');
+            }
         }
 
         async function transmitDataToAPI(action, payload) {
-            if (AppState.busy) return null; AppState.busy = true;
+            if (AppState.busy) { return null; }
+            AppState.busy = true;
             try {
-                const response = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action, payload }), headers: { 'Content-Type': 'text/plain;charset=utf-8' }, redirect: 'follow' });
+                const response = await fetch(API_URL, { 
+                    method: 'POST', 
+                    body: JSON.stringify({ action: action, payload: payload }), 
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                    redirect: 'follow' 
+                });
+                
                 const rawText = await response.text();
-                if (rawText.includes("<html")) throw new Error("API Offline");
-                const jsonResponse = JSON.parse(rawText); AppState.busy = false; return jsonResponse;
-            } catch (err) { AppState.busy = false; return null; }
+                if (rawText.includes("<html")) { throw new Error("API Offline"); }
+                
+                const jsonResponse = JSON.parse(rawText); 
+                AppState.busy = false; 
+                return jsonResponse;
+                
+            } catch (err) { 
+                AppState.busy = false; 
+                return null; 
+            }
         }
 
         async function fetchSystemDataSilently(isSilent = false, updateAdminForms = false) {
             AppState.busy = false; 
             try {
-                const response = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'getData', payload: { userId: AppState.u?.userId } }), headers: { 'Content-Type': 'text/plain;charset=utf-8' }, redirect: 'follow' });
+                const response = await fetch(API_URL, { 
+                    method: 'POST', 
+                    body: JSON.stringify({ action: 'getData', payload: { userId: AppState.u?.userId } }), 
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                    redirect: 'follow' 
+                });
+                
                 const rawText = await response.text();
-                if (rawText.includes("<html")) return;
+                if (rawText.includes("<html")) { return; }
+                
                 const res = JSON.parse(rawText);
                 
                 if (res && res.status === 'success') {
-                    AppState.sys = res.settings; AppState.prods = res.products; AppState.wrks = res.works; AppState.history = res.history; AppState.stats = res.stats;
-                    if (res.user) { AppState.u = res.user; localStorage.setItem('ks_usr', JSON.stringify(res.user)); AppState.inb = res.inbox; AppState.uOrd = res.uOrders; }
-                    if (res.adminData) AppState.adm = res.adminData;
+                    AppState.sys = res.settings; 
+                    AppState.prods = res.products; 
+                    AppState.wrks = res.works; 
+                    AppState.history = res.history; 
+                    AppState.stats = res.stats; 
                     
-                    renderDOMEngine(isSilent, updateAdminForms); 
+                    if (res.user) { 
+                        AppState.u = res.user; 
+                        localStorage.setItem('ks_usr', JSON.stringify(res.user)); 
+                        AppState.inb = res.inbox; 
+                        AppState.uOrd = res.uOrders; 
+                    }
+                    if (res.adminData) {
+                        AppState.adm = res.adminData;
+                    }
+                    
+                    try { 
+                        renderDOMEngine(isSilent, updateAdminForms); 
+                    } catch(e) {
+                        console.error(e);
+                    }
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.error(error);
+            }
         }
 
-        // 🟢 UI Rendering Engine กลาง (แยกย่อยกันพัง) 🟢
         function renderDOMEngine(isSilent, updateForms) {
+            // 🟢 อัปเดตภาษาเป็นอันดับแรก 🟢
             try { applyLanguageToDOM(); } catch(e) {}
             
             document.title = AppState.sys.storeName || 'kataiy';
             document.getElementById('favicon').href = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiName').innerText = AppState.sys.storeName || 'kataiy';
+            document.getElementById('fName').innerText = AppState.sys.storeName || 'kataiy';
 
             if(AppState.stats) {
                 document.getElementById('pubUsers').innerText = AppState.stats.usersCount || 0;
@@ -995,51 +1100,73 @@
                 const bannerUrls = AppState.sys.banner.split(',');
                 for(let i=0; i<bannerUrls.length; i++) {
                     let activeClass = i === 0 ? 'active' : '';
-                    bannerHtml += `<img src="${bannerUrls[i].trim()}" class="banner-item ${activeClass}">`;
+                    bannerHtml += '<img src="' + bannerUrls[i].trim() + '" class="banner-item ' + activeClass + '">';
                 }
                 bannerElement.innerHTML = bannerHtml;
             }
 
-            let marqueeStr = `<span class="mr-4 font-bold text-pDark">${AppState.sys.announcement || ''}</span> <i class="fa-solid fa-star text-yellow-400 mr-2"></i> <span class="text-gray-500">`;
+            let marqueeStr = '<span class="mr-4 font-bold text-pDark">' + (AppState.sys.announcement || '') + '</span> <i class="fa-solid fa-star text-yellow-400 mr-2"></i> <span class="text-gray-500">';
             if(AppState.history && AppState.history.length > 0) {
-                marqueeStr += AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-bolt text-pBtn"></i>&nbsp;&nbsp; ');
+                // ใช้ tDyn แปลข้อความใน History
+                let hArr = [];
+                for(let i=0; i<AppState.history.length; i++){
+                    hArr.push(tDyn(AppState.history[i]));
+                }
+                marqueeStr += hArr.join(' &nbsp;&nbsp;<i class="fa-solid fa-bolt text-pBtn"></i>&nbsp;&nbsp; ');
             } else {
                 marqueeStr += translator('alertWait');
             }
-            marqueeStr += `</span>`;
+            marqueeStr += '</span>';
             document.getElementById('uiMarq').innerHTML = marqueeStr;
 
-            const stBox = document.getElementById('uiStatus'); stBox.style.display = 'block';
+            const stBox = document.getElementById('uiStatus'); 
+            stBox.style.display = 'block';
             if (String(AppState.sys.isOpen) === 'true') { 
                 stBox.className = 'status-capsule text-pDark bg-white shadow-sm'; 
-                stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> ${translator('stOpen')}`; 
+                stBox.innerHTML = '<span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> ' + translator('stOpen'); 
             } else { 
                 stBox.className = 'status-capsule text-white bg-red-400 shadow-sm border-none'; 
-                stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-white rounded-full"></span> ${translator('stClose')}`; 
+                stBox.innerHTML = '<span class="w-2.5 h-2.5 bg-white rounded-full"></span> ' + translator('stClose'); 
             }
             
+            // 🟢 ควบคุมส่วนของล็อกอินอย่างสมบูรณ์ ไม่ให้เขียนทับฟอร์มเดิม 🟢
             if (AppState.u) {
                 document.getElementById('uBadge').classList.remove('hidden'); 
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
+                
+                document.getElementById('fLog').classList.add('hidden');
+                document.getElementById('fReg').classList.add('hidden');
+                document.getElementById('fLogout').classList.remove('hidden');
+                
+                document.getElementById('displayUserUID').innerText = AppState.u.userId;
+                
                 if (AppState.u.role === 'admin' && document.getElementById('p-admin').classList.contains('active')) {
                     renderAdminDashboard(updateForms);
                 }
-            } else { document.getElementById('uBadge').classList.add('hidden'); }
+            } else { 
+                document.getElementById('uBadge').classList.add('hidden'); 
+                document.getElementById('fLogout').classList.add('hidden');
+                document.getElementById('fLog').classList.remove('hidden');
+            }
             
             try { buildDynamicSidebarMenu(); } catch(e){}
             try { renderPortfolioGallery(); } catch(e){}
             try { renderUserPersonalData(); } catch(e){}
             try { renderContactInfo(); } catch(e){}
             
-            // ใช้ ViewState รักษาหน้าจอหมวดหมู่
-            if (ViewState.prodsArea === null) drawCategoryList('prodsArea');
-            else drawProductList('prodsArea', ViewState.prodsArea);
+            if (ViewState.prodsArea === null) {
+                drawCategoryList('prodsArea');
+            } else {
+                drawProductList('prodsArea', ViewState.prodsArea);
+            }
 
-            if (ViewState.allGamesArea === null) drawCategoryList('allGamesArea');
-            else drawProductList('allGamesArea', ViewState.allGamesArea);
+            if (ViewState.allGamesArea === null) {
+                drawCategoryList('allGamesArea');
+            } else {
+                drawProductList('allGamesArea', ViewState.allGamesArea);
+            }
         }
 
-        // 🟢 ระบบแบ่งหมวดหมู่ (UID และ Mail/Pass) 🟢
         function renderProductCatalog() { 
             ViewState.prodsArea = null;
             drawCategoryList('prodsArea'); 
@@ -1054,32 +1181,39 @@
             
             let validProds = [];
             for(let i=0; i<AppState.prods.length; i++) {
-                if(AppState.prods[i].id && String(AppState.prods[i].id).trim() !== '') validProds.push(AppState.prods[i]);
+                if(AppState.prods[i].id && String(AppState.prods[i].id).trim() !== '') {
+                    validProds.push(AppState.prods[i]);
+                }
             }
 
             const catMapUID = {};
             const catMapMail = {};
 
-            for(let i=0; i<validProds.length; i++) {
-                const p = validProds[i];
+            validProds.forEach(function(p) { 
                 const reqType = p.reqType || 'uid';
                 if(reqType === 'uid') {
-                    if(!catMapUID[p.category]) catMapUID[p.category] = []; 
+                    if(!catMapUID[p.category]) { catMapUID[p.category] = []; }
                     catMapUID[p.category].push(p); 
                 } else {
-                    if(!catMapMail[p.category]) catMapMail[p.category] = []; 
+                    if(!catMapMail[p.category]) { catMapMail[p.category] = []; }
                     catMapMail[p.category].push(p); 
                 }
-            }
+            });
 
             let html = '';
             
             if (Object.keys(catMapUID).length > 0) {
-                html += `<div class="col-span-full flex items-center gap-3 mb-2 mt-2"><div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div><h2 class="text-xl font-bold text-pDark tracking-tighter uppercase">${translator('tUidTopup')}</h2></div>`;
+                html += '<div class="col-span-full flex items-center gap-3 mb-2 mt-2"><div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div><h2 class="text-xl font-bold text-pDark tracking-tighter uppercase">' + translator('tUidTopup') + '</h2></div>';
                 for (let c in catMapUID) {
                     const leader = catMapUID[c][0];
-                    let catIcon = leader.catImg ? leader.catImg : (leader.images.split(',')[0].trim());
-                    let cName = c || 'ທົ່ວໄປ';
+                    let catIcon = '';
+                    if (leader.catImg) {
+                        catIcon = leader.catImg;
+                    } else if (leader.images) {
+                        catIcon = leader.images.split(',')[0].trim();
+                    }
+                    
+                    let cName = tDyn(c) || translator('tGeneral');
 
                     html += `
                     <div class="product-card animate-pageFadeIn" onclick="drawProductList('${containerId}', '${c}')">
@@ -1093,11 +1227,17 @@
             }
 
             if (Object.keys(catMapMail).length > 0) {
-                html += `<div class="col-span-full flex items-center gap-3 mb-2 mt-8"><div class="w-2.5 h-8 bg-pink-400 rounded-full shadow-sm"></div><h2 class="text-xl font-bold text-pDark tracking-tighter uppercase">${translator('tMailTopup')}</h2></div>`;
+                html += '<div class="col-span-full flex items-center gap-3 mb-2 mt-8"><div class="w-2.5 h-8 bg-pink-400 rounded-full shadow-sm"></div><h2 class="text-xl font-bold text-pDark tracking-tighter uppercase">' + translator('tMailTopup') + '</h2></div>';
                 for (let c in catMapMail) {
                     const leader = catMapMail[c][0];
-                    let catIcon = leader.catImg ? leader.catImg : (leader.images.split(',')[0].trim());
-                    let cName = c || 'ທົ່ວໄປ';
+                    let catIcon = '';
+                    if (leader.catImg) {
+                        catIcon = leader.catImg;
+                    } else if (leader.images) {
+                        catIcon = leader.images.split(',')[0].trim();
+                    }
+
+                    let cName = tDyn(c) || translator('tGeneral');
 
                     html += `
                     <div class="product-card animate-pageFadeIn" onclick="drawProductList('${containerId}', '${c}')">
@@ -1111,12 +1251,11 @@
             }
 
             if(html === '') {
-                html = `<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest">${translator('noData')}</div>`;
+                html = '<div class="col-span-full text-center py-20 text-gray-400 font-bold uppercase tracking-widest">' + translator('noData') + '</div>';
             }
             cx.innerHTML = html;
         }
 
-        // 🟢 แสดงสินค้าในหมวดหมู่ 🟢
         window.drawProductList = function(containerId, catName) {
             ViewState[containerId] = catName; 
             
@@ -1129,17 +1268,18 @@
                 }
             }
             
+            let cNameTrans = tDyn(catName);
+
             let html = `
             <div class="col-span-full mb-6">
                 <button type="button" onclick="renderCategoryAndResetState('${containerId}')" class="btn-pastel !w-auto !py-2 !px-6 text-sm shadow-md hover:scale-105 smooth">
                     <i class="fa-solid fa-arrow-left mr-2"></i> ${translator('btnBack')}
                 </button>
-                <h3 class="text-3xl font-extrabold text-pDark tracking-tighter uppercase mt-6 border-l-4 border-pBtn pl-4">${catName}</h3>
+                <h3 class="text-3xl font-extrabold text-pDark tracking-tighter uppercase mt-6 border-l-4 border-pBtn pl-4">${cNameTrans}</h3>
             </div>`;
             
             let productHtml = '';
-            for(let i=0; i<validProds.length; i++) {
-                const p = validProds[i];
+            validProds.forEach(function(p) {
                 let imgUrls = [];
                 if(p.images) {
                     let splits = p.images.split(',');
@@ -1151,9 +1291,9 @@
 
                 let imgHtml = '';
                 if (imgUrls.length > 0) {
-                    for(let x=0; x<imgUrls.length; x++) {
-                        let activeClass = x === 0 ? 'active' : '';
-                        imgHtml += `<img src="${imgUrls[x]}" class="slider-image ${activeClass}">`;
+                    for(let i=0; i<imgUrls.length; i++) {
+                        let activeClass = i === 0 ? 'active' : '';
+                        imgHtml += `<img src="${imgUrls[i]}" class="slider-image ${activeClass}">`;
                     }
                 } else {
                     imgHtml = '<div class="w-full h-full bg-gray-200"></div>';
@@ -1177,7 +1317,7 @@
                     <div class="img-box">${discountHTML}${imgHtml}</div>
                     <div class="p-5 flex-1 flex flex-col justify-between text-center bg-white">
                         <div>
-                            <h4 class="font-bold text-gray-800 text-sm mb-2 leading-snug line-clamp-2">${p.name}</h4>
+                            <h4 class="font-bold text-gray-800 text-sm mb-2 leading-snug line-clamp-2">${tDyn(p.name)}</h4>
                             <p class="text-[0.7rem] font-bold text-gray-400 mb-4 uppercase tracking-wider">${p.amount} ${p.unit}</p>
                         </div>
                         <div class="bg-pBg rounded-2xl py-2 px-3 border border-pMain shadow-inner group-hover:bg-pMain smooth">
@@ -1185,7 +1325,7 @@
                         </div>
                     </div>
                 </div>`;
-            }
+            });
 
             cx.innerHTML = html + productHtml;
         }
@@ -1196,12 +1336,18 @@
         }
 
         function renderPortfolioGallery() {
-            const wrap = document.getElementById('worksArea'); const grid = document.getElementById('gridWorks');
-            if (!AppState.wrks || AppState.wrks.length === 0) { wrap.classList.add('hidden'); return; } wrap.classList.remove('hidden');
+            const wrap = document.getElementById('worksArea'); 
+            const grid = document.getElementById('gridWorks');
+            
+            if (!AppState.wrks || AppState.wrks.length === 0) { 
+                wrap.classList.add('hidden'); 
+                return; 
+            } 
+            
+            wrap.classList.remove('hidden');
             
             let html = '';
-            for(let i=0; i<AppState.wrks.length; i++) {
-                const w = AppState.wrks[i];
+            AppState.wrks.forEach(function(w) {
                 let picUrls = [];
                 if(w.imgs) {
                     let splits = w.imgs.split(',');
@@ -1212,12 +1358,12 @@
                 }
                 
                 let picHTML = '';
-                for(let j=0; j<picUrls.length; j++) {
-                    let activeClass = j === 0 ? 'active' : '';
-                    picHTML += `<img src="${picUrls[j]}" class="slider-image ${activeClass}">`;
+                for(let i=0; i<picUrls.length; i++) {
+                    let activeClass = i === 0 ? 'active' : '';
+                    picHTML += `<img src="${picUrls[i]}" class="slider-image ${activeClass}">`;
                 }
 
-                let wCat = w.cat || 'ผลงาน';
+                let wCat = tDyn(w.cat) || translator('tGeneral');
                 
                 html += `
                 <div class="product-card cursor-pointer smooth hover:scale-105" onclick="window.open('${w.line || '#'}','_blank')">
@@ -1226,34 +1372,34 @@
                         <span class="text-[0.65rem] font-extrabold text-pDark uppercase tracking-widest">${wCat}</span>
                     </div>
                 </div>`;
-            }
+            });
             grid.innerHTML = html;
         }
 
         function renderUserPersonalData() {
             if (!AppState.u) return;
+            
             const notifBox = document.getElementById('inboxArea');
             if(AppState.inb.length === 0) {
                 notifBox.innerHTML = `<div class="text-center py-10 text-gray-400 font-medium">${translator('noData')}</div>`;
             } else {
                 let html = '';
-                for(let i=0; i<AppState.inb.length; i++) {
-                    let msg = AppState.inb[i];
+                AppState.inb.forEach(function(msg) {
                     let dateStr = new Date(msg.time).toLocaleString('th-TH');
+                    // ใช้ tDyn แปลข้อความ Inbox เสมอ
                     html += `
                     <div class="bg-pBg p-5 rounded-3xl border-l-8 border-pBtn shadow-sm animate-pageFadeIn">
                         <p class="text-[0.65rem] font-bold text-pDark mb-1 uppercase tracking-widest opacity-70"><i class="fa-solid fa-clock mr-1"></i> ${dateStr}</p>
-                        <p class="font-bold text-gray-700 text-sm leading-relaxed">${msg.msg}</p>
+                        <p class="font-bold text-gray-700 text-sm leading-relaxed">${tDyn(msg.msg)}</p>
                     </div>`;
-                }
+                });
                 notifBox.innerHTML = html;
             }
 
             const historyTbl = document.getElementById('uOrderList');
             let tableHtml = `<tr><th>${translator('thTime')}</th><th>${translator('thOrder')}</th><th>${translator('thProd')}</th><th>${translator('thStat')}</th></tr>`;
             
-            for(let i=0; i<AppState.uOrd.length; i++) {
-                let o = AppState.uOrd[i];
+            AppState.uOrd.forEach(function(o) {
                 let dateStr = new Date(o.time).toLocaleDateString('th-TH');
                 let oidShort = o.oid.substring(0,8);
                 let statClass = o.stat === 'Pending' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600';
@@ -1263,14 +1409,14 @@
                 <tr>
                     <td class="whitespace-nowrap font-medium text-gray-500">${dateStr}</td>
                     <td class="font-mono text-[0.7rem] font-bold text-gray-400">#${oidShort}</td>
-                    <td class="font-bold text-pDark">${o.prod}</td>
+                    <td class="font-bold text-pDark">${tDyn(o.prod)}</td>
                     <td>
                         <span class="px-4 py-1.5 rounded-full text-[0.65rem] font-extrabold shadow-sm ${statClass}">
                             ${statText}
                         </span>
                     </td>
                 </tr>`;
-            }
+            });
             historyTbl.innerHTML = tableHtml;
         }
 
@@ -1295,6 +1441,7 @@
         }
 
         function switchAuthView(mode) {
+            document.getElementById('fLogout').classList.add('hidden');
             if(mode === 'log') {
                 document.getElementById('fLog').classList.remove('hidden');
                 document.getElementById('fReg').classList.add('hidden');
@@ -1306,7 +1453,6 @@
             }
         }
 
-        // 🟢 การล็อกอินแบบไม่มี Refresh ให้หน้าเว็บสะดุด 🟢
         async function executeAuthenticationProcess(actionType) {
             Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
             
@@ -1331,7 +1477,7 @@
                     return; 
                 }
                 if (nPw !== nPw2) { 
-                    Swal.fire('Error', 'รหัสผ่านยืนยันไม่ตรงกันค่ะ รบกวนพิมพ์ใหม่อีกครั้ง', 'error'); 
+                    Swal.fire('Error', 'รหัสผ่านยืนยันไม่ตรงกันค่ะ', 'error'); 
                     return; 
                 }
                 dataset = { userId: nUid, email: nEmail, password: nPw };
@@ -1345,10 +1491,9 @@
                 
                 Swal.fire({ icon: 'success', title: translator('alertOk'), timer: 1500, showConfirmButton: false });
                 
-                // อัปเดตหน้าจอทันที ไม่ต้องรีเฟรชหน้า
+                // โหลดข้อมูลขึ้นหน้าจอแบบเงียบ
                 applyLanguageToDOM();
-                renderDOMEngine(true, false);
-                fetchSystemDataSilently(true, true); 
+                fetchSystemDataSilently(false, true); 
                 navigatePage('home');
             } else {
                 let msg = response ? response.message : 'API Error';
@@ -1371,7 +1516,7 @@
                     localStorage.removeItem('ks_usr');
                     
                     applyLanguageToDOM();
-                    renderDOMEngine(true, false);
+                    fetchSystemDataSilently(false, true); 
                     navigatePage('home');
                 }
             });
@@ -1416,11 +1561,11 @@
             const refRegex = /^[A-Z0-9]{6}$/;
             
             if (!refRegex.test(refVal)) { 
-                Swal.fire('Warning', 'รหัส 6 ตัวท้ายไม่ถูกต้อง', 'warning'); 
+                Swal.fire('Warning', 'รหัสอ้างอิงสลิปต้องเป็นตัวอักษรภาษาอังกฤษหรือตัวเลข 6 หลักท้ายสลิปค่ะ', 'warning'); 
                 return; 
             }
             if (!amountVal || !refVal || !slipUpload) { 
-                Swal.fire('Warning', 'กรอกจำนวนเงินและอัปโหลดสลิป', 'warning'); 
+                Swal.fire('Warning', 'กรุณากรอกจำนวนเงินและแนบไฟล์รูปสลิปให้ครบถ้วนนะคะ', 'warning'); 
                 return; 
             }
             
@@ -1481,7 +1626,7 @@
             
             let detailsHtml = '';
             if(p.details) {
-                detailsHtml = `<div class="bg-yellow-50 text-yellow-700 text-xs p-3 rounded-xl mb-4 font-bold text-center border border-yellow-200">${p.details}</div>`;
+                detailsHtml = `<div class="bg-yellow-50 text-yellow-700 text-xs p-3 rounded-xl mb-4 font-bold text-center border border-yellow-200">${tDyn(p.details)}</div>`;
             }
 
             let inputHtml = '';
@@ -1499,7 +1644,7 @@
                 title: translator('tBuy'),
                 html: `
                     <div class="bg-white p-6 rounded-3xl mb-6 text-left border-2 border-pMain shadow-sm">
-                        <p class="text-pDark font-extrabold text-xl mb-4 text-center uppercase tracking-tight">${p.name}</p>
+                        <p class="text-pDark font-extrabold text-xl mb-4 text-center uppercase tracking-tight">${tDyn(p.name)}</p>
                         ${detailsHtml}
                         <div class="flex justify-between items-center font-bold mb-2 pb-2 border-b border-gray-100">
                             <span class="text-gray-400 text-xs">${translator('tPrc')}</span>
@@ -1522,7 +1667,7 @@
                     if(reqType === 'uid') {
                         d = document.getElementById('gDataInp').value;
                         if (!d || d.includes('undefined') || d.trim() === '') { 
-                            Swal.showValidationMessage('กรุณากรอกข้อมูล UID ให้ครบถ้วน'); 
+                            Swal.showValidationMessage('กรุณากรอกข้อมูลให้ครบถ้วน'); 
                             return false; 
                         }
                     } else {
@@ -1563,9 +1708,6 @@
             });
         }
 
-        // ==========================================
-        // 9. ADMIN DASHBOARD CONTROLLER (FULLY TRANSLATED)
-        // ==========================================
         function switchAdminTab(tabID) {
             const sections = document.querySelectorAll('.ad-sec');
             for(let i=0; i<sections.length; i++) {
@@ -1575,311 +1717,4 @@
             document.getElementById(`ad-${tabID}`).classList.remove('hidden');
             
             const buttons = document.querySelectorAll('.ad-tab-btn');
-            for(let i=0; i<buttons.length; i++) {
-                buttons[i].classList.remove('active');
-            }
-            
-            event.target.classList.add('active');
-        }
-
-        function renderAdminDashboard(forceFormRefresh) {
-            if(!AppState.adm) return;
-            
-            if (forceFormRefresh) {
-                const keys = ['s_name','s_logo','s_ann','s_ban','s_banL','s_popH','s_popI','s_popT','s_qrB','s_qrT','s_qrI','s_mail','s_fb','s_line','s_phone','s_msgS'];
-                for(let i=0; i<keys.length; i++) {
-                    let mapKey = keys[i].replace('s_','');
-                    document.getElementById(keys[i]).value = AppState.sys[mapKey] || '';
-                }
-                document.getElementById('s_open').value = String(AppState.sys.isOpen) === 'true' ? 'true' : 'false';
-            }
-            
-            let validProds = [];
-            for(let i=0; i<AppState.prods.length; i++) {
-                if(AppState.prods[i].id && String(AppState.prods[i].id).trim() !== '') {
-                    validProds.push(AppState.prods[i]);
-                }
-            }
-
-            // 🟢 เปลี่ยนหัวตารางสินค้าให้แปลภาษาตาม Dictionary 🟢
-            let prodTableHtml = `<tr><th>${translator('adThType')}</th><th>${translator('adThCat')}</th><th>${translator('adThName')}</th><th>${translator('adThPrice')}</th><th>${translator('adThAct')}</th></tr>`;
-            for(let i=0; i<validProds.length; i++) {
-                let p = validProds[i];
-                let typeStr = p.reqType === 'uid' ? 'UID' : 'MAIL';
-                let catStr = p.category || 'ทั่วไป';
-                let priceStr = parseFloat(p.price||0).toFixed(2);
-                
-                prodTableHtml += `
-                <tr>
-                    <td class="font-bold text-gray-400 text-[0.6rem] uppercase">${typeStr}</td>
-                    <td class="font-bold text-pDark uppercase text-[0.7rem]">${catStr}</td>
-                    <td class="font-medium">${p.name}</td>
-                    <td class="font-bold text-pDark">฿${priceStr}</td>
-                    <td>
-                        <button type="button" onclick="editAdminProduct('${p.id}')" class="text-blue-500 mr-5 hover:scale-125 smooth"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button type="button" onclick="deleteAdminProduct('${p.id}')" class="text-red-500 hover:scale-125 smooth"><i class="fa-solid fa-trash-can"></i></button>
-                    </td>
-                </tr>`;
-            }
-            document.getElementById('tb-prods').innerHTML = prodTableHtml;
-            
-            // 🟢 เปลี่ยนหัวตารางออเดอร์ให้แปลภาษาตาม Dictionary 🟢
-            let ordTableHtml = `<tr><th>${translator('adThDate')}</th><th>${translator('adThUser')}</th><th>${translator('adThItem')}</th><th>${translator('adThData')}</th><th>${translator('adThAct')}</th></tr>`;
-            for(let i=0; i<AppState.adm.allOrders.length; i++) {
-                let o = AppState.adm.allOrders[i];
-                let dateStr = new Date(o.time).toLocaleDateString('th-TH');
-                let actionHtml = '';
-                if(o.stat === 'Pending') {
-                    actionHtml = `<button type="button" onclick="confirmOrderCompletion('${o.oid}','${o.uid}')" class="btn-pastel !py-2 !px-4 !text-xs !w-auto shadow-sm">${translator('btnDone')}</button>`;
-                } else {
-                    actionHtml = `<span class="text-green-500 font-extrabold text-sm"><i class="fa-solid fa-check-circle mr-1"></i> ${translator('statDone')}</span>`;
-                }
-                
-                ordTableHtml += `
-                <tr>
-                    <td class="text-[0.7rem] font-bold text-gray-400">${dateStr}</td>
-                    <td class="font-bold text-pDark">${o.uid}</td>
-                    <td class="font-medium">${o.prod}</td>
-                    <td><span class="bg-pBg px-3 py-1.5 rounded-xl text-[0.75rem] font-bold text-pDark border border-pMain block w-max">${o.data}</span></td>
-                    <td>${actionHtml}</td>
-                </tr>`;
-            }
-            document.getElementById('tb-orders').innerHTML = ordTableHtml;
-
-            // 🟢 เปลี่ยนหัวตารางงานป้ายให้แปลภาษาตาม Dictionary 🟢
-            let wrkTableHtml = `<tr><th>${translator('adThCat')}</th><th>${translator('adThPics')}</th><th>${translator('adThAct')}</th></tr>`;
-            for(let i=0; i<AppState.wrks.length; i++) {
-                let w = AppState.wrks[i];
-                let imgCount = 0;
-                if(w.imgs) {
-                    imgCount = w.imgs.split(',').length;
-                }
-                
-                wrkTableHtml += `
-                <tr>
-                    <td class="font-bold uppercase tracking-widest text-[0.75rem]">${w.cat}</td>
-                    <td class="font-medium">${imgCount} ${translator('picCount')}</td>
-                    <td><button type="button" onclick="deleteAdminWork('${w.id}')" class="text-red-500 hover:scale-125 smooth"><i class="fa-solid fa-trash-can"></i></button></td>
-                </tr>`;
-            }
-            document.getElementById('tb-works').innerHTML = wrkTableHtml;
-        }
-
-        async function persistSystemSettings() {
-            const dataToSave = { 
-                storeName: document.getElementById('s_name').value, 
-                logo: document.getElementById('s_logo').value, 
-                announcement: document.getElementById('s_ann').value, 
-                banner: document.getElementById('s_ban').value, 
-                bannerLink: document.getElementById('s_banL').value, 
-                popHead: document.getElementById('s_popH').value, 
-                popImg: document.getElementById('s_popI').value, 
-                popTxt: document.getElementById('s_popT').value, 
-                isOpen: document.getElementById('s_open').value, 
-                qrBank: document.getElementById('s_qrB').value, 
-                qrTrue: document.getElementById('s_qrT').value, 
-                qrInter: document.getElementById('s_qrI').value, 
-                adminEmail: document.getElementById('s_mail').value, 
-                contactFB: document.getElementById('s_fb').value, 
-                contactLine: document.getElementById('s_line').value, 
-                contactPhone: document.getElementById('s_phone').value, 
-                msgSuccess: document.getElementById('s_msgS').value 
-            };
-            
-            Swal.fire({ title: translator('saveWait'), didOpen: () => Swal.showLoading() }); 
-            const r = await transmitDataToAPI('adminSaveSet', dataToSave);
-            if(r && r.status === 'success') {
-                Swal.fire({ icon: 'success', title: translator('saveOk') }); 
-                fetchSystemDataSilently(true, false);
-            }
-        }
-
-        function editAdminProduct(uid) {
-            let p = null;
-            for(let i=0; i<AppState.prods.length; i++) {
-                if(AppState.prods[i].id === uid) {
-                    p = AppState.prods[i];
-                    break;
-                }
-            }
-            if (!p) return;
-            
-            document.getElementById('p_id').value = p.id;
-            document.getElementById('p_cat').value = p.category;
-            document.getElementById('p_catI').value = p.catImg;
-            document.getElementById('p_name').value = p.name;
-            document.getElementById('p_amt').value = p.amount;
-            document.getElementById('p_unit').value = p.unit;
-            document.getElementById('p_prc').value = p.price;
-            document.getElementById('p_disc').value = p.discount;
-            document.getElementById('p_img').value = p.images;
-            document.getElementById('p_det').value = p.details || ''; 
-            document.getElementById('p_prc_kip').value = p.priceKip || '';
-            document.getElementById('p_req').value = p.reqType || 'uid'; 
-            
-            document.getElementById('btnSaveProd').innerHTML = '<i class="fa-solid fa-save mr-2"></i> <span data-l="adBtnSaveP">' + translator('adBtnSaveP') + '</span>'; 
-            document.getElementById('btnCancelEdit').classList.remove('hidden'); 
-            window.scrollTo({top: document.getElementById('prodFormBox').offsetTop - 100, behavior: 'smooth'});
-        }
-
-        function resetAdminProductForm() {
-            const fields = ['p_id','p_cat','p_catI','p_name','p_amt','p_unit','p_prc','p_disc','p_img','p_det','p_prc_kip'];
-            for(let i=0; i<fields.length; i++) {
-                document.getElementById(fields[i]).value = '';
-            }
-            
-            document.getElementById('p_req').value = 'uid'; 
-            document.getElementById('btnSaveProd').innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-2"></i> <span data-l="adBtnSaveP">' + translator('adBtnSaveP') + '</span>'; 
-            document.getElementById('btnCancelEdit').classList.add('hidden');
-        }
-
-        async function persistProductData() {
-            const prodId = document.getElementById('p_id').value;
-            
-            const dataToSave = { 
-                act: prodId ? 'edit' : 'add', 
-                id: prodId, 
-                cat: document.getElementById('p_cat').value, 
-                catImg: document.getElementById('p_catI').value, 
-                name: document.getElementById('p_name').value, 
-                amt: document.getElementById('p_amt').value, 
-                unit: document.getElementById('p_unit').value, 
-                price: document.getElementById('p_prc').value, 
-                disc: document.getElementById('p_disc').value, 
-                imgs: document.getElementById('p_img').value, 
-                det: document.getElementById('p_det').value, 
-                priceKip: document.getElementById('p_prc_kip').value,
-                reqType: document.getElementById('p_req').value 
-            };
-            
-            if(!dataToSave.name || !dataToSave.price || !dataToSave.imgs || !dataToSave.cat) {
-                Swal.fire('Oops', 'กรุณากรอกข้อมูลในช่องที่มีดอกจันให้ครบถ้วน', 'warning');
-                return;
-            }
-            
-            Swal.fire({ title: translator('saveWait'), didOpen: () => Swal.showLoading() });
-            const r = await transmitDataToAPI('adminManageProd', dataToSave);
-            
-            if (r && r.status === 'success') { 
-                resetAdminProductForm(); 
-                await fetchSystemDataSilently(true, false); 
-                Swal.fire('Success!', translator('saveOk'), 'success'); 
-            }
-        }
-
-        async function deleteAdminProduct(uid) {
-            Swal.fire({
-                title: translator('delConfirm'),
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#EF4444',
-                cancelButtonColor: '#D1D5DB'
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    await transmitDataToAPI('adminManageProd', { act: 'del', id: uid }); 
-                    fetchSystemDataSilently(true, false);
-                }
-            });
-        }
-
-        async function persistPortfolioWork() {
-            const dataToSave = { 
-                act: 'add', 
-                cat: document.getElementById('w_cat').value || 'Work', 
-                imgs: document.getElementById('w_img').value, 
-                line: '' 
-            };
-            
-            if(!dataToSave.imgs) {
-                Swal.fire('Warning', translator('addPicReq'), 'warning');
-                return;
-            }
-            
-            Swal.fire({ title: translator('saveWait'), didOpen: () => Swal.showLoading() }); 
-            const r = await transmitDataToAPI('adminManageWork', dataToSave);
-            if (r && r.status === 'success') {
-                document.getElementById('w_img').value = ''; 
-                await fetchSystemDataSilently(true, false);
-                Swal.fire('Success', translator('saveOk'), 'success');
-            }
-        }
-
-        async function deleteAdminWork(uid) { 
-            Swal.fire({
-                title: translator('delConfirm'),
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#EF4444',
-                cancelButtonColor: '#D1D5DB'
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    await transmitDataToAPI('adminManageWork', { act: 'del', id: uid }); 
-                    fetchSystemDataSilently(true, false);
-                }
-            });
-        }
-
-        async function confirmOrderCompletion(oid, targetUid) {
-            Swal.fire({ title: translator('saveWait'), didOpen: () => Swal.showLoading() }); 
-            const r = await transmitDataToAPI('adminUpdateStatus', { type: 'order', id: oid, uid: targetUid });
-            if (r && r.status === 'success') {
-                await fetchSystemDataSilently(true, false);
-                Swal.fire('Success!', translator('alertDone'), 'success'); 
-            }
-        }
-
-        function handleBannerClick() { 
-            if(AppState.sys.bannerLink) {
-                window.open(AppState.sys.bannerLink, '_blank'); 
-            }
-        }
-
-        /**
-         * 10. SYSTEM BOOTSTRAP
-         */
-        window.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('lang').value = AppState.lang;
-            
-            try { 
-                const s = localStorage.getItem('ks_usr'); 
-                if (s && s !== 'undefined') {
-                    AppState.u = JSON.parse(s); 
-                }
-            } catch(e) { 
-                localStorage.removeItem('ks_usr'); 
-            }
-            
-            buildDynamicSidebarMenu(); 
-            applyLanguageToDOM(); 
-            
-            fetchSystemDataSilently(false, true); 
-            
-            setInterval(function() {
-                fetchSystemDataSilently(true, false);
-            }, 3000); 
-            
-            setInterval(function() { 
-                const containers = document.querySelectorAll('.img-box, .banner-slider');
-                for(let c=0; c<containers.length; c++) {
-                    let imgs = containers[c].querySelectorAll('img, .slider-image, .banner-item'); 
-                    if(imgs.length > 1) { 
-                        let activeIndex = -1;
-                        for(let i=0; i<imgs.length; i++) {
-                            if(imgs[i].classList.contains('active')) {
-                                activeIndex = i;
-                                break;
-                            }
-                        }
-                        
-                        if(activeIndex !== -1) { 
-                            imgs[activeIndex].classList.remove('active'); 
-                            let nextIndex = (activeIndex + 1) % imgs.length;
-                            imgs[nextIndex].classList.add('active'); 
-                        } 
-                    } 
-                }
-            }, 5000); 
-        });
-    </script>
-</body>
-</html>
+            for(
