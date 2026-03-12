@@ -565,12 +565,12 @@
                 <div id="fLog">
                     <div class="space-y-6">
                         <div>
-                            <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest">Username / Email</label>
-                            <input type="text" id="lUser" class="input-pastel shadow-sm" data-p="phUidMail" placeholder="UserID ຫລື Email" required>
+                            <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest" data-l="phUidMail">UserID ຫລື Email</label>
+                            <input type="text" id="lUser" class="input-pastel shadow-sm" data-p="phUidMail" required>
                         </div>
                         <div>
-                            <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest">Password</label>
-                            <input type="password" id="lPass" class="input-pastel shadow-sm" data-p="phPass" placeholder="ລະຫັດຜ່ານ" required>
+                            <label class="text-[0.65rem] font-extrabold text-gray-400 ml-4 mb-1 block uppercase tracking-widest" data-l="phPass">ລະຫັດຜ່ານ</label>
+                            <input type="password" id="lPass" class="input-pastel shadow-sm" data-p="phPass" required>
                         </div>
                         <button type="button" onclick="executeAuthenticationProcess('login')" class="btn-pastel w-full text-xl mt-6 shadow-xl">
                             <span data-l="btnLog">ເຂົ້າສູ່ລະບົບ</span> <i class="fa-solid fa-circle-arrow-right ml-2"></i>
@@ -762,22 +762,12 @@
     </main>
 
     <script>
-        // 🔴🔴🔴 API URL: ວາງລິ້ງ Web App ຂອງທ່ານບ່ອນນີ້ 🔴🔴🔴
+        // 🔴🔴🔴 API URL 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwUMa943t7APJoNlGsDPF3QuZcYIw7ab2_9HReCFCsbp5jI61G7rQGW1rKFeLhhE2u5iA/exec';
         
         const AppState = { 
             sys: { storeName: 'kataiy', logo: 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg' },
-            prods: [], 
-            wrks: [], 
-            history: [], 
-            stats: null, 
-            u: null, 
-            inb: [], 
-            uOrd: [], 
-            adm: null, 
-            busy: false, 
-            pay: 'bank', 
-            curCat: 'all', 
+            prods: [], wrks: [], history: [], stats: null, u: null, inb: [], uOrd: [], adm: null, busy: false, pay: 'bank', curCat: 'all', 
             lang: localStorage.getItem('ks_lang') || 'la' 
         };
 
@@ -788,31 +778,11 @@
 
         const LangDict = {
             th: {
-                stUsr:'ผู้ใช้งานทั้งหมด', stOrd:'จำนวนออเดอร์', stTop:'ยอดเติมเงินสะสม', stSal:'ยอดขายสำเร็จ', 
-                mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ / สมัคร', 
-                hRec:'บริการแนะนำ', catAll:'หมวดหมู่ทั้งหมด', hAll:'เกมและบริการทั้งหมด', hCont:'ช่องทางการติดต่อ', hLog:'เข้าสู่ระบบ', hReg:'สมัครสมาชิก', 
-                hTop:'เติมเงิน (ยอดเข้าออโต้)', hInb:'แจ้งเตือน', hWork:'ตัวอย่างงานป้าย', bBank:'ธนาคาร', bTrue:'วอเลท', bInter:'ตปท.', 
-                phUidMail:'UserID หรือ Email', phPass:'รหัสผ่าน', phUid:'ตั้งชื่อ UserID', phMail:'อีเมลของคุณ', phPass2:'ตั้งรหัสผ่าน', phPass3:'ยืนยันรหัสผ่าน', 
-                phAmt:'จำนวนเงิน', phRef:'รหัส 6 ตัวท้าย', txtUpload:'คลิกแนบสลิป', btnTopup:'แจ้งโอน', 
-                btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิก', noAcc:'ไม่มีบัญชี?', hasAcc:'มีบัญชีแล้ว?', out:'ออกจากระบบ', adm:'จัดการหลังบ้าน', 
-                stOpen:'เปิดให้บริการ', stClose:'ปิดให้บริการ', thTime:'เวลา', thOrder:'ออเดอร์', thProd:'สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', 
-                noData:'ไม่มีข้อมูลค่ะ', alertWait:'รอสักครู่...', alertOk:'สำเร็จแล้ว!', btnAck:'ตกลง', btnBuy:'สั่งซื้อ', btnCancel:'ยกเลิก', 
-                tBuy:'ยืนยันการสั่งซื้อ', tPrc:'ราคา', tBal:'ยอดเงิน', tUid:'กรอก UID', mMenu:'เมนู', btnBack:'กลับไปหมวดหมู่', txtUpdate:'อัปเดตล่าสุด', 
-                items: 'รายการ', mustLogin: 'กรุณาเข้าสู่ระบบก่อนนะคะ',
+                stUsr:'ผู้ใช้งานทั้งหมด', stOrd:'จำนวนออเดอร์', stTop:'ยอดเติมเงินสะสม', stSal:'ยอดขายสำเร็จ', mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ / สมัคร', hRec:'บริการแนะนำ', catAll:'หมวดหมู่ทั้งหมด', hAll:'เกมและบริการทั้งหมด', hCont:'ช่องทางการติดต่อ', hLog:'เข้าสู่ระบบ', hReg:'สมัครสมาชิก', hTop:'เติมเงิน (ยอดเข้าออโต้)', hInb:'แจ้งเตือน', hWork:'ตัวอย่างงานป้าย', bBank:'ธนาคาร', bTrue:'วอเลท', bInter:'ตปท.', phUidMail:'UserID หรือ Email', phPass:'รหัสผ่าน', phUid:'ตั้งชื่อ UserID', phMail:'อีเมลของคุณ', phPass2:'ตั้งรหัสผ่าน', phPass3:'ยืนยันรหัสผ่าน', phAmt:'จำนวนเงิน', phRef:'รหัส 6 ตัวท้าย', txtUpload:'คลิกแนบสลิป', btnTopup:'แจ้งโอน', btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิก', noAcc:'ไม่มีบัญชี?', hasAcc:'มีบัญชีแล้ว?', out:'ออกจากระบบ', adm:'จัดการหลังบ้าน', stOpen:'เปิดให้บริการ', stClose:'ปิดให้บริการ', thTime:'เวลา', thOrder:'ออเดอร์', thProd:'สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', noData:'ไม่มีข้อมูลค่ะ', alertWait:'รอสักครู่...', alertOk:'สำเร็จแล้ว!', btnAck:'ตกลง', btnBuy:'สั่งซื้อ', btnCancel:'ยกเลิก', tBuy:'ยืนยันการสั่งซื้อ', tPrc:'ราคา', tBal:'ยอดเงิน', tUid:'กรอก UID', mMenu:'เมนู', btnBack:'กลับไปหมวดหมู่', txtUpdate:'อัปเดตล่าสุด', items: 'รายการ', mustLogin: 'กรุณาเข้าสู่ระบบก่อนนะคะ',
                 tUidTopup: 'เกมที่เติมด้วย UID', tMailTopup: 'เกมที่เติมด้วย ID / Pass'
             },
             la: {
-                stUsr:'ຜູ້ໃຊ້ທັງໝົດ', stOrd:'ຈຳນວນອໍເດີ', stTop:'ຍອດຕື່ມເງິນ', stSal:'ຍອດຂາຍ', 
-                mHome:'ໜ້າຫຼັກ', mGames:'ເກມທັງໝົດ', mTopup:'ຕື່ມເງິນ', mInbox:'ຂໍ້ຄວາມ', mHist:'ປະຫວັດສັ່ງຊື້', mCont:'ຕິດຕໍ່ພວກເຮົາ', mLogin:'ເຂົ້າສູ່ລະບົບ', 
-                hRec:'ບໍລິການແນະນຳ', catAll:'ໝວດໝູ່ທັງໝົດ', hAll:'ເກມແລະບໍລິການທັງໝົດ', hCont:'ຊ່ອງທາງການຕິດຕໍ່', hLog:'ເຂົ້າສູ່ລະບົບ', hReg:'ສະໝັກສະມາຊິກ', 
-                hTop:'ຕື່ມເງິນອັດຕະໂນມັດ', hInb:'ແຈ້ງເຕືອນ', hWork:'ຕົວຢ່າງງານປ້າຍ', bBank:'ທະນາຄານ', bTrue:'ວໍເລັດ', bInter:'ຕປທ.', 
-                phUidMail:'ID ຫລື Email', phPass:'ລະຫັດຜ່ານ', phUid:'ຕັ້ງຊື່ UserID', phMail:'ອີເມວຂອງທ່ານ', phPass2:'ຕັ້ງລະຫັດຜ່ານ', phPass3:'ຢືນຢັນລະຫັດຜ່ານ', 
-                phAmt:'ຈຳນວນເງິນ', phRef:'6 ຕົວທ້າຍສະລິບ', txtUpload:'ແນບສະລິບ', btnTopup:'ແຈ້ງໂອນເງິນ', 
-                btnLog:'ເຂົ້າສູ່ລະບົບ', btnReg:'ສະໝັກສະມາຊິກ', noAcc:'ຍັງບໍ່ມີບັນຊີ?', hasAcc:'ມີບັນຊີແລ້ວ?', out:'ອອກຈາກລະບົບ', adm:'ຈັດການຫຼັງບ້ານ', 
-                stOpen:'ເປີດປົກກະຕິ', stClose:'ປິດຊົ່ວຄາວ', thTime:'ເວລາ', thOrder:'ອໍເດີ', thProd:'ສິນຄ້າ', thStat:'ສະຖານະ', statWait:'ລໍຖ້າ', statDone:'ສຳເລັດ', 
-                noData:'ບໍ່ມີຂໍ້ມູນ', alertWait:'ລໍຖ້າຈັກຄາວ...', alertOk:'ສຳເລັດແລ້ວ!', btnAck:'ຕົກລົງ', btnBuy:'ສັ່ງຊື້ເລີຍ', btnCancel:'ຍົກເລີກ', 
-                tBuy:'ຢືນຢັນສັ່ງຊື້', tPrc:'ລາຄາ', tBal:'ຍອດເງິນ', tUid:'ກະລຸນາໃສ່ UID ເກມ', mMenu:'ເມນູ', btnBack:'ກັບຄືນໝວດໝູ່', txtUpdate:'ອັບເດດລ່າສຸດ', 
-                items: 'ລາຍການ', mustLogin: 'ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້',
+                stUsr:'ຜູ້ໃຊ້ທັງໝົດ', stOrd:'ຈຳນວນອໍເດີ', stTop:'ຍອດຕື່ມເງິນ', stSal:'ຍອດຂາຍ', mHome:'ໜ້າຫຼັກ', mGames:'ເກມທັງໝົດ', mTopup:'ຕື່ມເງິນ', mInbox:'ຂໍ້ຄວາມ', mHist:'ປະຫວັດສັ່ງຊື້', mCont:'ຕິດຕໍ່ພວກເຮົາ', mLogin:'ເຂົ້າສູ່ລະບົບ', hRec:'ບໍລິການແນະນຳ', catAll:'ໝວດໝູ່ທັງໝົດ', hAll:'ເກມແລະບໍລິການທັງໝົດ', hCont:'ຊ່ອງທາງການຕິດຕໍ່', hLog:'ເຂົ້າສູ່ລະບົບ', hReg:'ສະໝັກສະມາຊິກ', hTop:'ຕື່ມເງິນອັດຕະໂນມັດ', hInb:'ແຈ້ງເຕືອນ', hWork:'ຕົວຢ່າງງານປ້າຍ', bBank:'ທະນາຄານ', bTrue:'ວໍເລັດ', bInter:'ຕປທ.', phUidMail:'ID ຫລື Email', phPass:'ລະຫັດຜ່ານ', phUid:'ຕັ້ງຊື່ UserID', phMail:'ອີເມວຂອງທ່ານ', phPass2:'ຕັ້ງລະຫັດຜ່ານ', phPass3:'ຢືນຢັນລະຫັດຜ່ານ', phAmt:'ຈຳນວນເງິນ', phRef:'6 ຕົວທ້າຍສະລິບ', txtUpload:'ແນບສະລິບ', btnTopup:'ແຈ້ງໂອນເງິນ', btnLog:'ເຂົ້າສູ່ລະບົບ', btnReg:'ສະໝັກສະມາຊິກ', noAcc:'ຍັງບໍ່ມີບັນຊີ?', hasAcc:'ມີບັນຊີແລ້ວ?', out:'ອອກຈາກລະບົບ', adm:'ຈັດການຫຼັງບ້ານ', stOpen:'ເປີດປົກກະຕິ', stClose:'ປິດຊົ່ວຄາວ', thTime:'ເວລາ', thOrder:'ອໍເດີ', thProd:'ສິນຄ້າ', thStat:'ສະຖານະ', statWait:'ລໍຖ້າ', statDone:'ສຳເລັດ', noData:'ບໍ່ມີຂໍ້ມູນ', alertWait:'ລໍຖ້າຈັກຄາວ...', alertOk:'ສຳເລັດແລ້ວ!', btnAck:'ຕົກລົງ', btnBuy:'ສັ່ງຊື້ເລີຍ', btnCancel:'ຍົກເລີກ', tBuy:'ຢືນຢັນສັ່ງຊື້', tPrc:'ລາຄາ', tBal:'ຍອດເງິນ', tUid:'ກະລຸນາໃສ່ UID ເກມ', mMenu:'ເມນູ', btnBack:'ກັບຄືນໝວດໝູ່', txtUpdate:'ອັບເດດລ່າສຸດ', items: 'ລາຍການ', mustLogin: 'ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້',
                 tUidTopup: 'ເກມທີ່ຕື່ມດ້ວຍ UID', tMailTopup: 'ເກມທີ່ຕື່ມດ້ວຍ ID / Pass'
             }
         };
@@ -866,6 +836,7 @@
             document.getElementById('mainMenu').classList.toggle('hidden'); 
         }
 
+        // 🟢 เปลี่ยนภาษาแล้วอัปเดตหน้าจอทันที ไม่ต้องรอโหลดชีต 🟢
         function executeLanguageChange() {
             AppState.lang = document.getElementById('lang').value;
             localStorage.setItem('ks_lang', AppState.lang);
@@ -883,8 +854,6 @@
             pElements.forEach(function(el) {
                 el.placeholder = translator(el.getAttribute('data-p'));
             });
-            
-            buildDynamicSidebarMenu();
         }
 
         function buildDynamicSidebarMenu() {
@@ -1039,8 +1008,6 @@
                 document.getElementById('uBadge').classList.remove('hidden'); 
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
                 
-                document.getElementById('fLog').innerHTML = '<button type="button" onclick="out()" class="btn-pastel !bg-red-400 w-full text-xl mt-6 shadow-sm"><i class="fa-solid fa-power-off mr-2"></i> ' + translator('out') + '</button>';
-                
                 if (AppState.u.role === 'admin' && document.getElementById('p-admin').classList.contains('active')) {
                     renderAdminDashboard(updateForms);
                 }
@@ -1054,7 +1021,7 @@
             renderContactInfo(); 
             applyLanguageToDOM();
             
-            // ใช้ ViewState เพื่อป้องกันการรีเฟรชหน้าสินค้ากลับไปเป็นหน้าหมวดหมู่
+            // 🟢 State Tracking เพื่อไม่ให้หน้าเด้งกลับตอนกำลังดูสินค้า 🟢
             if (ViewState.prodsArea === null) {
                 drawCategoryList('prodsArea');
             } else {
@@ -1160,9 +1127,8 @@
             cx.innerHTML = html;
         }
 
-        // 🟢 แสดงสินค้าในหมวดหมู่ 🟢
         window.drawProductList = function(containerId, catName) {
-            ViewState[containerId] = catName; // บันทึก State ว่ากำลังดูหน้านี้อยู่
+            ViewState[containerId] = catName; 
             
             const cx = document.getElementById(containerId);
             
@@ -1233,7 +1199,6 @@
             cx.innerHTML = html + productHtml;
         }
 
-        // ฟังก์ชันช่วยย้อนกลับ
         window.renderCategoryAndResetState = function(containerId) {
             ViewState[containerId] = null;
             drawCategoryList(containerId);
@@ -1355,6 +1320,7 @@
             }
         }
 
+        // 🟢 DYNAMIC LOGIN/REGISTER (NO RELOAD) 🟢
         async function executeAuthenticationProcess(actionType) {
             Swal.fire({ title: translator('alertWait'), didOpen: () => Swal.showLoading(), allowOutsideClick: false });
             
@@ -1375,7 +1341,7 @@
                 const nPw2 = document.getElementById('rPass2').value.trim();
                 
                 if (!nUid || !nEmail || !nPw) { 
-                    Swal.fire('Warning', 'กรอกฟอร์มไม่ครบ', 'warning'); 
+                    Swal.fire('Warning', 'กรอกฟอร์มให้ครบถ้วนนะคะ', 'warning'); 
                     return; 
                 }
                 if (nPw !== nPw2) { 
@@ -1393,13 +1359,35 @@
                 
                 Swal.fire({ icon: 'success', title: translator('alertOk'), timer: 1500, showConfirmButton: false });
                 
-                buildDynamicSidebarMenu();
+                applyLanguageToDOM();
+                renderDOMEngine(true, false);
                 fetchSystemDataSilently(true, true); 
                 navigatePage('home');
             } else {
                 let msg = response ? response.message : 'API Error';
                 Swal.fire({icon: 'error', title: 'Error', text: msg});
             }
+        }
+
+        function out() {
+            Swal.fire({
+                title: 'ออกจากระบบ / ອອກຈາກລະບົບ',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#A855F7',
+                cancelButtonColor: '#aaa'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    AppState.u = null;
+                    localStorage.removeItem('ks_usr');
+                    
+                    applyLanguageToDOM();
+                    renderDOMEngine(true, false);
+                    navigatePage('home');
+                }
+            });
         }
 
         function changePaymentMode(modeStr) {
@@ -1839,15 +1827,12 @@
             buildDynamicSidebarMenu(); 
             applyLanguageToDOM(); 
             
-            // Initial Fetch
             fetchSystemDataSilently(false, true); 
             
-            // Background Polling
             setInterval(function() {
                 fetchSystemDataSilently(true, false);
             }, 3000); 
             
-            // Image Slider Loop
             setInterval(function() { 
                 const containers = document.querySelectorAll('.img-box, .banner-slider');
                 containers.forEach(function(s) { 
