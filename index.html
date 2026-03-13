@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="la">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">kataiy | ร้านเติมเกมราคาถูก (ຮ້ານເຕີມເກມລາຄາຖືກ)</title>
+    <title id="pageTitle">kataiy | ຮ້ານເຕີມເກມລາຄາຖືກ</title>
     
     <link id="favicon" rel="icon" type="image/jpeg" href="https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg">
     
@@ -30,60 +30,388 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
-        body { font-family: 'Prompt', sans-serif; background-color: #FDF2F8; color: #4A4A4A; overflow-x: hidden; scroll-behavior: smooth; }
-        .smooth { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .hide-scroll::-webkit-scrollbar { display: none; }
-        .page-section { display: none; opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
-        .page-section.active { display: block; opacity: 1; transform: translateY(0); }
-
-        .marquee-wrapper { width: 100%; max-width: 1152px; margin: 15px auto 5px auto; padding: 0 15px; position: relative; z-index: 10; }
-        .marquee-cute-pill { background: white; border: 2.5px solid #E9D5FF; border-radius: 99px; padding: 6px 8px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.08); overflow: hidden; }
-        .marquee-badge { background: linear-gradient(135deg, #A855F7, #7E22CE); color: white; font-size: 0.75rem; font-weight: 700; padding: 8px 18px; border-radius: 99px; margin-right: 12px; white-space: nowrap; display: flex; align-items: center; gap: 8px; z-index: 10; box-shadow: 0 2px 8px rgba(126, 34, 206, 0.3); letter-spacing: 0.5px; }
-        .marquee-text-container { flex: 1; overflow: hidden; white-space: nowrap; position: relative; mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent); }
-        .marquee-content { display: inline-block; animation: scrollCute 25s linear infinite; color: #7E22CE; font-weight: 600; font-size: 0.85rem; padding-top: 2px; }
-        @keyframes scrollCute { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
-
-        .stat-card-public { background: white; border-radius: 20px; border: 2px solid transparent; padding: 20px 15px; text-align: center; box-shadow: 0 4px 15px rgba(126, 34, 206, 0.05); transition: 0.3s; }
-        .stat-card-public:hover { border-color: #E9D5FF; transform: translateY(-4px); box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); }
-        .stat-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-size: 1.4rem; }
-
-        .product-card { background: white; border-radius: 24px; border: 2px solid transparent; box-shadow: 0 4px 20px rgba(126, 34, 206, 0.05); overflow: hidden; display: flex; flex-direction: column; transition: 0.4s; cursor: pointer; }
-        .product-card:hover { border-color: #A855F7; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); }
-        .img-box { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden; }
-        .img-box img { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 10px; opacity: 0; transition: opacity 0.8s ease-in-out; }
-        .img-box img.active { opacity: 1; }
+        body { 
+            font-family: 'Prompt', sans-serif; 
+            background-color: #FDF2F8; 
+            color: #4A4A4A; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+        }
         
-        .banner-slider { position: relative; overflow: hidden; border-radius: 24px; border: 2px solid #E9D5FF; background: #FFF; box-shadow: 0 4px 15px rgba(0,0,0,0.03); cursor: pointer; }
-        .banner-item { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; opacity: 0; transition: opacity 1.2s; }
-        .banner-item.active { opacity: 1; z-index: 1; }
-
-        .input-pastel { width: 100%; border: 2.5px solid #E9D5FF; border-radius: 16px; padding: 14px 20px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Prompt', sans-serif; color: #7E22CE; font-weight: 500; }
-        .input-pastel:focus { border-color: #A855F7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
-        .btn-pastel { background: #A855F7; color: white; border-radius: 99px; padding: 14px 28px; font-weight: 600; text-align: center; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); width: 100%;}
-        .btn-pastel:hover { background: #9333EA; transform: scale(1.02); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); }
-        .btn-outline { background: white; color: #A855F7; border: 2.5px solid #A855F7; border-radius: 99px; padding: 14px 28px; font-weight: 600; text-align: center; cursor: pointer; transition: 0.3s; width: 100%;}
-        .btn-outline:hover { background: #FDF2F8; transform: scale(1.02); }
+        .smooth { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
         
-        .status-capsule { font-size: 0.75rem; font-weight: 700; padding: 5px 16px; border-radius: 99px; width: fit-content; margin: 12px auto; border: 1.5px solid currentColor; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-
-        .swal2-popup { border-radius: 28px !important; border: 4px solid #E9D5FF !important; font-family: 'Prompt', sans-serif !important; }
-        .swal2-confirm { border-radius: 99px !important; background: #A855F7 !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important;}
-        .swal2-cancel { border-radius: 99px !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important; background: #E5E7EB !important; color: #4A4A4A !important;}
-
-        .admin-section { background: white; border-radius: 24px; border: 1.5px solid #E9D5FF; padding: 30px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .admin-header { font-size: 1.4rem; font-weight: 700; color: #7E22CE; margin-bottom: 20px; border-left: 5px solid #A855F7; padding-left: 15px; }
-        .admin-label { font-size: 0.8rem; font-weight: 600; color: #9333EA; margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
-        .inp-admin { width: 100%; border: 1.5px solid #E9D5FF; border-radius: 12px; padding: 12px 15px; background: #FDF2F8; outline: none; transition: 0.2s; font-size: 0.95rem; color: #4A4A4A; font-family: 'Prompt', sans-serif; }
-        .inp-admin:focus { border-color: #A855F7; background: #FFF; box-shadow: 0 0 8px rgba(168, 85, 247, 0.15); }
-        .admin-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 0.9rem; }
-        .admin-table th { background: #FDF2F8; color: #7E22CE; padding: 15px; text-align: left; font-weight: 600; border-bottom: 2px solid #E9D5FF; }
-        .admin-table td { padding: 15px; background: white; border-top: 1px solid #E9D5FF; border-bottom: 1px solid #E9D5FF; color: #4B5563; }
-        .admin-table tr td:first-child { border-left: 1px solid #E9D5FF; border-radius: 12px 0 0 12px; }
-        .admin-table tr td:last-child { border-right: 1px solid #E9D5FF; border-radius: 0 12px 12px 0; }
+        .hide-scroll::-webkit-scrollbar { 
+            display: none; 
+        }
         
-        .ad-tab-btn { padding: 12px 25px; border-radius: 99px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.3s; background: white; color: #A855F7; border: 2px solid #E9D5FF; white-space: nowrap; }
-        .ad-tab-btn:hover { background: #FDF2F8; }
-        .ad-tab-btn.active { background: linear-gradient(135deg, #A855F7, #7E22CE); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); }
+        .page-section { 
+            display: none; 
+            opacity: 0; 
+            transform: translateY(15px); 
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
+        }
+        
+        .page-section.active { 
+            display: block; 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .marquee-wrapper {
+            width: 100%;
+            max-width: 1152px;
+            margin: 15px auto 5px auto;
+            padding: 0 15px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .marquee-cute-pill {
+            background: white;
+            border: 2.5px solid #E9D5FF;
+            border-radius: 99px;
+            padding: 6px 8px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.08);
+            overflow: hidden;
+        }
+        
+        .marquee-badge {
+            background: linear-gradient(135deg, #A855F7, #7E22CE);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 8px 18px;
+            border-radius: 99px;
+            margin-right: 12px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(126, 34, 206, 0.3);
+            letter-spacing: 0.5px;
+        }
+        
+        .marquee-text-container {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+        }
+        
+        .marquee-content { 
+            display: inline-block; 
+            animation: scrollCute 25s linear infinite; 
+            color: #7E22CE;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding-top: 2px;
+        }
+        
+        @keyframes scrollCute { 
+            0% { transform: translateX(100vw); } 
+            100% { transform: translateX(-100%); } 
+        }
+
+        .stat-card-public { 
+            background: white; 
+            border-radius: 20px; 
+            border: 2px solid transparent; 
+            padding: 20px 15px; 
+            text-align: center; 
+            box-shadow: 0 4px 15px rgba(126, 34, 206, 0.05); 
+            transition: 0.3s; 
+        }
+        
+        .stat-card-public:hover { 
+            border-color: #E9D5FF; 
+            transform: translateY(-4px); 
+            box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); 
+        }
+        
+        .stat-icon { 
+            width: 48px; 
+            height: 48px; 
+            border-radius: 14px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0 auto 12px auto; 
+            font-size: 1.4rem; 
+        }
+
+        .product-card { 
+            background: white; 
+            border-radius: 24px; 
+            border: 2px solid transparent; 
+            box-shadow: 0 4px 20px rgba(126, 34, 206, 0.05); 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            transition: 0.4s; 
+            cursor: pointer; 
+        }
+        
+        .product-card:hover { 
+            border-color: #A855F7; 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); 
+        }
+        
+        .img-box { 
+            position: relative; 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            background: #FFF; 
+            overflow: hidden; 
+        }
+        
+        .img-box img { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            padding: 10px; 
+            opacity: 0; 
+            transition: opacity 0.8s ease-in-out; 
+        }
+        
+        .img-box img.active { 
+            opacity: 1; 
+        }
+        
+        .banner-slider { 
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 24px; 
+            border: 2px solid #E9D5FF; 
+            background: #FFF; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            cursor: pointer; 
+        }
+        
+        .banner-item { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            top: 0; 
+            left: 0; 
+            opacity: 0; 
+            transition: opacity 1.2s; 
+        }
+        
+        .banner-item.active { 
+            opacity: 1; 
+            z-index: 1; 
+        }
+
+        .input-pastel { 
+            width: 100%; 
+            border: 2.5px solid #E9D5FF; 
+            border-radius: 16px; 
+            padding: 14px 20px; 
+            background: #FFF; 
+            outline: none; 
+            transition: 0.3s; 
+            font-family: 'Prompt', sans-serif; 
+            color: #7E22CE; 
+            font-weight: 500; 
+        }
+        
+        .input-pastel:focus { 
+            border-color: #A855F7; 
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); 
+        }
+        
+        .btn-pastel { 
+            background: #A855F7; 
+            color: white; 
+            border-radius: 99px; 
+            padding: 14px 28px; 
+            font-weight: 600; 
+            text-align: center; 
+            border: none; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); 
+            width: 100%;
+        }
+        
+        .btn-pastel:hover { 
+            background: #9333EA; 
+            transform: scale(1.02); 
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); 
+        }
+        
+        .btn-outline { 
+            background: white; 
+            color: #A855F7; 
+            border: 2.5px solid #A855F7; 
+            border-radius: 99px; 
+            padding: 14px 28px; 
+            font-weight: 600; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            width: 100%;
+        }
+
+        .btn-outline:hover {
+            background: #FDF2F8;
+            transform: scale(1.02);
+        }
+        
+        .status-capsule { 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            padding: 5px 16px; 
+            border-radius: 99px; 
+            width: fit-content; 
+            margin: 12px auto; 
+            border: 1.5px solid currentColor; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+        }
+
+        .swal2-popup { 
+            border-radius: 28px !important; 
+            border: 4px solid #E9D5FF !important; 
+            font-family: 'Prompt', sans-serif !important; 
+        }
+        
+        .swal2-confirm { 
+            border-radius: 99px !important; 
+            background: #A855F7 !important; 
+            padding: 12px 30px !important; 
+            font-weight: bold !important; 
+            outline: none !important; 
+            border: none !important;
+        }
+        
+        .swal2-cancel { 
+            border-radius: 99px !important; 
+            padding: 12px 30px !important; 
+            font-weight: bold !important; 
+            outline: none !important; 
+            border: none !important;
+            background: #E5E7EB !important;
+            color: #4A4A4A !important;
+        }
+
+        .admin-section { 
+            background: white; 
+            border-radius: 24px; 
+            border: 1.5px solid #E9D5FF; 
+            padding: 30px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02); 
+        }
+        
+        .admin-header { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            color: #7E22CE; 
+            margin-bottom: 20px; 
+            border-left: 5px solid #A855F7; 
+            padding-left: 15px; 
+        }
+        
+        .admin-label { 
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            color: #9333EA; 
+            margin-bottom: 6px; 
+            display: block; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+        
+        .inp-admin { 
+            width: 100%; 
+            border: 1.5px solid #E9D5FF; 
+            border-radius: 12px; 
+            padding: 12px 15px; 
+            background: #FDF2F8; 
+            outline: none; 
+            transition: 0.2s; 
+            font-size: 0.95rem; 
+            color: #4A4A4A; 
+            font-family: 'Prompt', sans-serif; 
+        }
+        
+        .inp-admin:focus { 
+            border-color: #A855F7; 
+            background: #FFF; 
+            box-shadow: 0 0 8px rgba(168, 85, 247, 0.15); 
+        }
+        
+        .admin-table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0 8px; 
+            font-size: 0.9rem; 
+        }
+        
+        .admin-table th { 
+            background: #FDF2F8; 
+            color: #7E22CE; 
+            padding: 15px; 
+            text-align: left; 
+            font-weight: 600; 
+            border-bottom: 2px solid #E9D5FF; 
+        }
+        
+        .admin-table td { 
+            padding: 15px; 
+            background: white; 
+            border-top: 1px solid #E9D5FF; 
+            border-bottom: 1px solid #E9D5FF; 
+            color: #4B5563; 
+        }
+        
+        .admin-table tr td:first-child { 
+            border-left: 1px solid #E9D5FF; 
+            border-radius: 12px 0 0 12px; 
+        }
+        
+        .admin-table tr td:last-child { 
+            border-right: 1px solid #E9D5FF; 
+            border-radius: 0 12px 12px 0; 
+        }
+        
+        .ad-tab-btn { 
+            padding: 12px 25px; 
+            border-radius: 99px; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            background: white; 
+            color: #A855F7; 
+            border: 2px solid #E9D5FF; 
+            white-space: nowrap; 
+        }
+        
+        .ad-tab-btn:hover { 
+            background: #FDF2F8; 
+        }
+        
+        .ad-tab-btn.active { 
+            background: linear-gradient(135deg, #A855F7, #7E22CE); 
+            color: white; 
+            border-color: transparent; 
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); 
+        }
+        
         .z-999 { z-index: 999; }
     </style>
 </head>
@@ -134,7 +462,7 @@
                 <span data-l="txtUpdate">อัปเดตล่าสุด</span>
             </div>
             <div class="marquee-text-container">
-                <div class="marquee-content" id="uiMarq" data-l="alertWait">
+                <div class="marquee-content" id="uiMarq">
                     กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล...
                 </div>
             </div>
@@ -379,7 +707,9 @@
                                 <div><label class="admin-label text-pDark" data-l="adPPrcThb">* ราคา (บาท)</label><input type="number" id="p_prc" class="inp-admin !bg-white border-pMain" step="0.01" data-p="adPPrcThb"></div>
                                 <div><label class="admin-label text-pDark" data-l="adPPrcKip">ราคา (กีบ)</label><input type="number" id="p_prc_kip" class="inp-admin !bg-white border-pMain" data-p="adPPrcKip"></div>
                                 <div><label class="admin-label text-pDark" data-l="adPDisc">ส่วนลด %</label><input type="number" id="p_disc" class="inp-admin !bg-white border-pMain" data-p="adPDisc"></div>
-                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPSort">ลำดับจัดเรียง (ตัวเลข)</label><input type="number" id="p_sort" class="inp-admin !bg-white border-pMain" placeholder="1, 2, 3..." data-p="adPSort"></div>
+                                
+                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPSort">ลำดับจัดเรียง (ตัวเลขน้อยขึ้นก่อน)</label><input type="number" id="p_sort" class="inp-admin !bg-white border-pMain" data-p="adPSort"></div>
+                                
                                 <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPImg">* ลิงก์รูปภาพ (คั่น ,)</label><input type="text" id="p_img" class="inp-admin !bg-white border-pMain" data-p="adPImg"></div>
                                 <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPDet">รายละเอียดสินค้า (แสดงตอนซื้อ)</label><textarea id="p_det" class="inp-admin !bg-white border-pMain" rows="3" data-p="adPDet"></textarea></div>
                             </div>
@@ -390,6 +720,7 @@
                         <button type="button" onclick="resetAdminProductForm()" class="btn-outline !bg-gray-100 !text-gray-500 !border-gray-300 hidden shadow-md" id="btnCancelEdit"><span data-l="adBtnCancel">ยกเลิก</span></button>
                     </div>
                 </div>
+
                 <div class="admin-section p-0 overflow-hidden">
                     <div class="p-6 border-b-2 border-pMain bg-pBg"><h3 class="font-bold text-pDark m-0 uppercase tracking-tighter"><i class="fa-solid fa-table-list mr-2"></i> <span data-l="adHeadListP">รายการสินค้า</span></h3></div>
                     <div class="overflow-x-auto"><table class="admin-table min-w-full" id="tb-prods"></table></div>
@@ -401,7 +732,7 @@
                     <h3 class="admin-header"><i class="fa-solid fa-palette mr-2"></i> <span data-l="adHeadAddW">อัปโหลดงานป้าย</span></h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div><label class="admin-label" data-l="adWCat">ชื่องาน</label><input type="text" id="w_cat" class="inp-admin" data-p="adWCat"></div>
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adWImg">ลิงก์รูป (คั่น ,)</label><input type="text" id="w_img" class="inp-admin" data-p="adWImg"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adWImg">ลิงก์รูปภาพ (คั่น ,)</label><input type="text" id="w_img" class="inp-admin" data-p="adWImg"></div>
                     </div>
                     <button type="button" onclick="persistPortfolioWork()" class="btn-pastel mt-6 shadow-md"><i class="fa-solid fa-plus-circle mr-2"></i> <span data-l="adBtnSaveW">เพิ่มงานป้าย</span></button>
                 </div>
@@ -415,6 +746,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="w-full text-center py-10 text-pDark font-bold text-sm bg-white border-t-2 border-pMain mt-auto relative z-10">
@@ -445,7 +777,7 @@
         };
 
         /**
-         * View State Management
+         * View State Management (จดจำหน้าหมวดหมู่ที่กำลังดูอยู่)
          */
         const ViewState = {
             prodsArea: null, 
@@ -523,11 +855,12 @@
             }
         };
 
+        // ฟังก์ชันช่วยแปลภาษา
         function translator(key) {
             return LangDict[AppState.lang][key] || key;
         }
 
-        // 🟢 ฟังก์ชันแปลภาษาแบบ 100% 🟢
+        // 🟢 ฟังก์ชันแปลภาษาที่ต้องรันทุกครั้งหลังวาดหน้าจอใหม่ 🟢
         function applyLanguageToDOM() {
             const lElements = document.querySelectorAll('[data-l]');
             for(let i=0; i<lElements.length; i++) {
@@ -667,7 +1000,7 @@
             } catch (err) { 
                 AppState.busy = false; 
                 console.error("API Transmission Failed:", err);
-                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ตหรือ Deploy Web App ใหม่' };
+                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ต' };
             }
         }
 
@@ -708,7 +1041,7 @@
                     try { 
                         renderDOMEngine(isSilent, updateAdminForms); 
                     } catch(e) {
-                        console.error("UI Render Blocked an Error:", e);
+                        console.error("UI Render Error:", e);
                     }
                 }
             } catch (error) {
@@ -717,8 +1050,6 @@
         }
 
         function renderDOMEngine(isSilent, updateForms) {
-            try { applyLanguageToDOM(); } catch(e) {}
-            
             document.title = AppState.sys.storeName || 'kataiy';
             document.getElementById('favicon').href = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
@@ -745,13 +1076,12 @@
                 bannerElement.innerHTML = bannerHtml;
             }
 
-            let marqueeStr = `<span class="mr-4 font-bold text-pDark">${AppState.sys.announcement || ''}</span> <i class="fa-solid fa-star text-yellow-400 mr-2"></i> <span class="text-gray-500">`;
+            let marqueeStr = '';
             if(AppState.history && AppState.history.length > 0) {
                 marqueeStr += AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-bolt text-pBtn"></i>&nbsp;&nbsp; ');
             } else {
-                marqueeStr += translator('alertWait');
+                marqueeStr += 'ยินดีต้อนรับเข้าสู่ร้าน kataiy ระบบเติมเกมอัตโนมัติ';
             }
-            marqueeStr += `</span>`;
             document.getElementById('uiMarq').innerHTML = marqueeStr;
 
             const stBox = document.getElementById('uiStatus'); 
@@ -768,8 +1098,6 @@
                 document.getElementById('uBadge').classList.remove('hidden'); 
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
                 
-                document.getElementById('fLog').innerHTML = `<button type="button" onclick="executeLogout()" class="btn-pastel !bg-red-400 w-full text-xl mt-6 shadow-sm"><i class="fa-solid fa-power-off mr-2"></i> ${translator('out')}</button>`;
-                
                 if (AppState.u.role === 'admin' && document.getElementById('p-admin').classList.contains('active')) {
                     renderAdminDashboard(updateForms);
                 }
@@ -781,7 +1109,6 @@
             try { renderPortfolioGallery(); } catch(e){}
             try { renderUserPersonalData(); } catch(e){}
             try { renderContactInfo(); } catch(e){}
-            try { applyLanguageToDOM(); } catch(e){}
             
             if (ViewState.prodsArea === null) {
                 drawCategoryList('prodsArea');
@@ -794,6 +1121,9 @@
             } else {
                 drawProductList('allGamesArea', ViewState.allGamesArea);
             }
+            
+            // 🟢 เรียกแปลภาษาสุดท้ายเพื่อให้ครอบคลุมทุกส่วน 🟢
+            try { applyLanguageToDOM(); } catch(e){}
         }
 
         // 🟢 ระบบแยกหมวดหมู่ (UID กับ ID/Pass) 🟢
@@ -842,7 +1172,7 @@
                     } else if (leader.images) {
                         catIcon = leader.images.split(',')[0].trim();
                     }
-                    let cName = c || 'ທົ່ວໄປ';
+                    let cName = c || 'ทั่วไป';
 
                     html += `
                     <div class="product-card animate-pageFadeIn" onclick="drawProductList('${containerId}', '${c}')">
@@ -866,7 +1196,7 @@
                         catIcon = leader.images.split(',')[0].trim();
                     }
 
-                    let cName = c || 'ທົ່ວໄປ';
+                    let cName = c || 'ทั่วไป';
 
                     html += `
                     <div class="product-card animate-pageFadeIn" onclick="drawProductList('${containerId}', '${c}')">
@@ -901,7 +1231,7 @@
                 }
             }
             
-            // 🟢 ระบบจัดเรียง 🟢
+            // 🟢 ฟังก์ชันจัดเรียง (Sorting) 🟢
             if (sortValue === 'price_asc') {
                 validProds.sort(function(a, b) {
                     return parseFloat(a.price || 0) - parseFloat(b.price || 0);
@@ -1128,7 +1458,7 @@
                     return; 
                 }
                 if (nPw !== nPw2) { 
-                    Swal.fire('Error', 'รหัสผ่านยืนยันไม่ตรงกันค่ะ รบกวนพิมพ์ใหม่อีกครั้ง', 'error'); 
+                    Swal.fire('Error', 'รหัสผ่านยืนยันไม่ตรงกันค่ะ', 'error'); 
                     return; 
                 }
                 dataset = { userId: nUid, email: nEmail, password: nPw };
@@ -1146,6 +1476,7 @@
                     timer: 1500, 
                     showConfirmButton: false 
                 }).then(() => {
+                    // 🟢 Hard Reload แบบล้างค่าให้ชัวร์ที่สุด 🟢
                     window.location.href = window.location.pathname; 
                     window.location.reload(true); 
                 });
@@ -1156,7 +1487,7 @@
             }
         }
 
-        // 🟢 ฟังก์ชันออกจากระบบแบบ Hard Clear 🟢
+        // 🟢 ฟังก์ชันออกจากระบบแบบล้างค่าสมบูรณ์ 🟢
         function executeLogout() {
             Swal.fire({
                 title: translator('out'),
@@ -1380,7 +1711,7 @@
             event.target.classList.add('active');
         }
 
-        // 🟢 แก้ไขการดึงข้อมูลจากตัวแปร Settings อย่างแม่นยำ 🟢
+        // 🟢 แก้ไขการดึงข้อมูลจากตัวแปร Settings แบบตรงตัว (Explicit Mapping) 🟢
         function renderAdminDashboard(forceFormRefresh) {
             if(!AppState.adm) return;
             
@@ -1525,7 +1856,7 @@
             document.getElementById('p_req').value = p.reqType || 'uid'; 
             document.getElementById('p_sort').value = p.sortOrder || ''; 
             
-            document.getElementById('btnSaveProd').innerHTML = `<i class="fa-solid fa-save mr-2"></i> <span>${translator('adBtnSaveP')}</span>`; 
+            document.getElementById('btnSaveProd').innerHTML = `<i class="fa-solid fa-save mr-2"></i> <span data-l="adBtnSaveP">${translator('adBtnSaveP')}</span>`; 
             document.getElementById('btnCancelEdit').classList.remove('hidden'); 
             window.scrollTo({top: document.getElementById('prodFormBox').offsetTop - 100, behavior: 'smooth'});
         }
@@ -1537,7 +1868,7 @@
             }
             
             document.getElementById('p_req').value = 'uid'; 
-            document.getElementById('btnSaveProd').innerHTML = `<i class="fa-solid fa-cloud-arrow-up mr-2"></i> <span>${translator('adBtnSaveP')}</span>`; 
+            document.getElementById('btnSaveProd').innerHTML = `<i class="fa-solid fa-cloud-arrow-up mr-2"></i> <span data-l="adBtnSaveP">${translator('adBtnSaveP')}</span>`; 
             document.getElementById('btnCancelEdit').classList.add('hidden');
         }
 
@@ -1558,7 +1889,7 @@
                 det: document.getElementById('p_det').value, 
                 priceKip: document.getElementById('p_prc_kip').value,
                 reqType: document.getElementById('p_req').value,
-                sortOrder: document.getElementById('p_sort').value || 999
+                sortOrder: document.getElementById('p_sort').value || 999 
             };
             
             if(!dataToSave.name || !dataToSave.price || !dataToSave.imgs || !dataToSave.cat) {
@@ -1647,18 +1978,20 @@
          * 10. SYSTEM BOOTSTRAP (เริ่มทำงานทันทีเมื่อเปิดหน้าเว็บ)
          */
         window.addEventListener("DOMContentLoaded", () => {
+            // โหลดภาษา
             document.getElementById('lang').value = AppState.lang;
             
-            try { 
-                const s = localStorage.getItem('ks_usr'); 
-                if (s && s !== 'undefined') {
-                    AppState.u = JSON.parse(s); 
+            // อ่านค่า User จาก Cache อย่างปลอดภัย
+            try {
+                const session = localStorage.getItem('ks_usr');
+                if (session && session !== 'undefined') {
+                    AppState.u = JSON.parse(session);
                 }
             } catch(e) { 
                 localStorage.removeItem('ks_usr'); 
             }
             
-            // วาดหน้าจอทันที ไม่ต้องรอ API
+            // 🟢 วาดหน้าจอทันที ไม่ต้องรอ API 🟢
             applyLanguageToDOM();
             
             // เริ่มต้นดึงข้อมูลแบบเบื้องหลัง
@@ -1693,4 +2026,5 @@
             }, 5000); 
         });
     </script>
+</body>
 </html>
