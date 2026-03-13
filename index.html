@@ -30,406 +30,60 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
-        /* ==========================================================================
-           GLOBAL STYLES & UX
-           ========================================================================== */
-        body { 
-            font-family: 'Prompt', sans-serif; 
-            background-color: #FDF2F8; 
-            color: #4A4A4A; 
-            overflow-x: hidden; 
-            scroll-behavior: smooth; 
-        }
-        
-        .smooth { 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-        }
-        
-        .hide-scroll::-webkit-scrollbar { 
-            display: none; 
-        }
-        
-        /* ==========================================================================
-           PAGE TRANSITIONS
-           ========================================================================== */
-        .page-section { 
-            display: none; 
-            opacity: 0; 
-            transform: translateY(15px); 
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
-        }
-        
-        .page-section.active { 
-            display: block; 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
+        body { font-family: 'Prompt', sans-serif; background-color: #FDF2F8; color: #4A4A4A; overflow-x: hidden; scroll-behavior: smooth; }
+        .smooth { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .page-section { display: none; opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+        .page-section.active { display: block; opacity: 1; transform: translateY(0); }
 
-        /* ==========================================================================
-           CUTE MARQUEE COMPONENT
-           ========================================================================== */
-        .marquee-wrapper {
-            width: 100%;
-            max-width: 1152px;
-            margin: 15px auto 5px auto;
-            padding: 0 15px;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .marquee-cute-pill {
-            background: white;
-            border: 2.5px solid #E9D5FF;
-            border-radius: 99px;
-            padding: 6px 8px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.08);
-            overflow: hidden;
-        }
-        
-        .marquee-badge {
-            background: linear-gradient(135deg, #A855F7, #7E22CE);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 8px 18px;
-            border-radius: 99px;
-            margin-right: 12px;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 10;
-            box-shadow: 0 2px 8px rgba(126, 34, 206, 0.3);
-            letter-spacing: 0.5px;
-        }
-        
-        .marquee-text-container {
-            flex: 1;
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-            mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
-        }
-        
-        .marquee-content { 
-            display: inline-block; 
-            animation: scrollCute 25s linear infinite; 
-            color: #7E22CE;
-            font-weight: 600;
-            font-size: 0.85rem;
-            padding-top: 2px;
-        }
-        
-        @keyframes scrollCute { 
-            0% { transform: translateX(100vw); } 
-            100% { transform: translateX(-100%); } 
-        }
+        .marquee-wrapper { width: 100%; max-width: 1152px; margin: 15px auto 5px auto; padding: 0 15px; position: relative; z-index: 10; }
+        .marquee-cute-pill { background: white; border: 2.5px solid #E9D5FF; border-radius: 99px; padding: 6px 8px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.08); overflow: hidden; }
+        .marquee-badge { background: linear-gradient(135deg, #A855F7, #7E22CE); color: white; font-size: 0.75rem; font-weight: 700; padding: 8px 18px; border-radius: 99px; margin-right: 12px; white-space: nowrap; display: flex; align-items: center; gap: 8px; z-index: 10; box-shadow: 0 2px 8px rgba(126, 34, 206, 0.3); letter-spacing: 0.5px; }
+        .marquee-text-container { flex: 1; overflow: hidden; white-space: nowrap; position: relative; mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent); }
+        .marquee-content { display: inline-block; animation: scrollCute 25s linear infinite; color: #7E22CE; font-weight: 600; font-size: 0.85rem; padding-top: 2px; }
+        @keyframes scrollCute { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        /* ==========================================================================
-           PUBLIC STATS & PRODUCT CARDS
-           ========================================================================== */
-        .stat-card-public { 
-            background: white; 
-            border-radius: 20px; 
-            border: 2px solid transparent; 
-            padding: 20px 15px; 
-            text-align: center; 
-            box-shadow: 0 4px 15px rgba(126, 34, 206, 0.05); 
-            transition: 0.3s; 
-        }
-        
-        .stat-card-public:hover { 
-            border-color: #E9D5FF; 
-            transform: translateY(-4px); 
-            box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); 
-        }
-        
-        .stat-icon { 
-            width: 48px; 
-            height: 48px; 
-            border-radius: 14px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            margin: 0 auto 12px auto; 
-            font-size: 1.4rem; 
-        }
+        .stat-card-public { background: white; border-radius: 20px; border: 2px solid transparent; padding: 20px 15px; text-align: center; box-shadow: 0 4px 15px rgba(126, 34, 206, 0.05); transition: 0.3s; }
+        .stat-card-public:hover { border-color: #E9D5FF; transform: translateY(-4px); box-shadow: 0 8px 25px rgba(126, 34, 206, 0.15); }
+        .stat-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-size: 1.4rem; }
 
-        .product-card { 
-            background: white; 
-            border-radius: 24px; 
-            border: 2px solid transparent; 
-            box-shadow: 0 4px 20px rgba(126, 34, 206, 0.05); 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            transition: 0.4s; 
-            cursor: pointer; 
-        }
+        .product-card { background: white; border-radius: 24px; border: 2px solid transparent; box-shadow: 0 4px 20px rgba(126, 34, 206, 0.05); overflow: hidden; display: flex; flex-direction: column; transition: 0.4s; cursor: pointer; }
+        .product-card:hover { border-color: #A855F7; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); }
+        .img-box { position: relative; width: 100%; aspect-ratio: 1/1; background: #FFF; overflow: hidden; }
+        .img-box img { position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 10px; opacity: 0; transition: opacity 0.8s ease-in-out; }
+        .img-box img.active { opacity: 1; }
         
-        .product-card:hover { 
-            border-color: #A855F7; 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 30px rgba(126, 34, 206, 0.15); 
-        }
-        
-        .img-box { 
-            position: relative; 
-            width: 100%; 
-            aspect-ratio: 1/1; 
-            background: #FFF; 
-            overflow: hidden; 
-        }
-        
-        .img-box img { 
-            position: absolute; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-            padding: 10px; 
-            opacity: 0; 
-            transition: opacity 0.8s ease-in-out; 
-        }
-        
-        .img-box img.active { 
-            opacity: 1; 
-        }
-        
-        .banner-slider { 
-            position: relative; 
-            overflow: hidden; 
-            border-radius: 24px; 
-            border: 2px solid #E9D5FF; 
-            background: #FFF; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
-            cursor: pointer; 
-        }
-        
-        .banner-item { 
-            position: absolute; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            top: 0; 
-            left: 0; 
-            opacity: 0; 
-            transition: opacity 1.2s; 
-        }
-        
-        .banner-item.active { 
-            opacity: 1; 
-            z-index: 1; 
-        }
+        .banner-slider { position: relative; overflow: hidden; border-radius: 24px; border: 2px solid #E9D5FF; background: #FFF; box-shadow: 0 4px 15px rgba(0,0,0,0.03); cursor: pointer; }
+        .banner-item { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; opacity: 0; transition: opacity 1.2s; }
+        .banner-item.active { opacity: 1; z-index: 1; }
 
-        /* ==========================================================================
-           FORMS, BUTTONS & SWEETALERT
-           ========================================================================== */
-        .input-pastel { 
-            width: 100%; 
-            border: 2.5px solid #E9D5FF; 
-            border-radius: 16px; 
-            padding: 14px 20px; 
-            background: #FFF; 
-            outline: none; 
-            transition: 0.3s; 
-            font-family: 'Prompt', sans-serif; 
-            color: #7E22CE; 
-            font-weight: 500; 
-        }
+        .input-pastel { width: 100%; border: 2.5px solid #E9D5FF; border-radius: 16px; padding: 14px 20px; background: #FFF; outline: none; transition: 0.3s; font-family: 'Prompt', sans-serif; color: #7E22CE; font-weight: 500; }
+        .input-pastel:focus { border-color: #A855F7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
+        .btn-pastel { background: #A855F7; color: white; border-radius: 99px; padding: 14px 28px; font-weight: 600; text-align: center; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); width: 100%;}
+        .btn-pastel:hover { background: #9333EA; transform: scale(1.02); box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); }
+        .btn-outline { background: white; color: #A855F7; border: 2.5px solid #A855F7; border-radius: 99px; padding: 14px 28px; font-weight: 600; text-align: center; cursor: pointer; transition: 0.3s; width: 100%;}
+        .btn-outline:hover { background: #FDF2F8; transform: scale(1.02); }
         
-        .input-pastel:focus { 
-            border-color: #A855F7; 
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); 
-        }
-        
-        .btn-pastel { 
-            background: #A855F7; 
-            color: white; 
-            border-radius: 99px; 
-            padding: 14px 28px; 
-            font-weight: 600; 
-            text-align: center; 
-            border: none; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); 
-            width: 100%;
-        }
-        
-        .btn-pastel:hover { 
-            background: #9333EA; 
-            transform: scale(1.02); 
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); 
-        }
-        
-        .btn-outline { 
-            background: white; 
-            color: #A855F7; 
-            border: 2.5px solid #A855F7; 
-            border-radius: 99px; 
-            padding: 14px 28px; 
-            font-weight: 600; 
-            text-align: center; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            width: 100%;
-        }
+        .status-capsule { font-size: 0.75rem; font-weight: 700; padding: 5px 16px; border-radius: 99px; width: fit-content; margin: 12px auto; border: 1.5px solid currentColor; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 
-        .btn-outline:hover {
-            background: #FDF2F8;
-            transform: scale(1.02);
-        }
-        
-        .status-capsule { 
-            font-size: 0.75rem; 
-            font-weight: 700; 
-            padding: 5px 16px; 
-            border-radius: 99px; 
-            width: fit-content; 
-            margin: 12px auto; 
-            border: 1.5px solid currentColor; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
-        }
+        .swal2-popup { border-radius: 28px !important; border: 4px solid #E9D5FF !important; font-family: 'Prompt', sans-serif !important; }
+        .swal2-confirm { border-radius: 99px !important; background: #A855F7 !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important;}
+        .swal2-cancel { border-radius: 99px !important; padding: 12px 30px !important; font-weight: bold !important; outline: none !important; border: none !important; background: #E5E7EB !important; color: #4A4A4A !important;}
 
-        .swal2-popup { 
-            border-radius: 28px !important; 
-            border: 4px solid #E9D5FF !important; 
-            font-family: 'Prompt', sans-serif !important; 
-        }
+        .admin-section { background: white; border-radius: 24px; border: 1.5px solid #E9D5FF; padding: 30px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .admin-header { font-size: 1.4rem; font-weight: 700; color: #7E22CE; margin-bottom: 20px; border-left: 5px solid #A855F7; padding-left: 15px; }
+        .admin-label { font-size: 0.8rem; font-weight: 600; color: #9333EA; margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        .inp-admin { width: 100%; border: 1.5px solid #E9D5FF; border-radius: 12px; padding: 12px 15px; background: #FDF2F8; outline: none; transition: 0.2s; font-size: 0.95rem; color: #4A4A4A; font-family: 'Prompt', sans-serif; }
+        .inp-admin:focus { border-color: #A855F7; background: #FFF; box-shadow: 0 0 8px rgba(168, 85, 247, 0.15); }
+        .admin-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 0.9rem; }
+        .admin-table th { background: #FDF2F8; color: #7E22CE; padding: 15px; text-align: left; font-weight: 600; border-bottom: 2px solid #E9D5FF; }
+        .admin-table td { padding: 15px; background: white; border-top: 1px solid #E9D5FF; border-bottom: 1px solid #E9D5FF; color: #4B5563; }
+        .admin-table tr td:first-child { border-left: 1px solid #E9D5FF; border-radius: 12px 0 0 12px; }
+        .admin-table tr td:last-child { border-right: 1px solid #E9D5FF; border-radius: 0 12px 12px 0; }
         
-        .swal2-confirm { 
-            border-radius: 99px !important; 
-            background: #A855F7 !important; 
-            padding: 12px 30px !important; 
-            font-weight: bold !important; 
-            outline: none !important; 
-            border: none !important;
-        }
-        
-        .swal2-cancel { 
-            border-radius: 99px !important; 
-            padding: 12px 30px !important; 
-            font-weight: bold !important; 
-            outline: none !important; 
-            border: none !important;
-            background: #E5E7EB !important;
-            color: #4A4A4A !important;
-        }
-
-        /* ==========================================================================
-           ADMIN DASHBOARD UI
-           ========================================================================== */
-        .admin-section { 
-            background: white; 
-            border-radius: 24px; 
-            border: 1.5px solid #E9D5FF; 
-            padding: 30px; 
-            margin-bottom: 25px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02); 
-        }
-        
-        .admin-header { 
-            font-size: 1.4rem; 
-            font-weight: 700; 
-            color: #7E22CE; 
-            margin-bottom: 20px; 
-            border-left: 5px solid #A855F7; 
-            padding-left: 15px; 
-        }
-        
-        .admin-label { 
-            font-size: 0.8rem; 
-            font-weight: 600; 
-            color: #9333EA; 
-            margin-bottom: 6px; 
-            display: block; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-        }
-        
-        .inp-admin { 
-            width: 100%; 
-            border: 1.5px solid #E9D5FF; 
-            border-radius: 12px; 
-            padding: 12px 15px; 
-            background: #FDF2F8; 
-            outline: none; 
-            transition: 0.2s; 
-            font-size: 0.95rem; 
-            color: #4A4A4A; 
-            font-family: 'Prompt', sans-serif; 
-        }
-        
-        .inp-admin:focus { 
-            border-color: #A855F7; 
-            background: #FFF; 
-            box-shadow: 0 0 8px rgba(168, 85, 247, 0.15); 
-        }
-        
-        .admin-table { 
-            width: 100%; 
-            border-collapse: separate; 
-            border-spacing: 0 8px; 
-            font-size: 0.9rem; 
-        }
-        
-        .admin-table th { 
-            background: #FDF2F8; 
-            color: #7E22CE; 
-            padding: 15px; 
-            text-align: left; 
-            font-weight: 600; 
-            border-bottom: 2px solid #E9D5FF; 
-        }
-        
-        .admin-table td { 
-            padding: 15px; 
-            background: white; 
-            border-top: 1px solid #E9D5FF; 
-            border-bottom: 1px solid #E9D5FF; 
-            color: #4B5563; 
-        }
-        
-        .admin-table tr td:first-child { 
-            border-left: 1px solid #E9D5FF; 
-            border-radius: 12px 0 0 12px; 
-        }
-        
-        .admin-table tr td:last-child { 
-            border-right: 1px solid #E9D5FF; 
-            border-radius: 0 12px 12px 0; 
-        }
-        
-        .ad-tab-btn { 
-            padding: 12px 25px; 
-            border-radius: 99px; 
-            font-weight: 600; 
-            font-size: 0.95rem; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            background: white; 
-            color: #A855F7; 
-            border: 2px solid #E9D5FF; 
-            white-space: nowrap; 
-        }
-        
-        .ad-tab-btn:hover { 
-            background: #FDF2F8; 
-        }
-        
-        .ad-tab-btn.active { 
-            background: linear-gradient(135deg, #A855F7, #7E22CE); 
-            color: white; 
-            border-color: transparent; 
-            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); 
-        }
-        
+        .ad-tab-btn { padding: 12px 25px; border-radius: 99px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.3s; background: white; color: #A855F7; border: 2px solid #E9D5FF; white-space: nowrap; }
+        .ad-tab-btn:hover { background: #FDF2F8; }
+        .ad-tab-btn.active { background: linear-gradient(135deg, #A855F7, #7E22CE); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); }
         .z-999 { z-index: 999; }
     </style>
 </head>
@@ -437,7 +91,6 @@
 
     <nav class="bg-white shadow-sm sticky top-0 z-50 border-b-2 border-pMain w-full">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
-            
             <div class="flex items-center gap-4 cursor-pointer group" onclick="navigatePage('home')">
                 <img id="uiLogo" src="https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-pMain object-cover shadow-sm bg-white group-hover:rotate-6 smooth">
                 <div>
@@ -481,7 +134,7 @@
                 <span data-l="txtUpdate">อัปเดตล่าสุด</span>
             </div>
             <div class="marquee-text-container">
-                <div class="marquee-content" id="uiMarq">
+                <div class="marquee-content" id="uiMarq" data-l="alertWait">
                     กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล...
                 </div>
             </div>
@@ -584,10 +237,10 @@
                 
                 <div id="fReg" class="hidden">
                     <div class="space-y-4">
-                        <input type="text" id="rUid" class="input-pastel" data-p="phUid">
-                        <input type="email" id="rMail" class="input-pastel" data-p="phMail">
-                        <input type="password" id="rPass" class="input-pastel" data-p="phPass2">
-                        <input type="password" id="rPass2" class="input-pastel" data-p="phPass3">
+                        <input type="text" id="rUid" class="input-pastel" data-p="phUid" placeholder="ตั้งชื่อ UserID">
+                        <input type="email" id="rMail" class="input-pastel" data-p="phMail" placeholder="อีเมลของคุณ">
+                        <input type="password" id="rPass" class="input-pastel" data-p="phPass2" placeholder="ตั้งรหัสผ่าน">
+                        <input type="password" id="rPass2" class="input-pastel" data-p="phPass3" placeholder="ยืนยันรหัสผ่าน">
                         <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิก</span></button>
                     </div>
                     <div class="text-center mt-8 border-t border-pMain pt-6">
@@ -658,42 +311,42 @@
                 <div class="admin-section">
                     <h3 class="admin-header"><i class="fa-solid fa-store mr-2"></i> <span data-l="adHeadStore">ข้อมูลร้านค้า</span></h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div><label class="admin-label" data-l="adName">ชื่อเว็บ</label><input type="text" id="s_name" class="inp-admin"></div>
-                        <div><label class="admin-label" data-l="adLogo">ลิงก์ Logo</label><input type="text" id="s_logo" class="inp-admin"></div>
+                        <div><label class="admin-label" data-l="adName">ชื่อเว็บ</label><input type="text" id="s_name" class="inp-admin" data-p="adName"></div>
+                        <div><label class="admin-label" data-l="adLogo">ลิงก์ Logo</label><input type="text" id="s_logo" class="inp-admin" data-p="adLogo"></div>
                         <div><label class="admin-label" data-l="adStatus">สถานะร้าน</label>
                             <select id="s_open" class="inp-admin">
                                 <option value="true" data-l="adStOpen">เปิดปกติ</option>
                                 <option value="false" data-l="adStClose">ปิดชั่วคราว</option>
                             </select>
                         </div>
-                        <div class="md:col-span-3"><label class="admin-label" data-l="adMarq">ป้ายเลื่อนแจ้งเตือน</label><input type="text" id="s_ann" class="inp-admin"></div>
+                        <div class="md:col-span-3"><label class="admin-label" data-l="adMarq">ป้ายเลื่อนแจ้งเตือน</label><input type="text" id="s_ann" class="inp-admin" data-p="adMarq"></div>
                     </div>
                 </div>
                 
                 <div class="admin-section">
                     <h3 class="admin-header"><i class="fa-solid fa-images mr-2"></i> <span data-l="adHeadBan">แบนเนอร์ & ป๊อปอัป</span></h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adBan">แบนเนอร์ (คั่นด้วย ,)</label><input type="text" id="s_ban" class="inp-admin"></div>
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adBanLink">ลิงก์คลิกแบนเนอร์</label><input type="text" id="s_banL" class="inp-admin"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adBan">แบนเนอร์ (ลิงก์รูป คั่น ,)</label><input type="text" id="s_ban" class="inp-admin" data-p="adBan"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adBanLink">ลิงก์คลิกแบนเนอร์</label><input type="text" id="s_banL" class="inp-admin" data-p="adBanLink"></div>
                         <div class="col-span-full border-t border-pMain my-3"></div>
-                        <div><label class="admin-label" data-l="adPopHead">หัวข้อ Popup</label><input type="text" id="s_popH" class="inp-admin"></div>
-                        <div><label class="admin-label" data-l="adPopImg">รูปลิงก์ Popup</label><input type="text" id="s_popI" class="inp-admin"></div>
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adPopTxt">ข้อความ Popup</label><input type="text" id="s_popT" class="inp-admin"></div>
+                        <div><label class="admin-label" data-l="adPopHead">หัวข้อ Popup</label><input type="text" id="s_popH" class="inp-admin" data-p="adPopHead"></div>
+                        <div><label class="admin-label" data-l="adPopImg">รูปลิงก์ Popup</label><input type="text" id="s_popI" class="inp-admin" data-p="adPopImg"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adPopTxt">ข้อความ Popup</label><input type="text" id="s_popT" class="inp-admin" data-p="adPopTxt"></div>
                     </div>
                 </div>
 
                 <div class="admin-section">
                     <h3 class="admin-header"><i class="fa-solid fa-money-bill-wave mr-2"></i> <span data-l="adHeadFin">การเงิน & ติดต่อ</span></h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div><label class="admin-label" data-l="adQrBank">QR พร้อมเพย์</label><input type="text" id="s_qrB" class="inp-admin"></div>
-                        <div><label class="admin-label" data-l="adQrTrue">QR ทรูมันนี่</label><input type="text" id="s_qrT" class="inp-admin"></div>
-                        <div><label class="admin-label" data-l="adQrInter">QR ต่างประเทศ</label><input type="text" id="s_qrI" class="inp-admin"></div>
+                        <div><label class="admin-label" data-l="adQrBank">QR พร้อมเพย์</label><input type="text" id="s_qrB" class="inp-admin" data-p="adQrBank"></div>
+                        <div><label class="admin-label" data-l="adQrTrue">QR ทรูมันนี่</label><input type="text" id="s_qrT" class="inp-admin" data-p="adQrTrue"></div>
+                        <div><label class="admin-label" data-l="adQrInter">QR ต่างประเทศ</label><input type="text" id="s_qrI" class="inp-admin" data-p="adQrInter"></div>
                         <div class="col-span-full border-t border-pMain my-3"></div>
-                        <div><label class="admin-label" data-l="adMail">อีเมลแอดมิน</label><input type="email" id="s_mail" class="inp-admin"></div>
-                        <div><label class="admin-label" data-l="adFb">Facebook URL</label><input type="text" id="s_fb" class="inp-admin"></div>
-                        <div><label class="admin-label" data-l="adLine">Line URL</label><input type="text" id="s_line" class="inp-admin"></div>
-                        <div><label class="admin-label" data-l="adPhone">เบอร์โทรติดต่อ</label><input type="text" id="s_phone" class="inp-admin"></div>
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adMsgSuc">ข้อความตอบกลับออเดอร์สำเร็จ</label><input type="text" id="s_msgS" class="inp-admin"></div>
+                        <div><label class="admin-label" data-l="adMail">อีเมลแอดมิน</label><input type="email" id="s_mail" class="inp-admin" data-p="adMail"></div>
+                        <div><label class="admin-label" data-l="adFb">Facebook URL</label><input type="text" id="s_fb" class="inp-admin" data-p="adFb"></div>
+                        <div><label class="admin-label" data-l="adLine">Line URL</label><input type="text" id="s_line" class="inp-admin" data-p="adLine"></div>
+                        <div><label class="admin-label" data-l="adPhone">เบอร์โทรติดต่อ</label><input type="text" id="s_phone" class="inp-admin" data-p="adPhone"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adMsgSuc">ข้อความตอบกลับออเดอร์สำเร็จ</label><input type="text" id="s_msgS" class="inp-admin" data-p="adMsgSuc"></div>
                     </div>
                 </div>
                 
@@ -708,8 +361,8 @@
                     <input type="hidden" id="p_id">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
                         <div class="md:col-span-4 bg-pBg p-6 rounded-3xl border-2 border-pMain space-y-5 shadow-inner">
-                            <div><label class="admin-label text-pDark" data-l="adPCat">* ชื่อหมวดหมู่</label><input type="text" id="p_cat" class="inp-admin !bg-white border-pMain"></div>
-                            <div><label class="admin-label text-pDark" data-l="adPCatI">ไอคอนหมวดหมู่ (URL)</label><input type="text" id="p_catI" class="inp-admin !bg-white border-pMain"></div>
+                            <div><label class="admin-label text-pDark" data-l="adPCat">* ชื่อหมวดหมู่</label><input type="text" id="p_cat" class="inp-admin !bg-white border-pMain" data-p="adPCat"></div>
+                            <div><label class="admin-label text-pDark" data-l="adPCatI">ไอคอนหมวดหมู่ (URL)</label><input type="text" id="p_catI" class="inp-admin !bg-white border-pMain" data-p="adPCatI"></div>
                             <div>
                                 <label class="admin-label text-pDark" data-l="adPType">* ประเภทการเติม</label>
                                 <select id="p_req" class="inp-admin !bg-white border-pMain">
@@ -720,14 +373,15 @@
                         </div>
                         <div class="md:col-span-8 bg-pBg p-6 rounded-3xl border-2 border-pMain shadow-inner">
                             <div class="grid grid-cols-2 gap-5">
-                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPName">* ชื่อแพ็กเกจ</label><input type="text" id="p_name" class="inp-admin !bg-white border-pMain"></div>
-                                <div><label class="admin-label text-pDark" data-l="adPAmt">* จำนวน</label><input type="text" id="p_amt" class="inp-admin !bg-white border-pMain"></div>
-                                <div><label class="admin-label text-pDark" data-l="adPUnit">หน่วย</label><input type="text" id="p_unit" class="inp-admin !bg-white border-pMain"></div>
-                                <div><label class="admin-label text-pDark" data-l="adPPrcThb">* ราคา (บาท)</label><input type="number" id="p_prc" class="inp-admin !bg-white border-pMain" step="0.01"></div>
-                                <div><label class="admin-label text-pDark" data-l="adPPrcKip">ราคา (กีบ)</label><input type="number" id="p_prc_kip" class="inp-admin !bg-white border-pMain"></div>
-                                <div><label class="admin-label text-pDark" data-l="adPDisc">ส่วนลด %</label><input type="number" id="p_disc" class="inp-admin !bg-white border-pMain"></div>
-                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPImg">* ลิงก์รูปภาพ (คั่น ,)</label><input type="text" id="p_img" class="inp-admin !bg-white border-pMain"></div>
-                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPDet">รายละเอียดสินค้า (แสดงตอนซื้อ)</label><textarea id="p_det" class="inp-admin !bg-white border-pMain" rows="3"></textarea></div>
+                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPName">* ชื่อแพ็กเกจ</label><input type="text" id="p_name" class="inp-admin !bg-white border-pMain" data-p="adPName"></div>
+                                <div><label class="admin-label text-pDark" data-l="adPAmt">* จำนวน</label><input type="text" id="p_amt" class="inp-admin !bg-white border-pMain" data-p="adPAmt"></div>
+                                <div><label class="admin-label text-pDark" data-l="adPUnit">หน่วย</label><input type="text" id="p_unit" class="inp-admin !bg-white border-pMain" data-p="adPUnit"></div>
+                                <div><label class="admin-label text-pDark" data-l="adPPrcThb">* ราคา (บาท)</label><input type="number" id="p_prc" class="inp-admin !bg-white border-pMain" step="0.01" data-p="adPPrcThb"></div>
+                                <div><label class="admin-label text-pDark" data-l="adPPrcKip">ราคา (กีบ)</label><input type="number" id="p_prc_kip" class="inp-admin !bg-white border-pMain" data-p="adPPrcKip"></div>
+                                <div><label class="admin-label text-pDark" data-l="adPDisc">ส่วนลด %</label><input type="number" id="p_disc" class="inp-admin !bg-white border-pMain" data-p="adPDisc"></div>
+                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPSort">ลำดับจัดเรียง (ตัวเลข)</label><input type="number" id="p_sort" class="inp-admin !bg-white border-pMain" placeholder="1, 2, 3..." data-p="adPSort"></div>
+                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPImg">* ลิงก์รูปภาพ (คั่น ,)</label><input type="text" id="p_img" class="inp-admin !bg-white border-pMain" data-p="adPImg"></div>
+                                <div class="col-span-2"><label class="admin-label text-pDark" data-l="adPDet">รายละเอียดสินค้า (แสดงตอนซื้อ)</label><textarea id="p_det" class="inp-admin !bg-white border-pMain" rows="3" data-p="adPDet"></textarea></div>
                             </div>
                         </div>
                     </div>
@@ -746,8 +400,8 @@
                 <div class="admin-section">
                     <h3 class="admin-header"><i class="fa-solid fa-palette mr-2"></i> <span data-l="adHeadAddW">อัปโหลดงานป้าย</span></h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div><label class="admin-label" data-l="adWCat">ชื่องาน</label><input type="text" id="w_cat" class="inp-admin"></div>
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adWImg">ลิงก์รูป (คั่น ,)</label><input type="text" id="w_img" class="inp-admin"></div>
+                        <div><label class="admin-label" data-l="adWCat">ชื่องาน</label><input type="text" id="w_cat" class="inp-admin" data-p="adWCat"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adWImg">ลิงก์รูป (คั่น ,)</label><input type="text" id="w_img" class="inp-admin" data-p="adWImg"></div>
                     </div>
                     <button type="button" onclick="persistPortfolioWork()" class="btn-pastel mt-6 shadow-md"><i class="fa-solid fa-plus-circle mr-2"></i> <span data-l="adBtnSaveW">เพิ่มงานป้าย</span></button>
                 </div>
@@ -774,7 +428,6 @@
         
         /**
          * Global App State Object
-         * บริหารจัดการข้อมูลภายในเว็บไซต์ (Single Source of Truth)
          */
         const AppState = { 
             sys: { storeName: 'kataiy', logo: 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg' },
@@ -788,35 +441,33 @@
             adm: null, 
             busy: false, 
             pay: 'bank', 
-            curCat: 'all', 
             lang: localStorage.getItem('ks_lang') || 'th' 
         };
 
         /**
          * View State Management
-         * ป้องกันการรีเฟรชกลับไปหน้าหมวดหมู่เวลาลูกค้าดูสินค้าอยู่
          */
         const ViewState = {
             prodsArea: null, 
             allGamesArea: null 
         };
 
-        // 🟢 พจนานุกรมแปลภาษา 100% (ครอบคลุมทั้งหน้าบ้านและหลังบ้าน) 🟢
+        // 🟢 พจนานุกรมแปลภาษา 100% 🟢
         const LangDict = {
             th: {
-                stUsr:'ผู้ใช้งานทั้งหมด', stOrd:'จำนวนออเดอร์', stTop:'ยอดเติมเงินสะสม', stSal:'ยอดขายสำเร็จ', 
+                stUsr:'ผู้ใช้งานทั้งหมด', stOrd:'จำนวนออเดอร์', stTop:'ยอดเติมเงิน', stSal:'ยอดขายสำเร็จ', 
                 mHome:'หน้าหลัก', mGames:'เกมทั้งหมด', mTopup:'เติมเงิน', mInbox:'กล่องข้อความ', mHist:'ประวัติสั่งซื้อ', mCont:'ติดต่อเรา', mLogin:'เข้าสู่ระบบ / สมัคร', 
                 hRec:'บริการแนะนำ', catAll:'หมวดหมู่ทั้งหมด', hAll:'เกมและบริการทั้งหมด', hCont:'ช่องทางการติดต่อ', hLog:'เข้าสู่ระบบ', hReg:'สมัครสมาชิก', 
                 hTop:'เติมเงิน (ยอดเข้าออโต้)', hInb:'แจ้งเตือน', hWork:'ตัวอย่างงานป้าย', bBank:'ธนาคาร', bTrue:'วอเลท', bInter:'ตปท.', 
                 phUidMail:'UserID หรือ Email', phPass:'รหัสผ่าน', phUid:'ตั้งชื่อ UserID', phMail:'อีเมลของคุณ', phPass2:'ตั้งรหัสผ่าน', phPass3:'ยืนยันรหัสผ่าน', 
-                phAmt:'จำนวนเงิน (ทศนิยมได้)', phRef:'รหัสอ้างอิง 6 ตัวท้าย', txtUpload:'คลิกเพื่อแนบสลิปโอนเงิน', btnTopup:'ยืนยันการแจ้งโอน', 
-                btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิกใหม่', noAcc:'ไม่มีบัญชี? สมัครสมาชิก', hasAcc:'มีบัญชีแล้ว? เข้าระบบ', 
+                phAmt:'จำนวนเงิน', phRef:'รหัส 6 ตัวท้าย', txtUpload:'คลิกแนบสลิป', btnTopup:'แจ้งโอน', 
+                btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิก', noAcc:'ไม่มีบัญชี? สมัครสมาชิก', hasAcc:'มีบัญชีแล้ว? เข้าระบบ', 
                 out:'ออกจากระบบ', adm:'จัดการหลังบ้าน', stOpen:'เปิดให้บริการปกติค่ะ', stClose:'ปิดให้บริการชั่วคราวค่ะ', 
                 thTime:'เวลา', thOrder:'ออเดอร์', thProd:'สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', 
                 noData:'ไม่มีข้อมูลค่ะ', alertWait:'ระบบกำลังประมวลผล...', alertOk:'สำเร็จแล้วค่ะ!', alertErr:'เกิดข้อผิดพลาด', btnAck:'ตกลง', 
                 btnBuy:'สั่งเติมเกม', btnCancel:'ยกเลิก', tBuy:'ยืนยันการสั่งซื้อ', tPrc:'ราคา', tBal:'ยอดเงินคงเหลือ', tUid:'กรอกข้อมูล UID เกม', mMenu:'เมนู', 
                 btnBack:'กลับไปหมวดหมู่', txtUpdate:'อัปเดตล่าสุด', items: 'รายการ', mustLogin: 'กรุณาเข้าสู่ระบบก่อนนะคะ',
-                tUidTopup: 'เกมที่เติมด้วย UID', tMailTopup: 'เกมที่เติมด้วย ID / Pass',
+                tUidTopup: 'เกมที่เติมด้วยไอดี', tMailTopup: 'เกมที่เติมผ่านเมลพาส',
                 tContactReq: 'ช่องทางติดต่อ (เช่น WhatsApp, เบอร์โทร)', msgContactReq: 'กรุณากรอกข้อมูลและช่องทางติดต่อให้ครบถ้วนนะคะ',
                 
                 adTabSet:'ตั้งค่าเว็บไซต์', adTabProd:'จัดการสินค้า', adTabWork:'จัดการงานป้าย', adTabOrd:'คิวออเดอร์', 
@@ -828,17 +479,17 @@
                 adHeadAddP:'เพิ่มสินค้าใหม่', adPCat:'* ชื่อหมวดหมู่', adPCatI:'ไอคอนหมวดหมู่ (URL)', adPType:'* ประเภทการเติม', 
                 adPTypeUid:'เติมผ่าน UID', adPTypeMail:'เติมผ่าน ID / Pass', adPName:'* ชื่อแพ็กเกจ', adPAmt:'* จำนวน', 
                 adPUnit:'หน่วย', adPPrcThb:'* ราคา (บาท)', adPPrcKip:'ราคา (กีบ)', adPDisc:'ส่วนลด %', adPImg:'* ลิงก์รูปภาพ (คั่น ,)', 
-                adPDet:'รายละเอียดสินค้า', adBtnSaveP:'บันทึกสินค้า', adBtnCancel:'ยกเลิก', adHeadListP:'รายการสินค้า', 
+                adPDet:'รายละเอียดสินค้า', adPSort: 'ลำดับจัดเรียง (ตัวเลขน้อยขึ้นก่อน)', adBtnSaveP:'บันทึกสินค้า', adBtnCancel:'ยกเลิก', adHeadListP:'รายการสินค้า', 
                 adHeadAddW:'อัปโหลดงานป้าย', adWCat:'ชื่องาน', adWImg:'ลิงก์รูปภาพ (คั่น ,)', adBtnSaveW:'เพิ่มงานป้าย', 
                 adHeadOrd:'คิวออเดอร์', saveWait:'กำลังบันทึก...', saveOk:'บันทึกสำเร็จ!', delConfirm:'ลบข้อมูลนี้หรือไม่?', 
                 picCount:'รูป', addPicReq:'กรุณาใส่ลิงก์รูปภาพ', btnDone:'กดเสร็จสิ้น', alertDone:'ดำเนินการเสร็จสิ้นแล้วค่ะ',
                 
                 adThType: 'ประเภท', adThCat: 'หมวดหมู่', adThName: 'ชื่อสินค้า', adThPrice: 'ราคา', adThAct: 'จัดการ',
                 adThDate: 'วันที่', adThUser: 'ผู้ใช้', adThItem: 'รายการ', adThData: 'ข้อมูลเกม', adThPics: 'รูปภาพ',
-                sortAsc: 'ราคา: ต่ำ -> สูง', sortDesc: 'ราคา: สูง -> ต่ำ'
+                sortDef: 'จัดเรียง: ค่าเริ่มต้น', sortAsc: 'ราคา: ต่ำ -> สูง', sortDesc: 'ราคา: สูง -> ต่ำ'
             },
             la: {
-                stUsr:'ຜູ້ໃຊ້ທັງໝົດ', stOrd:'ຈຳນວນອໍເດີ', stTop:'ຍອດຕື່ມເງິນ', stSal:'ຍອດຂາຍ', 
+                stUsr:'ຜູ້ໃຊ້ທັງໝົດ', stOrd:'ຈຳນວນອໍເດີ', stTop:'ຍອດເຕີມເງິນ', stSal:'ຍອດຂາຍ', 
                 mHome:'ໜ້າຫຼັກ', mGames:'ເກມທັງໝົດ', mTopup:'ຕື່ມເງິນ', mInbox:'ຂໍ້ຄວາມ', mHist:'ປະຫວັດສັ່ງຊື້', mCont:'ຕິດຕໍ່ພວກເຮົາ', mLogin:'ເຂົ້າສູ່ລະບົບ', 
                 hRec:'ບໍລິການແນະນຳ', catAll:'ໝວດໝູ່ທັງໝົດ', hAll:'ເກມແລະບໍລິການທັງໝົດ', hCont:'ຊ່ອງທາງການຕິດຕໍ່', hLog:'ເຂົ້າສູ່ລະບົບ', hReg:'ສະໝັກສະມາຊິກ', 
                 hTop:'ຕື່ມເງິນອັດຕະໂນມັດ', hInb:'ແຈ້ງເຕືອນ', hWork:'ຕົວຢ່າງງານປ້າຍ', bBank:'ທະນາຄານ', bTrue:'ວໍເລັດ', bInter:'ຕປທ.', 
@@ -848,7 +499,8 @@
                 stOpen:'ເປີດປົກກະຕິ', stClose:'ປິດຊົ່ວຄາວ', thTime:'ເວລາ', thOrder:'ອໍເດີ', thProd:'ສິນຄ້າ', thStat:'ສະຖານະ', statWait:'ລໍຖ້າ', statDone:'ສຳເລັດ', 
                 noData:'ບໍ່ມີຂໍ້ມູນ', alertWait:'ລໍຖ້າຈັກຄາວ...', alertOk:'ສຳເລັດແລ້ວ!', btnAck:'ຕົກລົງ', btnBuy:'ສັ່ງຊື້ເລີຍ', btnCancel:'ຍົກເລີກ', 
                 tBuy:'ຢືນຢັນສັ່ງຊື້', tPrc:'ລາຄາ', tBal:'ຍອດເງິນ', tUid:'ກະລຸນາໃສ່ UID ເກມ', mMenu:'ເມນູ', btnBack:'ກັບຄືນໝວດໝູ່', txtUpdate:'ອັບເດດລ່າສຸດ', 
-                items: 'ລາຍການ', mustLogin: 'ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້', tUidTopup: 'ເກມທີ່ຕື່ມດ້ວຍ UID', tMailTopup: 'ເກມທີ່ຕື່ມດ້ວຍ ID / Pass',
+                items: 'ລາຍການ', mustLogin: 'ກະລຸນາເຂົ້າສູ່ລະບົບກ່ອນສັ່ງຊື້',
+                tUidTopup: 'ເກມທີ່ເຕີມຜ່ານ UID', tMailTopup: 'ເກມທີ່ເຕີມຜ່ານ ID-PASS',
                 tContactReq: 'ຊ່ອງທາງຕິດຕໍ່ (ເຊັ່ນ WhatsApp, ເບີໂທ)', msgContactReq: 'ກະລຸນາໃສ່ຂໍ້ມູນ ແລະ ຊ່ອງທາງຕິດຕໍ່ໃຫ້ຄົບຖ້ວນເດີ້',
                 
                 adTabSet:'ຕັ້ງຄ່າເວັບໄຊທ໌', adTabProd:'ຈັດການສິນຄ້າ', adTabWork:'ຈັດການງານປ້າຍ', adTabOrd:'ຄິວອໍເດີ', 
@@ -860,23 +512,22 @@
                 adHeadAddP:'ເພີ່ມສິນຄ້າໃໝ່', adPCat:'* ຊື່ໝວດໝູ່', adPCatI:'ໄອຄອນໝວດໝູ່ (URL)', adPType:'* ປະເພດການເຕີມ', 
                 adPTypeUid:'ເຕີມຜ່ານ UID', adPTypeMail:'ເຕີມຜ່ານ ID / Pass', adPName:'* ຊື່ແພັກເກດ', adPAmt:'* ຈຳນວນ', 
                 adPUnit:'ຫົວໜ່ວຍ', adPPrcThb:'* ລາຄາ (ບາດ)', adPPrcKip:'ລາຄາ (ກີບ)', adPDisc:'ສ່ວນຫຼຸດ %', adPImg:'* ລິ້ງຮູບພາບ (ຄັ່ນ ,)', 
-                adPDet:'ລາຍລະອຽດສິນຄ້າ', adBtnSaveP:'ບັນທຶກສິນຄ້າ', adBtnCancel:'ຍົກເລີກ', adHeadListP:'ລາຍການສິນຄ້າ', 
+                adPDet:'ລາຍລະອຽດສິນຄ້າ', adPSort: 'ລຳດັບຈັດລຽງ (ຕົວເລກໜ້ອຍຂຶ້ນກ່ອນ)', adBtnSaveP:'ບັນທຶກສິນຄ້າ', adBtnCancel:'ຍົກເລີກ', adHeadListP:'ລາຍການສິນຄ້າ', 
                 adHeadAddW:'ອັບໂຫຼດງານປ້າຍ', adWCat:'ຊື່ງານ', adWImg:'ລິ້ງຮູບພາບ (ຄັ່ນ ,)', adBtnSaveW:'ເພີ່ມງານປ້າຍ', 
                 adHeadOrd:'ຄິວອໍເດີ', saveWait:'ກຳລັງບັນທຶກ...', saveOk:'ບັນທຶກສຳເລັດ!', delConfirm:'ລົບຂໍ້ມູນນີ້ຫຼືບໍ່?', 
                 picCount:'ຮູບ', addPicReq:'ກະລຸນາໃສ່ລິ້ງຮູບພາບ', btnDone:'ສຳເລັດອໍເດີ', alertDone:'ສຳເລັດອໍເດີແລ້ວ!',
                 
                 adThType: 'ປະເພດ', adThCat: 'ໝວດໝູ່', adThName: 'ຊື່ສິນຄ້າ', adThPrice: 'ລາຄາ', adThAct: 'ຈັດການ',
                 adThDate: 'ວັນທີ', adThUser: 'ຜູ້ໃຊ້', adThItem: 'ລາຍການ', adThData: 'ຂໍ້ມູນເກມ', adThPics: 'ຮູບພາບ',
-                sortAsc: 'ລາຄາ: ຕ່ຳ -> ສູງ', sortDesc: 'ລາຄາ: ສູງ -> ຕ່ຳ'
+                sortDef: 'ຈັດລຽງ: ຄ່າເລີ່ມຕົ້ນ', sortAsc: 'ລາຄາ: ຕ່ຳ -> ສູງ', sortDesc: 'ລາຄາ: ສູງ -> ຕ່ຳ'
             }
         };
 
-        // ฟังก์ชันช่วยแปลภาษา
         function translator(key) {
             return LangDict[AppState.lang][key] || key;
         }
 
-        // 🟢 นำคำสั่งแปลภาษาแยกออกมาให้ทำงานชัดเจนที่สุด 🟢
+        // 🟢 ฟังก์ชันแปลภาษาแบบ 100% 🟢
         function applyLanguageToDOM() {
             const lElements = document.querySelectorAll('[data-l]');
             for(let i=0; i<lElements.length; i++) {
@@ -895,15 +546,12 @@
             AppState.lang = document.getElementById('lang').value;
             localStorage.setItem('ks_lang', AppState.lang);
             
-            // แปลภาษาในหน้าจอทันที ไม่ต้องโหลดใหม่
             applyLanguageToDOM();
             
-            // ถ้าแอดมินเปิดระบบหลังบ้านอยู่ ให้บังคับวาดหน้าหลังบ้านใหม่เพื่อแปลคำ
             if(document.getElementById('p-admin').classList.contains('active')) {
                 renderAdminDashboard(false); 
             }
             
-            // ถ้าลูกค้าอยู่ในหน้าสินค้า ให้วาดสินค้านั้นใหม่เพื่อแปลคำ
             if(document.getElementById('p-home').classList.contains('active') && ViewState.prodsArea !== null) {
                 drawProductList('prodsArea', ViewState.prodsArea);
             }
@@ -912,9 +560,6 @@
             }
         }
 
-        /**
-         * 1. Navigation Flow & Route Protection
-         */
         function requireAuthValidation(targetId) {
             const loggedIn = !!AppState.u;
             const protectedZones = ['topup', 'inbox', 'history', 'admin'];
@@ -955,7 +600,6 @@
                 renderAdminDashboard(true);
             }
             
-            // รีเซ็ตการดูสินค้า ให้กลับไปหน้าหมวดหมู่เสมอเวลาเปลี่ยนเมนูหลัก
             if(safeTarget === 'home') {
                 drawCategoryList('prodsArea');
             }
@@ -998,9 +642,6 @@
             }
         }
 
-        /**
-         * 3. API Communication Engine (Fail-Safe text/plain)
-         */
         async function transmitDataToAPI(action, payload) {
             if (AppState.busy) { 
                 return null; 
@@ -1030,11 +671,8 @@
             }
         }
 
-        /**
-         * 4. System Initialization & Background Polling
-         */
         async function fetchSystemDataSilently(isSilent = false, updateAdminForms = false) {
-            AppState.busy = false; // ปลดล็อกสำหรับการดึงข้อมูลรัวๆ
+            AppState.busy = false; 
             try {
                 const response = await fetch(API_URL, { 
                     method: 'POST', 
@@ -1045,7 +683,7 @@
                 
                 const rawText = await response.text();
                 if (rawText.includes("<html")) {
-                    return; // ยกเลิกการประมวลผลถ้าได้ HTML กลับมา
+                    return; 
                 }
                 
                 const res = JSON.parse(rawText);
@@ -1078,32 +716,15 @@
             }
         }
 
-        /**
-         * 5. UI Rendering System (Core DOM Manipulator)
-         */
         function renderDOMEngine(isSilent, updateForms) {
-            // โชว์ Popup ถ้าระบบเปิดใช้งานและยังไม่เคยโชว์มาก่อน
-            if (AppState.sys.popHead && String(AppState.sys.popHead).trim() !== '' && !sessionStorage.getItem('ks_pop_shown')) {
-                sessionStorage.setItem('ks_pop_shown', 'true');
-                let imgHtml = (AppState.sys.popImg && String(AppState.sys.popImg).trim() !== '') ? `<img src="${AppState.sys.popImg}" class="w-full rounded-2xl mb-4 object-contain max-h-64">` : '';
-                let txtHtml = (AppState.sys.popTxt && String(AppState.sys.popTxt).trim() !== '') ? `<p class="font-medium text-gray-700 mt-2">${AppState.sys.popTxt}</p>` : '';
-                
-                Swal.fire({
-                    title: AppState.sys.popHead,
-                    html: imgHtml + txtHtml,
-                    confirmButtonText: translator('btnAck'),
-                    confirmButtonColor: '#A855F7',
-                    customClass: { popup: 'swal2-popup' } 
-                });
-            }
-
+            try { applyLanguageToDOM(); } catch(e) {}
+            
             document.title = AppState.sys.storeName || 'kataiy';
             document.getElementById('favicon').href = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiName').innerText = AppState.sys.storeName || 'kataiy';
             document.getElementById('fName').innerText = AppState.sys.storeName || 'kataiy';
 
-            // Public Stats Update
             if(AppState.stats) {
                 document.getElementById('pubUsers').innerText = AppState.stats.usersCount || 0;
                 document.getElementById('pubOrders').innerText = AppState.stats.ordersCount || 0;
@@ -1111,7 +732,6 @@
                 document.getElementById('pubSales').innerText = '฿' + parseFloat(AppState.stats.salesAmount || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
             }
 
-            // Banner Rotation
             const bannerElement = document.getElementById('bannerContainer');
             if (AppState.sys.banner) {
                 bannerElement.classList.remove('hidden');
@@ -1125,7 +745,6 @@
                 bannerElement.innerHTML = bannerHtml;
             }
 
-            // Marquee Feed (ไม่เอา data-l มาใช้ จะได้ไม่โดนแปลภาษาทับ)
             let marqueeStr = `<span class="mr-4 font-bold text-pDark">${AppState.sys.announcement || ''}</span> <i class="fa-solid fa-star text-yellow-400 mr-2"></i> <span class="text-gray-500">`;
             if(AppState.history && AppState.history.length > 0) {
                 marqueeStr += AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-bolt text-pBtn"></i>&nbsp;&nbsp; ');
@@ -1135,7 +754,6 @@
             marqueeStr += `</span>`;
             document.getElementById('uiMarq').innerHTML = marqueeStr;
 
-            // Status Capsule
             const stBox = document.getElementById('uiStatus'); 
             stBox.style.display = 'block';
             if (String(AppState.sys.isOpen) === 'true') { 
@@ -1146,7 +764,6 @@
                 stBox.innerHTML = `<span class="w-2.5 h-2.5 bg-white rounded-full"></span> ${translator('stClose')}`; 
             }
             
-            // Authentication Updates
             if (AppState.u) {
                 document.getElementById('uBadge').classList.remove('hidden'); 
                 document.getElementById('uBal').innerText = parseFloat(AppState.u.balance).toLocaleString(undefined, {minimumFractionDigits: 2});
@@ -1166,7 +783,6 @@
             try { renderContactInfo(); } catch(e){}
             try { applyLanguageToDOM(); } catch(e){}
             
-            // 🟢 State Tracking: เพื่อไม่ให้หน้าเด้งกลับตอนลูกค้ากำลังดูสินค้า 🟢
             if (ViewState.prodsArea === null) {
                 drawCategoryList('prodsArea');
             } else {
@@ -1216,7 +832,6 @@
 
             let html = '';
             
-            // วาดหมวดหมู่ฝั่ง UID
             if (Object.keys(catMapUID).length > 0) {
                 html += `<div class="col-span-full flex items-center gap-3 mb-2 mt-2"><div class="w-2.5 h-8 bg-pBtn rounded-full shadow-sm"></div><h2 class="text-xl font-bold text-pDark tracking-tighter uppercase">${translator('tUidTopup')}</h2></div>`;
                 for (let c in catMapUID) {
@@ -1227,8 +842,7 @@
                     } else if (leader.images) {
                         catIcon = leader.images.split(',')[0].trim();
                     }
-                    let cName = c;
-                    if(!cName) cName = 'ທົ່ວໄປ';
+                    let cName = c || 'ທົ່ວໄປ';
 
                     html += `
                     <div class="product-card animate-pageFadeIn" onclick="drawProductList('${containerId}', '${c}')">
@@ -1241,7 +855,6 @@
                 }
             }
 
-            // วาดหมวดหมู่ฝั่ง Mail/Pass
             if (Object.keys(catMapMail).length > 0) {
                 html += `<div class="col-span-full flex items-center gap-3 mb-2 mt-8"><div class="w-2.5 h-8 bg-pink-400 rounded-full shadow-sm"></div><h2 class="text-xl font-bold text-pDark tracking-tighter uppercase">${translator('tMailTopup')}</h2></div>`;
                 for (let c in catMapMail) {
@@ -1253,8 +866,7 @@
                         catIcon = leader.images.split(',')[0].trim();
                     }
 
-                    let cName = c;
-                    if(!cName) cName = 'ທົ່ວໄປ';
+                    let cName = c || 'ທົ່ວໄປ';
 
                     html += `
                     <div class="product-card animate-pageFadeIn" onclick="drawProductList('${containerId}', '${c}')">
@@ -1275,13 +887,12 @@
 
         // 🟢 วาดรายการสินค้าในหมวดหมู่ที่คลิก + ระบบ Sorting 🟢
         window.drawProductList = function(containerId, catName) {
-            ViewState[containerId] = catName; // บันทึก State ว่ากำลังดูสินค้านี้อยู่
+            ViewState[containerId] = catName; 
             
             const cx = document.getElementById(containerId);
             
-            // อ่านค่าจาก Dropdown (ถ้ามี) เพื่อจำสถานะการจัดเรียง
             let sortSelect = document.getElementById('sort_' + containerId);
-            let sortValue = sortSelect ? sortSelect.value : 'price_asc';
+            let sortValue = sortSelect ? sortSelect.value : 'default';
             
             let validProds = [];
             for(let i=0; i<AppState.prods.length; i++) {
@@ -1290,7 +901,7 @@
                 }
             }
             
-            // 🟢 ฟังก์ชันจัดเรียง (Sorting) 🟢
+            // 🟢 ระบบจัดเรียง 🟢
             if (sortValue === 'price_asc') {
                 validProds.sort(function(a, b) {
                     return parseFloat(a.price || 0) - parseFloat(b.price || 0);
@@ -1298,6 +909,10 @@
             } else if (sortValue === 'price_desc') {
                 validProds.sort(function(a, b) {
                     return parseFloat(b.price || 0) - parseFloat(a.price || 0);
+                });
+            } else {
+                validProds.sort(function(a, b) {
+                    return parseInt(a.sortOrder || 999) - parseInt(b.sortOrder || 999);
                 });
             }
             
@@ -1310,6 +925,7 @@
                     <h3 class="text-2xl md:text-3xl font-extrabold text-pDark tracking-tighter uppercase border-l-4 border-pBtn pl-4">${catName}</h3>
                 </div>
                 <select id="sort_${containerId}" onchange="drawProductList('${containerId}', '${catName}')" class="input-pastel !w-full md:!w-48 !py-2 !text-sm shadow-sm cursor-pointer">
+                    <option value="default" ${sortValue === 'default' ? 'selected' : ''}>${translator('sortDef')}</option>
                     <option value="price_asc" ${sortValue === 'price_asc' ? 'selected' : ''}>${translator('sortAsc')}</option>
                     <option value="price_desc" ${sortValue === 'price_desc' ? 'selected' : ''}>${translator('sortDesc')}</option>
                 </select>
@@ -1530,7 +1146,6 @@
                     timer: 1500, 
                     showConfirmButton: false 
                 }).then(() => {
-                    // 🟢 Hard Reload แบบล้างค่าให้ชัวร์ที่สุด 🟢
                     window.location.href = window.location.pathname; 
                     window.location.reload(true); 
                 });
@@ -1553,6 +1168,7 @@
                 cancelButtonColor: '#aaa'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    AppState.u = null;
                     localStorage.removeItem('ks_usr');
                     window.location.reload(true); 
                 }
@@ -1632,9 +1248,6 @@
             fr.readAsDataURL(slipUpload);
         }
 
-        /**
-         * 8. Smart Order Placement System (บังคับกรอกช่องทางติดต่อสำหรับ Mail/Pass)
-         */
         function launchOrderProcess(prodId) {
             if (!AppState.u) { 
                 Swal.fire('Stop!', translator('mustLogin'), 'warning'); 
@@ -1673,7 +1286,6 @@
             if (reqType === 'uid') {
                 inputHtml = `<input type="text" id="gDataInp" class="input-pastel text-center shadow-sm" placeholder="${translator('tUid')}">`;
             } else {
-                // 🟢 สำหรับ ID/Pass บังคับมีช่อง Contact 🟢
                 inputHtml = `
                     <input type="text" id="gMailInp" class="input-pastel text-center shadow-sm mb-3" placeholder="ID / Email">
                     <input type="password" id="gPassInp" class="input-pastel text-center shadow-sm mb-3" placeholder="Password">
@@ -1712,7 +1324,6 @@
                             return false; 
                         }
                     } else {
-                        // 🟢 ดักจับข้อมูล Contact ก่อนให้ซื้อ 🟢
                         const mMail = document.getElementById('gMailInp').value;
                         const mPass = document.getElementById('gPassInp').value;
                         const mCont = document.getElementById('gContactInp').value;
@@ -1769,11 +1380,11 @@
             event.target.classList.add('active');
         }
 
+        // 🟢 แก้ไขการดึงข้อมูลจากตัวแปร Settings อย่างแม่นยำ 🟢
         function renderAdminDashboard(forceFormRefresh) {
             if(!AppState.adm) return;
             
             if (forceFormRefresh) {
-                // ใช้การดึงค่าแบบ Explicit Mapping ป้องกันการ Error จาก Loop
                 document.getElementById('s_name').value = AppState.sys.storeName || '';
                 document.getElementById('s_logo').value = AppState.sys.logo || '';
                 document.getElementById('s_ann').value = AppState.sys.announcement || '';
@@ -1800,7 +1411,6 @@
                 }
             }
 
-            // 🟢 เปลี่ยนหัวตารางสินค้าให้แปลภาษาตาม Dictionary 🟢
             let prodTableHtml = `<tr><th>${translator('adThType')}</th><th>${translator('adThCat')}</th><th>${translator('adThName')}</th><th>${translator('adThPrice')}</th><th>${translator('adThAct')}</th></tr>`;
             for(let i=0; i<validProds.length; i++) {
                 let p = validProds[i];
@@ -1822,7 +1432,6 @@
             }
             document.getElementById('tb-prods').innerHTML = prodTableHtml;
             
-            // 🟢 เปลี่ยนหัวตารางออเดอร์ให้แปลภาษาตาม Dictionary 🟢
             let ordTableHtml = `<tr><th>${translator('adThDate')}</th><th>${translator('adThUser')}</th><th>${translator('adThItem')}</th><th>${translator('adThData')}</th><th>${translator('adThAct')}</th></tr>`;
             for(let i=0; i<AppState.adm.allOrders.length; i++) {
                 let o = AppState.adm.allOrders[i];
@@ -1845,7 +1454,6 @@
             }
             document.getElementById('tb-orders').innerHTML = ordTableHtml;
 
-            // 🟢 เปลี่ยนหัวตารางงานป้ายให้แปลภาษาตาม Dictionary 🟢
             let wrkTableHtml = `<tr><th>${translator('adThCat')}</th><th>${translator('adThPics')}</th><th>${translator('adThAct')}</th></tr>`;
             for(let i=0; i<AppState.wrks.length; i++) {
                 let w = AppState.wrks[i];
@@ -1915,6 +1523,7 @@
             document.getElementById('p_det').value = p.details || ''; 
             document.getElementById('p_prc_kip').value = p.priceKip || '';
             document.getElementById('p_req').value = p.reqType || 'uid'; 
+            document.getElementById('p_sort').value = p.sortOrder || ''; 
             
             document.getElementById('btnSaveProd').innerHTML = `<i class="fa-solid fa-save mr-2"></i> <span>${translator('adBtnSaveP')}</span>`; 
             document.getElementById('btnCancelEdit').classList.remove('hidden'); 
@@ -1922,7 +1531,7 @@
         }
 
         function resetAdminProductForm() {
-            const fields = ['p_id','p_cat','p_catI','p_name','p_amt','p_unit','p_prc','p_disc','p_img','p_det','p_prc_kip'];
+            const fields = ['p_id','p_cat','p_catI','p_name','p_amt','p_unit','p_prc','p_disc','p_img','p_det','p_prc_kip','p_sort'];
             for(let i=0; i<fields.length; i++) {
                 document.getElementById(fields[i]).value = '';
             }
@@ -1948,7 +1557,8 @@
                 imgs: document.getElementById('p_img').value, 
                 det: document.getElementById('p_det').value, 
                 priceKip: document.getElementById('p_prc_kip').value,
-                reqType: document.getElementById('p_req').value 
+                reqType: document.getElementById('p_req').value,
+                sortOrder: document.getElementById('p_sort').value || 999
             };
             
             if(!dataToSave.name || !dataToSave.price || !dataToSave.imgs || !dataToSave.cat) {
@@ -2037,20 +1647,18 @@
          * 10. SYSTEM BOOTSTRAP (เริ่มทำงานทันทีเมื่อเปิดหน้าเว็บ)
          */
         window.addEventListener("DOMContentLoaded", () => {
-            // โหลดภาษา
             document.getElementById('lang').value = AppState.lang;
             
-            // อ่านค่า User จาก Cache อย่างปลอดภัย
-            try {
-                const session = localStorage.getItem('ks_usr');
-                if (session && session !== 'undefined') {
-                    AppState.u = JSON.parse(session);
+            try { 
+                const s = localStorage.getItem('ks_usr'); 
+                if (s && s !== 'undefined') {
+                    AppState.u = JSON.parse(s); 
                 }
             } catch(e) { 
                 localStorage.removeItem('ks_usr'); 
             }
             
-            // 🟢 วาดหน้าจอทันที ไม่ต้องรอ API 🟢
+            // วาดหน้าจอทันที ไม่ต้องรอ API
             applyLanguageToDOM();
             
             // เริ่มต้นดึงข้อมูลแบบเบื้องหลัง
@@ -2085,5 +1693,4 @@
             }, 5000); 
         });
     </script>
-</body>
 </html>
