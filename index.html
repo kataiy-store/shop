@@ -481,7 +481,7 @@
                 <span data-l="txtUpdate">อัปเดตล่าสุด</span>
             </div>
             <div class="marquee-text-container">
-                <div class="marquee-content" id="uiMarq" data-l="alertWait">
+                <div class="marquee-content" id="uiMarq">
                     กำลังเตรียมระบบและเชื่อมต่อฐานข้อมูล...
                 </div>
             </div>
@@ -584,10 +584,10 @@
                 
                 <div id="fReg" class="hidden">
                     <div class="space-y-4">
-                        <input type="text" id="rUid" class="input-pastel" data-p="phUid" placeholder="ตั้งชื่อ UserID">
-                        <input type="email" id="rMail" class="input-pastel" data-p="phMail" placeholder="อีเมลของคุณ">
-                        <input type="password" id="rPass" class="input-pastel" data-p="phPass2" placeholder="ตั้งรหัสผ่าน">
-                        <input type="password" id="rPass2" class="input-pastel" data-p="phPass3" placeholder="ยืนยันรหัสผ่าน">
+                        <input type="text" id="rUid" class="input-pastel" data-p="phUid">
+                        <input type="email" id="rMail" class="input-pastel" data-p="phMail">
+                        <input type="password" id="rPass" class="input-pastel" data-p="phPass2">
+                        <input type="password" id="rPass2" class="input-pastel" data-p="phPass3">
                         <button type="button" onclick="executeAuthenticationProcess('register')" class="btn-pastel w-full text-xl mt-6 shadow-xl"><i class="fa-solid fa-user-plus mr-2"></i> <span data-l="btnReg">สมัครสมาชิก</span></button>
                     </div>
                     <div class="text-center mt-8 border-t border-pMain pt-6">
@@ -633,7 +633,7 @@
         </section>
 
         <section id="p-inbox" class="page-section">
-            <h2 class="text-2xl font-bold text-pDark mb-6 border-b-2 border-pMain pb-4"><i class="fa-solid fa-envelope-open-text mr-3 text-pBtn"></i> <span data-l="hInb">กล่องข้อความแจ้งเตือน</span></h2>
+            <h2 class="text-2xl font-bold text-pDark mb-6 border-b-2 border-pMain pb-4"><i class="fa-solid fa-envelope-open-text mr-3 text-pBtn"></i> <span data-l="hInb">แจ้งเตือน</span></h2>
             <div class="bg-white p-8 rounded-[40px] border-2 border-pMain shadow-xl"><div id="inboxArea" class="space-y-5 max-h-[600px] overflow-y-auto pr-3"></div></div>
         </section>
         
@@ -673,11 +673,11 @@
                 <div class="admin-section">
                     <h3 class="admin-header"><i class="fa-solid fa-images mr-2"></i> <span data-l="adHeadBan">แบนเนอร์ & ป๊อปอัป</span></h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adBan">แบนเนอร์ (ลิงก์รูป คั่น ,)</label><input type="text" id="s_ban" class="inp-admin"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adBan">แบนเนอร์ (คั่นด้วย ,)</label><input type="text" id="s_ban" class="inp-admin"></div>
                         <div class="md:col-span-2"><label class="admin-label" data-l="adBanLink">ลิงก์คลิกแบนเนอร์</label><input type="text" id="s_banL" class="inp-admin"></div>
                         <div class="col-span-full border-t border-pMain my-3"></div>
                         <div><label class="admin-label" data-l="adPopHead">หัวข้อ Popup</label><input type="text" id="s_popH" class="inp-admin"></div>
-                        <div><label class="admin-label" data-l="adPopImg">ลิงก์รูป Popup</label><input type="text" id="s_popI" class="inp-admin"></div>
+                        <div><label class="admin-label" data-l="adPopImg">รูปลิงก์ Popup</label><input type="text" id="s_popI" class="inp-admin"></div>
                         <div class="md:col-span-2"><label class="admin-label" data-l="adPopTxt">ข้อความ Popup</label><input type="text" id="s_popT" class="inp-admin"></div>
                     </div>
                 </div>
@@ -736,7 +736,6 @@
                         <button type="button" onclick="resetAdminProductForm()" class="btn-outline !bg-gray-100 !text-gray-500 !border-gray-300 hidden shadow-md" id="btnCancelEdit"><span data-l="adBtnCancel">ยกเลิก</span></button>
                     </div>
                 </div>
-
                 <div class="admin-section p-0 overflow-hidden">
                     <div class="p-6 border-b-2 border-pMain bg-pBg"><h3 class="font-bold text-pDark m-0 uppercase tracking-tighter"><i class="fa-solid fa-table-list mr-2"></i> <span data-l="adHeadListP">รายการสินค้า</span></h3></div>
                     <div class="overflow-x-auto"><table class="admin-table min-w-full" id="tb-prods"></table></div>
@@ -748,7 +747,7 @@
                     <h3 class="admin-header"><i class="fa-solid fa-palette mr-2"></i> <span data-l="adHeadAddW">อัปโหลดงานป้าย</span></h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div><label class="admin-label" data-l="adWCat">ชื่องาน</label><input type="text" id="w_cat" class="inp-admin"></div>
-                        <div class="md:col-span-2"><label class="admin-label" data-l="adWImg">ลิงก์รูปภาพ (คั่น ,)</label><input type="text" id="w_img" class="inp-admin"></div>
+                        <div class="md:col-span-2"><label class="admin-label" data-l="adWImg">ลิงก์รูป (คั่น ,)</label><input type="text" id="w_img" class="inp-admin"></div>
                     </div>
                     <button type="button" onclick="persistPortfolioWork()" class="btn-pastel mt-6 shadow-md"><i class="fa-solid fa-plus-circle mr-2"></i> <span data-l="adBtnSaveW">เพิ่มงานป้าย</span></button>
                 </div>
@@ -762,7 +761,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="w-full text-center py-10 text-pDark font-bold text-sm bg-white border-t-2 border-pMain mt-auto relative z-10">
@@ -771,11 +769,12 @@
     </footer>
 
     <script>
-        // 🔴🔴🔴 API URL: ใส่ลิงก์ Google Apps Script ลงในนี้ (ห้ามมีช่องว่าง) 🔴🔴🔴
+        // 🔴🔴🔴 API URL: ใส่ลิงก์ของ Google Apps Script ที่นี่ (ห้ามมีช่องว่าง) 🔴🔴🔴
         const API_URL = 'https://script.google.com/macros/s/AKfycbwUMa943t7APJoNlGsDPF3QuZcYIw7ab2_9HReCFCsbp5jI61G7rQGW1rKFeLhhE2u5iA/exec';
         
         /**
          * Global App State Object
+         * บริหารจัดการข้อมูลภายในเว็บไซต์ (Single Source of Truth)
          */
         const AppState = { 
             sys: { storeName: 'kataiy', logo: 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg' },
@@ -789,18 +788,20 @@
             adm: null, 
             busy: false, 
             pay: 'bank', 
+            curCat: 'all', 
             lang: localStorage.getItem('ks_lang') || 'th' 
         };
 
         /**
-         * View State Management (จดจำหน้าหมวดหมู่ที่กำลังดูอยู่)
+         * View State Management
+         * ป้องกันการรีเฟรชกลับไปหน้าหมวดหมู่เวลาลูกค้าดูสินค้าอยู่
          */
         const ViewState = {
             prodsArea: null, 
             allGamesArea: null 
         };
 
-        // 🟢 พจนานุกรมแปลภาษา ครอบคลุมระบบหลังบ้านทั้งหมด 🟢
+        // 🟢 พจนานุกรมแปลภาษา 100% (ครอบคลุมทั้งหน้าบ้านและหลังบ้าน) 🟢
         const LangDict = {
             th: {
                 stUsr:'ผู้ใช้งานทั้งหมด', stOrd:'จำนวนออเดอร์', stTop:'ยอดเติมเงินสะสม', stSal:'ยอดขายสำเร็จ', 
@@ -808,12 +809,13 @@
                 hRec:'บริการแนะนำ', catAll:'หมวดหมู่ทั้งหมด', hAll:'เกมและบริการทั้งหมด', hCont:'ช่องทางการติดต่อ', hLog:'เข้าสู่ระบบ', hReg:'สมัครสมาชิก', 
                 hTop:'เติมเงิน (ยอดเข้าออโต้)', hInb:'แจ้งเตือน', hWork:'ตัวอย่างงานป้าย', bBank:'ธนาคาร', bTrue:'วอเลท', bInter:'ตปท.', 
                 phUidMail:'UserID หรือ Email', phPass:'รหัสผ่าน', phUid:'ตั้งชื่อ UserID', phMail:'อีเมลของคุณ', phPass2:'ตั้งรหัสผ่าน', phPass3:'ยืนยันรหัสผ่าน', 
-                phAmt:'จำนวนเงิน', phRef:'รหัส 6 ตัวท้าย', txtUpload:'คลิกแนบสลิป', btnTopup:'แจ้งโอน', 
-                btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิก', noAcc:'ไม่มีบัญชี?', hasAcc:'มีบัญชีแล้ว?', out:'ออกจากระบบ', adm:'จัดการหลังบ้าน', 
-                stOpen:'เปิดให้บริการ', stClose:'ปิดให้บริการ', thTime:'เวลา', thOrder:'ออเดอร์', thProd:'สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', 
-                noData:'ไม่มีข้อมูลค่ะ', alertWait:'รอสักครู่...', alertOk:'สำเร็จแล้ว!', btnAck:'ตกลง', btnBuy:'สั่งซื้อ', btnCancel:'ยกเลิก', 
-                tBuy:'ยืนยันการสั่งซื้อ', tPrc:'ราคา', tBal:'ยอดเงิน', tUid:'กรอก UID', mMenu:'เมนู', btnBack:'กลับไปหมวดหมู่', txtUpdate:'อัปเดตล่าสุด', 
-                items: 'รายการ', mustLogin: 'กรุณาเข้าสู่ระบบก่อนนะคะ',
+                phAmt:'จำนวนเงิน (ทศนิยมได้)', phRef:'รหัสอ้างอิง 6 ตัวท้าย', txtUpload:'คลิกเพื่อแนบสลิปโอนเงิน', btnTopup:'ยืนยันการแจ้งโอน', 
+                btnLog:'เข้าสู่ระบบ', btnReg:'สมัครสมาชิกใหม่', noAcc:'ไม่มีบัญชี? สมัครสมาชิก', hasAcc:'มีบัญชีแล้ว? เข้าระบบ', 
+                out:'ออกจากระบบ', adm:'จัดการหลังบ้าน', stOpen:'เปิดให้บริการปกติค่ะ', stClose:'ปิดให้บริการชั่วคราวค่ะ', 
+                thTime:'เวลา', thOrder:'ออเดอร์', thProd:'สินค้า', thStat:'สถานะ', statWait:'รอคิว', statDone:'สำเร็จ', 
+                noData:'ไม่มีข้อมูลค่ะ', alertWait:'ระบบกำลังประมวลผล...', alertOk:'สำเร็จแล้วค่ะ!', alertErr:'เกิดข้อผิดพลาด', btnAck:'ตกลง', 
+                btnBuy:'สั่งเติมเกม', btnCancel:'ยกเลิก', tBuy:'ยืนยันการสั่งซื้อ', tPrc:'ราคา', tBal:'ยอดเงินคงเหลือ', tUid:'กรอกข้อมูล UID เกม', mMenu:'เมนู', 
+                btnBack:'กลับไปหมวดหมู่', txtUpdate:'อัปเดตล่าสุด', items: 'รายการ', mustLogin: 'กรุณาเข้าสู่ระบบก่อนนะคะ',
                 tUidTopup: 'เกมที่เติมด้วย UID', tMailTopup: 'เกมที่เติมด้วย ID / Pass',
                 tContactReq: 'ช่องทางติดต่อ (เช่น WhatsApp, เบอร์โทร)', msgContactReq: 'กรุณากรอกข้อมูลและช่องทางติดต่อให้ครบถ้วนนะคะ',
                 
@@ -831,7 +833,7 @@
                 adHeadOrd:'คิวออเดอร์', saveWait:'กำลังบันทึก...', saveOk:'บันทึกสำเร็จ!', delConfirm:'ลบข้อมูลนี้หรือไม่?', 
                 picCount:'รูป', addPicReq:'กรุณาใส่ลิงก์รูปภาพ', btnDone:'กดเสร็จสิ้น', alertDone:'ดำเนินการเสร็จสิ้นแล้วค่ะ',
                 
-                adThType: 'ประเภท', adThCat: 'หมวดหมู่', adThName: 'ชื่อแพ็กเกจ', adThPrice: 'ราคา', adThAct: 'จัดการ',
+                adThType: 'ประเภท', adThCat: 'หมวดหมู่', adThName: 'ชื่อสินค้า', adThPrice: 'ราคา', adThAct: 'จัดการ',
                 adThDate: 'วันที่', adThUser: 'ผู้ใช้', adThItem: 'รายการ', adThData: 'ข้อมูลเกม', adThPics: 'รูปภาพ',
                 sortAsc: 'ราคา: ต่ำ -> สูง', sortDesc: 'ราคา: สูง -> ต่ำ'
             },
@@ -862,7 +864,8 @@
                 adHeadAddW:'ອັບໂຫຼດງານປ້າຍ', adWCat:'ຊື່ງານ', adWImg:'ລິ້ງຮູບພາບ (ຄັ່ນ ,)', adBtnSaveW:'ເພີ່ມງານປ້າຍ', 
                 adHeadOrd:'ຄິວອໍເດີ', saveWait:'ກຳລັງບັນທຶກ...', saveOk:'ບັນທຶກສຳເລັດ!', delConfirm:'ລົບຂໍ້ມູນນີ້ຫຼືບໍ່?', 
                 picCount:'ຮູບ', addPicReq:'ກະລຸນາໃສ່ລິ້ງຮູບພາບ', btnDone:'ສຳເລັດອໍເດີ', alertDone:'ສຳເລັດອໍເດີແລ້ວ!',
-                adThType: 'ປະເພດ', adThCat: 'ໝວດໝູ່', adThName: 'ຊື່ແພັກເກດ', adThPrice: 'ລາຄາ', adThAct: 'ຈັດການ',
+                
+                adThType: 'ປະເພດ', adThCat: 'ໝວດໝູ່', adThName: 'ຊື່ສິນຄ້າ', adThPrice: 'ລາຄາ', adThAct: 'ຈັດການ',
                 adThDate: 'ວັນທີ', adThUser: 'ຜູ້ໃຊ້', adThItem: 'ລາຍການ', adThData: 'ຂໍ້ມູນເກມ', adThPics: 'ຮູບພາບ',
                 sortAsc: 'ລາຄາ: ຕ່ຳ -> ສູງ', sortDesc: 'ລາຄາ: ສູງ -> ຕ່ຳ'
             }
@@ -952,6 +955,7 @@
                 renderAdminDashboard(true);
             }
             
+            // รีเซ็ตการดูสินค้า ให้กลับไปหน้าหมวดหมู่เสมอเวลาเปลี่ยนเมนูหลัก
             if(safeTarget === 'home') {
                 drawCategoryList('prodsArea');
             }
@@ -1022,7 +1026,7 @@
             } catch (err) { 
                 AppState.busy = false; 
                 console.error("API Transmission Failed:", err);
-                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ต' };
+                return { status: 'error', message: 'เซิร์ฟเวอร์ไม่ตอบสนอง กรุณาตรวจสอบอินเทอร์เน็ตหรือ Deploy Web App ใหม่' };
             }
         }
 
@@ -1078,6 +1082,21 @@
          * 5. UI Rendering System (Core DOM Manipulator)
          */
         function renderDOMEngine(isSilent, updateForms) {
+            // โชว์ Popup ถ้าระบบเปิดใช้งานและยังไม่เคยโชว์มาก่อน
+            if (AppState.sys.popHead && String(AppState.sys.popHead).trim() !== '' && !sessionStorage.getItem('ks_pop_shown')) {
+                sessionStorage.setItem('ks_pop_shown', 'true');
+                let imgHtml = (AppState.sys.popImg && String(AppState.sys.popImg).trim() !== '') ? `<img src="${AppState.sys.popImg}" class="w-full rounded-2xl mb-4 object-contain max-h-64">` : '';
+                let txtHtml = (AppState.sys.popTxt && String(AppState.sys.popTxt).trim() !== '') ? `<p class="font-medium text-gray-700 mt-2">${AppState.sys.popTxt}</p>` : '';
+                
+                Swal.fire({
+                    title: AppState.sys.popHead,
+                    html: imgHtml + txtHtml,
+                    confirmButtonText: translator('btnAck'),
+                    confirmButtonColor: '#A855F7',
+                    customClass: { popup: 'swal2-popup' } 
+                });
+            }
+
             document.title = AppState.sys.storeName || 'kataiy';
             document.getElementById('favicon').href = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
             document.getElementById('uiLogo').src = AppState.sys.logo || 'https://img2.pic.in.th/-242_20260207172619694a61f6c059b7b0.jpeg';
@@ -1106,7 +1125,7 @@
                 bannerElement.innerHTML = bannerHtml;
             }
 
-            // Marquee Feed
+            // Marquee Feed (ไม่เอา data-l มาใช้ จะได้ไม่โดนแปลภาษาทับ)
             let marqueeStr = `<span class="mr-4 font-bold text-pDark">${AppState.sys.announcement || ''}</span> <i class="fa-solid fa-star text-yellow-400 mr-2"></i> <span class="text-gray-500">`;
             if(AppState.history && AppState.history.length > 0) {
                 marqueeStr += AppState.history.join(' &nbsp;&nbsp;<i class="fa-solid fa-bolt text-pBtn"></i>&nbsp;&nbsp; ');
@@ -1141,11 +1160,11 @@
                 document.getElementById('uBadge').classList.add('hidden'); 
             }
             
-            // Call renders securely
-            try { applyLanguageToDOM(); } catch(e){}
+            try { buildDynamicSidebarMenu(); } catch(e){}
             try { renderPortfolioGallery(); } catch(e){}
             try { renderUserPersonalData(); } catch(e){}
             try { renderContactInfo(); } catch(e){}
+            try { applyLanguageToDOM(); } catch(e){}
             
             // 🟢 State Tracking: เพื่อไม่ให้หน้าเด้งกลับตอนลูกค้ากำลังดูสินค้า 🟢
             if (ViewState.prodsArea === null) {
@@ -1162,6 +1181,15 @@
         }
 
         // 🟢 ระบบแยกหมวดหมู่ (UID กับ ID/Pass) 🟢
+        function renderProductCatalog() { 
+            ViewState.prodsArea = null;
+            drawCategoryList('prodsArea'); 
+        }
+        function renderGamesListing() { 
+            ViewState.allGamesArea = null;
+            drawCategoryList('allGamesArea'); 
+        }
+
         function drawCategoryList(containerId) {
             const cx = document.getElementById(containerId);
             
@@ -1175,9 +1203,8 @@
             const catMapUID = {};
             const catMapMail = {};
 
-            for(let i=0; i<validProds.length; i++) {
-                let p = validProds[i];
-                let reqType = p.reqType || 'uid';
+            validProds.forEach(function(p) { 
+                const reqType = p.reqType || 'uid';
                 if(reqType === 'uid') {
                     if(!catMapUID[p.category]) { catMapUID[p.category] = []; }
                     catMapUID[p.category].push(p); 
@@ -1185,7 +1212,7 @@
                     if(!catMapMail[p.category]) { catMapMail[p.category] = []; }
                     catMapMail[p.category].push(p); 
                 }
-            }
+            });
 
             let html = '';
             
@@ -1200,7 +1227,8 @@
                     } else if (leader.images) {
                         catIcon = leader.images.split(',')[0].trim();
                     }
-                    let cName = c || 'ທົ່ວໄປ';
+                    let cName = c;
+                    if(!cName) cName = 'ທົ່ວໄປ';
 
                     html += `
                     <div class="product-card animate-pageFadeIn" onclick="drawProductList('${containerId}', '${c}')">
@@ -1225,7 +1253,8 @@
                         catIcon = leader.images.split(',')[0].trim();
                     }
 
-                    let cName = c || 'ທົ່ວໄປ';
+                    let cName = c;
+                    if(!cName) cName = 'ທົ່ວໄປ';
 
                     html += `
                     <div class="product-card animate-pageFadeIn" onclick="drawProductList('${containerId}', '${c}')">
@@ -1263,9 +1292,13 @@
             
             // 🟢 ฟังก์ชันจัดเรียง (Sorting) 🟢
             if (sortValue === 'price_asc') {
-                validProds.sort((a, b) => parseFloat(a.price || 0) - parseFloat(b.price || 0));
+                validProds.sort(function(a, b) {
+                    return parseFloat(a.price || 0) - parseFloat(b.price || 0);
+                });
             } else if (sortValue === 'price_desc') {
-                validProds.sort((a, b) => parseFloat(b.price || 0) - parseFloat(a.price || 0));
+                validProds.sort(function(a, b) {
+                    return parseFloat(b.price || 0) - parseFloat(a.price || 0);
+                });
             }
             
             let html = `
@@ -1283,8 +1316,7 @@
             </div>`;
             
             let productHtml = '';
-            for(let i=0; i<validProds.length; i++) {
-                const p = validProds[i];
+            validProds.forEach(function(p) {
                 let imgUrls = [];
                 if(p.images) {
                     let splits = p.images.split(',');
@@ -1296,9 +1328,9 @@
 
                 let imgHtml = '';
                 if (imgUrls.length > 0) {
-                    for(let x=0; x<imgUrls.length; x++) {
-                        let activeClass = x === 0 ? 'active' : '';
-                        imgHtml += `<img src="${imgUrls[x]}" class="slider-image ${activeClass}">`;
+                    for(let i=0; i<imgUrls.length; i++) {
+                        let activeClass = i === 0 ? 'active' : '';
+                        imgHtml += `<img src="${imgUrls[i]}" class="slider-image ${activeClass}">`;
                     }
                 } else {
                     imgHtml = '<div class="w-full h-full bg-gray-200"></div>';
@@ -1330,7 +1362,7 @@
                         </div>
                     </div>
                 </div>`;
-            }
+            });
 
             cx.innerHTML = html + productHtml;
         }
@@ -1352,8 +1384,7 @@
             wrap.classList.remove('hidden');
             
             let html = '';
-            for(let i=0; i<AppState.wrks.length; i++) {
-                let w = AppState.wrks[i];
+            AppState.wrks.forEach(function(w) {
                 let picUrls = [];
                 if(w.imgs) {
                     let splits = w.imgs.split(',');
@@ -1364,9 +1395,9 @@
                 }
                 
                 let picHTML = '';
-                for(let j=0; j<picUrls.length; j++) {
-                    let activeClass = j === 0 ? 'active' : '';
-                    picHTML += `<img src="${picUrls[j]}" class="slider-image ${activeClass}">`;
+                for(let i=0; i<picUrls.length; i++) {
+                    let activeClass = i === 0 ? 'active' : '';
+                    picHTML += `<img src="${picUrls[i]}" class="slider-image ${activeClass}">`;
                 }
 
                 let wCat = w.cat || 'ผลงาน';
@@ -1378,7 +1409,7 @@
                         <span class="text-[0.65rem] font-extrabold text-pDark uppercase tracking-widest">${wCat}</span>
                     </div>
                 </div>`;
-            }
+            });
             grid.innerHTML = html;
         }
 
@@ -1390,23 +1421,21 @@
                 notifBox.innerHTML = `<div class="text-center py-10 text-gray-400 font-medium">${translator('noData')}</div>`;
             } else {
                 let html = '';
-                for(let i=0; i<AppState.inb.length; i++) {
-                    let msg = AppState.inb[i];
+                AppState.inb.forEach(function(msg) {
                     let dateStr = new Date(msg.time).toLocaleString('th-TH');
                     html += `
                     <div class="bg-pBg p-5 rounded-3xl border-l-8 border-pBtn shadow-sm animate-pageFadeIn">
                         <p class="text-[0.65rem] font-bold text-pDark mb-1 uppercase tracking-widest opacity-70"><i class="fa-solid fa-clock mr-1"></i> ${dateStr}</p>
                         <p class="font-bold text-gray-700 text-sm leading-relaxed">${msg.msg}</p>
                     </div>`;
-                }
+                });
                 notifBox.innerHTML = html;
             }
 
             const historyTbl = document.getElementById('uOrderList');
             let tableHtml = `<tr><th>${translator('thTime')}</th><th>${translator('thOrder')}</th><th>${translator('thProd')}</th><th>${translator('thStat')}</th></tr>`;
             
-            for(let i=0; i<AppState.uOrd.length; i++) {
-                let o = AppState.uOrd[i];
+            AppState.uOrd.forEach(function(o) {
                 let dateStr = new Date(o.time).toLocaleDateString('th-TH');
                 let oidShort = o.oid.substring(0,8);
                 let statClass = o.stat === 'Pending' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600';
@@ -1423,7 +1452,7 @@
                         </span>
                     </td>
                 </tr>`;
-            }
+            });
             historyTbl.innerHTML = tableHtml;
         }
 
@@ -1740,11 +1769,11 @@
             event.target.classList.add('active');
         }
 
-        // 🟢 แก้ไขบักการจับคู่ Settings (Explicit Mapping) 🟢
         function renderAdminDashboard(forceFormRefresh) {
             if(!AppState.adm) return;
             
             if (forceFormRefresh) {
+                // ใช้การดึงค่าแบบ Explicit Mapping ป้องกันการ Error จาก Loop
                 document.getElementById('s_name').value = AppState.sys.storeName || '';
                 document.getElementById('s_logo').value = AppState.sys.logo || '';
                 document.getElementById('s_ann').value = AppState.sys.announcement || '';
@@ -1771,6 +1800,7 @@
                 }
             }
 
+            // 🟢 เปลี่ยนหัวตารางสินค้าให้แปลภาษาตาม Dictionary 🟢
             let prodTableHtml = `<tr><th>${translator('adThType')}</th><th>${translator('adThCat')}</th><th>${translator('adThName')}</th><th>${translator('adThPrice')}</th><th>${translator('adThAct')}</th></tr>`;
             for(let i=0; i<validProds.length; i++) {
                 let p = validProds[i];
@@ -1792,6 +1822,7 @@
             }
             document.getElementById('tb-prods').innerHTML = prodTableHtml;
             
+            // 🟢 เปลี่ยนหัวตารางออเดอร์ให้แปลภาษาตาม Dictionary 🟢
             let ordTableHtml = `<tr><th>${translator('adThDate')}</th><th>${translator('adThUser')}</th><th>${translator('adThItem')}</th><th>${translator('adThData')}</th><th>${translator('adThAct')}</th></tr>`;
             for(let i=0; i<AppState.adm.allOrders.length; i++) {
                 let o = AppState.adm.allOrders[i];
@@ -1814,6 +1845,7 @@
             }
             document.getElementById('tb-orders').innerHTML = ordTableHtml;
 
+            // 🟢 เปลี่ยนหัวตารางงานป้ายให้แปลภาษาตาม Dictionary 🟢
             let wrkTableHtml = `<tr><th>${translator('adThCat')}</th><th>${translator('adThPics')}</th><th>${translator('adThAct')}</th></tr>`;
             for(let i=0; i<AppState.wrks.length; i++) {
                 let w = AppState.wrks[i];
